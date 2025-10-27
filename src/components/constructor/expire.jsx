@@ -1,9 +1,9 @@
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import { Flex, Icon, Stack, Text } from "@chakra-ui/react";
 import { attention } from "../../assets/svgs";
 
 export const Expire = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <Flex

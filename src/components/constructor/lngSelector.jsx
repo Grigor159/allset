@@ -6,13 +6,13 @@ import {
   Image,
   Stack,
 } from "@chakra-ui/react";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import { Label } from "./texts/label";
 import { languages } from "../../utils/constants";
 import { checked } from "../../assets/svgs";
 
 export const LngSelector = ({ name, value, onChange, required }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const toggleLanguage = (code) => {
     const updated = value.includes(code)

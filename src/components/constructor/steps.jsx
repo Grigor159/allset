@@ -1,11 +1,14 @@
-import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+"use client";
+
+
+import { useTranslations } from "next-intl";
+import { usePathname } from "@/i18n/routing";
 import { getStepInfo } from "../../utils/helpers";
 import { Flex, Slider, Text } from "@chakra-ui/react";
 
 export const Steps = () => {
-  const { t } = useTranslation();
-  const { pathname } = useLocation();
+  const t = useTranslations();
+  const pathname = usePathname();
   const { step, value, show } = getStepInfo(pathname);
 
   if (!show) return null;

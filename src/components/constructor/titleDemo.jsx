@@ -1,11 +1,11 @@
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import { Field, Flex, Icon, Input, Stack, Text } from "@chakra-ui/react";
 import { Label } from "./texts/label";
 import { info, url } from "../../assets/svgs";
 import { BASE_URL } from "../../services/api/config";
 
 export const TitleDemo = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   
   return (
     <Stack

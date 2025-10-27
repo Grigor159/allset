@@ -1,3 +1,5 @@
+"use client"
+
 import { NuqsAdapter } from 'nuqs/adapters/react'
 
 export function NuqsProvider({ children }) {

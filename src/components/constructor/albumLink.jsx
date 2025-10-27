@@ -1,11 +1,11 @@
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Field, Flex, HStack, Input, Stack } from "@chakra-ui/react";
 import { Label } from "./texts/label";
 import { Switcher } from "./ui/switcher";
 
 export const AlbumLink = ({ name, value, onChange, hide, required }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const [checked, setChecked] = useState(true);
 

@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Field, Flex, Input, Stack, Text } from "@chakra-ui/react";
 import { BASE_URL } from "../../services/api/config";
@@ -14,7 +14,7 @@ export const TitleCreator = ({
   required,
   languages,
 }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const [activeLang, setActiveLang] = useState("");
 

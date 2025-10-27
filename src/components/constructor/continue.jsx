@@ -1,7 +1,7 @@
 import { useLocation, useParams, NavLink } from "react-router-dom";
 import { useNuqs } from "../../hooks/useNuqs";
 import { useQueryState } from "nuqs";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import { getNextRoute } from "../../utils/helpers";
 import { isContinueDisabled } from "../../utils/checkers";
 import { Button } from "@chakra-ui/react";
@@ -11,7 +11,7 @@ export const Continue = () => {
   const [palette] = useNuqs("palette");
   const [accept] = useQueryState("terms_accepted");
 
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { language } = useParams();
   const { pathname, search } = useLocation();
 

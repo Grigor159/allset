@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Checkbox, Field, Flex, Icon, Input, Stack } from "@chakra-ui/react";
 import { Label } from "./texts/label";
@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import { checked } from "../../assets/svgs";
 
 export const Timeline = ({ name, value, hide, onChange, required }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { language } = useParams();
 
   const [disabled, setDisabled] = useState(true);

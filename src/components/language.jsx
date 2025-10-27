@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Flex,
   For,
@@ -7,27 +9,42 @@ import {
   Portal,
   Spinner,
 } from "@chakra-ui/react";
-import cookies from "js-cookie";
+import { useRouter, usePathname } from "@/i18n/routing";
+import { useLocale } from "next-intl";
+import { useTransition } from "react";
 import { languages } from "../utils/constants";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { navigateWithLocal } from "../utils/helpers";
+import { useTranslations } from "next-intl";
 import { down } from "../assets/svgs";
+import cookies from "js-cookie";
 
-export const Language = ({ isPending }) => {
-  const navigate = useNavigate();
+export const Language = () => {
+  const t = useTranslations();
+  const pathname = usePathname();
+  const language = useLocale();
+  const router = useRouter();
 
-  const { t, i18n } = useTranslation();
-  const { pathname } = useLocation();
-  const { language } = useParams();
+  const [isPending, startTransition] = useTransition();
 
-  const selected = languages.find(({ code }) => code === language);
+  // derive selected flag from cookie or active locale
 
   const handleChangeLng = (code) => {
-    i18n.changeLanguage(code);
-    cookies.set("i18next", code);
-    navigate(`/${code}${navigateWithLocal(pathname)}`);
+    const selectedCode = code === "en" ? "gb" : code === "hy" ? "am" : code;
+    cookies.set("lngFlag", selectedCode);
+    cookies.set("NEXT_LOCALE", code);
+
+    startTransition(() => {
+      const pathWithoutLocale = pathname.split("/").slice(2).join("/");
+      router.replace("/" + pathWithoutLocale || "", { locale: code });
+    });
   };
+
+  const lngFlag =
+    cookies.get("lngFlag") ||
+    (language === "en"
+      ? "gb"
+      : language === "hy"
+      ? "am"
+      : language.slice(0, 2));
 
   return (
     <Menu.Root>
@@ -38,10 +55,10 @@ export const Language = ({ isPending }) => {
           ) : (
             <>
               <Image
-                src={`https://flagcdn.com/${selected?.flag}.svg`}
+                src={`https://flagcdn.com/${lngFlag}.svg`}
                 boxSize="24px"
                 borderRadius={"4px"}
-                alt={selected?.name}
+                alt={lngFlag}
               />
               <Icon size={"lg"}>{down.icon}</Icon>
             </>
@@ -51,7 +68,7 @@ export const Language = ({ isPending }) => {
       <Portal>
         <Menu.Positioner>
           <Menu.Content w="auto" minW="unset" p="0">
-            <For each={languages.filter(({ flag }) => flag !== selected?.flag)}>
+            <For each={languages.filter(({ code }) => code !== language)}>
               {({ code, flag }) => (
                 <Menu.Item
                   key={code}

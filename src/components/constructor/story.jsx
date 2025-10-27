@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import {
   Field,
   FileUpload,
@@ -16,7 +16,7 @@ import { LngSwitcher } from "./ui/lngSwitcher";
 import { Switcher } from "./ui/switcher";
 
 export const Story = ({ name, value, onChange, hide, required, languages }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const [checked, setChecked] = useState(true);
   const [activeLang, setActiveLang] = useState("");

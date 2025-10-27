@@ -1,9 +1,9 @@
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Portal, Select } from "@chakra-ui/react";
 
 export const Selector = ({ name, value, onChange, collection, disabled }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   
   const [selected, setSelected] = useState(value || "");
 

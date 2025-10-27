@@ -1,8 +1,10 @@
-import { useTranslation } from "react-i18next";
+"use client";
+
+import { useTranslations } from "next-intl";
 import { Text } from "@chakra-ui/react";
 
 export const MidText = ({ text }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   
   return (
     <Text textStyle="xl" fontWeight={700} lineHeight={"28px"} letterSpacing={0}>

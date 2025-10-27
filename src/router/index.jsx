@@ -2,19 +2,19 @@ import { lazy } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import cookies from "js-cookie";
 import Layout from "../components/constructor/layout";
-import NotFound from "../pages/404";
-import Soon from "../pages/soon";
+import NotFound from "../../../src/pages/404";
+import Soon from "../../../src/pages/soon";
 
-const Invitation = lazy(() => import("../pages/invitation"));
-const Templates = lazy(() => import("../pages/constructor/templates"));
+const Invitation = lazy(() => import("../../../src/pages/invitation"));
+const Templates = lazy(() => import("../../../src/pages/constructor/templates"));
 const Customisations = lazy(() =>
-  import("../pages/constructor/customisations")
+  import("../../../src/pages/constructor/customisations")
 );
-const Details = lazy(() => import("../pages/constructor/details"));
-const Preview = lazy(() => import("../pages/constructor/preview"));
-const Confirm = lazy(() => import("../pages/constructor/confirm"));
-const Terms = lazy(() => import("../pages/legal/terms"));
-const Policy = lazy(() => import("../pages/legal/policy"));
+const Details = lazy(() => import("../../../src/pages/constructor/details"));
+const Preview = lazy(() => import("../../../src/pages/constructor/preview"));
+const Confirm = lazy(() => import("../../../src/pages/constructor/confirm"));
+const Terms = lazy(() => import("../../../src/pages/legal/terms"));
+const Policy = lazy(() => import("../../../src/pages/legal/policy"));
 
 // const router = createBrowserRouter([
 //   {

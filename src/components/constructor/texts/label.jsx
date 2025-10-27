@@ -1,8 +1,8 @@
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import { Text } from "@chakra-ui/react";
 
 export const Label = ({ text }) => {
-    const { t } = useTranslation();
+    const t = useTranslations();
 
   return (
     <Text textStyle="md" fontWeight={700} lineHeight={"28px"} letterSpacing={0}>

@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
   Avatar,
@@ -10,10 +10,10 @@ import {
   Show,
   Spinner,
 } from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
+import { Link } from "@/i18n/routing";
 
 export const Auth = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { isLoading, user, loginWithPopup, logout } = useAuth0();
 
   return (

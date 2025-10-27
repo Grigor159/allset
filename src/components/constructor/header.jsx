@@ -1,14 +1,22 @@
-import { useTranslation } from "react-i18next";
-import { Box, Container, Flex, Image, Link } from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
+"use client";
+
+import { useTranslations } from "next-intl";
+import {
+  Box,
+  Container,
+  Flex,
+  Image,
+  Link as ChakraLink,
+} from "@chakra-ui/react";
+import { Link } from "@/i18n/routing";
 import { Steps } from "./steps";
 import { Language } from "../language";
 import { MidText } from "./texts/midText";
-import { Auth } from "../../pages/auth";
-import logo from "../../assets/allset.png";
+// import { Auth } from "../../pages/auth";
+import logo from "@/assets/allset.png";
 
 export const Header = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <Flex
@@ -27,7 +35,7 @@ export const Header = () => {
       justify="space-between"
     >
       <Box ml="40px">
-        <Image src={logo} w="65px" h="40px" alt="AllSet" />
+        <Image src={logo.src} w="65px" h="40px" alt="AllSet" />
       </Box>
       <Box
         position="absolute"
@@ -37,9 +45,9 @@ export const Header = () => {
       >
         <Container maxW="1104px" px={0}>
           <Flex justify="space-between">
-            <Link as={NavLink} to="" gap="12px">
+            <ChakraLink as={Link} to="" gap="12px">
               <MidText text={t("title")} />
-            </Link>
+            </ChakraLink>
 
             <Steps />
           </Flex>
@@ -47,7 +55,7 @@ export const Header = () => {
       </Box>
       <Flex gap="12px" mr="40px">
         <Language />
-        <Auth />
+        {/* <Auth /> */}
       </Flex>
     </Flex>
   );

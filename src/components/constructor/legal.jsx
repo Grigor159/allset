@@ -1,10 +1,10 @@
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import { NavLink, useParams } from "react-router-dom";
 import { useQueryState } from "nuqs";
 import { Checkbox, Link } from "@chakra-ui/react";
 
 export const Legal = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { language } = useParams();
 
   const [accept, setAccept] = useQueryState("terms_accepted");

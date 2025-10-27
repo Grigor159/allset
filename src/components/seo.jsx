@@ -1,10 +1,10 @@
 import { Helmet } from "@dr.pogodin/react-helmet";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import logo from "../assets/allset.png";
 import { useParams } from "react-router-dom";
 
 const Seo = ({ title, description, url, image, alt }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { language } = useParams();
 
   const name = "Allset.am";

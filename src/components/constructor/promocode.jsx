@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import {
   Button,
@@ -20,7 +20,7 @@ import { usePostTanstack } from "../../hooks/useTanstack";
 export const Promocode = () => {
   const discount = 20;
 
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const [promocode, setPromocode] = useState("");
   const [applied, setApplied] = useState(false);

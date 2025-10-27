@@ -1,10 +1,10 @@
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import { Field, Stack, Text } from "@chakra-ui/react";
 import { Label } from "./texts/label";
 import { Calendar } from "./ui/calendar";
 
 export const EventDate = ({ name, value, onChange, required }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   
   return (
     <Stack

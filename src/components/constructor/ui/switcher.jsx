@@ -1,12 +1,12 @@
 import { Switch } from "@chakra-ui/react";
 import { Tooltip } from "../../tooltip";
 import { useId } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 
 export const Switcher = ({ checked, onChange }) => {
   const id = useId();
 
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const handleChange = (e) => {
     onChange(e);

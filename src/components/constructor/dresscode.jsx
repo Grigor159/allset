@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import {
   createListCollection,
@@ -21,7 +21,7 @@ export const Dresscode = ({
   required,
   languages,
 }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const [checked, setChecked] = useState(true);
   const [activeLang, setActiveLang] = useState("");

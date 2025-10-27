@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Button } from "@chakra-ui/react";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 
 export const ScrollToTop = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const [isVisible, setIsVisible] = useState(false);
 

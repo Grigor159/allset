@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -22,7 +22,7 @@ import useOutsideClick from "../../../hooks/useOutsideClick";
 export const Calendar = ({ name, value, onChange, required }) => {
   const ref = useRef();
 
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { language } = useParams();
 
   const [selected, setSelected] = useState(null);
