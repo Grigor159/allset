@@ -5,7 +5,7 @@ const NotFound = () => {
   return (
     <Box
       style={{
-        backgroundImage: `url(${img})`,
+        backgroundImage: `url(${img.src})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         width: "100%",

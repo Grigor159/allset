@@ -15,7 +15,7 @@ import "react-day-picker/style.css";
 import { calendar } from "../../../assets/svgs";
 import { formatDate } from "../../../utils/formatters";
 import { currentYear, today } from "../../../utils/helpers";
-import { calenarLocales } from "../../../utils/constants";
+import { calendarLocales } from "../../../utils/constants";
 import { format } from "date-fns";
 import useOutsideClick from "../../../hooks/useOutsideClick";
 
@@ -54,7 +54,7 @@ export const Calendar = ({ name, value, onChange, required }) => {
 
   const formatted = selected
     ? format(selected, "EEEE, MMMM d, yyyy", {
-        locale: calenarLocales[language],
+        locale: calendarLocales[language],
       })
     : "";
 
@@ -112,7 +112,7 @@ export const Calendar = ({ name, value, onChange, required }) => {
 
             <Dialog.Body>
               <DayPicker
-                locale={calenarLocales[language]}
+                locale={calendarLocales[language]}
                 mode="single"
                 // captionLayout="dropdown"
                 navLayout="around"

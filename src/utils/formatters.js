@@ -1,5 +1,6 @@
 "use client";
 
+// must be deleted
 export const pathWithoutLang = (pathname) =>
     pathname.replace(/^\/[a-z]{2}/, '') || '/'
 

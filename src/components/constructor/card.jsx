@@ -7,10 +7,8 @@ import { MidText } from "./texts/midText";
 import { SubText } from "./texts/subText";
 import { selected } from "../../assets/svgs";
 import { formatUrl } from "../../utils/formatters";
-import { getLanguageKey } from "../../utils/helpers";
 
 export const Card = ({ el }) => {
-  // const language = useLanguage();
   const language = useLocale();
 
   const { id, templateImage, name, description } = el;
@@ -18,7 +16,6 @@ export const Card = ({ el }) => {
   const [template, setTemplate] = useNuqs("template");
   const [_, setPalette] = useNuqs("palette");
 
-  const lng = getLanguageKey(language);
   const isSelected = template == id;
 
   const handleSelect = () => {
@@ -70,8 +67,8 @@ export const Card = ({ el }) => {
       )}
 
       <Stack pr="24px" pl="24px" gap="8px">
-        <MidText text={name[lng]} />
-        <SubText text={description[lng]} />
+        <MidText text={name[language]} />
+        <SubText text={description[language]} />
       </Stack>
     </Stack>
   );

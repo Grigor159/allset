@@ -45,7 +45,7 @@ export const Header = () => {
       >
         <Container maxW="1104px" px={0}>
           <Flex justify="space-between">
-            <ChakraLink as={Link} to="" gap="12px">
+            <ChakraLink as={Link} href="/" gap="12px">
               <MidText text={t("title")} />
             </ChakraLink>
 

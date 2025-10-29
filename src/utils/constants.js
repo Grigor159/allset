@@ -1,5 +1,11 @@
 export const locales = ["hy", "en", "ru"]
 
+export const prefixes = {
+  'hy': '/hy',
+  'en': '/en',
+  'ru': '/ru'
+}
+
 export const languages = [
   {
     code: "hy",
@@ -15,104 +21,104 @@ export const languages = [
   },
 ]
 
-import { grooms, church, welcome, registration, banquet, cake, afterparty, end } from '../assets/svgs';
+// import { grooms, church, welcome, registration, banquet, cake, afterparty, end } from '../assets/svgs';
 
-export const agenda = [
-  {
-    icon: grooms,
-    venueName: {
-      hy: "",
-      en: "Groom's place",
-      ru: ""
-    },
-    time: "",
-    venueLocation: "",
-  },
-  {
-    icon: grooms,
-    venueName: {
-      hy: "",
-      en: "Bride's place",
-      ru: ""
-    },
-    time: "",
-    venueLocation: "",
-  },
-  {
-    icon: church,
-    venueName: {
-      hy: "",
-      en: "Church ceremony",
-      ru: ""
-    },
-    time: "",
-    venueLocation: "",
-  },
-  {
-    icon: welcome,
-    venueName: {
-      hy: "",
-      en: "Welcome Reception",
-      ru: ""
-    },
-    time: "",
-    venueLocation: "",
-  },
-  {
-    icon: registration,
-    venueName: {
-      hy: "",
-      en: "Registration ceremony",
-      ru: ""
-    },
-    time: "",
-    venueLocation: "",
-  },
-  {
-    icon: banquet,
-    venueName: {
-      hy: "",
-      en: "Banquet",
-      ru: ""
-    },
-    time: "",
-    venueLocation: "",
-  },
-  {
-    icon: cake,
-    venueName: {
-      hy: "",
-      en: "Cake Ceremony",
-      ru: ""
-    },
-    time: "",
-    venueLocation: "",
-  },
-  {
-    icon: afterparty,
-    venueName: {
-      hy: "",
-      en: "Afterparty",
-      ru: ""
-    },
-    time: "",
-    venueLocation: "",
-  },
-  {
-    icon: end,
-    venueName: {
-      hy: "",
-      en: "The End",
-      ru: ""
-    },
-    time: "",
-    venueLocation: "",
-  },
-]
+// export const agenda = [
+//   {
+//     icon: grooms,
+//     venueName: {
+//       hy: "",
+//       en: "Groom's place",
+//       ru: ""
+//     },
+//     time: "",
+//     venueLocation: "",
+//   },
+//   {
+//     icon: grooms,
+//     venueName: {
+//       hy: "",
+//       en: "Bride's place",
+//       ru: ""
+//     },
+//     time: "",
+//     venueLocation: "",
+//   },
+//   {
+//     icon: church,
+//     venueName: {
+//       hy: "",
+//       en: "Church ceremony",
+//       ru: ""
+//     },
+//     time: "",
+//     venueLocation: "",
+//   },
+//   {
+//     icon: welcome,
+//     venueName: {
+//       hy: "",
+//       en: "Welcome Reception",
+//       ru: ""
+//     },
+//     time: "",
+//     venueLocation: "",
+//   },
+//   {
+//     icon: registration,
+//     venueName: {
+//       hy: "",
+//       en: "Registration ceremony",
+//       ru: ""
+//     },
+//     time: "",
+//     venueLocation: "",
+//   },
+//   {
+//     icon: banquet,
+//     venueName: {
+//       hy: "",
+//       en: "Banquet",
+//       ru: ""
+//     },
+//     time: "",
+//     venueLocation: "",
+//   },
+//   {
+//     icon: cake,
+//     venueName: {
+//       hy: "",
+//       en: "Cake Ceremony",
+//       ru: ""
+//     },
+//     time: "",
+//     venueLocation: "",
+//   },
+//   {
+//     icon: afterparty,
+//     venueName: {
+//       hy: "",
+//       en: "Afterparty",
+//       ru: ""
+//     },
+//     time: "",
+//     venueLocation: "",
+//   },
+//   {
+//     icon: end,
+//     venueName: {
+//       hy: "",
+//       en: "The End",
+//       ru: ""
+//     },
+//     time: "",
+//     venueLocation: "",
+//   },
+// ]
 
 import { enUS, ru, hy } from "react-day-picker/locale";
 
-export const calenarLocales = {
+export const calendarLocales = {
   en: enUS,
   hy: hy,
   ru: ru,
@@ -197,55 +203,55 @@ export const schemes = [
   { label: "Colorful", value: "colorful" },
 ]
 
-export const detailsForm = {
-  templateId: "",
-  colorPaletteId: "",
-  title: {
-    hy: "",
-    en: "",
-    ru: ""
-  },
-  urlExtension: "",
-  eventDate: "",
-  description: {
-    hy: "",
-    en: "",
-    ru: ""
-  },
-  mainImages: [],
-  closingText: {
-    hy: "",
-    en: "",
-    ru: ""
-  },
-  timeline: [],
-  countDown: true,
-  connectWithUs: {
-    // description: "",
-    name: "",
-    phone: "",
-    email: "",
-  },
-  dressCode: {
-    description: {
-      hy: "",
-      en: "",
-      ru: ""
-    },
-    style: "",
-    colorPaletteId: "",
-  },
-  albumLink: "",
-  ourStory: {
-    text: {
-      hy: "",
-      en: "",
-      ru: ""
-    },
-    photoUrls: [],
-  },
-  languages: []
-}
+// export const detailsForm = {
+//   templateId: "",
+//   colorPaletteId: "",
+//   title: {
+//     hy: "",
+//     en: "",
+//     ru: ""
+//   },
+//   urlExtension: "",
+//   eventDate: "",
+//   description: {
+//     hy: "",
+//     en: "",
+//     ru: ""
+//   },
+//   mainImages: [],
+//   closingText: {
+//     hy: "",
+//     en: "",
+//     ru: ""
+//   },
+//   timeline: [],
+//   countDown: true,
+//   connectWithUs: {
+//     // description: "",
+//     name: "",
+//     phone: "",
+//     email: "",
+//   },
+//   dressCode: {
+//     description: {
+//       hy: "",
+//       en: "",
+//       ru: ""
+//     },
+//     style: "",
+//     colorPaletteId: "",
+//   },
+//   albumLink: "",
+//   ourStory: {
+//     text: {
+//       hy: "",
+//       en: "",
+//       ru: ""
+//     },
+//     photoUrls: [],
+//   },
+//   languages: []
+// }
 
 import visa from "../assets/visa.png";
 import idram from "../assets/idram.png";

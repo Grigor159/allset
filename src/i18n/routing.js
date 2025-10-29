@@ -1,16 +1,13 @@
 import { defineRouting } from 'next-intl/routing';
 import { createNavigation } from 'next-intl/navigation';
+import { locales, prefixes } from '@/utils/constants';
 
 export const routing = defineRouting({
-    locales: ['hy', 'en', 'ru'],
+    locales: locales,
     defaultLocale: 'hy',
     localePrefix: {
         mode: 'always',
-        prefixes: {
-            'am': '/hy',
-            'en': '/en',
-            'ru': '/ru'
-        }
+        prefixes: prefixes
     }
 });
 

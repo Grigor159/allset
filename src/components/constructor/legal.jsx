@@ -39,7 +39,7 @@ export const Legal = () => {
           {t("terms_of_service")}
         </Link>{" "}
         {t("and")}
-        <Link as={NavLink} color={"#F43F5E"} to={`/${language}/privacy-policy`}>
+        <Link as={NavLink} color={"#F43F5E"} href={`/privacy-policy`}>
           {t("privacy_policy")}
         </Link>{" "}
         {t("legal_understand")}

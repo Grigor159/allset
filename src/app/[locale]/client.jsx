@@ -5,6 +5,7 @@ import { Scroll } from "@/components/scroll";
 import { Box, Container, Flex, For } from "@chakra-ui/react";
 import { useGetTanstack } from "@/hooks/useTanstack";
 import { Loader } from "@/components/loader";
+import { Card } from "@/components/constructor/card";
 
 export const HomeClient = () => {
   const { isLoading, data } = useGetTanstack("templates");

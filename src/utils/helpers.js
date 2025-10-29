@@ -19,6 +19,7 @@ export const scrollToTopWithDuration = (duration) => {
   requestAnimationFrame(scrollStep);
 }
 
+// must be deleted
 export const getLanguage = (pathname) => {
   const match = pathname.match(/^\/([a-z]{2})/);
   return match ? match[1] : '';
@@ -55,68 +56,24 @@ export const getStepInfo = (pathname) => {
 
 import { routes } from "./constants";
 
-// export const getPreviousRoute = (pathname) => {
-//   const language = getLanguage(pathname);
-//   const cleanPath = pathWithoutLang(pathname);
-
-//   const stepRoutes = routes.filter(r =>
-//     ["/", "/customisations", "/details", "/preview", "/confirm"].includes(r.path)
-//   );
-
-//   const index = stepRoutes.findIndex(r => r.path === cleanPath);
-
-//   if (index <= 0) return null;
-
-//   const prevRoute = stepRoutes[index - 1];
-//   return {
-//     path: `/${language}${prevRoute.path}`,
-//     name: prevRoute.name,
-//   };
-// };
-
 export const getPreviousRoute = (pathname) => {
-  const language = getLanguage(pathname);
-  const cleanPath = pathWithoutLang(pathname);
-
-  const index = routes.findIndex(r => r.path === cleanPath);
+  const index = routes.findIndex(r => r.path === pathname);
   if (index <= 0) return null;
 
   const prevRoute = routes[index - 1];
   return {
-    path: `/${language}${prevRoute.path}`,
+    path: `${prevRoute.path}`,
     name: prevRoute.name,
   };
 };
 
-// export const getNextRoute = (pathname) => {
-//   const language = getLanguage(pathname);
-//   const cleanPath = pathWithoutLang(pathname);
-
-//   const stepRoutes = routes.filter(r =>
-//     ["/", "/customisations", "/details", "/preview", "/confirm", "/payment"].includes(r.path)
-//   );
-
-//   const index = stepRoutes.findIndex(r => r.path === cleanPath);
-
-//   if (index === -1 || index === stepRoutes.length - 1) return null;
-
-//   const nextRoute = stepRoutes[index + 1];
-//   return {
-//     path: `/${language}${nextRoute.path}`,
-//     name: nextRoute.name,
-//   };
-// };
-
 export const getNextRoute = (pathname) => {
-  const language = getLanguage(pathname);
-  const cleanPath = pathWithoutLang(pathname) || "/";
-
-  const index = routes.findIndex(r => r.path === cleanPath);
+  const index = routes?.findIndex(r => r.path === pathname);
   if (index === -1 || index === routes.length - 1) return null;
 
   const nextRoute = routes[index + 1];
   return {
-    path: `${language}${nextRoute.path}`,
+    path: `${nextRoute.path}`,
     name: nextRoute.name,
   };
 };
@@ -131,10 +88,10 @@ import { localesRegex } from "./regex";
 export const navigateWithLocal = (pathname) =>
   pathname.replace(localesRegex, "")
 
-// export const getLanguageKey = (language) => {
-//   if (language === "hy") return "am";
-//   return language;
-// };
+export const getLanguageKey = (language) => {
+  if (language === "hy") return "am";
+  return language;
+};
 
 export function random(num) {
   return Math.floor(Math.random() * num);

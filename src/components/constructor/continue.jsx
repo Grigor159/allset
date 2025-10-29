@@ -1,14 +1,13 @@
 "use client";
 
-// import { useLocation, useParams, NavLink } from "react-router-dom";
 import { useNuqs } from "../../hooks/useNuqs";
 import { useQueryState } from "nuqs";
-import { useLocale, useTranslations } from "next-intl";
+import { Link, usePathname } from "@/i18n/routing";
+import { useSearch } from "@/hooks/useSearch";
+import { useTranslations } from "next-intl";
 import { getNextRoute } from "../../utils/helpers";
 import { isContinueDisabled } from "../../utils/checkers";
 import { Button } from "@chakra-ui/react";
-import { Link, usePathname, useRouter } from "@/i18n/routing";
-import { useParams } from "next/navigation";
 
 export const Continue = () => {
   const [template] = useNuqs("template");
@@ -16,26 +15,22 @@ export const Continue = () => {
   const [accept] = useQueryState("terms_accepted");
 
   const t = useTranslations();
-  const language = useLocale();
-  // const { pathname, search } = useLocation();
   const pathname = usePathname();
-  const search = useRouter();
+  const search = useSearch();
 
   const nextInfo = getNextRoute(pathname);
 
   if (!nextInfo) return null;
 
   const { path, name } = nextInfo;
-// console.log(path);
-// console.log(search); // search is not defined
 
-  const disabled = isContinueDisabled(pathname, language, {
+  const disabled = isContinueDisabled(pathname, {
     template,
     palette,
   });
 
-  const isDetailsPage = pathname === `/${language}/details`;
-  const isConfirmPage = pathname === `/${language}/confirm`;
+  const isDetailsPage = pathname === `/details`;
+  const isConfirmPage = pathname === `/confirm`;
 
   return isDetailsPage ? (
     <Button
@@ -68,7 +63,7 @@ export const Continue = () => {
     <Button
       as={!disabled ? Link : "button"}
       // to={!disabled ? path : undefined}
-      to={!disabled ? `${path}${search}` : undefined}
+      href={!disabled ? `${path}${search}` : undefined}
       fontWeight="400"
       fontSize="14px"
       borderRadius="8px"
