@@ -4,9 +4,9 @@ import { QueryProvider } from "@/providers/queryProvider";
 import { ChakraUIProvider } from "@/providers/chakcraProvider";
 import { NuqsProvider } from "@/providers/nuqsProvider";
 import { NextIntlClientProvider } from "next-intl";
-import { Header } from "@/components/constructor/header";
+import { Header } from "@/components/globals/header";
 import { TopPart } from "@/components/constructor/topPart";
-import { Footer } from "@/components/constructor/footer";
+import { Footer } from "@/components/globals/footer";
 import "../../index.css";
 
 export default async function RootLayout({ children, params }) {

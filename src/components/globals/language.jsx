@@ -12,9 +12,9 @@ import {
 import { useRouter, usePathname } from "@/i18n/routing";
 import { useParams } from "next/navigation";
 import { useTransition } from "react";
-import { languages } from "../utils/constants";
+import { languages } from "../../utils/constants";
 import { useTranslations, useLocale } from "next-intl";
-import { down } from "../assets/svgs";
+import { down } from "../../assets/svgs";
 import cookies from "js-cookie";
 
 export const Language = () => {

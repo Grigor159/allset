@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Field, Flex, HStack, Input, Stack } from "@chakra-ui/react";
-import { Label } from "./texts/label";
-import { Switcher } from "./ui/switcher";
+import { Label } from "../globals/texts/label";
+import { Switcher } from "../globals/ui/switcher";
 
 export const Contact = ({ name, value, onChange, hide, required }) => {
   const t = useTranslations();

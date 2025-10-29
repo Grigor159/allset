@@ -10,8 +10,8 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "@/i18n/routing";
 // import { Steps } from "./steps";
-import { Language } from "../language";
-import { Auth } from "../../pages/auth";
+import { Language } from "./language";
+import { OAuth } from "./oauth";
 import logo from "@/assets/allset.png";
 import { Navigation } from "./navigation";
 
@@ -42,7 +42,7 @@ export const Header = () => {
 
           <Flex gap="16px">
             <Language />
-            <Auth />
+            <OAuth />
           </Flex>
         </Flex>
       </Container>

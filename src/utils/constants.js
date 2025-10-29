@@ -131,14 +131,6 @@ export const mainPages = [
   { path: "/contacts", name: "Contacts" },
 ]
 
-export const steps = {
-  "/": 1,
-  "/customisations": 1,
-  "/details": 2,
-  "/preview": 3,
-  "/confirm": 4,
-};
-
 export const constructorPages = [
   { path: "/", name: "themes" },
   { path: "/customisations", name: "customisations" },
@@ -147,6 +139,16 @@ export const constructorPages = [
   { path: "/confirm", name: "confirm" },
   { path: "/payment", name: "payment" },
 ];
+
+export const authPages = ["profile", "invitations", "vendors", "logout"]
+
+export const steps = {
+  "/": 1,
+  "/customisations": 1,
+  "/details": 2,
+  "/preview": 3,
+  "/confirm": 4,
+};
 
 import allset from '../assets/allset.png'
 import details from '../assets/details.png'

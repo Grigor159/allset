@@ -1,11 +1,11 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import { Box } from "@chakra-ui/react";
-import { Header } from "./header";
+import { Header } from "../globals/header";
 import { TopPart } from "./topPart";
-import { Footer } from "./footer";
-import { Loader } from "../loader";
-import { ScrollToTop } from "../scrollToTop";
+import { Footer } from "../globals/footer";
+import { Loader } from "../globals/loader";
+import { ScrollToTop } from "../globals/scrollToTop";
 
 const Layout = () => {
   return (

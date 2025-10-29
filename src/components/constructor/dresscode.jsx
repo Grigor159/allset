@@ -7,11 +7,11 @@ import {
   Stack,
   Textarea,
 } from "@chakra-ui/react";
-import { Label } from "./texts/label";
-import { Selector } from "./ui/selector";
+import { Label } from "../globals/texts/label";
+import { Selector } from "../globals/ui/selector";
 import { schemes, styles } from "../../utils/constants";
-import { LngSwitcher } from "./ui/lngSwitcher";
-import { Switcher } from "./ui/switcher";
+import { LngSwitcher } from "../globals/ui/lngSwitcher";
+import { Switcher } from "../globals/ui/switcher";
 
 export const Dresscode = ({
   name,

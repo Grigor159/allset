@@ -12,9 +12,9 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { Label } from "./texts/label";
+import { Label } from "../globals/texts/label";
 import { promo } from "../../assets/svgs";
-import { error, success } from "../alerts";
+import { error, success } from "../globals/alerts";
 import { usePostTanstack } from "../../hooks/useTanstack";
 
 export const Promocode = () => {

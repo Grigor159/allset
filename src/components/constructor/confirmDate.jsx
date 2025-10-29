@@ -1,8 +1,8 @@
 import { Field, Icon, Stack } from "@chakra-ui/react";
-import { Label } from "./texts/label";
+import { Label } from "../globals/texts/label";
 import { date } from "../../assets/svgs";
-import { SubText } from "./texts/subText";
-import { Calendar } from "./ui/calendar";
+import { SubText } from "../globals/texts/subText";
+import { Calendar } from "../globals/ui/calendar";
 
 export const ConfirmDate = () => {
   return (

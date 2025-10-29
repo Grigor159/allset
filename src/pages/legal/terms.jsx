@@ -1,5 +1,5 @@
 import { Box, Container, Stack } from "@chakra-ui/react";
-import { Title } from "../../components/constructor/texts/title";
+import { Title } from "../../components/globals/texts/title";
 
 const Terms = () => {
   return (

@@ -1,7 +1,7 @@
 "use client";
 
 import { Center, Image } from "@chakra-ui/react";
-import loader from "../assets/loader.gif";
+import loader from "../../assets/loader.gif";
 
 export const Loader = () => {
   return (

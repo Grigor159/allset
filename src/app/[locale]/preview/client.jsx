@@ -1,7 +1,7 @@
 import React from 'react'
 
-export const PreviewClient = () => {
+export const ProfileClient = () => {
   return (
-    <div>PreviewClient</div>
+    <div>ProfileClient</div>
   )
 }

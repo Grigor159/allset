@@ -7,7 +7,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
-import { Label } from "./texts/label";
+import { Label } from "../globals/texts/label";
 import { languages } from "../../utils/constants";
 import { checked } from "../../assets/svgs";
 

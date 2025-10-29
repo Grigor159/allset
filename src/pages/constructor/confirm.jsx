@@ -1,9 +1,8 @@
-import { Scroll } from "../../components/scroll";
-import Seo from "../../components/seo";
+import { Scroll } from "../../components/globals/scroll";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Container, Stack } from "@chakra-ui/react";
-import { success, error } from "../../components/alerts";
+import { success, error } from "../../components/globals/alerts";
 import baseApi from "../../services/api/baseApi";
 import { Promocode } from "../../components/constructor/promocode";
 import { TitleDemo } from "../../components/constructor/titleDemo";
@@ -37,7 +36,6 @@ const Confirm = () => {
   return (
     <Scroll animationKey="confirm">
       <Box pt="32px" pb="40px">
-        <Seo title="confirm_title" description="confirm_text" />
         <Container maxW="1104px" px={0}>
           <Stack gap="24px" w="864px" mx="auto">
             <Stack

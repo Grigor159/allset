@@ -9,11 +9,11 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { story } from "../../assets/svgs";
-import { Label } from "./texts/label";
-import { FileUploadList } from "./ui/filleUpload";
+import { Label } from "../globals/texts/label";
+import { FileUploadList } from "../globals/ui/filleUpload";
 import { useEffect, useState } from "react";
-import { LngSwitcher } from "./ui/lngSwitcher";
-import { Switcher } from "./ui/switcher";
+import { LngSwitcher } from "../globals/ui/lngSwitcher";
+import { Switcher } from "../globals/ui/switcher";
 
 export const Story = ({ name, value, onChange, hide, required, languages }) => {
   const t = useTranslations();

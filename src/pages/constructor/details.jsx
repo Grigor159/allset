@@ -1,13 +1,12 @@
-import { Scroll } from "../../components/scroll";
-import Seo from "../../components/seo";
+import { Scroll } from "../../components/globals/scroll";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRef, useState } from "react";
 import { Box, Container, Stack } from "@chakra-ui/react";
 import { Expire } from "../../components/constructor/expire";
 import { TitleCreator } from "../../components/constructor/titleCreator";
 import { EventDate } from "../../components/constructor/eventDate";
-import { TextArea } from "../../components/constructor/ui/textarea";
-import { error, success } from "../../components/alerts";
+import { TextArea } from "../../components/globals/ui/textarea";
+import { error, success } from "../../components/globals/alerts";
 import { Photos } from "../../components/constructor/photos";
 import { Counter } from "../../components/constructor/counter";
 import { Contact } from "../../components/constructor/contact";
@@ -109,7 +108,6 @@ const Details = () => {
   return (
     <Scroll animationKey="details">
       <Box pt="32px" pb="65px">
-        <Seo title="details_title" description="details_text" />
         <Container maxW="1104px" px={0}>
           {/* VStack */}
           <Stack gap="24px" w="864px" mx="auto">

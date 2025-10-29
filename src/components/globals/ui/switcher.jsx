@@ -1,5 +1,5 @@
 import { Switch } from "@chakra-ui/react";
-import { Tooltip } from "../../tooltip";
+import { Tooltip } from "../tooltip";
 import { useId } from "react";
 import { useTranslations } from "next-intl";
 

@@ -1,10 +1,10 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Field, Flex, HStack, Show, Stack, Text } from "@chakra-ui/react";
-import { Label } from "./texts/label";
+import { Label } from "../globals/texts/label";
 import { getTimeUntil } from "../../utils/helpers";
 import { isNotEmptyObject } from "../../utils/checkers";
-import { Switcher } from "./ui/switcher";
+import { Switcher } from "../globals/ui/switcher";
 
 export const Counter = ({ name, value, hide, required }) => {
   const t = useTranslations();

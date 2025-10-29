@@ -2,8 +2,8 @@ import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Field, Flex, Input, Stack, Text } from "@chakra-ui/react";
 import { BASE_URL } from "../../services/api/config";
-import { Label } from "./texts/label";
-import { LngSwitcher } from "./ui/lngSwitcher";
+import { Label } from "../globals/texts/label";
+import { LngSwitcher } from "../globals/ui/lngSwitcher";
 import { cleanUrlExtension } from "../../utils/formatters";
 
 export const TitleCreator = ({

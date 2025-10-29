@@ -7,10 +7,9 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import Seo from "../components/seo";
 import { useState } from "react";
 import { supabase } from "../services/supabase/supabase";
-import { info, success, warning } from "../components/alerts";
+import { info, success, warning } from "../components/globals/alerts";
 import soon from "../assets/soon.png";
 import soonMobile from "../assets/soonMobile.png";
 import { isValidEmail } from "../utils/checkers";
@@ -47,10 +46,6 @@ const Soon = () => {
       w="100vw"
       h="100vh"
     >
-      <Seo
-        title="Cooming Soon"
-        description="Your dream wedding invitations — personalized, elegant, and effortless. Launching soon to make your big day unforgettable."
-      />
       <Center h="100vh">
         <Stack align={"center"} gap={{ base: "42px", md: "52px" }}>
           <Heading

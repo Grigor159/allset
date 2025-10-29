@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { Field, FileUpload, Icon, Stack, Text } from "@chakra-ui/react";
 import { uploadAvatar } from "../../assets/svgs";
-import { Label } from "./texts/label";
-import { FileUploadList } from "./ui/filleUpload";
+import { Label } from "../globals/texts/label";
+import { FileUploadList } from "../globals/ui/filleUpload";
 
 export const Photos = ({ name, onChange, required }) => {
   const t = useTranslations();

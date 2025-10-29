@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import { Scroll } from "@/components/scroll";
+import { Scroll } from "@/components/globals/scroll";
 import { Box, Container, Flex, For } from "@chakra-ui/react";
 import { useGetTanstack } from "@/hooks/useTanstack";
-import { Loader } from "@/components/loader";
+import { Loader } from "@/components/globals/loader";
 import { Card } from "@/components/constructor/card";
 
 export const HomeClient = () => {

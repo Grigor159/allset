@@ -1,10 +1,9 @@
-import { Scroll } from "../../components/scroll";
-import Seo from "../../components/seo";
+import { Scroll } from "../../components/globals/scroll";
 import { Box, Container, Flex, For } from "@chakra-ui/react";
 import { Card } from "../../components/constructor/card";
 // import { templates } from "../../utils/constants";
 import { useGetTanstack } from "../../hooks/useTanstack";
-import { Loader } from "../../components/loader";
+import { Loader } from "../../components/globals/loader";
 
 const Templates = () => {
   const { isLoading, data } = useGetTanstack("templates");
@@ -15,7 +14,6 @@ const Templates = () => {
   return (
     <Scroll animationKey="templates">
       <Box>
-        <Seo title="template_title" description="template_text" />
         <Container maxW="1104px" px={0}>
           <Flex justify={"space-between"} gap="32px" pt="32px" pb="32px">
             <For each={data}>{(el, index) => <Card key={index} el={el} />}</For>

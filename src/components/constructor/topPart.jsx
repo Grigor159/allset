@@ -4,8 +4,8 @@ import { Center, Stack, Image } from "@chakra-ui/react";
 import { usePathname } from "@/i18n/routing";
 import { contentMap } from "../../utils/constants";
 import { pathWithoutLang } from "../../utils/formatters";
-import { Title } from "./texts/title";
-import { SubTitle } from "./texts/subTitle";
+import { Title } from "../globals/texts/title";
+import { SubTitle } from "../globals/texts/subTitle";
 
 export const TopPart = () => {
   const pathname = usePathname();

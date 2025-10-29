@@ -3,8 +3,8 @@
 import { useLocale } from "next-intl";
 import { useNuqs } from "../../hooks/useNuqs";
 import { Box, Flex, Icon, Image, Stack, Text } from "@chakra-ui/react";
-import { MidText } from "./texts/midText";
-import { SubText } from "./texts/subText";
+import { MidText } from "../globals/texts/midText";
+import { SubText } from "../globals/texts/subText";
 import { selected } from "../../assets/svgs";
 import { formatUrl } from "../../utils/formatters";
 

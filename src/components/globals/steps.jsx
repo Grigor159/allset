@@ -1,6 +1,5 @@
 "use client";
 
-
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/routing";
 import { getStepInfo } from "../../utils/helpers";

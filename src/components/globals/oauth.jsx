@@ -6,15 +6,19 @@ import {
   Avatar,
   Button,
   Circle,
+  Flex,
   Float,
+  For,
   Menu,
   Portal,
   Show,
   Spinner,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import { Link } from "@/i18n/routing";
+import { authPages } from "@/utils/constants";
 
-export const Auth = () => {
+export const OAuth = () => {
   const t = useTranslations();
   const { isLoading, user, loginWithPopup, logout } = useAuth0();
 
@@ -54,6 +58,7 @@ export const Auth = () => {
                 <Circle size="2" bg="green" />
               </Float>
             </Avatar.Root>
+            Hello, {user?.given_name}
           </Button>
         ) : (
           <Button
@@ -78,42 +83,46 @@ export const Auth = () => {
       <Portal>
         <Menu.Positioner>
           <Show when={user}>
-            <Menu.Content w="auto" minW="unset" autoFocus>
-              <Menu.Item p="0">
-                <Button
-                  as={Link}
-                  to="profile"
-                  border="1px solid"
-                  borderColor="#F43F5E"
-                  bg="white"
-                  color="#F43F5E"
-                  fontWeight="400"
-                  fontSize="14px"
-                  borderRadius="8px"
-                  lineHeight="24px"
-                  w="100%"
-                  _hover={{ bg: "#F43F5E", color: "white" }}
-                >
-                  {t("profile")}
-                </Button>
-              </Menu.Item>
-              <Menu.Item p="0" mt="12px">
-                <Button
-                  onClick={logout}
-                  border="1px solid"
-                  borderColor="#F43F5E"
-                  bg="white"
-                  color="#F43F5E"
-                  fontWeight="400"
-                  fontSize="14px"
-                  borderRadius="8px"
-                  lineHeight="24px"
-                  w="100%"
-                  _hover={{ bg: "#F43F5E", color: "white" }}
-                >
-                  {t("logout")}
-                </Button>
-              </Menu.Item>
+            <Menu.Content w="auto" minW="unset" autoFocus={false}>
+              <For each={authPages}>
+                {(el) => (
+                  <Menu.Item key={el}>
+                    {el === "logout" ? (
+                      <ChakraLink
+                        onClick={logout}
+                        bg="white"
+                        color="#4B5563"
+                        fontWeight="400"
+                        fontSize="14px"
+                        borderRadius="8px"
+                        lineHeight="24px"
+                        w="100%"
+                        display="flex"
+                        justifyContent="center"
+                      >
+                        {t("logout")}
+                      </ChakraLink>
+                    ) : (
+                      <ChakraLink
+                        as={Link}
+                        href={`/auth/${el}`}
+                        bg="white"
+                        color="#4B5563"
+                        fontWeight="400"
+                        fontSize="14px"
+                        borderRadius="8px"
+                        lineHeight="24px"
+                        w="100%"
+                        display="flex"
+                        justifyContent="center"
+                        // _hover={{ bg: "#F43F5E", color: "white" }}
+                      >
+                        {t(el)}
+                      </ChakraLink>
+                    )}
+                  </Menu.Item>
+                )}
+              </For>
             </Menu.Content>
           </Show>
         </Menu.Positioner>

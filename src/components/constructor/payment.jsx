@@ -1,7 +1,7 @@
 import { Button, Field, Flex, For, Icon, Image, Stack } from "@chakra-ui/react";
 import { payment } from "../../assets/svgs";
 import { useQueryState } from "nuqs";
-import { Label } from "./texts/label";
+import { Label } from "../globals/texts/label";
 import { paymentMethods } from "../../utils/constants";
 
 export const Payment = () => {

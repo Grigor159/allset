@@ -10,8 +10,8 @@ import {
   Separator,
   Stack,
 } from "@chakra-ui/react";
-import { MidText } from "./texts/midText";
-import { SubText } from "./texts/subText";
+import { MidText } from "../globals/texts/midText";
+import { SubText } from "../globals/texts/subText";
 import { responsive } from "../../utils/constants";
 import img from "../../assets/customisations.png";
 
