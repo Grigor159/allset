@@ -1,3 +1,5 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
@@ -27,7 +29,7 @@ export const Auth = () => {
                 <Spinner />
               ) : (
                 <Button variant="outline" onClick={loginWithPopup}>
-                  Log-In
+                  Login
                 </Button>
               )
             }
@@ -55,15 +57,17 @@ export const Auth = () => {
           </Button>
         ) : (
           <Button
+            w="137px"
             border="1px solid"
-            borderColor="#F43F5E"
-            bg="white"
-            color="#F43F5E"
+            borderColor="#80A0A14D"
+            disabled={isLoading}
+            bg={isLoading ? "#749596" : "#004143"}
+            color="white"
             fontWeight="400"
             fontSize="14px"
-            borderRadius="8px"
+            borderRadius="38px"
             lineHeight="24px"
-            _hover={{ bg: "#F43F5E", color: "white" }}
+            _hover={{ bg: "white", color: "#004143" }}
             onClick={loginWithPopup}
           >
             {isLoading ? <Spinner /> : t("login")}
@@ -77,7 +81,7 @@ export const Auth = () => {
             <Menu.Content w="auto" minW="unset" autoFocus>
               <Menu.Item p="0">
                 <Button
-                  as={NavLink}
+                  as={Link}
                   to="profile"
                   border="1px solid"
                   borderColor="#F43F5E"

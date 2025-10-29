@@ -124,6 +124,13 @@ export const calendarLocales = {
   ru: ru,
 };
 
+export const mainPages = [
+  { path: "/digital-invitations", name: "Digital Invitations" },
+  { path: "/event-vendors", name: "Event Vendors" },
+  { path: "/about-us", name: "About Us" },
+  { path: "/contacts", name: "Contacts" },
+]
+
 export const steps = {
   "/": 1,
   "/customisations": 1,
@@ -132,7 +139,7 @@ export const steps = {
   "/confirm": 4,
 };
 
-export const routes = [
+export const constructorPages = [
   { path: "/", name: "themes" },
   { path: "/customisations", name: "customisations" },
   { path: "/details", name: "details" },

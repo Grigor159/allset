@@ -51,12 +51,12 @@ export default async function RootLayout({ children, params }) {
         <link rel="manifest" href={getManifestHref()} />
 
         {/* Fonts */}
-        {/* <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
           href="https://fonts.googleapis.com/css2?family=Montaga&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet"
-        /> */}
+        />
 
         <meta
           name="viewport"
@@ -72,7 +72,7 @@ export default async function RootLayout({ children, params }) {
         <meta name="twitter:creator" content="allset.am" />
         <meta property="fb:app_id" content="" />
       </head>
-      <body >
+      <body style={{ backgroundColor: "#f9fafb" }}>
         <AuthProvider>
           <QueryProvider>
             <ChakraUIProvider>

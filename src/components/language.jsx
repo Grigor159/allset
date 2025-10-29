@@ -47,7 +47,7 @@ export const Language = () => {
               <Image
                 src={`https://flagcdn.com/${selected?.flag}.svg`}
                 boxSize="24px"
-                borderRadius={"4px"}
+                borderRadius={"100%"}
                 alt={selected?.name}
               />
               <Icon size={"lg"}>{down.icon}</Icon>

@@ -2,9 +2,10 @@
 
 export const down = {
     icon: (
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M11.0476 6.47607L8.00001 9.52369L4.95239 6.47607" stroke="black" strokeWidth="0.761905" strokeLinecap="round" strokeLinejoin="round" />
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 14.3077L8.19226 10.5H15.8078L12 14.3077Z" fill="#5F6368" />
         </svg>
+
     )
 }
 

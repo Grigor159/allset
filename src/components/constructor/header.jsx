@@ -9,17 +9,17 @@ import {
   Link as ChakraLink,
 } from "@chakra-ui/react";
 import { Link } from "@/i18n/routing";
-import { Steps } from "./steps";
+// import { Steps } from "./steps";
 import { Language } from "../language";
-import { MidText } from "./texts/midText";
-// import { Auth } from "../../pages/auth";
+import { Auth } from "../../pages/auth";
 import logo from "@/assets/allset.png";
+import { Navigation } from "./navigation";
 
 export const Header = () => {
   const t = useTranslations();
 
   return (
-    <Flex
+    <Box
       as="header"
       w="100%"
       position="sticky"
@@ -31,32 +31,21 @@ export const Header = () => {
       boxShadow="sm"
       py="16px"
       px="0"
-      align="center"
-      justify="space-between"
     >
-      <Box ml="40px">
-        <Image src={logo.src} w="65px" h="40px" alt="AllSet" />
-      </Box>
-      <Box
-        position="absolute"
-        left="50%"
-        transform="translateX(-50%)"
-        w="1104px"
-      >
-        <Container maxW="1104px" px={0}>
-          <Flex justify="space-between">
-            <ChakraLink as={Link} href="/" gap="12px">
-              <MidText text={t("title")} />
-            </ChakraLink>
+      <Container maxW="1104px" px={0}>
+        <Flex align="center" justify="space-between">
+          <ChakraLink as={Link} href="/" gap="12px">
+            <Image src={logo.src} w="94px" h="58px" alt="AllSet" />
+          </ChakraLink>
 
-            <Steps />
+          <Navigation />
+
+          <Flex gap="16px">
+            <Language />
+            <Auth />
           </Flex>
-        </Container>
-      </Box>
-      <Flex gap="12px" mr="40px">
-        <Language />
-        {/* <Auth /> */}
-      </Flex>
-    </Flex>
+        </Flex>
+      </Container>
+    </Box>
   );
 };

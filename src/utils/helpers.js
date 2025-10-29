@@ -54,13 +54,13 @@ export const getStepInfo = (pathname) => {
   // return { step, value };
 };
 
-import { routes } from "./constants";
+import { constructorPages } from "./constants";
 
 export const getPreviousRoute = (pathname) => {
-  const index = routes.findIndex(r => r.path === pathname);
+  const index = constructorPages.findIndex(r => r.path === pathname);
   if (index <= 0) return null;
 
-  const prevRoute = routes[index - 1];
+  const prevRoute = constructorPages[index - 1];
   return {
     path: `${prevRoute.path}`,
     name: prevRoute.name,
@@ -68,10 +68,10 @@ export const getPreviousRoute = (pathname) => {
 };
 
 export const getNextRoute = (pathname) => {
-  const index = routes?.findIndex(r => r.path === pathname);
-  if (index === -1 || index === routes.length - 1) return null;
+  const index = constructorPages?.findIndex(r => r.path === pathname);
+  if (index === -1 || index === constructorPages.length - 1) return null;
 
-  const nextRoute = routes[index + 1];
+  const nextRoute = constructorPages[index + 1];
   return {
     path: `${nextRoute.path}`,
     name: nextRoute.name,
