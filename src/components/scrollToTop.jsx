@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { Button } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";

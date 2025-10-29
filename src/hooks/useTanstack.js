@@ -1,3 +1,5 @@
+"use client";
+
 import { useQuery, useMutation } from "@tanstack/react-query";
 import baseApi from "../services/api/baseApi";
 
@@ -8,7 +10,6 @@ export const useGetTanstack = (name) => {
             const { data } = await baseApi.get(`${name}`);
             return data;
         },
-        staleTime: Infinity,
     });
 };
 

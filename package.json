@@ -29,7 +29,8 @@
     "typewriter-effect": "^2.22.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3",
     "eslint": "^9",
-    "eslint-config-next": "16.0.0"
+    "eslint-config-next": "15.1.0"
   }
 }

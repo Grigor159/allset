@@ -4,9 +4,10 @@ import { QueryProvider } from "@/providers/queryProvider";
 import { ChakraUIProvider } from "@/providers/chakcraProvider";
 import { NuqsProvider } from "@/providers/nuqsProvider";
 import { NextIntlClientProvider } from "next-intl";
-import "../../index.css";
 import { Header } from "@/components/constructor/header";
-// import { TopPart } from "@/components/constructor/topPart";
+import { TopPart } from "@/components/constructor/topPart";
+import { Footer } from "@/components/constructor/footer";
+import "../../index.css";
 
 export default async function RootLayout({ children, params }) {
   const { locale } = params;
@@ -79,8 +80,9 @@ export default async function RootLayout({ children, params }) {
                 {/* <NuqsAdapter> */}
                 <NextIntlClientProvider locale={locale} messages={messages}>
                   <Header />
-                  {/* <TopPart /> */}
+                  <TopPart />
                   {children}
+                  <Footer />
                 </NextIntlClientProvider>
                 {/* </NuqsAdapter> */}
               </NuqsProvider>

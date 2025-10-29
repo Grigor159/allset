@@ -1,3 +1,5 @@
+"use client";
+
 export const scrollToTopWithDuration = (duration) => {
   const start = window.scrollY || document.documentElement.scrollTop;
   const startTime = performance.now();
@@ -114,7 +116,7 @@ export const getNextRoute = (pathname) => {
 
   const nextRoute = routes[index + 1];
   return {
-    path: `/${language}${nextRoute.path}`,
+    path: `${language}${nextRoute.path}`,
     name: nextRoute.name,
   };
 };
@@ -129,10 +131,10 @@ import { localesRegex } from "./regex";
 export const navigateWithLocal = (pathname) =>
   pathname.replace(localesRegex, "")
 
-export const getLanguageKey = (language) => {
-  if (language === "hy") return "am";
-  return language;
-};
+// export const getLanguageKey = (language) => {
+//   if (language === "hy") return "am";
+//   return language;
+// };
 
 export function random(num) {
   return Math.floor(Math.random() * num);

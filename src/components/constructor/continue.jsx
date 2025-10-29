@@ -1,10 +1,14 @@
-import { useLocation, useParams, NavLink } from "react-router-dom";
+"use client";
+
+// import { useLocation, useParams, NavLink } from "react-router-dom";
 import { useNuqs } from "../../hooks/useNuqs";
 import { useQueryState } from "nuqs";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { getNextRoute } from "../../utils/helpers";
 import { isContinueDisabled } from "../../utils/checkers";
 import { Button } from "@chakra-ui/react";
+import { Link, usePathname, useRouter } from "@/i18n/routing";
+import { useParams } from "next/navigation";
 
 export const Continue = () => {
   const [template] = useNuqs("template");
@@ -12,14 +16,18 @@ export const Continue = () => {
   const [accept] = useQueryState("terms_accepted");
 
   const t = useTranslations();
-  const { language } = useParams();
-  const { pathname, search } = useLocation();
+  const language = useLocale();
+  // const { pathname, search } = useLocation();
+  const pathname = usePathname();
+  const search = useRouter();
 
   const nextInfo = getNextRoute(pathname);
 
   if (!nextInfo) return null;
 
   const { path, name } = nextInfo;
+// console.log(path);
+// console.log(search); // search is not defined
 
   const disabled = isContinueDisabled(pathname, language, {
     template,
@@ -58,7 +66,7 @@ export const Continue = () => {
     </Button>
   ) : (
     <Button
-      as={!disabled ? NavLink : "button"}
+      as={!disabled ? Link : "button"}
       // to={!disabled ? path : undefined}
       to={!disabled ? `${path}${search}` : undefined}
       fontWeight="400"

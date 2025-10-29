@@ -3,12 +3,12 @@
 import { Auth0Provider } from "@auth0/auth0-react";
 
 export function AuthProvider({ children }) {
-    const { VITE_DOMAIN, VITE_CLIENT_ID } = process.env;
+    const { NEXT_PUBLIC_DOMAIN, NEXT_PUBLIC_CLIENT_ID } = process.env;
 
     return (
         <Auth0Provider
-            domain={VITE_DOMAIN}
-            clientId={VITE_CLIENT_ID}
+            domain={NEXT_PUBLIC_DOMAIN}
+            clientId={NEXT_PUBLIC_CLIENT_ID}
             authorizationParams={{
                 redirect_uri: window.location.origin,
             }}>

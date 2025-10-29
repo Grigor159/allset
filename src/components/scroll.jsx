@@ -1,3 +1,5 @@
+"use client";
+
 import { useLayoutEffect } from "react";
 import { scrollToTopWithDuration } from "../utils/helpers";
 import { AnimatePresence, motion } from "framer-motion";

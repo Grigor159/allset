@@ -1,4 +1,6 @@
-import { useLanguage } from "../../hooks/useLanguge";
+"use client";
+
+import { useLocale } from "next-intl";
 import { useNuqs } from "../../hooks/useNuqs";
 import { Box, Flex, Icon, Image, Stack, Text } from "@chakra-ui/react";
 import { MidText } from "./texts/midText";
@@ -8,7 +10,8 @@ import { formatUrl } from "../../utils/formatters";
 import { getLanguageKey } from "../../utils/helpers";
 
 export const Card = ({ el }) => {
-  const language = useLanguage();
+  // const language = useLanguage();
+  const language = useLocale();
 
   const { id, templateImage, name, description } = el;
 

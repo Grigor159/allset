@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, Container, Flex } from "@chakra-ui/react";
 import { GoBack } from "./goBack";
 import { Continue } from "./continue";

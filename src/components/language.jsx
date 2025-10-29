@@ -10,41 +10,31 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import { useRouter, usePathname } from "@/i18n/routing";
-import { useLocale } from "next-intl";
+import { useParams } from "next/navigation";
 import { useTransition } from "react";
 import { languages } from "../utils/constants";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { down } from "../assets/svgs";
 import cookies from "js-cookie";
 
 export const Language = () => {
   const t = useTranslations();
   const pathname = usePathname();
+  const params = useParams();
   const language = useLocale();
   const router = useRouter();
 
   const [isPending, startTransition] = useTransition();
 
-  // derive selected flag from cookie or active locale
+  const selected = languages.find(({ code }) => code === language);
 
   const handleChangeLng = (code) => {
-    const selectedCode = code === "en" ? "gb" : code === "hy" ? "am" : code;
-    cookies.set("lngFlag", selectedCode);
     cookies.set("NEXT_LOCALE", code);
 
     startTransition(() => {
-      const pathWithoutLocale = pathname.split("/").slice(2).join("/");
-      router.replace("/" + pathWithoutLocale || "", { locale: code });
+      router.replace({ pathname, params }, { locale: code });
     });
   };
-
-  const lngFlag =
-    cookies.get("lngFlag") ||
-    (language === "en"
-      ? "gb"
-      : language === "hy"
-      ? "am"
-      : language.slice(0, 2));
 
   return (
     <Menu.Root>
@@ -55,10 +45,10 @@ export const Language = () => {
           ) : (
             <>
               <Image
-                src={`https://flagcdn.com/${lngFlag}.svg`}
+                src={`https://flagcdn.com/${selected?.flag}.svg`}
                 boxSize="24px"
                 borderRadius={"4px"}
-                alt={lngFlag}
+                alt={selected?.name}
               />
               <Icon size={"lg"}>{down.icon}</Icon>
             </>

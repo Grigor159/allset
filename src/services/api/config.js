@@ -1,8 +1,8 @@
-const { MODE, VITE_BASE_API_DEV, VITE_BASE_API_RELEASE, VITE_BASE_URL_DEV, VITE_BASE_URL_RELEASE } = process.env;
+"use strict";
 
-export const BASE_API = MODE === "development" ? VITE_BASE_API_DEV : VITE_BASE_API_RELEASE; // api url
+export const BASE_API = process.env.NODE_ENV === "development" ? process.env.NEXT_PUBLIC_API_DEV : process.env.NEXT_PUBLIC_API_RELEASE; // api url
 
-export const BASE_URL = MODE === "development" ? VITE_BASE_URL_DEV : VITE_BASE_URL_RELEASE; // web url
+export const BASE_URL = process.env.NODE_ENV === "development" ? process.env.NEXT_PUBLIC_URL_DEV : process.env.NEXT_PUBLIC_URL_RELEASE; // web url
 
 export const getAxiosConfig = () => {
   const token = sessionStorage.getItem("") || "";
