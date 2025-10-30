@@ -1,7 +1,7 @@
 import { lazy } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import cookies from "js-cookie";
-import Layout from "../components/constructor/layout";
+import Layout from "../components/builder/layout";
 import NotFound from "../../../src/pages/404";
 import Soon from "../../../src/pages/soon";
 

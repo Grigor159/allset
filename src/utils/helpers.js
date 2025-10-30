@@ -35,10 +35,10 @@ export const getFlagCode = (lang) => {
 };
 
 import { steps } from "./constants";
-import { pathWithoutLang } from "./formatters";
 
 export const getStepInfo = (pathname) => {
-  const step = steps[pathWithoutLang(pathname)];
+  const step = steps[pathname];
+  
   if (!step) return { show: false };
 
   return {
@@ -46,21 +46,15 @@ export const getStepInfo = (pathname) => {
     value: (step / 4) * 100,
     show: true,
   };
-
-  // const step = stepMap[pathWithoutLang(pathname)] || 4;
-  // const valuePerStep = 25;
-  // const value = step * valuePerStep;
-
-  // return { step, value };
 };
 
-import { constructorPages } from "./constants";
+import { builderPages } from "./constants";
 
 export const getPreviousRoute = (pathname) => {
-  const index = constructorPages.findIndex(r => r.path === pathname);
+  const index = builderPages.findIndex(r => r.path === pathname);
   if (index <= 0) return null;
 
-  const prevRoute = constructorPages[index - 1];
+  const prevRoute = builderPages[index - 1];
   return {
     path: `${prevRoute.path}`,
     name: prevRoute.name,
@@ -68,10 +62,10 @@ export const getPreviousRoute = (pathname) => {
 };
 
 export const getNextRoute = (pathname) => {
-  const index = constructorPages?.findIndex(r => r.path === pathname);
-  if (index === -1 || index === constructorPages.length - 1) return null;
+  const index = builderPages?.findIndex(r => r.path === pathname);
+  if (index === -1 || index === builderPages.length - 1) return null;
 
-  const nextRoute = constructorPages[index + 1];
+  const nextRoute = builderPages[index + 1];
   return {
     path: `${nextRoute.path}`,
     name: nextRoute.name,

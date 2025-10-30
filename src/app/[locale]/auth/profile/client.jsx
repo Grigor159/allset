@@ -1,5 +1,5 @@
 import React from "react";
 
 export const ProfileClient = () => {
-  return <div>ProfileClient</div>;
+  return <div>lorem1000</div>;
 };

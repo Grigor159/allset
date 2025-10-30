@@ -1,13 +1,13 @@
-import { useTranslations } from "next-intl";
+"use client";
+
+import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
 import {
   Box,
   Dialog,
   Icon,
   Input,
   InputGroup,
-  Button,
   CloseButton,
 } from "@chakra-ui/react";
 import { DayPicker } from "react-day-picker";
@@ -23,7 +23,7 @@ export const Calendar = ({ name, value, onChange, required }) => {
   const ref = useRef();
 
   const t = useTranslations();
-  const { language } = useParams();
+  const  language  = useLocale();
 
   const [selected, setSelected] = useState(null);
   const [open, setOpen] = useState(false);

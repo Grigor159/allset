@@ -66,7 +66,8 @@ export const OAuth = () => {
             border="1px solid"
             borderColor="#80A0A14D"
             disabled={isLoading}
-            bg={isLoading ? "#749596" : "#004143"}
+            // bg={isLoading ? "#749596" : "#004143"}
+            bg={"#004143"}
             color="white"
             fontWeight="400"
             fontSize="14px"

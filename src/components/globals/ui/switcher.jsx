@@ -1,6 +1,8 @@
+"use client";
+
+import { useId } from "react";
 import { Switch } from "@chakra-ui/react";
 import { Tooltip } from "../tooltip";
-import { useId } from "react";
 import { useTranslations } from "next-intl";
 
 export const Switcher = ({ checked, onChange }) => {

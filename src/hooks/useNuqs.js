@@ -23,9 +23,11 @@
 //   return [value, setValueAndCookie];
 // }
 
+"use client"
+
+import { useEffect } from "react";
 import { useQueryState } from "nuqs";
 import cookies from "js-cookie";
-import { useEffect } from "react";
 
 export function useNuqs(key, options = {}) {
   const [internalValue, setInternalValue] = useQueryState(key, options);

@@ -1,9 +1,5 @@
 "use client";
 
-// must be deleted
-export const pathWithoutLang = (pathname) =>
-    pathname.replace(/^\/[a-z]{2}/, '') || '/'
-
 export const capitalize = (str) => str?.charAt(0)?.toUpperCase() + str?.slice(1);
 
 export const deepCapitalize = (str) =>

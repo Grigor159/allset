@@ -1,3 +1,6 @@
+"use client";
+
+
 import { Button, ButtonGroup, Image } from "@chakra-ui/react";
 import { getFlagCode } from "../../../utils/helpers";
 

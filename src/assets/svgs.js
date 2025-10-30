@@ -9,6 +9,45 @@ export const down = {
     )
 }
 
+export const next = {
+    icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 7L12 12L7 17M13 7L18 12L13 17" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+    )
+}
+
+export const checkedStep = {
+    icon: (
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_2636_371)">
+                <path d="M9.66667 14L12.5556 16.8889L18.3333 11.1111M1 14C1 15.7072 1.33625 17.3977 1.98957 18.9749C2.64288 20.5521 3.60045 21.9852 4.80761 23.1924C6.01477 24.3995 7.44788 25.3571 9.02512 26.0104C10.6023 26.6637 12.2928 27 14 27C15.7072 27 17.3977 26.6637 18.9749 26.0104C20.5521 25.3571 21.9852 24.3995 23.1924 23.1924C24.3995 21.9852 25.3571 20.5521 26.0104 18.9749C26.6637 17.3977 27 15.7072 27 14C27 12.2928 26.6637 10.6023 26.0104 9.02512C25.3571 7.44788 24.3995 6.01477 23.1924 4.80761C21.9852 3.60045 20.5521 2.64288 18.9749 1.98957C17.3977 1.33626 15.7072 1 14 1C12.2928 1 10.6023 1.33626 9.02512 1.98957C7.44788 2.64288 6.01477 3.60045 4.80761 4.80761C3.60045 6.01477 2.64288 7.44788 1.98957 9.02512C1.33625 10.6023 1 12.2928 1 14Z" stroke="#004143" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </g>
+            <defs>
+                <clipPath id="clip0_2636_371">
+                    <rect width="28" height="28" fill="white" />
+                </clipPath>
+            </defs>
+        </svg>
+    )
+}
+
+export const dots = {
+    icon: (
+        <svg width="42" height="1" viewBox="0 0 42 1" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line y1="0.5" x2="42" y2="0.5" stroke="#D0D0D0" stroke-dasharray="4 4" />
+        </svg>
+    )
+}
+
+export const dotsGreen = {
+    icon: (
+        <svg width="42" height="1" viewBox="0 0 42 1" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line y1="0.5" x2="42" y2="0.5" stroke="#004143" stroke-dasharray="4 4" />
+        </svg>
+    )
+}
+
 export const back = {
     icon: (
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

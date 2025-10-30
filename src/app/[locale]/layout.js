@@ -5,9 +5,9 @@ import { ChakraUIProvider } from "@/providers/chakcraProvider";
 import { NuqsProvider } from "@/providers/nuqsProvider";
 import { NextIntlClientProvider } from "next-intl";
 import { Header } from "@/components/globals/header";
-import { TopPart } from "@/components/constructor/topPart";
-import { Footer } from "@/components/globals/footer";
+import { ScrollToTop } from "@/components/globals/scrollToTop";
 import "../../index.css";
+import { Scroll } from "@/components/globals/scroll";
 
 export default async function RootLayout({ children, params }) {
   const { locale } = params;
@@ -80,9 +80,10 @@ export default async function RootLayout({ children, params }) {
                 {/* <NuqsAdapter> */}
                 <NextIntlClientProvider locale={locale} messages={messages}>
                   <Header />
-                  <TopPart />
-                  {children}
-                  <Footer />
+                  <Scroll>
+                    {children}
+                  </Scroll>
+                  <ScrollToTop />
                 </NextIntlClientProvider>
                 {/* </NuqsAdapter> */}
               </NuqsProvider>
