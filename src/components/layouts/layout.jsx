@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { TopPart } from "./topPart";
-import { BottomPart } from "./bottomPart";
+import { TopPart } from "../../features/builder/topPart";
+import { BottomPart } from "../../features/builder/bottomPart";
 
 export const Layout = ({ children }) => {
   return (

@@ -3,8 +3,8 @@
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Button, Field, Flex, Icon, Stack, Textarea } from "@chakra-ui/react";
-import { Label } from "../texts/label";
-import { xls } from "../../../assets/svgs";
+import { Label } from "./typography/label";
+import { xls } from "../../assets/svgs";
 import { LngSwitcher } from "./lngSwitcher";
 import { Switcher } from "./switcher";
 

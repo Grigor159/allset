@@ -3,8 +3,8 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Field, Flex, HStack, Input, Stack } from "@chakra-ui/react";
-import { Label } from "../globals/texts/label";
-import { Switcher } from "../globals/ui/switcher";
+import { Label } from "@/components/ui/typography/label";
+import { Switcher } from "@/components/ui/switcher";
 
 export const Contact = ({ name, value, onChange, hide, required }) => {
   const t = useTranslations();

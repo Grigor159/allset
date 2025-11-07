@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { FileUpload, Float, useFileUploadContext } from "@chakra-ui/react";
-import { remove } from "../../../assets/svgs";
+import { remove } from "../../assets/svgs";
 
 export const FileUploadList = ({ onFileSelect }) => {
   const fileUpload = useFileUploadContext();

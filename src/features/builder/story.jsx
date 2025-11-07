@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import {
   Field,
@@ -11,11 +12,10 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { story } from "../../assets/svgs";
-import { Label } from "../globals/texts/label";
-import { FileUploadList } from "../globals/ui/filleUpload";
-import { useEffect, useState } from "react";
-import { LngSwitcher } from "../globals/ui/lngSwitcher";
-import { Switcher } from "../globals/ui/switcher";
+import { Label } from "@/components/ui/typography/label";
+import { FileUploadList } from "@/components/ui/filleUpload";
+import { LngSwitcher } from "@/components/ui/lngSwitcher";
+import { Switcher } from "@/components/ui/switcher";
 
 export const Story = ({ name, value, onChange, hide, required, languages }) => {
   const t = useTranslations();

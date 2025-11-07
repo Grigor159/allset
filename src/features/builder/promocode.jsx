@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { usePostTanstack } from "../../hooks/useTanstack";
 import {
   Button,
   DataList,
@@ -14,10 +15,9 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { Label } from "../globals/texts/label";
 import { promo } from "../../assets/svgs";
-import { error, success } from "../globals/alerts";
-import { usePostTanstack } from "../../hooks/useTanstack";
+import { Label } from "@/components/ui/typography/label";
+import { error, success } from "@/components/ui/alerts";
 
 export const Promocode = () => {
   const discount = 20;

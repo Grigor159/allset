@@ -1,8 +1,8 @@
-import { Scroll } from "../../components/globals/scroll";
+import { Scroll } from "../../components/ui/scroll";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Container, Stack } from "@chakra-ui/react";
-import { success, error } from "../../components/globals/alerts";
+import { success, error } from "../../components/ui/alerts";
 import baseApi from "../../services/api/baseApi";
 import { Promocode } from "../../components/builder/promocode";
 import { TitleDemo } from "../../components/builder/titleDemo";

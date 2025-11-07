@@ -4,10 +4,10 @@ import { QueryProvider } from "@/providers/queryProvider";
 import { ChakraUIProvider } from "@/providers/chakcraProvider";
 import { NuqsProvider } from "@/providers/nuqsProvider";
 import { NextIntlClientProvider } from "next-intl";
-import { Header } from "@/components/globals/header";
-import { ScrollToTop } from "@/components/globals/scrollToTop";
+import { Header } from "@/components/ui/header";
+import { ScrollToTop } from "@/components/ui/scrollToTop";
 import "../../index.css";
-import { Scroll } from "@/components/globals/scroll";
+import { Scroll } from "@/components/ui/scroll";
 
 export default async function RootLayout({ children, params }) {
   const { locale } = params;

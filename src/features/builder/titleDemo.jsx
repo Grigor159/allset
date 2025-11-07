@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Field, Flex, Icon, Input, Stack, Text } from "@chakra-ui/react";
-import { Label } from "../globals/texts/label";
+import { Label } from "@/components/ui/typography/label";
 import { info, url } from "../../assets/svgs";
 import { BASE_URL } from "../../services/api/config";
 

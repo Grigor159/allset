@@ -1,6 +1,6 @@
 "use client";
 
-import { Layout } from "@/components/builder/layout";
+import { Layout } from "@/components/layouts/layout";
 import { Box } from "@chakra-ui/react";
 
 export const PreviewClient = () => {

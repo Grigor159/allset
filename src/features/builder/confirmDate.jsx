@@ -1,10 +1,10 @@
 "use client";
 
 import { Field, Icon, Stack } from "@chakra-ui/react";
-import { Label } from "../globals/texts/label";
 import { date } from "../../assets/svgs";
-import { SubText } from "../globals/texts/subText";
-import { Calendar } from "../globals/ui/calendar";
+import { Label } from "@/components/ui/typography/label";
+import { SubText } from "@/components/ui/typography/subText";
+import { Calendar } from "@/components/ui/calendar";
 
 export const ConfirmDate = () => {
   return (

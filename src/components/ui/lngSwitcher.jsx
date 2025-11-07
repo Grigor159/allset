@@ -2,7 +2,7 @@
 
 
 import { Button, ButtonGroup, Image } from "@chakra-ui/react";
-import { getFlagCode } from "../../../utils/helpers";
+import { getFlagCode } from "../../utils/helpers";
 
 export const LngSwitcher = ({
   activeLang,

@@ -10,10 +10,12 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "@/i18n/routing";
 // import { Steps } from "./steps";
-import { Language } from "./language";
+// import { Language } from "../globals/language";
 import { OAuth } from "./oauth";
 import logo from "@/assets/allset.png";
+import { Language } from "./language";
 import { Navigation } from "./navigation";
+// import { Navigation } from "../globals/navigation";
 
 export const Header = () => {
   const t = useTranslations();

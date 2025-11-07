@@ -9,11 +9,11 @@ import {
   Stack,
   Textarea,
 } from "@chakra-ui/react";
-import { Label } from "../globals/texts/label";
-import { Selector } from "../globals/ui/selector";
+import { Label } from "@/components/ui/typography/label";
+import { Switcher } from "@/components/ui/switcher";
+import { LngSwitcher } from "@/components/ui/lngSwitcher";
+import { Selector } from "@/components/ui/selector";
 import { schemes, styles } from "../../utils/constants";
-import { LngSwitcher } from "../globals/ui/lngSwitcher";
-import { Switcher } from "../globals/ui/switcher";
 
 export const Dresscode = ({
   name,

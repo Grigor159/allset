@@ -3,8 +3,8 @@
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { Checkbox, Field, Flex, Icon, Input, Stack } from "@chakra-ui/react";
-import { Label } from "../globals/texts/label";
-import { Switcher } from "../globals/ui/switcher";
+import { Label } from "@/components/ui/typography/label";
+import { Switcher } from "@/components/ui/switcher";
 import { agenda } from "../../utils/constants";
 import { checked } from "../../assets/svgs";
 

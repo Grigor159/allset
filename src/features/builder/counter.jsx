@@ -3,14 +3,14 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Field, Flex, HStack, Show, Stack, Text } from "@chakra-ui/react";
-import { Label } from "../globals/texts/label";
+import { Label } from "@/components/ui/typography/label";
+import { Switcher } from "@/components/ui/switcher";
 import { getTimeUntil } from "../../utils/helpers";
 import { isNotEmptyObject } from "../../utils/checkers";
-import { Switcher } from "../globals/ui/switcher";
 
 export const Counter = ({ name, value, hide, required }) => {
   const t = useTranslations();
-  
+
   const [checked, setChecked] = useState(true);
   const remaining = getTimeUntil(value);
 

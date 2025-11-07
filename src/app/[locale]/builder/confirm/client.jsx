@@ -2,14 +2,14 @@
 
 import { useRouter } from "@/i18n/routing";
 import { useState } from "react";
-import { Layout } from "@/components/builder/layout";
+import { Layout } from "@/components/layouts/layout";
 import { Box, Container, Stack } from "@chakra-ui/react";
-import { error, success } from "@/components/globals/alerts";
-import { TitleDemo } from "@/components/builder/titleDemo";
-import { ConfirmDate } from "@/components/builder/confirmDate";
-import { Promocode } from "@/components/builder/promocode";
-import { Payment } from "@/components/builder/payment";
-import { Legal } from "@/components/builder/legal";
+import { error, success } from "@/components/ui/alerts";
+import { TitleDemo } from "@/features/builder/titleDemo";
+import { ConfirmDate } from "@/features/builder/confirmDate";
+import { Promocode } from "@/features/builder/promocode";
+import { Payment } from "@/features/builder/payment";
+import { Legal } from "@/features/builder/legal";
 
 export const ConfirmClient = () => {
   const router = useRouter();

@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { supabase } from "../services/supabase/supabase";
-import { info, success, warning } from "../components/globals/alerts";
+import { info, success, warning } from "../components/ui/alerts";
 import soon from "../assets/soon.png";
 import soonMobile from "../assets/soonMobile.png";
 import { isValidEmail } from "../utils/checkers";

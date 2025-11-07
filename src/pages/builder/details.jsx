@@ -1,12 +1,12 @@
-import { Scroll } from "../../components/globals/scroll";
+import { Scroll } from "../../components/ui/scroll";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRef, useState } from "react";
 import { Box, Container, Stack } from "@chakra-ui/react";
 import { Expire } from "../../components/builder/expire";
 import { TitleCreator } from "../../components/builder/titleCreator";
 import { EventDate } from "../../components/builder/eventDate";
-import { TextArea } from "../../components/globals/ui/textarea";
-import { error, success } from "../../components/globals/alerts";
+import { TextArea } from "../../components/ui/textarea";
+import { error, success } from "../../components/ui/alerts";
 import { Photos } from "../../components/builder/photos";
 import { Counter } from "../../components/builder/counter";
 import { Contact } from "../../components/builder/contact";

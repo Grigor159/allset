@@ -1,9 +1,9 @@
-import { Scroll } from "../../components/globals/scroll";
+import { Scroll } from "../../components/ui/scroll";
 import { Box, Container, Flex, For } from "@chakra-ui/react";
 import { Card } from "../../components/builder/card";
 // import { templates } from "../../utils/constants";
 import { useGetTanstack } from "../../hooks/useTanstack";
-import { Loader } from "../../components/globals/loader";
+import { Loader } from "../../components/ui/loader";
 
 const Templates = () => {
   const { isLoading, data } = useGetTanstack("templates");

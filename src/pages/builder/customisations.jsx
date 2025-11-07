@@ -1,8 +1,8 @@
-import { Scroll } from "../../components/globals/scroll";
+import { Scroll } from "../../components/ui/scroll";
 import { Box, Container, Flex } from "@chakra-ui/react";
 import { useGetTanstack } from "../../hooks/useTanstack";
 import { useNuqs } from "../../hooks/useNuqs";
-import { Loader } from "../../components/globals/loader";
+import { Loader } from "../../components/ui/loader";
 import { Aside } from "../../components/builder/aside";
 import { Preview } from "../../components/builder/preview";
 import { useLanguage } from "../../hooks/useLanguge";

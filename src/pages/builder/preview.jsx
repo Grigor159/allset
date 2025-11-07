@@ -1,4 +1,4 @@
-import { Scroll } from "../../components/globals/scroll";
+import { Scroll } from "../../components/ui/scroll";
 import { Box } from "@chakra-ui/react";
 
 const Preview = () => {

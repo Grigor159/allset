@@ -1,7 +1,7 @@
 "use client"
 
 import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
-import { Toaster } from "../components/globals/toaster";
+import { Toaster } from "../components/ui/toaster";
 
 export function ChakraUIProvider({ children }) {
   return (
