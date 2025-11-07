@@ -14,7 +14,7 @@ import { Dresscode } from "../../components/builder/dresscode";
 import { Story } from "../../components/builder/story";
 import { AlbumLink } from "../../components/builder/albumLink";
 import { detailsForm } from "../../utils/constants";
-import baseApi from "../../services/api/baseApi";
+import apiClient from "@/lib/apiClient";
 import { useNuqs } from "../../hooks/useNuqs";
 import { LngSelector } from "../../components/builder/lngSelector";
 import { Timeline } from "../../components/builder/timeline";
@@ -93,7 +93,7 @@ const Details = () => {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await baseApi.post(`/invitations`, form);
+      const { data } = await apiClient.post(`/invitations`, form);
 
       if (data.status === "ok") {
         success("Basic Wedding Information Completed.");

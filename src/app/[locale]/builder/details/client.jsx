@@ -4,7 +4,7 @@ import { useRouter } from "@/i18n/routing";
 import { useRef, useState } from "react";
 import { useNuqs } from "@/hooks/useNuqs";
 import { detailsForm } from "@/utils/constants";
-import baseApi from "@/services/api/baseApi";
+import apiClient from "@/lib/apiClient";
 import { Layout } from "@/components/layouts/layout";
 import { Box, Container, Stack } from "@chakra-ui/react";
 import { LngSelector } from "@/features/builder/lngSelector";
@@ -92,7 +92,7 @@ export const DetailsClient = () => {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await baseApi.post(`/invitations`, form);
+      const { data } = await apiClient.post(`/invitations`, form);
 
       if (data.status === "ok") {
         success("Basic Wedding Information Completed.");

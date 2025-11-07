@@ -2,6 +2,7 @@
 
 import { useRouter } from "@/i18n/routing";
 import { useState } from "react";
+import apiClient from "@/lib/apiClient";
 import { Layout } from "@/components/layouts/layout";
 import { Box, Container, Stack } from "@chakra-ui/react";
 import { error, success } from "@/components/ui/alerts";
@@ -10,6 +11,7 @@ import { ConfirmDate } from "@/features/builder/confirmDate";
 import { Promocode } from "@/features/builder/promocode";
 import { Payment } from "@/features/builder/payment";
 import { Legal } from "@/features/builder/legal";
+
 
 export const ConfirmClient = () => {
   const router = useRouter();
@@ -20,7 +22,7 @@ export const ConfirmClient = () => {
     e.preventDefault();
     try {
       alert(159);
-      const { data } = await baseApi.post(`/invitations`, form);
+      const { data } = await apiClient.post(`/invitations`, form);
 
       if (data.status === "ok") {
         success("Basic Wedding Information Completed.");

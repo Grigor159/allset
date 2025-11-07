@@ -8,11 +8,10 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { supabase } from "../services/supabase/supabase";
-import { info, success, warning } from "../components/ui/alerts";
+import { success, warning } from "../components/ui/alerts";
 import soon from "../assets/soon.png";
 import soonMobile from "../assets/soonMobile.png";
-import { isValidEmail } from "../utils/checkers";
+import { subscribe } from "@/services/emailService";
 
 const Soon = () => {
   const [email, setEmail] = useState("");
@@ -21,20 +20,34 @@ const Soon = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!email) return info("Please enter your email address.");
-    if (email && !isValidEmail(email)) return warning("Invalid email.");
+    // if (!email) return info("Please enter your email address.");
+    // if (email && !isValidEmail(email)) return warning("Invalid email.");
 
     setLoading(true);
 
-    const { error } = await supabase.from("newslater").insert([{ email }]);
-
-    if (error) {
-      warning(error.message || "Something went wrong. Try again.");
-    } else {
-      success(`Thank you! You will be notified.`);
-      setLoading(false);
+    try {
+      await subscribe(email);
+      success("Thank you! You will be notified.");
       setEmail("");
+    } catch (err) {
+      if (err.message === "Please enter your email address.") {
+        info(err.message);
+      } else {
+        warning(err.message);
+      }
+    } finally {
+      setLoading(false);
     }
+
+    // const { error } = await supabase.from("newslater").insert([{ email }]);
+
+    // if (error) {
+    //   warning(error.message || "Something went wrong. Try again.");
+    // } else {
+    //   success(`Thank you! You will be notified.`);
+    //   setLoading(false);
+    //   setEmail("");
+    // }
   };
 
   return (

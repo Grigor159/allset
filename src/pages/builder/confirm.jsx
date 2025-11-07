@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Container, Stack } from "@chakra-ui/react";
 import { success, error } from "../../components/ui/alerts";
-import baseApi from "../../services/api/baseApi";
+import apiClient from "@/lib/apiClient";
 import { Promocode } from "../../components/builder/promocode";
 import { TitleDemo } from "../../components/builder/titleDemo";
 import { ConfirmDate } from "../../components/builder/confirmDate";
@@ -21,7 +21,7 @@ const Confirm = () => {
     e.preventDefault();
     try {
       alert(159);
-      const { data } = await baseApi.post(`/invitations`, form);
+      const { data } = await apiClient.post(`/invitations`, form);
 
       if (data.status === "ok") {
         success("Basic Wedding Information Completed.");
