@@ -2,7 +2,7 @@
 
 import { useId } from "react";
 import { Switch } from "@chakra-ui/react";
-import { Tooltip } from "./tooltip";
+import { Tooltip } from "../../components/ui/tooltip";
 import { useTranslations } from "next-intl";
 
 export const Switcher = ({ checked, onChange }) => {

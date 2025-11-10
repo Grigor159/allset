@@ -10,9 +10,9 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { Label } from "@/components/ui/typography/label";
-import { Switcher } from "@/components/ui/switcher";
+import { Switcher } from "@/features/builder/switcher";
 import { LngSwitcher } from "@/components/ui/lngSwitcher";
-import { Selector } from "@/components/ui/selector";
+import { Selector } from "@/features/builder/selector";
 import { schemes, styles } from "../../utils/constants";
 
 export const Dresscode = ({

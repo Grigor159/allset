@@ -4,7 +4,7 @@ import { Field, Icon, Stack } from "@chakra-ui/react";
 import { date } from "../../assets/svgs";
 import { Label } from "@/components/ui/typography/label";
 import { SubText } from "@/components/ui/typography/subText";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from "@/features/builder/calendar";
 
 export const ConfirmDate = () => {
   return (

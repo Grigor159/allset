@@ -5,7 +5,6 @@ import { useRef, useState } from "react";
 import { useNuqs } from "@/hooks/useNuqs";
 import { detailsForm } from "@/utils/constants";
 import apiClient from "@/lib/apiClient";
-import { Layout } from "@/components/layouts/layout";
 import { Box, Container, Stack } from "@chakra-ui/react";
 import { LngSelector } from "@/features/builder/lngSelector";
 import { TitleCreator } from "@/features/builder/titleCreator";
@@ -16,9 +15,10 @@ import { Contact } from "@/features/builder/contact";
 import { Dresscode } from "@/features/builder/dresscode";
 import { AlbumLink } from "@/features/builder/albumLink";
 import { Story } from "@/features/builder/story";
-import { TextArea } from "@/components/ui/textarea";
+import { TextArea } from "@/features/builder/textarea";
 import { Photos } from "@/features/builder/photos";
 import { Expire } from "@/features/builder/expire";
+import { error } from "@/components/ui/alerts";
 
 export const DetailsClient = () => {
   const router = useRouter();
@@ -105,7 +105,6 @@ export const DetailsClient = () => {
   };
 
   return (
-    <Layout>
       <Box pt="32px" pb="65px">
         <Container maxW="1104px" px={0}>
           {/* VStack */}
@@ -221,6 +220,5 @@ export const DetailsClient = () => {
           </Stack>
         </Container>
       </Box>
-    </Layout>
   );
 };

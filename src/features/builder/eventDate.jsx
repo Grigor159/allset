@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Field, Stack, Text } from "@chakra-ui/react";
 import { Label } from "@/components/ui/typography/label";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from "@/features/builder/calendar";
 
 export const EventDate = ({ name, value, onChange, required }) => {
   const t = useTranslations();

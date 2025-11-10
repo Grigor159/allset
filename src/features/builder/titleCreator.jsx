@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Field, Flex, Input, Stack, Text } from "@chakra-ui/react";
-import { BASE_URL } from "../../services/api/config";
+import { BASE_URL } from "@/lib/config";
 import { Label } from "@/components/ui/typography/label";
 import { LngSwitcher } from "@/components/ui/lngSwitcher";
 import { cleanUrlExtension } from "../../utils/formatters";

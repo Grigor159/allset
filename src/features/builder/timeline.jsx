@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { Checkbox, Field, Flex, Icon, Input, Stack } from "@chakra-ui/react";
 import { Label } from "@/components/ui/typography/label";
-import { Switcher } from "@/components/ui/switcher";
+import { Switcher } from "@/features/builder/switcher";
 import { agenda } from "../../utils/constants";
 import { checked } from "../../assets/svgs";
 

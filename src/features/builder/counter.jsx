@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Field, Flex, HStack, Show, Stack, Text } from "@chakra-ui/react";
 import { Label } from "@/components/ui/typography/label";
-import { Switcher } from "@/components/ui/switcher";
+import { Switcher } from "@/features/builder/switcher";
 import { getTimeUntil } from "../../utils/helpers";
 import { isNotEmptyObject } from "../../utils/checkers";
 

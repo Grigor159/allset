@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import {
   Box,
   Button,
@@ -7,13 +10,12 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { useState } from "react";
-import { success, warning } from "../components/ui/alerts";
-import soon from "../assets/soon.png";
-import soonMobile from "../assets/soonMobile.png";
-import { subscribe } from "@/services/emailService";
+import { subscribe } from "@/services/email";
+import { success, warning } from "@/components/ui/alerts";
+import soon from "@/assets/soon.png";
+import soonMobile from "@/assets/soonMobile.png";
 
-const Soon = () => {
+export const SoonClient = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -123,5 +125,3 @@ const Soon = () => {
     </Box>
   );
 };
-
-export default Soon;

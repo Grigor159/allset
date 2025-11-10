@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { Field, FileUpload, Icon, Stack, Text } from "@chakra-ui/react";
 import { uploadAvatar } from "../../assets/svgs";
 import { Label } from "@/components/ui/typography/label";
-import { FileUploadList } from "@/components/ui/filleUpload";
+import { FileUploadList } from "@/features/builder/filleUpload";
 
 export const Photos = ({ name, onChange, required }) => {
   const t = useTranslations();

@@ -3,10 +3,10 @@
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Button, Field, Flex, Icon, Stack, Textarea } from "@chakra-ui/react";
-import { Label } from "./typography/label";
+import { Label } from "@/components/ui/typography/label";
 import { xls } from "../../assets/svgs";
-import { LngSwitcher } from "./lngSwitcher";
-import { Switcher } from "./switcher";
+import { LngSwitcher } from "@/components/ui/lngSwitcher";
+import { Switcher } from "@/features/builder/switcher";
 
 export const TextArea = ({
   name,

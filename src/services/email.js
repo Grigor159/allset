@@ -18,5 +18,5 @@ export async function subscribe(email) {
         throw new Error(error.message || "Something went wrong. Try again.");
     }
 
-    return true; // success
+    return true;
 }

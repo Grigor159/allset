@@ -2,8 +2,8 @@
 
 import axios from "axios";
 import { BASE_API } from "./config";
-import { queryClient } from "../../providers/queryProvider";
-import { error } from "../../components/ui/alerts";
+import { queryClient } from "@/providers/queryProvider";
+import { error } from "@/components/ui/alerts";
 
 const instance = axios.create({
     baseURL: BASE_API,

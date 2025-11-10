@@ -13,9 +13,9 @@ import {
 } from "@chakra-ui/react";
 import { story } from "../../assets/svgs";
 import { Label } from "@/components/ui/typography/label";
-import { FileUploadList } from "@/components/ui/filleUpload";
+import { FileUploadList } from "@/features/builder/filleUpload";
 import { LngSwitcher } from "@/components/ui/lngSwitcher";
-import { Switcher } from "@/components/ui/switcher";
+import { Switcher } from "@/features/builder/switcher";
 
 export const Story = ({ name, value, onChange, hide, required, languages }) => {
   const t = useTranslations();

@@ -19,12 +19,6 @@ export const scrollToTopWithDuration = (duration) => {
   requestAnimationFrame(scrollStep);
 }
 
-// must be deleted
-export const getLanguage = (pathname) => {
-  const match = pathname.match(/^\/([a-z]{2})/);
-  return match ? match[1] : '';
-};
-
 export const getFlagCode = (lang) => {
   const map = {
     hy: "am",
@@ -38,7 +32,7 @@ import { steps } from "./constants";
 
 export const getStepInfo = (pathname) => {
   const step = steps[pathname];
-  
+
   if (!step) return { show: false };
 
   return {
@@ -81,11 +75,6 @@ export const getNextRoute = (pathname) => {
 import { localesRegex } from "./regex";
 export const navigateWithLocal = (pathname) =>
   pathname.replace(localesRegex, "")
-
-export const getLanguageKey = (language) => {
-  if (language === "hy") return "am";
-  return language;
-};
 
 export function random(num) {
   return Math.floor(Math.random() * num);

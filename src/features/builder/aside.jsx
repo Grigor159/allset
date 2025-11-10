@@ -2,8 +2,8 @@
 
 import { useNuqs } from "../../hooks/useNuqs";
 import { Box, Text, VStack, HStack, Stack } from "@chakra-ui/react";
-import { MidText } from "../globals/texts/midText";
-import { SubText } from "../globals/texts/subText";
+import { MidText } from "@/components/ui/typography/midText";
+import { SubText } from "@/components/ui/typography/subText";
 
 export const Aside = ({ data, language }) => {
   const [palette, setPalette] = useNuqs("palette");

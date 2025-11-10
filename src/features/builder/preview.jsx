@@ -11,10 +11,10 @@ import {
   Separator,
   Stack,
 } from "@chakra-ui/react";
-import { MidText } from "../globals/texts/midText";
-import { SubText } from "../globals/texts/subText";
-import { responsive } from "../../utils/constants";
-import img from "../../assets/customisations.png";
+import { MidText } from "@/components/ui/typography/midText";
+import { SubText } from "@/components/ui/typography/subText";
+import { responsive } from "@/utils/constants";
+import img from "@/assets/customisations.png";
 
 export const Preview = () => {
   const [device, setDevice] = useQueryState("device");
