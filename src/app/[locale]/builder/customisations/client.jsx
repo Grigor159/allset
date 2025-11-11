@@ -5,8 +5,8 @@ import { useNuqs } from "@/hooks/useNuqs";
 import { useGetTanstack } from "@/hooks/useTanstack";
 import { Loader } from "@/components/ui/loader";
 import { Box, Container, Flex } from "@chakra-ui/react";
-import { Aside } from "@/features/builder/aside";
-import { Preview } from "@/features/builder/preview";
+import { Aside } from "@/components/builder/aside";
+import { Preview } from "@/components/builder/preview";
 
 export const CustomisationsClient = () => {
   const language = useLocale();

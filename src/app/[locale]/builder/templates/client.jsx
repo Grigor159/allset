@@ -4,7 +4,7 @@ import React from "react";
 import { Box, Container, Flex, For } from "@chakra-ui/react";
 import { useGetTanstack } from "@/hooks/useTanstack";
 import { Loader } from "@/components/ui/loader";
-import { Card } from "@/features/builder/card";
+import { Card } from "@/components/builder/card";
 
 export const TemplatesClient = () => {
   const { isLoading, data } = useGetTanstack("templates");

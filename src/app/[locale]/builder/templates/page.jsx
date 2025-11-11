@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { BASE_URL } from "@/lib/config";
-import logo from "@/assets/allset.png";
+import logo from "@/assets/imgs/allset.png";
 import { TemplatesClient } from "./client";
 
 export async function generateMetadata({ params }) {

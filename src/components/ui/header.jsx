@@ -8,11 +8,11 @@ import {
   Image,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-import { Link } from "@/i18n/routing";
+import { Link } from "@/lib/i18n/routing";
 // import { Steps } from "./steps";
 // import { Language } from "../globals/language";
 import { OAuth } from "./oauth";
-import logo from "@/assets/allset.png";
+import logo from "@/assets/imgs/allset.png";
 import { Language } from "./language";
 import { Navigation } from "./navigation";
 // import { Navigation } from "../globals/navigation";

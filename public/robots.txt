@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+Disallow: /auth/
+Disallow: /admin/
+Disallow: /login/
+Disallow: /api/public/files/
+Disallow: /cgi-bin/
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /dashboard/
+Disallow: /config/
+Disallow: /backup/
+Disallow: /logs/
+Disallow: /*.env
+
+Sitemap: https://allset.am/sitemap.xml
+Sitemap: https://allset.am/images_sitemap.xml

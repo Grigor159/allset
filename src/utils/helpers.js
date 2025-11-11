@@ -19,17 +19,13 @@ export const scrollToTopWithDuration = (duration) => {
   requestAnimationFrame(scrollStep);
 }
 
+import { localesMap } from "./constants";
 export const getFlagCode = (lang) => {
-  const map = {
-    hy: "am",
-    en: "gb",
-    ru: "ru",
-  };
-  return map[lang] || "un";
+  return localesMap[lang] || "un";
 };
 
-import { steps } from "./constants";
 
+import { steps } from "./constants";
 export const getStepInfo = (pathname) => {
   const step = steps[pathname];
 
@@ -43,7 +39,6 @@ export const getStepInfo = (pathname) => {
 };
 
 import { builderPages } from "./constants";
-
 export const getPreviousRoute = (pathname) => {
   const index = builderPages.findIndex(r => r.path === pathname);
   if (index <= 0) return null;
@@ -85,12 +80,12 @@ export function getCurrentYear() {
 }
 
 import cookies from "js-cookie";
-
 export function clearAllSiteCookies() {
   Object.keys(cookies.get()).forEach((cookieName) => {
     cookies.remove(cookieName);
   });
 }
+import { expired, days, hours, minutes } from "./constants";
 
 export function getTimeUntil(fullDate) {
   if (!fullDate) {
@@ -105,23 +100,13 @@ export function getTimeUntil(fullDate) {
   const difference = target - now;
 
   if (difference <= 0) {
-    return {
-      days: 0,
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
-      expired: true,
-    };
+    return expired;
   }
 
-  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-
   return {
-    days,
-    hours,
-    minutes,
+    days: days(difference),
+    hours: hours(difference),
+    minutes: minutes(difference),
     expired: false,
   };
 }

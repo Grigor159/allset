@@ -1,6 +1,6 @@
 "use client";
 
-import { Link, usePathname } from "@/i18n/routing";
+import { Link, usePathname } from "@/lib/i18n/routing";
 import { mainPages } from "@/utils/constants";
 import { Flex, For, Link as ChakraLink } from "@chakra-ui/react";
 

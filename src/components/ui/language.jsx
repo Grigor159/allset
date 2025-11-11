@@ -9,7 +9,7 @@ import {
   Portal,
   Spinner,
 } from "@chakra-ui/react";
-import { useRouter, usePathname } from "@/i18n/routing";
+import { useRouter, usePathname } from "@/lib/i18n/routing";
 import { useParams } from "next/navigation";
 import { useTransition } from "react";
 import { languages } from "../../utils/constants";

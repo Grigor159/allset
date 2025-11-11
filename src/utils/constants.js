@@ -21,6 +21,24 @@ export const languages = [
   },
 ]
 
+export const localesMap = {
+  hy: "am",
+  en: "gb",
+  ru: "ru",
+}
+
+export const days = (difference) => Math.floor(difference / (1000 * 60 * 60 * 24));
+export const hours = (difference) => Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+export const minutes = (difference) => Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+
+export const expired = {
+  days: 0,
+  hours: 0,
+  minutes: 0,
+  seconds: 0,
+  expired: true,
+}
+
 import { grooms, church, welcome, registration, banquet, cake, afterparty, end } from '../assets/svgs';
 
 export const agenda = [
@@ -152,10 +170,10 @@ export const steps = {
 
 export const totalSteps = 5;
 
-import allset from '../assets/allset.png'
-import details from '../assets/details.png'
-import preview from '../assets/preview.png'
-import confirm from '../assets/confirm.png'
+import allset from '@/assets/imgs/allset.png'
+import details from '@/assets/imgs/details.png'
+import preview from '@/assets/imgs/preview.png'
+import confirm from '@/assets/imgs/confirm.png'
 
 export const contentMap = {
   "/builder/templates": {
@@ -264,9 +282,9 @@ export const detailsForm = {
   languages: []
 }
 
-import visa from "../assets/visa.png";
-import idram from "../assets/idram.png";
-import arca from "../assets/arca.png";
+import visa from "@/assets/imgs/visa.png";
+import idram from "@/assets/imgs/idram.png";
+import arca from "@/assets/imgs/arca.png";
 
 export const paymentMethods = [
   {

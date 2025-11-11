@@ -1,23 +1,23 @@
 "use client";
 
-import { useRouter } from "@/i18n/routing";
+import { useRouter } from "@/lib/i18n/routing";
 import { useRef, useState } from "react";
 import { useNuqs } from "@/hooks/useNuqs";
 import { detailsForm } from "@/utils/constants";
 import apiClient from "@/lib/apiClient";
 import { Box, Container, Stack } from "@chakra-ui/react";
-import { LngSelector } from "@/features/builder/lngSelector";
-import { TitleCreator } from "@/features/builder/titleCreator";
-import { EventDate } from "@/features/builder/eventDate";
-import { Timeline } from "@/features/builder/timeline";
-import { Counter } from "@/features/builder/counter";
-import { Contact } from "@/features/builder/contact";
-import { Dresscode } from "@/features/builder/dresscode";
-import { AlbumLink } from "@/features/builder/albumLink";
-import { Story } from "@/features/builder/story";
-import { TextArea } from "@/features/builder/textarea";
-import { Photos } from "@/features/builder/photos";
-import { Expire } from "@/features/builder/expire";
+import { LngSelector } from "@/components/builder/lngSelector";
+import { TitleCreator } from "@/components/builder/titleCreator";
+import { EventDate } from "@/components/builder/eventDate";
+import { Timeline } from "@/components/builder/timeline";
+import { Counter } from "@/components/builder/counter";
+import { Contact } from "@/components/builder/contact";
+import { Dresscode } from "@/components/builder/dresscode";
+import { AlbumLink } from "@/components/builder/albumLink";
+import { Story } from "@/components/builder/story";
+import { TextArea } from "@/components/builder/textarea";
+import { Photos } from "@/components/builder/photos";
+import { Expire } from "@/components/builder/expire";
 import { error } from "@/components/ui/alerts";
 
 export const DetailsClient = () => {

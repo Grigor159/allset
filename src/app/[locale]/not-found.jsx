@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import img from "@/assets/404.png";
+import img from "@/assets/imgs/404.png";
 
 const NotFound = () => {
   return (

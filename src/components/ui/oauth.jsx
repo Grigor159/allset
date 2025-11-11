@@ -15,7 +15,7 @@ import {
   Spinner,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-import { Link } from "@/i18n/routing";
+import { Link } from "@/lib/i18n/routing";
 import { authPages } from "@/utils/constants";
 
 export const OAuth = () => {
