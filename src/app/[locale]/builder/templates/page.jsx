@@ -7,12 +7,15 @@ export async function generateMetadata({ params }) {
   const t = await getTranslations();
   const { locale } = params;
 
+  const title = t("template_title");
+  const description = t("template_text");
+
   const metadata = {
-    // title: `${t("")} - Allset.am`,
-    // description: t(""),
+    title: `${title} - Allset.am`,
+    description: t(description),
     openGraph: {
-      // title: `${t("")} - Allset.am`,
-      // description: t(""),
+      title: `${title} - Allset.am`,
+      description: t(description),
       images: [
         {
           url: `${BASE_URL}${logo.src}`,
@@ -22,8 +25,8 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: "summary_large_image",
-      title: "Allset.am",
-      // description: t(""),
+      title: `${title} - Allset.am`,
+      description: t(description),
       images: [`${BASE_URL}${logo.src}`],
     },
     authors: [

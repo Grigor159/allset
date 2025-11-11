@@ -77,7 +77,6 @@ export default async function RootLayout({ children, params }) {
           <QueryProvider>
             <ChakraUIProvider>
               <NuqsProvider>
-                {/* <NuqsAdapter> */}
                 <NextIntlClientProvider locale={locale} messages={messages}>
                   <Header />
                   <Scroll>
@@ -85,7 +84,6 @@ export default async function RootLayout({ children, params }) {
                   </Scroll>
                   <ScrollToTop />
                 </NextIntlClientProvider>
-                {/* </NuqsAdapter> */}
               </NuqsProvider>
             </ChakraUIProvider>
           </QueryProvider>
