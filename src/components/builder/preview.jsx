@@ -8,8 +8,8 @@ import {
   For,
   HStack,
   Image,
-  Separator,
   Stack,
+  VStack,
 } from "@chakra-ui/react";
 import { MidText } from "@/components/ui/typography/midText";
 import { SubText } from "@/components/ui/typography/subText";
@@ -20,16 +20,16 @@ export const Preview = () => {
   const [device, setDevice] = useQueryState("device");
 
   return (
-    <Box
+    <VStack
       w="100%"
       minH="100%"
       bg="white"
-      border="1px solid"
       borderRadius={"8px"}
-      borderColor={"#E5E7EB"}
+      p="24px"
+      gap="32px"
     >
-      <Flex justify={"space-between"} p={"16px 25px"}>
-        <Stack gap={"0px"}>
+      <Flex w="100%" justify={"space-between"}>
+        <Stack gap={"8px"}>
           <MidText text="template_preview" />
           <SubText fs="14px" text="template_desc" />
         </Stack>
@@ -49,15 +49,14 @@ export const Preview = () => {
         </HStack>
       </Flex>
 
-      <Separator />
-
       <Image
         w="100%"
         h="685px"
-        objectFit={"contain"}
+        objectFit={"cover"}
         src={img.src}
-        p={"60px 25px 0 25px"}
+        borderRadius={"8px"}
+        // p={"60px 25px 0 25px"}
       />
-    </Box>
+    </VStack>
   );
 };

@@ -24,10 +24,10 @@
         }
     ],
     "start_url": "https://allset.am/hy",
-    "scope": "/am",
+    "scope": "/hy",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#ffffff",
     "orientation": "portrait",
-    "lang": "am"
+    "lang": "hy"
 }

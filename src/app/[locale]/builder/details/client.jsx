@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "@/lib/i18n/routing";
+import { useRouter } from "@/i18n/routing";
 import { useRef, useState } from "react";
 import { useNuqs } from "@/hooks/useNuqs";
 import { detailsForm } from "@/utils/constants";
@@ -106,7 +106,7 @@ export const DetailsClient = () => {
 
   return (
       <Box pt="32px" pb="65px">
-        <Container maxW="1104px" px={0}>
+        <Container maxW="1360px" px={0}>
           {/* VStack */}
           <Stack gap="24px" w="864px" mx="auto">
             <Stack

@@ -4,15 +4,18 @@ import { useLayoutEffect } from "react";
 import { scrollToTopWithDuration } from "../../utils/helpers";
 import { AnimatePresence, motion } from "framer-motion";
 import { Box } from "@chakra-ui/react";
+import { usePathname } from "@/i18n/routing";
 
 const MotionBox = motion.create(Box);
 
 export const Scroll = ({ children, scrollToTop = true, animationKey }) => {
+  const pathname = usePathname();
+
   useLayoutEffect(() => {
     if (scrollToTop) {
       scrollToTopWithDuration(700);
     }
-  }, [scrollToTop]);
+  }, [pathname, scrollToTop]);
 
   return (
     <AnimatePresence mode="wait">

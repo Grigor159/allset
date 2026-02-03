@@ -2,7 +2,7 @@
 
 import { useNuqs } from "../../hooks/useNuqs";
 import { useQueryState } from "nuqs";
-import { Link, usePathname } from "@/lib/i18n/routing";
+import { Link, usePathname } from "@/i18n/routing";
 import { useSearch } from "@/hooks/useSearch";
 import { useTranslations } from "next-intl";
 import { getNextRoute } from "../../utils/helpers";
@@ -39,12 +39,10 @@ export const Continue = () => {
       type="submit"
       form="details"
       fontWeight="400"
-      fontSize="16px"
-      borderRadius="8px"
       lineHeight="24px"
       bg="#004143"
       w="137px"
-      h="44px"
+      h="52px"
       disabled={disabled}
     >
       {/* {hasMultipleWords(name) ? name : `Continue to ${name}`} */}
@@ -57,12 +55,10 @@ export const Continue = () => {
       type="submit"
       form="confirm"
       fontWeight="400"
-      fontSize="16px"
-      borderRadius="8px"
       lineHeight="24px"
       bg="#004143"
       w="137px"
-      h="44px"
+      h="52px"
       disabled={disabled && !(accept == true || accept === "true")}
     >
       {t(name)}
@@ -73,12 +69,10 @@ export const Continue = () => {
       // to={!disabled ? path : undefined}
       href={!disabled ? `${path}${search}` : undefined}
       fontWeight="400"
-      fontSize="16px"
-      borderRadius="8px"
       lineHeight="24px"
       bg="#004143"
       w="137px"
-      h="44px"
+      h="52px"
       disabled={disabled}
     >
       {t("next")} {next.icon}

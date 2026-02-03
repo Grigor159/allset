@@ -3,7 +3,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import { useQueryState } from "nuqs";
 import { Checkbox, Link as ChakraLink } from "@chakra-ui/react";
-import { Link } from "@/lib/i18n/routing";
+import { Link } from "@/i18n/routing";
 
 export const Legal = () => {
   const t = useTranslations();

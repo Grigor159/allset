@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "@/lib/i18n/routing";
+import { useRouter } from "@/i18n/routing";
 import { useState } from "react";
 import apiClient from "@/lib/apiClient";
 import { Box, Container, Stack } from "@chakra-ui/react";
@@ -34,7 +34,7 @@ export const ConfirmClient = () => {
 
   return (
       <Box pt="32px" pb="40px">
-        <Container maxW="1104px" px={0}>
+        <Container maxW="1360px" px={0}>
           <Stack gap="24px" w="864px" mx="auto">
             <Stack
               id="confirm"

@@ -15,7 +15,7 @@ import {
   Spinner,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-import { Link } from "@/lib/i18n/routing";
+import { Link } from "@/i18n/routing";
 import { authPages } from "@/utils/constants";
 
 export const OAuth = () => {
@@ -61,23 +61,43 @@ export const OAuth = () => {
             Hello, {user?.given_name}
           </Button>
         ) : (
-          <Button
-            w="137px"
-            border="1px solid"
-            borderColor="#80A0A14D"
-            disabled={isLoading}
-            // bg={isLoading ? "#749596" : "#004143"}
-            bg={"#004143"}
-            color="white"
-            fontWeight="400"
-            fontSize="14px"
-            borderRadius="38px"
-            lineHeight="24px"
-            _hover={{ bg: "white", color: "#004143" }}
-            onClick={loginWithPopup}
-          >
-            {isLoading ? <Spinner /> : t("login")}
-          </Button>
+          <>
+            <Button
+              w="60px"
+              // variant={"plain"}
+              variant="ghost"
+              // bg={isLoading ? "#749596" : "#004143"}
+              color="#004143"
+              fontWeight="400"
+              lineHeight="24px"
+              // _hover={{ border: "1px solid", borderColor: "#004143" }}
+              loading={isLoading}
+              onClick={loginWithPopup}
+            >
+              {t("login")}
+            </Button>
+            <Button
+              w="171px"
+              border="1px solid"
+              // borderColor="#80A0A14D"
+              // bg={isLoading ? "#749596" : "#004143"}
+              bg={"#004143"}
+              color="white"
+              fontWeight="400"
+              lineHeight="24px"
+              _hover={{ bg: "white", color: "#004143" }}
+              loading={isLoading}
+              onClick={() =>
+                loginWithPopup({
+                  authorizationParams: {
+                    screen_hint: "signup",
+                  },
+                })
+              }
+            >
+              {t("signup")}
+            </Button>
+          </>
         )}
       </Menu.Trigger>
 

@@ -8,7 +8,7 @@ import {
   Image,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-import { Link } from "@/lib/i18n/routing";
+import { Link } from "@/i18n/routing";
 // import { Steps } from "./steps";
 // import { Language } from "../globals/language";
 import { OAuth } from "./oauth";
@@ -34,7 +34,7 @@ export const Header = () => {
       py="16px"
       px="0"
     >
-      <Container maxW="1104px" px={0}>
+      <Container maxW="1360px" px={0}>
         <Flex align="center" justify="space-between">
           <ChakraLink as={Link} href="/" gap="12px">
             <Image src={logo.src} w="94px" h="58px" alt="AllSet" />

@@ -1,9 +1,9 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { usePathname } from "@/lib/i18n/routing";
+import { usePathname } from "@/i18n/routing";
 import { getStepInfo } from "../../utils/helpers";
-import { Flex, Box, Text, Circle, Icon } from "@chakra-ui/react";
+import { Flex, Text, Circle, Icon } from "@chakra-ui/react";
 import { checkedStep, dots, dotsGreen } from "@/assets/svgs";
 import { totalSteps } from "@/utils/constants";
 

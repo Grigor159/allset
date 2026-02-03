@@ -7,8 +7,8 @@ import { Steps } from "./steps";
 
 export const BottomPart = () => {
   return (
-    <Box w="100%" boxShadow="sm" pt="16px" pb="16px" bg="white">
-      <Container maxW="1104px" px={0}>
+    <Box w="100%" boxShadow="sm" pt="32px" pb="32px" bg="white">
+      <Container maxW="1360px" px={0}>
         <Flex justify="space-between">
           <Steps />
           <Flex gap={"8px"}>

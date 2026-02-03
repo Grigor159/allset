@@ -12,8 +12,8 @@ import {
 } from "@chakra-ui/react";
 import { subscribe } from "@/services/email";
 import { success, warning } from "@/components/ui/alerts";
-import soon from "@/assets/soon.png";
-import soonMobile from "@/assets/soonMobile.png";
+import soon from "@/assets/imgs/soon.png";
+import soonMobile from "@/assets/imgs/soonMobile.png";
 
 export const SoonClient = () => {
   const [email, setEmail] = useState("");

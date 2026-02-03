@@ -19,13 +19,9 @@ export const CustomisationsClient = () => {
   if (!selectedTemplate) return <Loader />;
 
   return (
-      <Box position={"relative"} pt="32px" pb="32px">
-        <Container maxW="1104px" px={0}>
-          <Flex gap={"24px"}>
-            <Aside data={selectedTemplate} language={language} />
-            <Preview />
-          </Flex>
-        </Container>
-      </Box>
+    <Flex position={"relative"} pt="32px" pb="54px" gap={"24px"}>
+      <Aside data={selectedTemplate?.palettes} language={language} />
+      <Preview />
+    </Flex>
   );
 };

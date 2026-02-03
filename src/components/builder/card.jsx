@@ -1,17 +1,35 @@
 "use client";
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useNuqs } from "../../hooks/useNuqs";
-import { Box, Flex, Icon, Image, Stack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  HStack,
+  Icon,
+  Image,
+  Stack,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { MidText } from "@/components/ui/typography/midText";
 import { SubText } from "@/components/ui/typography/subText";
-import { selected } from "../../assets/svgs";
-import { formatUrl } from "../../utils/formatters";
+import {
+  palletDesc,
+  palleteName,
+  palletHex,
+  palletLast,
+  selected,
+} from "../../assets/svgs";
+import { formatPrice, formatUrl } from "../../utils/formatters";
+import img from "@/assets/imgs/classic_elegance.png";
 
 export const Card = ({ el }) => {
+  const t = useTranslations();
+
   const language = useLocale();
 
-  const { id, templateImage, name, description } = el;
+  const { id, templateImage, name, description, pricing, paletteKeyword } = el;
 
   const [template, setTemplate] = useNuqs("template");
   const [_, setPalette] = useNuqs("palette");
@@ -23,53 +41,134 @@ export const Card = ({ el }) => {
     setPalette(null);
   };
 
+  console.log(paletteKeyword);
+
   return (
     <Stack
       bg="white"
-      gap="24px"
-      w="347px"
-      h="608px"
-      border={"2px solid"}
-      borderColor={isSelected ? "#F43F5E" : "#E5E7EB"}
-      borderRadius={"12px"}
-      transition={".3s ease"}
+      gap="16px"
+      w="443px"
+      minH="602px"
+      border={"1px solid"}
+      borderColor={isSelected ? "#004143" : "transparent"}
+      borderRadius={"8px"}
       _hover={{
-        boxShadow: "0 0 0 2px rgba(244, 63, 94, 0.4)",
         cursor: "pointer",
+        "& img": {
+          transform: "scale(1.1)",
+        },
       }}
       _focus={{
-        borderColor: "#F43F5E",
+        borderColor: "#004143",
         outline: "none",
       }}
       tabIndex={0}
       onClick={handleSelect}
+      p="24px"
+      transition="border-color 0.3s ease"
     >
-      <Box borderTopRadius="12px">
-        <Image w="100%" h="272px" src={formatUrl(templateImage)} p="24px" />
+      <Box
+        w="100%"
+        h="272px"
+        overflow={"hidden"}
+        borderRadius="8px"
+        border="24px solid"
+        borderColor="#F1F1F1"
+        background={"#F1F1F1"}
+              transition="all 0.3s ease"
+      >
+        {/* <Image w="100%" h="272px" src={formatUrl(templateImage)} p="24px" /> */}
+        <Image
+          w="100%"
+          h="100%"
+          src={img.src}
+          borderRadius="8px"
+          transition="transform 0.3s ease"
+        />
       </Box>
 
-      {isSelected && (
-        <Flex
-          w="fit-content"
-          bg="#FCE7F3"
-          align={"center"}
-          gap="4px"
-          mr="24px"
-          ml="24px"
-          p="4px 8px 4px 8px"
-          borderRadius={"99px"}
-        >
-          <Icon>{selected.icon}</Icon>
-          <Text fontSize={"11px"} color={"#9D174D"}>
-            Selected
+      <Flex justify="space-between" align="center">
+        <Stack>
+          <Text
+            textStyle="xl"
+            fontWeight={isSelected && "700"}
+            lineHeight={"28px"}
+            letterSpacing={0}
+            color={isSelected ? "#0C4A4C" : "#004143"}
+            transition="all 0.3s ease"
+          >
+            {t(name[language])}
           </Text>
-        </Flex>
-      )}
 
-      <Stack pr="24px" pl="24px" gap="8px">
-        <MidText text={name[language]} />
-        <SubText text={description[language]} />
-      </Stack>
+          {isSelected && pricing?.discountAmount !== 0 && (
+            <Text
+              textDecoration="line-through"
+              fontSize={"12px"}
+              color={"#6B7280"}
+            >
+              {formatPrice(pricing?.basePrice)}
+            </Text>
+          )}
+        </Stack>
+        <Text
+          border="1px solid"
+          borderColor="#EFEFEF"
+          p="6px 20px"
+          borderRadius="8px"
+          fontSize={"14px"}
+          color={"#004143"}
+        >
+          {formatPrice(pricing?.finalPrice)}
+        </Text>
+      </Flex>
+      <SubText
+        fs="14px"
+        minH="120px"
+        color={isSelected && "#004143"}
+        text={description[language]}
+      />
+
+      <VStack gap="16px">
+        <Flex w="100%" justify={"space-between"}>
+          <HStack>
+            <Icon>{palleteName.icon}</Icon>
+            <Text fontSize={"14px"} color={"#6B7280"}>
+              {paletteKeyword?.name[language]}
+            </Text>
+          </HStack>
+          <HStack>
+            <Icon>{palletDesc.icon}</Icon>
+            <Text fontSize={"14px"} color={"#6B7280"}>
+              {paletteKeyword?.description[language]}
+            </Text>
+          </HStack>
+        </Flex>
+
+        <Flex w="100%" justify={"space-between"}>
+          <HStack>
+            <Icon>{palletHex.icon}</Icon>
+            {paletteKeyword?.colors?.map((color, index) => (
+              <Box
+                key={color}
+                spacing={1}
+                w="20px"
+                h="20px"
+                borderRadius="50%"
+                bg={color}
+                ml={index === 0 ? 0 : "-17px"}
+                border={"1px solid"}
+                borderColor={"white"}
+              />
+            ))}
+          </HStack>
+          {/* <HStack>
+            <Icon>{palletLast.icon}</Icon>
+            <Text fontSize={"14px"} color={"#6B7280"}>
+              {paletteKeyword?.name[language]}
+            </Text>
+          </HStack> */}
+        </Flex>
+      </VStack>
     </Stack>
   );
 };

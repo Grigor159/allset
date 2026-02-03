@@ -1,7 +1,7 @@
 "use client";
 
 import { Center, Stack, Image } from "@chakra-ui/react";
-import { usePathname } from "@/lib/i18n/routing";
+import { usePathname } from "@/i18n/routing";
 import { contentMap } from "../../utils/constants";
 import { Title } from "@/components/ui/typography/title";
 import { SubTitle } from "@/components/ui/typography/subTitle";
@@ -14,9 +14,9 @@ export const TopPart = () => {
   if (!content) return;
 
   return (
-    <Center pt="24px">
+    <Center pt="48px">
       <Stack gap="16px" align={"center"}>
-        <Image w="64px" h="64px" src={content?.img?.src} objectFit={"contain"}/>
+        {/* <Image w="64px" h="64px" src={content?.img?.src} objectFit={"contain"}/> */}
         <Title text={content?.title} />
         <SubTitle text={content?.text} />
       </Stack>

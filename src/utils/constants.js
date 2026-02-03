@@ -144,6 +144,7 @@ export const calendarLocales = {
 
 export const mainPages = [
   { path: "/digital-invitations", name: "Digital Invitations" },
+  // { path: "/builder/templates", name: "Digital Invitations" },
   { path: "/event-vendors", name: "Event Vendors" },
   { path: "/about-us", name: "About Us" },
   { path: "/contacts", name: "Contacts" },
@@ -168,7 +169,7 @@ export const steps = {
   "/builder/confirm": 5,
 };
 
-export const totalSteps = 5;
+export const totalSteps = 4;
 
 import allset from '@/assets/imgs/allset.png'
 import details from '@/assets/imgs/details.png'
@@ -210,14 +211,14 @@ export const responsive = [
   },
   {
     id: 2,
-    name: "mobile",
-    icon: <Icon>{mobile.icon}</Icon>
+    name: "laptop",
+    icon: <Icon>{laptop.icon}</Icon>
   },
   {
     id: 3,
-    name: "laptop",
-    icon: <Icon>{laptop.icon}</Icon>
-  }
+    name: "mobile",
+    icon: <Icon>{mobile.icon}</Icon>
+  },
 ]
 
 export const styles = [
