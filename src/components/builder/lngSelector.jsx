@@ -7,11 +7,12 @@ import {
   Icon,
   Image,
   Stack,
+  Text,
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import { Label } from "@/components/ui/typography/label";
 import { languages } from "../../utils/constants";
-import { checked } from "../../assets/svgs";
+import { checked, slash } from "../../assets/svgs";
 
 export const LngSelector = ({ name, value, onChange, required }) => {
   const t = useTranslations();
@@ -30,14 +31,7 @@ export const LngSelector = ({ name, value, onChange, required }) => {
   };
 
   return (
-    <Stack
-      borderRadius={"8px"}
-      border={"1px solid"}
-      borderColor={"#E5E7EB"}
-      bg="white"
-      p="25px"
-      gap="16px"
-    >
+    <Stack borderRadius={"8px"} bg="white" p="24px" gap="16px">
       <Field.Root required={required}>
         <Field.Label>
           <Field.RequiredIndicator fontSize="18px" />
@@ -45,38 +39,37 @@ export const LngSelector = ({ name, value, onChange, required }) => {
         </Field.Label>
       </Field.Root>
 
-      <Flex gap="32px">
-        {languages.map(({ code, flag }) => (
+      <Flex w="100%" justify={"space-between"}>
+        {languages.map(({ code, flag }, index) => (
           <Checkbox.Root
             key={code}
             checked={value.includes(code)}
             onCheckedChange={() => toggleLanguage(code)}
             cursor={"pointer"}
+            gap="42px"
           >
             <Checkbox.HiddenInput />
-            <Checkbox.Control
-              w="18px"
-              h="18px"
-              _checked={{ border: "none", bg: "transparent" }}
-            >
-              {value.includes(code) && <Icon>{checked.icon}</Icon>}
-            </Checkbox.Control>
-            <Checkbox.Label
-              as={Flex}
-              gap={"8px"}
-              alignItems={"center"}
-              fontSize={"14px"}
-              fontWeight={"400"}
-              lineHeight={"24px"}
-            >
+            <Checkbox.Label as={Flex} gap={"18px"} alignItems={"center"}>
               <Image
                 src={`https://flagcdn.com/${flag}.svg`}
                 boxSize="24px"
-                borderRadius="4px"
+                borderRadius="50%"
                 alt={t(code)}
               />
-              {t(code)}
+              <Text fontSize={"16px"} fontWeight={"300"} lineHeight={"24px"}>
+                {t(code)}
+              </Text>
             </Checkbox.Label>
+            <Checkbox.Control
+              w="24px"
+              h="24px"
+              _checked={{ border: "none", bg: "transparent" }}
+              cursor={"pointer"}
+            >
+              {value.includes(code) && <Icon>{checked.icon}</Icon>}
+            </Checkbox.Control>
+
+            {index < languages?.length - 1 && <Icon>{slash.icon}</Icon>}
           </Checkbox.Root>
         ))}
       </Flex>

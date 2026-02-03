@@ -34,14 +34,12 @@ export const ScrollToTop = () => {
       zIndex="101"
       border="1px solid"
       borderColor="white"
-      bg="#F43F5E"
+      bg="#004143"
       boxShadow="xl"
-      _hover={{ bg: "white", color: "#F43F5E", borderColor: "#F43F5E" }}
+      _hover={{ bg: "white", color: "#004143", borderColor: "#004143" }}
       transition="all 0.3s ease-in-out"
       aria-label="Scroll to top"
       fontWeight="400"
-      fontSize="14px"
-      borderRadius="8px"
     >
       {t("top")}
     </Button>

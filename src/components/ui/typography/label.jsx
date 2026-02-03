@@ -7,7 +7,7 @@ export const Label = ({ text }) => {
     const t = useTranslations();
 
   return (
-    <Text textStyle="md" fontWeight={700} lineHeight={"28px"} letterSpacing={0}>
+    <Text textStyle="md" fontWeight={500} color={"#4B5563"} lineHeight={"18px"} letterSpacing={0}>
       {t(text)}
     </Text>
   );

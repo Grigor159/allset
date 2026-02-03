@@ -136,7 +136,6 @@ export const OAuth = () => {
                         w="100%"
                         display="flex"
                         justifyContent="center"
-                        // _hover={{ bg: "#F43F5E", color: "white" }}
                       >
                         {t(el)}
                       </ChakraLink>

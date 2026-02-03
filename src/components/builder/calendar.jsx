@@ -104,7 +104,6 @@ export const Calendar = ({ name, value, onChange, required }) => {
               fontWeight="400"
               fontSize="14px"
               borderRadius="8px"
-              bg="#F43F5E"
               color="white"
             >
               X
@@ -129,7 +128,7 @@ export const Calendar = ({ name, value, onChange, required }) => {
                 // }}
                 modifiersStyles={{
                   selected: {
-                    backgroundColor: "#f43f5e",
+                    backgroundColor: "#004143",
                     color: "white",
                     borderRadius: "100%",
                   },

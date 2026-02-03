@@ -35,7 +35,7 @@ export const ConfirmClient = () => {
   return (
       <Box pt="32px" pb="40px">
         <Container maxW="1360px" px={0}>
-          <Stack gap="24px" w="864px" mx="auto">
+          <Stack gap="24px" w="748px" mx="auto">
             <Stack
               id="confirm"
               as="form"

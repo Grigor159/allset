@@ -35,13 +35,13 @@ export const Legal = () => {
         {t("legal_agree")}{" "}
         <ChakraLink
           as={Link}
-          color={"#F43F5E"}
+          color={"#004143"}
           href={`/legal/terms-of-service`}
         >
           {t("terms_of_service")}
         </ChakraLink>{" "}
         {t("and")}
-        <ChakraLink as={Link} color={"#F43F5E"} href={`/legal/privacy-policy`}>
+        <ChakraLink as={Link} color={"#004143"} href={`/legal/privacy-policy`}>
           {t("privacy_policy")}
         </ChakraLink>{" "}
         {t("legal_understand")}

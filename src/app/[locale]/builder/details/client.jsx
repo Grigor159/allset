@@ -108,7 +108,7 @@ export const DetailsClient = () => {
       <Box pt="32px" pb="65px">
         <Container maxW="1360px" px={0}>
           {/* VStack */}
-          <Stack gap="24px" w="864px" mx="auto">
+          <Stack gap="24px" w="748px" mx="auto">
             <Stack
               id="details"
               as="form"

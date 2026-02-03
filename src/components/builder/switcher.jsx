@@ -30,8 +30,8 @@ export const Switcher = ({ checked, onChange }) => {
         <Switch.HiddenInput />
         <Switch.Control
           _checked={{
-            bg: "#F43F5E",
-            borderColor: "#F43F5E",
+            bg: "#004143",
+            borderColor: "#004143",
           }}
         />
       </Switch.Root>
