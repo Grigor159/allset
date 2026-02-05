@@ -25,7 +25,7 @@ export const Counter = ({ name, value, hide, required }) => {
       border={"1px solid"}
       borderColor={"#E5E7EB"}
       bg="white"
-      p="25px"
+      p="24px"
       gap="14px"
     >
       <Field.Root required={required} gap={"16px"}>

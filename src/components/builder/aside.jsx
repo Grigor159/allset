@@ -7,7 +7,7 @@ import { SubText } from "@/components/ui/typography/subText";
 
 export const Aside = ({ data, language }) => {
   const [palette, setPalette] = useNuqs("palette");
-  console.log(data);
+  // console.log(data);
 
   return (
     <Box

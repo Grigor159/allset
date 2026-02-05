@@ -1,14 +1,30 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { Field, Flex, HStack, Stack } from "@chakra-ui/react";
+import { Button, Field, Flex, HStack, Icon, Stack } from "@chakra-ui/react";
 import { Label } from "@/components/ui/typography/label";
+import { xls } from "../../assets/svgs";
 import { Switcher } from "@/components/builder/switcher";
-import { InputUrl } from "../ui/inputUrl";
+import { TextArea } from "../ui/textarea";
 
-export const AlbumLink = ({ name, value, onChange, hide, required }) => {
+export const TextAreaField = ({
+  name,
+  value,
+  onChange,
+  hide,
+  required,
+  text,
+  placeholder,
+  languages,
+}) => {
   const t = useTranslations();
 
   const [checked, setChecked] = useState(true);
+
+  const handleInputChange = (e, lng) => {
+    onChange(name, lng, e.target.value);
+  };
 
   const handleSwitchChange = (e) => {
     setChecked(e.checked);
@@ -20,20 +36,20 @@ export const AlbumLink = ({ name, value, onChange, hide, required }) => {
       <Field.Root required={required} gap={"16px"}>
         <Field.Label as={Flex} w="100%" justify={"space-between"}>
           <HStack>
-            <Field.RequiredIndicator />
-            <Label text="photo_video" />
+            <Field.RequiredIndicator fontSize="18px" />
+            <Label text={t(text)} />
           </HStack>
+
           {!required && (
             <Switcher checked={checked} onChange={handleSwitchChange} />
           )}
         </Field.Label>
-
-        <InputUrl
+        <TextArea
+          languages={languages}
           name={name}
-          value={value ?? ""}
-          onChange={onChange}
-          placeholder={t("photo_video_placeholder")}
-          disabled={!checked}
+          value={value}
+          onChange={handleInputChange}
+          placeholder={t(placeholder)}
         />
       </Field.Root>
     </Stack>

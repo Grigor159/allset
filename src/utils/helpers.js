@@ -21,7 +21,7 @@ export const scrollToTopWithDuration = (duration) => {
 
 import { localesMap } from "./constants";
 export const getFlagCode = (lang) => {
-  return localesMap[lang] || "un";
+  return localesMap[lang];
 };
 
 

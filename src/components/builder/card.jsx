@@ -22,7 +22,6 @@ import {
   selected,
 } from "../../assets/svgs";
 import { formatPrice, formatUrl } from "../../utils/formatters";
-import img from "@/assets/imgs/classic_elegance.png";
 
 export const Card = ({ el }) => {
   const t = useTranslations();
@@ -40,8 +39,6 @@ export const Card = ({ el }) => {
     setTemplate(id);
     setPalette(null);
   };
-
-  console.log(paletteKeyword);
 
   return (
     <Stack
@@ -81,7 +78,8 @@ export const Card = ({ el }) => {
         <Image
           w="100%"
           h="100%"
-          src={img.src}
+          // src={img.src}
+          src={formatUrl(templateImage)}
           borderRadius="8px"
           transition="transform 0.3s ease"
         />

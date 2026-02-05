@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import {
   Field,
@@ -9,42 +9,40 @@ import {
   Icon,
   Stack,
   Text,
-  Textarea,
 } from "@chakra-ui/react";
-import { story } from "../../assets/svgs";
+import { upload } from "../../assets/svgs";
 import { Label } from "@/components/ui/typography/label";
 import { FileUploadList } from "@/components/builder/filleUpload";
-import { LngSwitcher } from "@/components/builder/lngSwitcher";
 import { Switcher } from "@/components/builder/switcher";
+import { TextArea } from "../ui/textarea";
 
 export const Story = ({ name, value, onChange, hide, required, languages }) => {
   const t = useTranslations();
 
   const [checked, setChecked] = useState(true);
-  const [activeLang, setActiveLang] = useState("");
-
-  useEffect(() => {
-    languages?.length ? setActiveLang(languages[0]) : setActiveLang("");
-  }, [languages]);
 
   const handleSwitchChange = (e) => {
     setChecked(e.checked);
     hide(name, !e.checked);
   };
 
-  const handleNestedChange = (e, lang) => {
-    onChange({
-      target: {
-        name: name,
-        value: {
-          ...value,
-          text: {
-            ...value?.text,
-            [lang]: e.target.value,
-          },
-        },
-      },
-    });
+  // const handleNestedChange = (e, lang) => {
+  //   onChange({
+  //     target: {
+  //       name: name,
+  //       value: {
+  //         ...value,
+  //         text: {
+  //           ...value?.text,
+  //           [lang]: e.target.value,
+  //         },
+  //       },
+  //     },
+  //   });
+  // };
+
+  const handleInputChange = (e, lng) => {
+    onChange(name, lng, e.target.value, "text");
   };
 
   const handleFileSelect = (files) => {
@@ -60,52 +58,62 @@ export const Story = ({ name, value, onChange, hide, required, languages }) => {
   };
 
   return (
-    <Stack
-      borderRadius={"8px"}
-      border={"1px solid"}
-      borderColor={"#E5E7EB"}
-      bg="white"
-      p="25px"
-      gap="16px"
-    >
-      <Field.Root required={required}>
+    <Stack borderRadius={"8px"} bg="white" p="24px" gap="16px">
+      <Field.Root required={required} gap={"16px"}>
         <Field.Label as={Flex} w="100%" justify={"space-between"}>
-          <Flex align={"center"} gap={"4px"}>
+          <Flex>
             <Field.RequiredIndicator fontSize="18px" />
             <Label text="story" />
           </Flex>
-          <Flex gap={"25px"}>
-            <LngSwitcher
-              activeLang={activeLang}
-              setActiveLang={setActiveLang}
-              languages={languages}
-              disabled={!checked}
-            />
-            {!required && (
-              <Switcher checked={checked} onChange={handleSwitchChange} />
-            )}
-          </Flex>
+
+          {!required && (
+            <Switcher checked={checked} onChange={handleSwitchChange} />
+          )}
         </Field.Label>
+
+        {/* <Textarea
+          h="114px"
+          resize={"none"}
+          name="text"
+          value={value?.text?.[activeLang] ?? ""}
+          onChange={(e) => handleNestedChange(e, activeLang)}
+          disabled={!checked || !activeLang}
+          placeholder={t("story_placeholder")}
+        /> */}
+
+        <TextArea
+          languages={languages}
+          name={name}
+          value={value?.text}
+          onChange={handleInputChange}
+          placeholder={t("story_placeholder")}
+          disabled={!checked}
+        />
       </Field.Root>
-      <Textarea
-        h="114px"
-        resize={"none"}
-        name="text"
-        value={value?.text?.[activeLang] ?? ""}
-        onChange={(e) => handleNestedChange(e, activeLang)}
-        disabled={!checked || !activeLang}
-        placeholder={t("story_placeholder")}
-      />
-      <FileUpload.Root accept="image/*" maxFiles={5} disabled={!checked}>
+      <FileUpload.Root
+        accept="image/*"
+        maxFiles={5}
+        disabled={!checked}
+        as={Flex}
+        gap="16px"
+        flexDirection="row"
+        flexWrap="wrap"
+      >
+        <FileUploadList onFileSelect={handleFileSelect} />
         <FileUpload.HiddenInput />
-        <FileUpload.Dropzone w="100%" cursor={!checked && "not-allowed"}>
-          <Icon>{story.icon}</Icon>
+        <FileUpload.Dropzone
+          minW="163px"
+          maxW="163px"
+          minH="178px"
+          background="#F9FAFB"
+          cursor={!checked && "not-allowed"}
+        >
+          <Icon>{upload.icon}</Icon>
           <FileUpload.DropzoneContent>
-            <Text textStyle="md">{t("photos_drag")}</Text>
-            <Text color="#9CA3AF">{t("photos_rule2")}</Text>
+            <Text textStyle="md">{t("or")}</Text>
+            <Text textStyle="md">{t("photos_rule")}</Text>
           </FileUpload.DropzoneContent>
         </FileUpload.Dropzone>
-        <FileUploadList onFileSelect={handleFileSelect} />
       </FileUpload.Root>
     </Stack>
   );

@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Field, Flex, Icon, Input, Stack, Text } from "@chakra-ui/react";
 import { Label } from "@/components/ui/typography/label";
-import { info, url } from "../../assets/svgs";
+import { info, link } from "../../assets/svgs";
 import { BASE_URL } from "@/lib/config";
 
 export const TitleDemo = () => {
@@ -15,11 +15,11 @@ export const TitleDemo = () => {
       border={"1px solid"}
       borderColor={"#E5E7EB"}
       bg="white"
-      p="25px"
+      p="24px"
     >
       <Field.Root gap="12px">
         <Field.Label gap="16px">
-          <Icon>{url.icon}</Icon>
+          <Icon>{link.icon}</Icon>
           <Label text="invitation_url" />
         </Field.Label>
 

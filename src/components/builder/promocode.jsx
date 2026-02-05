@@ -45,7 +45,7 @@ export const Promocode = () => {
       border={"1px solid"}
       borderColor={"#E5E7EB"}
       bg="white"
-      p="25px"
+      p="24px"
       as="form"
       onSubmit={handleSubmit}
     >

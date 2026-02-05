@@ -2,22 +2,15 @@
 
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import {
-  Field,
-  Flex,
-  HStack,
-  Icon,
-  Input,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Field, Flex, HStack, Icon, Stack, Text } from "@chakra-ui/react";
 import { BASE_URL } from "@/lib/config";
 import { Label } from "@/components/ui/typography/label";
 import { LngSwitcher } from "@/components/builder/lngSwitcher";
 import { cleanUrlExtension } from "../../utils/formatters";
-import { Link } from "@/i18n/routing";
 import { copied, copy } from "@/assets/svgs";
 import { Tooltip } from "../ui/tooltip";
+import { Input } from "../ui/input";
+import { error, info, success } from "../ui/alerts";
 
 export const TitleCreator = ({
   name,
@@ -29,63 +22,52 @@ export const TitleCreator = ({
 }) => {
   const t = useTranslations();
 
-  const [activeLang, setActiveLang] = useState("");
   const [isCopied, setIsCopied] = useState(false);
 
   const fullUrl = BASE_URL + (value?.["en"] ?? "");
 
-  useEffect(() => {
-    languages?.length ? setActiveLang(languages[0]) : setActiveLang("");
-  }, [languages]);
-
-  const handleInputChange = (e) => {
+  const handleInputChange = (e, lng) => {
     const val = e.target.value;
 
-    onChange(name, activeLang, val);
+    onChange(name, lng, val);
 
-    if (activeLang === "en" && setForm) {
+    if (lng === "en" && setForm) {
       setForm((prev) => ({
         ...prev,
         urlExtension: cleanUrlExtension(val),
       }));
     }
-    setIsCopied(false);
+
+    lng == "en" && setIsCopied(false);
   };
 
   const handleCopy = async () => {
+    if (!value?.en) return error("Fill english title!");
+
+    if (isCopied) return info("URL is in clipboard!");
+
     try {
       await navigator.clipboard.writeText(fullUrl);
       setIsCopied(true);
-      // setTimeout(() => setIsCopied(false), 1000); // hide icon after 1s
+      success("URL copied successfully.");
     } catch (err) {
-      console.error("Failed to copy: ", err);
+      error("Failed to copy: ", err);
     }
   };
 
   return (
-    <Stack borderRadius={"8px"} bg="white" p="25px" gap="14px">
+    <Stack borderRadius={"8px"} bg="white" p="24px" gap={"16px"}>
       <Field.Root required={required} gap={"16px"}>
-        {/* <Field.Label as={Stack} alignItems={"flex-start"}> */}
-        <Field.Label as={Flex} w="100%" justifyContent={"space-between"}>
-          <Flex align={"center"} gap={"4px"}>
-            <Field.RequiredIndicator fontSize="18px" />
-            <Label text="invitation_title" />
-          </Flex>
-          <LngSwitcher
-            activeLang={activeLang}
-            setActiveLang={setActiveLang}
-            languages={languages}
-          />
+        <Field.Label>
+          <Field.RequiredIndicator fontSize="18px" />
+          <Label text="invitation_title" />
         </Field.Label>
         <Input
+          languages={languages}
           name={name}
-          value={value?.[activeLang] ?? ""}
+          value={value ?? ""}
           onChange={handleInputChange}
           placeholder={t("invitation_placeholder")}
-          required
-          variant="outline"
-          borderRadius={"8px"}
-          disabled={!activeLang}
         />
       </Field.Root>
 

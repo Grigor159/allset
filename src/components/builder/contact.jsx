@@ -2,13 +2,14 @@
 
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { Field, Flex, HStack, Input, Stack } from "@chakra-ui/react";
+import { Field, Flex, HStack, Stack } from "@chakra-ui/react";
 import { Label } from "@/components/ui/typography/label";
 import { Switcher } from "@/components/builder/switcher";
+import { InputSimple } from "../ui/inputSimple";
 
 export const Contact = ({ name, value, onChange, hide, required }) => {
   const t = useTranslations();
-  
+
   const [checked, setChecked] = useState(true);
 
   const handleSwitchChange = (e) => {
@@ -17,28 +18,20 @@ export const Contact = ({ name, value, onChange, hide, required }) => {
   };
 
   const handleNestedChange = (e) => {
-    const { name, value: inputValue } = e.target;
     onChange({
       target: {
-        name: "connectWithUs",
+        name: name,
         value: {
           ...value,
-          [name]: inputValue,
+          [e.target.name]: e.target.value,
         },
       },
     });
   };
 
   return (
-    <Stack
-      borderRadius={"8px"}
-      border={"1px solid"}
-      borderColor={"#E5E7EB"}
-      bg="white"
-      p="25px"
-      gap="16px"
-    >
-      <Field.Root required={required}>
+    <Stack borderRadius={"8px"} bg="white" p="24px">
+      <Field.Root required={required} gap={"16px"}>
         <Field.Label as={Flex} w="100%" justify={"space-between"}>
           <HStack>
             <Field.RequiredIndicator />
@@ -48,53 +41,30 @@ export const Contact = ({ name, value, onChange, hide, required }) => {
             <Switcher checked={checked} onChange={handleSwitchChange} />
           )}
         </Field.Label>
+        <Flex w="100%" gap="16px" justify={"space-between"}>
+          <InputSimple
+            name="name"
+            value={value?.name ?? ""}
+            onChange={handleNestedChange}
+            placeholder={t("name")}
+            disabled={!checked}
+          />
+          <InputSimple
+            name="phone"
+            value={value?.phone ?? ""}
+            onChange={handleNestedChange}
+            placeholder={t("phone")}
+            disabled={!checked}
+          />
+          <InputSimple
+            name="email"
+            value={value?.email ?? ""}
+            onChange={handleNestedChange}
+            placeholder={t("email")}
+            disabled={!checked}
+          />
+        </Flex>
       </Field.Root>
-      {/* 
-      <Textarea
-        h={"66px"}
-        resize={"none"}
-        name="description"
-        value={value?.description}
-        onChange={handleNestedChange}
-        disabled={!checked}
-        placeholder="Short description"
-      /> */}
-
-      <Flex gap="15px">
-        <Input
-          type="text"
-          name="name"
-          variant="outline"
-          value={value?.name ?? ""}
-          required={required}
-          onChange={handleNestedChange}
-          borderRadius="8px"
-          placeholder={t("name")}
-          disabled={!checked}
-        />
-        <Input
-          type="tel"
-          name="phone"
-          variant="outline"
-          value={value?.phone ?? ""}
-          required={required}
-          onChange={handleNestedChange}
-          borderRadius="8px"
-          placeholder={t("phone")}
-          disabled={!checked}
-        />
-        <Input
-          type="email"
-          name="email"
-          variant="outline"
-          value={value?.email ?? ""}
-          required={required}
-          onChange={handleNestedChange}
-          borderRadius="8px"
-          placeholder={t("email")}
-          disabled={!checked}
-        />
-      </Flex>
     </Stack>
   );
 };

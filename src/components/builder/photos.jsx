@@ -1,14 +1,14 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Field, FileUpload, Icon, Stack, Text } from "@chakra-ui/react";
-import { uploadAvatar } from "../../assets/svgs";
+import { Field, FileUpload, Flex, Icon, Stack, Text } from "@chakra-ui/react";
+import { upload } from "../../assets/svgs";
 import { Label } from "@/components/ui/typography/label";
 import { FileUploadList } from "@/components/builder/filleUpload";
 
 export const Photos = ({ name, onChange, required }) => {
   const t = useTranslations();
-  
+
   const handleFileSelect = (files) => {
     onChange({
       target: {
@@ -19,31 +19,35 @@ export const Photos = ({ name, onChange, required }) => {
   };
 
   return (
-    <Stack
-      borderRadius={"8px"}
-      border={"1px solid"}
-      borderColor={"#E5E7EB"}
-      bg="white"
-      p="25px"
-      gap="16px"
-    >
+    <Stack borderRadius={"8px"} bg="white" p="24px" gap="16px">
       <Field.Root required={required}>
         <Field.Label>
           <Field.RequiredIndicator />
           <Label text="photos_main" />
         </Field.Label>
       </Field.Root>
-      <FileUpload.Root accept="image/*" maxFiles={1}>
+      <FileUpload.Root
+        accept="image/*"
+        maxFiles={2}
+        as={Flex}
+        gap="16px"
+        flexDirection="row"
+        flexWrap="wrap"
+      >
+        <FileUploadList onFileSelect={handleFileSelect} />
         <FileUpload.HiddenInput />
-        <FileUpload.Dropzone w="100%">
-          <Icon>{uploadAvatar.icon}</Icon>
+        <FileUpload.Dropzone
+          minW="163px"
+          maxW="163px"
+          minH="178px"
+          background="#F9FAFB"
+        >
+          <Icon>{upload.icon}</Icon>
           <FileUpload.DropzoneContent>
-            <Text textStyle="md">{t("photos_drag")}</Text>
-            <Text color="#9CA3AF">{t("photos_rule")}</Text>
-            {/* <Box color="fg.muted">.png, .jpg up to 5MB</Box> */}
+            <Text textStyle="md">{t("or")}</Text>
+            <Text textStyle="md">{t("photos_rule")}</Text>
           </FileUpload.DropzoneContent>
         </FileUpload.Dropzone>
-        <FileUploadList onFileSelect={handleFileSelect} />
       </FileUpload.Root>
     </Stack>
   );

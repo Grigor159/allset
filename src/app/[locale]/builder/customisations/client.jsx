@@ -4,7 +4,7 @@ import { useLocale } from "next-intl";
 import { useNuqs } from "@/hooks/useNuqs";
 import { useGetTanstack } from "@/hooks/useTanstack";
 import { Loader } from "@/components/ui/loader";
-import { Box, Container, Flex } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { Aside } from "@/components/builder/aside";
 import { Preview } from "@/components/builder/preview";
 

@@ -2,13 +2,14 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
-import { Checkbox, Field, Flex, Icon, Input, Stack } from "@chakra-ui/react";
+import { Checkbox, Field, Flex, Icon, Stack } from "@chakra-ui/react";
 import { Label } from "@/components/ui/typography/label";
 import { Switcher } from "@/components/builder/switcher";
-import { agenda } from "../../utils/constants";
 import { checked } from "../../assets/svgs";
+import { InputUrl } from "../ui/inputUrl";
+import { InputTime } from "../ui/inputTime";
 
-export const Timeline = ({ name, value, hide, onChange, required }) => {
+export const Timeline = ({ data, name, value, hide, onChange, required }) => {
   const t = useTranslations();
   const language = useLocale();
 
@@ -44,36 +45,23 @@ export const Timeline = ({ name, value, hide, onChange, required }) => {
 
   const handleInputChange = (venueKey, field, val) => {
     const newTimeline = value.map((item) =>
-      item.venueKey === venueKey ? { ...item, [field]: val } : item
+      item.venueKey === venueKey ? { ...item, [field]: val } : item,
     );
     onChange(newTimeline);
   };
 
   return (
-    <Stack
-      borderRadius="8px"
-      border="1px solid"
-      borderColor="#E5E7EB"
-      bg="white"
-      p="25px"
-      gap="14px"
-    >
+    <Stack borderRadius="8px" bg="white" p="24px" gap="16px">
       <Field.Root required={required} gap="16px">
         <Field.Label as={Flex} w="100%" justify="space-between">
-          <Flex align="center" gap="4px">
-            <Field.RequiredIndicator fontSize="18px" />
-            <Label text="agenda" />
-          </Flex>
-          <Flex gap="25px">
-            {!required && (
-              <Switcher checked={disabled} onChange={handleSwitchChange} />
-            )}
-          </Flex>
+          <Label text="agenda" />
+          {!required && (
+            <Switcher checked={disabled} onChange={handleSwitchChange} />
+          )}
         </Field.Label>
       </Field.Root>
 
-      {agenda.map(({ icon, venueName }) => {
-        const venueKey = venueName.en;
+      {Object.entries(data || {}).map(([venueKey, venueName]) => {
         const item = getItem(venueKey);
         const isChecked = !!item;
 
@@ -85,23 +73,23 @@ export const Timeline = ({ name, value, hide, onChange, required }) => {
               handleCheckboxChange(
                 venueKey,
                 e.checked === true,
-                venueName[language] || venueName.en
+                venueName[language] || venueName.en,
               )
             }
             w="100%"
             justifyContent="space-between"
             cursor="pointer"
-            bg="#F9FAFB"
-            py="15px"
-            px="12px"
+            p="16px 0"
             borderRadius="4px"
             disabled={!disabled}
+            borderBottom="2px solid"
+            borderColor="#F9FAFB"
           >
             <Flex align="center" gap="12px">
               <Checkbox.HiddenInput />
               <Checkbox.Control
-                w="18px"
-                h="18px"
+                w="24px"
+                h="24px"
                 _checked={{ border: "none", bg: "transparent" }}
               >
                 {isChecked && <Icon>{checked.icon}</Icon>}
@@ -111,40 +99,30 @@ export const Timeline = ({ name, value, hide, onChange, required }) => {
                 gap={"8px"}
                 alignItems={"center"}
                 fontSize={"14px"}
-                fontWeight={"400"}
+                fontWeight={"600"}
                 lineHeight={"24px"}
               >
-                <Icon>{icon.icon}</Icon>
+                {/* <Icon>{icon.icon}</Icon> */}
                 {venueName[language] || venueName.en}
               </Checkbox.Label>
             </Flex>
 
-            <Flex gap="8px">
-              <Input
+            <Flex gap="32px">
+              <InputTime
                 value={item?.time}
                 onChange={(e) =>
                   handleInputChange(venueKey, "time", e.target.value)
                 }
-                placeholder={t("time")}
-                variant="outline"
-                bg="white"
-                w="128px"
-                h="30px"
-                borderRadius="4px"
-                //   disabled={!isChecked}
+                disabled={!isChecked}
               />
-              <Input
+              <InputUrl
+                name="venueLocation"
                 value={item?.venueLocation}
                 onChange={(e) =>
-                  handleInputChange(venueKey, "venueLocation", e.target.value)
+                  handleInputChange(venueKey, e.target.name, e.target.value)
                 }
                 placeholder={t("location")}
-                variant="outline"
-                bg="white"
-                w="128px"
-                h="30px"
-                borderRadius="4px"
-                //   disabled={!isChecked}
+                disabled={!isChecked}
               />
             </Flex>
           </Checkbox.Root>

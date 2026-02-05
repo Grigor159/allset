@@ -30,7 +30,7 @@ export const ScrollToTop = () => {
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       position="fixed"
       right={{ base: "33px", md: "10px" }}
-      bottom={{ base: "99px", md: "50px" }}
+      bottom={{ base: "99px", md: "70px" }}
       zIndex="101"
       border="1px solid"
       borderColor="white"

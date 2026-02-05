@@ -23,7 +23,7 @@ export const Calendar = ({ name, value, onChange, required }) => {
   const ref = useRef();
 
   const t = useTranslations();
-  const  language  = useLocale();
+  const language = useLocale();
 
   const [selected, setSelected] = useState(null);
   const [open, setOpen] = useState(false);
@@ -61,40 +61,43 @@ export const Calendar = ({ name, value, onChange, required }) => {
   useOutsideClick(ref, open, setOpen);
 
   return (
-    <Box>
-      <Dialog.Root open={open} onOpenChange={setOpen} placement="center">
-        <Dialog.Trigger asChild>
-          <InputGroup startElement={<Icon>{calendar.icon}</Icon>}>
-            <Input
-              type="text"
-              name={name}
-              value={formatted}
-              readOnly
-              placeholder={t("choose_date")}
-              required={required}
-              onClick={() => setOpen(true)}
-            />
-          </InputGroup>
-        </Dialog.Trigger>
+    <Dialog.Root open={open} onOpenChange={setOpen} placement="center">
+      <Dialog.Trigger asChild>
+        <InputGroup startElement={<Icon>{calendar.icon}</Icon>}>
+          <Input
+            type="text"
+            name={name}
+            value={formatted}
+            readOnly
+            placeholder={t("choose_date")}
+            required={required}
+            onClick={() => setOpen(true)}
+            variant="subtle"
+            borderRadius={"4px"}
+            bg="#F9FAFB"
+            h="52px"
+          />
+        </InputGroup>
+      </Dialog.Trigger>
 
-        <Dialog.Backdrop />
+      <Dialog.Backdrop />
 
-        <Dialog.Positioner>
-          <Dialog.Content
-            ref={ref}
-            width="fit-content"
-            background="white"
-            padding={"25px"}
-          >
-            <CloseButton
-              size="sm"
-              variant="outline"
-              onClick={() => setOpen(false)}
-              position="absolute"
-              top="5px"
-              right="5px"
-            />
-            {/* <Button
+      <Dialog.Positioner>
+        <Dialog.Content
+          ref={ref}
+          width="fit-content"
+          background="white"
+          padding={"25px"}
+        >
+          <CloseButton
+            size="sm"
+            variant="outline"
+            onClick={() => setOpen(false)}
+            position="absolute"
+            top="5px"
+            right="5px"
+          />
+          {/* <Button
               onClick={() => setOpen(false)}
               // variant="outline"
               position="absolute"
@@ -109,35 +112,34 @@ export const Calendar = ({ name, value, onChange, required }) => {
               X
             </Button> */}
 
-            <Dialog.Body>
-              <DayPicker
-                locale={calendarLocales[language]}
-                mode="single"
-                // captionLayout="dropdown"
-                navLayout="around"
-                selected={selected}
-                // fromYear={currentYear}
-                // toYear={currentYear + 5}
-                defaultMonth={selected || today}
-                startMonth={new Date(currentYear, 0)}
-                endMonth={new Date(currentYear + 1, 11)}
-                disabled={{ before: today }}
-                onSelect={handleSelect}
-                // modifiersClassNames={{
-                //   selected: "selected",
-                // }}
-                modifiersStyles={{
-                  selected: {
-                    backgroundColor: "#004143",
-                    color: "white",
-                    borderRadius: "100%",
-                  },
-                }}
-              />
-            </Dialog.Body>
-          </Dialog.Content>
-        </Dialog.Positioner>
-      </Dialog.Root>
-    </Box>
+          <Dialog.Body>
+            <DayPicker
+              locale={calendarLocales[language]}
+              mode="single"
+              // captionLayout="dropdown"
+              navLayout="around"
+              selected={selected}
+              // fromYear={currentYear}
+              // toYear={currentYear + 5}
+              defaultMonth={selected || today}
+              startMonth={new Date(currentYear, 0)}
+              endMonth={new Date(currentYear + 1, 11)}
+              disabled={{ before: today }}
+              onSelect={handleSelect}
+              // modifiersClassNames={{
+              //   selected: "selected",
+              // }}
+              modifiersStyles={{
+                selected: {
+                  backgroundColor: "#004143",
+                  color: "white",
+                  borderRadius: "100%",
+                },
+              }}
+            />
+          </Dialog.Body>
+        </Dialog.Content>
+      </Dialog.Positioner>
+    </Dialog.Root>
   );
 };

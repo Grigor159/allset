@@ -1,19 +1,21 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { useGetTanstack } from "@/hooks/useTanstack";
+import { useState } from "react";
 import {
-  createListCollection,
+  Box,
   Field,
   Flex,
+  For,
+  HStack,
   Stack,
-  Textarea,
+  Text,
+  VStack,
 } from "@chakra-ui/react";
 import { Label } from "@/components/ui/typography/label";
 import { Switcher } from "@/components/builder/switcher";
-import { LngSwitcher } from "@/components/builder/lngSwitcher";
-import { Selector } from "@/components/builder/selector";
-import { schemes, styles } from "../../utils/constants";
+import { TextArea } from "../ui/textarea";
 
 export const Dresscode = ({
   name,
@@ -24,116 +26,166 @@ export const Dresscode = ({
   languages,
 }) => {
   const t = useTranslations();
+  const language = useLocale();
+
+  const { data } = useGetTanstack("color-palettes");
+  console.log(data);
 
   const [checked, setChecked] = useState(true);
-  const [activeLang, setActiveLang] = useState("");
-
-  useEffect(() => {
-    languages?.length ? setActiveLang(languages[0]) : setActiveLang("");
-  }, [languages]);
+  const [selected, setSelected] = useState(null);
 
   const handleSwitchChange = (e) => {
     setChecked(e.checked);
     hide(name, !e.checked);
   };
 
-  // const handleNestedChange = (e) => {
-  //   const { name, value: inputValue } = e.target;
-  //   onChange({
-  //     target: {
-  //       name: "dressCode",
-  //       value: {
-  //         ...value,
-  //         [name]: inputValue,
-  //       },
-  //     },
-  //   });
-  // };
-
-  const handleNestedChange = (e, lang) => {
-    if (e?.target) {
-      const { name, value: inputValue } = e.target;
-
-      if (name === "description") {
-        onChange({
-          target: {
-            name: "dressCode",
-            value: {
-              ...value,
-              description: {
-                ...value?.description,
-                [lang]: inputValue,
-              },
-            },
-          },
-        });
-      } else {
-        onChange({
-          target: {
-            name: "dressCode",
-            value: {
-              ...value,
-              [name]: inputValue,
-            },
-          },
-        });
-      }
-    }
+  const handleInputChange = (e, lng) => {
+    onChange(name, lng, e.target.value, "description");
   };
 
   return (
-    <Stack
-      borderRadius={"8px"}
-      border={"1px solid"}
-      borderColor={"#E5E7EB"}
-      bg="white"
-      p="25px"
-      gap="16px"
-    >
+    <Stack borderRadius={"8px"} bg="white" p="24px">
       <Field.Root required={required} gap={"16px"}>
         <Field.Label as={Flex} w="100%" justify={"space-between"}>
-          <Flex align={"center"} gap={"4px"}>
-            <Field.RequiredIndicator fontSize="18px" />
-            <Label text="dresscode" />
-          </Flex>
-          <Flex gap={"25px"}>
-            <LngSwitcher
-              activeLang={activeLang}
-              setActiveLang={setActiveLang}
-              languages={languages}
-              disabled={!checked}
-            />
-            {!required && (
-              <Switcher checked={checked} onChange={handleSwitchChange} />
-            )}
-          </Flex>
+          {/* <HStack> */}
+          <Field.RequiredIndicator fontSize="18px" />
+          <Label text="dresscode" />
+          {/* </HStack> */}
+
+          {!required && (
+            <Switcher checked={checked} onChange={handleSwitchChange} />
+          )}
         </Field.Label>
-        <Textarea
-          h={"66px"}
-          resize={"none"}
-          name="description"
-          value={value?.description?.[activeLang] ?? ""}
-          onChange={(e) => handleNestedChange(e, activeLang)}
-          disabled={!checked || !activeLang}
+
+        <Flex gap={"16px"} flexWrap={"wrap"}>
+          {data?.map((item) => {
+            const isSelected = selected === item.id;
+
+            return (
+              <Box
+                key={item.id}
+                border="2px solid"
+                borderColor={isSelected ? "#0041434D" : "transparent"}
+                borderRadius="8px"
+                bg={isSelected ? "#0041430D" : "#F9FAFB"}
+                p="18px"
+                transition="all 0.3s ease"
+                _hover={{
+                  borderColor: "#0041434D",
+                  cursor: "pointer",
+                }}
+                tabIndex={0}
+                w="222px"
+                onClick={() => setSelected(item.id)}
+              >
+                <HStack gap={"8px"} pb="12px">
+                  {item.colors.map((color, index) => (
+                    <VStack key={color} spacing={1}>
+                      <Box
+                        w="32px"
+                        h="32px"
+                        borderRadius="50%"
+                        bg={color}
+                        ml={index === 0 ? 0 : "-17px"}
+                        border={"1px solid"}
+                        borderColor={"white"}
+                      />
+                    </VStack>
+                  ))}
+                </HStack>
+
+                <Text fontSize="14px">
+                  {item.name[language] || item.name.en}
+                </Text>
+                <Text fontSize="12px" color="#6B7280">
+                  {item.description[language] || item.description.en}
+                </Text>
+
+                <Flex flexWrap={"wrap"}>
+                  <For each={item.colors}>
+                    {(el, index) => (
+                      <Text key={index} fontSize="12px" color="#BBBEC3">
+                        {el}
+                        {index !== item.colors.length - 1 ? "," : ""}
+                      </Text>
+                    )}
+                  </For>
+                </Flex>
+              </Box>
+            );
+          })}
+        </Flex>
+
+        <TextArea
+          languages={languages}
+          name={name}
+          value={value?.description}
+          onChange={handleInputChange}
           placeholder={t("dresscode_placeholder")}
+          disabled={!checked}
         />
       </Field.Root>
-      <Flex w="100%" gap="24px" justify={"space-between"}>
-        <Selector
-          name="style"
-          value={value?.style}
-          onChange={handleNestedChange}
-          collection={createListCollection({ items: styles })}
-          disabled={!checked}
-        />
-        <Selector
-          name="color_palette_id"
-          value={value?.colorPaletteId}
-          onChange={handleNestedChange}
-          collection={createListCollection({ items: schemes })}
-          disabled={!checked}
-        />
-      </Flex>
     </Stack>
   );
 };
+
+/* <Flex w="100%" gap="24px" justify={"space-between"}>
+  <Selector
+    name="style"
+    value={value?.style}
+    onChange={handleNestedChange}
+    collection={createListCollection({ items: styles })}
+    disabled={!checked}
+  />
+  <Selector
+    name="color_palette_id"
+    value={value?.colorPaletteId}
+    onChange={handleNestedChange}
+    collection={createListCollection({ items: schemes })}
+    disabled={!checked}
+  />
+</Flex> */
+
+// const handleNestedChange = (e) => {
+//   const { name, value: inputValue } = e.target;
+//   onChange({
+//     target: {
+//       name: "dressCode",
+//       value: {
+//         ...value,
+//         [name]: inputValue,
+//       },
+//     },
+//   });
+// };
+
+// const handleNestedChange = (e, lang) => {
+//   if (e?.target) {
+//     const { name, value: inputValue } = e.target;
+
+//     if (name === "description") {
+//       onChange({
+//         target: {
+//           name: "dressCode",
+//           value: {
+//             ...value,
+//             description: {
+//               ...value?.description,
+//               [lang]: inputValue,
+//             },
+//           },
+//         },
+//       });
+//     } else {
+//       onChange({
+//         target: {
+//           name: "dressCode",
+//           value: {
+//             ...value,
+//             [name]: inputValue,
+//           },
+//         },
+//       });
+//     }
+//   }
+// };
