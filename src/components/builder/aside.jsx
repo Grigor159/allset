@@ -29,14 +29,15 @@ export const Aside = ({ data, language }) => {
           return (
             <Box
               key={item.id}
-              border="2px solid"
+              border="1px solid"
               borderColor={isSelected ? "#0041434D" : "transparent"}
+              boxShadow={isSelected && "0px 4px 10px 0px rgba(0, 65, 67, 0.1)"}
               borderRadius="8px"
-              bg={isSelected ? "#0041430D" : "#F9FAFB"}
-              p="18px"
+              bg="#F9FAFB"
+              p="16px"
               transition="all 0.3s ease"
               _hover={{
-                borderColor: "#0041434D",
+                background: "#0041430D",
                 cursor: "pointer",
               }}
               tabIndex={0}
@@ -46,11 +47,11 @@ export const Aside = ({ data, language }) => {
                 {item.colors.map((color, index) => (
                   <VStack key={color} spacing={1}>
                     <Box
-                      w="32px"
-                      h="32px"
+                      w="34px"
+                      h="34px"
                       borderRadius="50%"
                       bg={color}
-                      ml={index === 0 ? 0 : "-17px"}
+                      ml={index === 0 ? 0 : "-22px"}
                       border={"1px solid"}
                       borderColor={"white"}
                     />
@@ -58,7 +59,7 @@ export const Aside = ({ data, language }) => {
                 ))}
               </HStack>
 
-              <Text fontSize="14px" >
+              <Text fontSize="14px" fontWeight={"500"}>
                 {item.name[language] || item.name.en}
               </Text>
               <Text fontSize="12px" color="#6B7280">

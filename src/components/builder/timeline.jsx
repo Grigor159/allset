@@ -2,10 +2,10 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
-import { Checkbox, Field, Flex, Icon, Stack } from "@chakra-ui/react";
+import { Button, Checkbox, Field, Flex, Icon, Stack } from "@chakra-ui/react";
 import { Label } from "@/components/ui/typography/label";
 import { Switcher } from "@/components/builder/switcher";
-import { checked } from "../../assets/svgs";
+import { add, checked } from "../../assets/svgs";
 import { InputUrl } from "../ui/inputUrl";
 import { InputTime } from "../ui/inputTime";
 
@@ -128,6 +128,10 @@ export const Timeline = ({ data, name, value, hide, onChange, required }) => {
           </Checkbox.Root>
         );
       })}
+      <Button variant="ghost" width={"fit-content"} color={"#004143"}>
+        Add my variant
+        <Icon>{add.icon}</Icon>
+      </Button>
     </Stack>
   );
 };
