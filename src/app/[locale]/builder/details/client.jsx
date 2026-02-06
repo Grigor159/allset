@@ -41,6 +41,9 @@ export const DetailsClient = () => {
     colorPaletteId: palette,
   });
   console.log(form); //
+  
+  const [agenda, setAgenda] = useState(defaults?.agendaTitles);
+  console.log(agenda); //
 
   useEffect(() => {
     if (defaults?.ourStoryText) {
@@ -209,7 +212,10 @@ export const DetailsClient = () => {
               required={true}
             />
             <Timeline
-              data={defaults?.agendaTitles}
+              data={agenda}
+              setData={setAgenda}
+              languages={form.languages}
+              //
               name="timeline"
               value={form.timeline}
               hide={handleHide}

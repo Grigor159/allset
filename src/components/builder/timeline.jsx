@@ -2,16 +2,27 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
-import { Button, Checkbox, Field, Flex, Icon, Stack } from "@chakra-ui/react";
+import { Checkbox, Field, Flex, Icon, Stack } from "@chakra-ui/react";
 import { Label } from "@/components/ui/typography/label";
 import { Switcher } from "@/components/builder/switcher";
-import { add, checked } from "../../assets/svgs";
+import { checked } from "../../assets/svgs";
 import { InputUrl } from "../ui/inputUrl";
 import { InputTime } from "../ui/inputTime";
+import { AddAgenda } from "./addAgenda";
 
-export const Timeline = ({ data, name, value, hide, onChange, required }) => {
+export const Timeline = ({
+  data,
+  setData,
+  languages,
+  name,
+  value,
+  hide,
+  onChange,
+  required,
+}) => {
   const t = useTranslations();
   const language = useLocale();
+  console.log(data);
 
   const [disabled, setDisabled] = useState(true);
 
@@ -128,10 +139,8 @@ export const Timeline = ({ data, name, value, hide, onChange, required }) => {
           </Checkbox.Root>
         );
       })}
-      <Button variant="ghost" width={"fit-content"} color={"#004143"}>
-        Add my variant
-        <Icon>{add.icon}</Icon>
-      </Button>
+
+      <AddAgenda setData={setData} languages={languages}/>
     </Stack>
   );
 };

@@ -62,3 +62,11 @@ export function formatPrice(price) {
 
   return `${formatted} AMD`;
 }
+
+export const generateAgendaKey = (text) => {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+};

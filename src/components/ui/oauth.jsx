@@ -79,6 +79,7 @@ export const OAuth = () => {
             <Button
               w="171px"
               border="1px solid"
+              borderColor="#4B5563"
               // borderColor="#80A0A14D"
               // bg={isLoading ? "#749596" : "#004143"}
               bg={"#004143"}
