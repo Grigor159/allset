@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import Seo from "../components/seo";
 import { useState } from "react";
-import { supabase } from "../lib/supabaseClient";
+import { supabase } from "../services/supabase/supabase";
 import { info, success, warning } from "../components/alerts";
 import soon from "../assets/soon.png";
 import soonMobile from "../assets/soonMobile.png";
