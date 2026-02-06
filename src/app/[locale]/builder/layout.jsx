@@ -18,7 +18,6 @@ export default function Layout({ children }) {
       bgRepeat="no-repeat"
     >
       <TopPart />
-
       <Container
         maxW="1360px"
         px={0}
@@ -27,7 +26,6 @@ export default function Layout({ children }) {
       >
         {children}
       </Container>
-
       <BottomPart />
     </Box>
   );

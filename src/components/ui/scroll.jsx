@@ -8,7 +8,7 @@ import { usePathname } from "@/i18n/routing";
 
 const MotionBox = motion.create(Box);
 
-export const Scroll = ({ children, scrollToTop = true, animationKey }) => {
+export const Scroll = ({ children, scrollToTop = true }) => {
   const pathname = usePathname();
 
   useLayoutEffect(() => {
@@ -20,7 +20,7 @@ export const Scroll = ({ children, scrollToTop = true, animationKey }) => {
   return (
     <AnimatePresence mode="wait">
       <MotionBox
-        key={animationKey}
+        key={"scroll"}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}

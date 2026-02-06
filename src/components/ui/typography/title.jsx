@@ -11,7 +11,7 @@ export const Title = ({ text }) => {
     <Heading as="h1" fontWeight={"700"} size="3xl" letterSpacing={"0"}>
       <Typewritter
         options={{
-          delay: 80,
+          delay: 70,
           strings: t(text),
           autoStart: true,
           loop: false,

@@ -5,12 +5,12 @@ import { useRef, useState, useEffect } from "react";
 import { useNuqs } from "@/hooks/useNuqs";
 import { detailsForm } from "@/utils/constants";
 import apiClient from "@/lib/apiClient";
+import { Animate } from "@/components/ui/animate";
 import { Box, Container, Stack } from "@chakra-ui/react";
 import { LngSelector } from "@/components/builder/lngSelector";
 import { TitleCreator } from "@/components/builder/titleCreator";
 import { EventDate } from "@/components/builder/eventDate";
 import { Timeline } from "@/components/builder/timeline";
-// import { Counter } from "@/components/builder/counter";
 import { Contact } from "@/components/builder/contact";
 import { Dresscode } from "@/components/builder/dresscode";
 import { AlbumLink } from "@/components/builder/albumLink";
@@ -41,37 +41,58 @@ export const DetailsClient = () => {
     colorPaletteId: palette,
   });
   console.log(form); //
-  
+
   const [agenda, setAgenda] = useState(defaults?.agendaTitles);
   console.log(agenda); //
 
+  // useEffect(() => {
+  //   if (defaults?.ourStoryText) {
+  //     setForm((prev) => ({
+  //       ...prev,
+  //       ourStory: {
+  //         ...prev.ourStory,
+  //         text: defaults?.ourStoryText,
+  //       },
+  //     }));
+  //   }
+  //   if (defaults?.description) {
+  //     setForm((prev) => ({
+  //       ...prev,
+  //       description: {
+  //         ...defaults?.description,
+  //       },
+  //     }));
+  //   }
+  //   if (defaults?.dressCodeDescription) {
+  //     setForm((prev) => ({
+  //       ...prev,
+  //       dressCode: {
+  //         ...prev.dressCode,
+  //         description: defaults?.dressCodeDescription,
+  //       },
+  //     }));
+  //   }
+  // }, [defaults]);
+
   useEffect(() => {
-    if (defaults?.ourStoryText) {
-      setForm((prev) => ({
-        ...prev,
-        ourStory: {
-          ...prev.ourStory,
-          text: defaults?.ourStoryText,
-        },
-      }));
-    }
-    if (defaults?.description) {
-      setForm((prev) => ({
-        ...prev,
-        description: {
-          ...defaults?.description,
-        },
-      }));
-    }
-    if (defaults?.dressCodeDescription) {
-      setForm((prev) => ({
-        ...prev,
-        dressCode: {
+    setForm((prev) => {
+      const updates = { ...prev };
+
+      if (defaults?.ourStoryText) {
+        updates.ourStory = { ...prev.ourStory, text: defaults.ourStoryText };
+      }
+      if (defaults?.description) {
+        updates.description = defaults.description;
+      }
+      if (defaults?.dressCodeDescription) {
+        updates.dressCode = {
           ...prev.dressCode,
-          description: defaults?.dressCodeDescription,
-        },
-      }));
-    }
+          description: defaults.dressCodeDescription,
+        };
+      }
+
+      return updates;
+    });
   }, [defaults]);
 
   const handleHide = (key, hidden) => {
@@ -167,99 +188,136 @@ export const DetailsClient = () => {
             autoComplete="on"
             onSubmit={submit}
           >
-            <LngSelector
-              name="languages"
-              value={form.languages}
-              onChange={handleChange}
-              required={true}
-            />
-            <TitleCreator
-              name="title"
-              value={form.title}
-              onChange={handleLngChange}
-              setForm={setForm}
-              required={true}
-              languages={form.languages}
-            />
-            <EventDate
-              name="eventDate"
-              value={form.eventDate}
-              onChange={handleChange}
-              required={true}
-            />
-            <TextAreaField
-              name="description"
-              value={form.description}
-              onChange={handleLngChange}
-              required={true}
-              text="description"
-              placeholder="description_placeholder"
-              languages={form.languages}
-            />
-            <Photos
-              // onFileSelect={(file) =>
-              //   setForm((prev) => ({ ...prev, mainImages: file }))
-              // }
-              name="mainImages"
-              onChange={handleChange}
-              required={true}
-            />
-            <Rsvp name="rsvp" hide={handleHide} text="rsvp" />
-            <Venue
-              name="venue"
-              value={form.venue}
-              onChange={handleChange}
-              required={true}
-            />
-            <Timeline
-              data={agenda}
-              setData={setAgenda}
-              languages={form.languages}
-              //
-              name="timeline"
-              value={form.timeline}
-              hide={handleHide}
-              onChange={handleTimelineChange}
-              required={false}
-            />
-            {/* <Counter
-              name="countDown"
-              value={form.eventDate}
-              hide={handleHide}
-              required={false}
-            /> */}
-            <Dresscode
-              name="dressCode"
-              value={form.dressCode}
-              onChange={handleLngChange}
-              hide={handleHide}
-              required={false}
-              languages={form.languages}
-            />
-            <AlbumLink
-              name="albumLink"
-              value={form.albumLink}
-              onChange={handleChange}
-              hide={handleHide}
-              required={false}
-            />
-            <Story
-              name="ourStory"
-              value={form.ourStory}
-              onChange={handleLngChange}
-              hide={handleHide}
-              required={false}
-              languages={form.languages}
-            />
-            <Contact
-              name="connectWithUs"
-              value={form.connectWithUs}
-              onChange={handleChange}
-              hide={handleHide}
-              required={false}
-            />
+            <Animate>
+              <LngSelector
+                name="languages"
+                value={form.languages}
+                onChange={handleChange}
+                required={true}
+              />
+            </Animate>
+
+            <Animate>
+              <TitleCreator
+                name="title"
+                value={form.title}
+                onChange={handleLngChange}
+                setForm={setForm}
+                required={true}
+                languages={form.languages}
+              />
+            </Animate>
+
+            <Animate>
+              <EventDate
+                name="eventDate"
+                value={form.eventDate}
+                onChange={handleChange}
+                required={true}
+              />
+            </Animate>
+
+            <Animate>
+              <TextAreaField
+                name="description"
+                value={form.description}
+                onChange={handleLngChange}
+                required={true}
+                text="description"
+                placeholder="description_placeholder"
+                languages={form.languages}
+              />
+            </Animate>
+
+            <Animate>
+              <Photos
+                // onFileSelect={(file) =>
+                //   setForm((prev) => ({ ...prev, mainImages: file }))
+                // }
+                name="mainImages"
+                onChange={handleChange}
+                required={true}
+              />
+            </Animate>
+
+            <Animate>
+              <Rsvp name="rsvp" hide={handleHide} text="rsvp" />
+            </Animate>
+
+            <Animate>
+              <Venue
+                name="venue"
+                value={form.venue}
+                onChange={handleChange}
+                required={true}
+              />
+            </Animate>
+
+            <Animate>
+              <Timeline
+                data={agenda}
+                setData={setAgenda}
+                languages={form.languages}
+                //
+                name="timeline"
+                value={form.timeline}
+                hide={handleHide}
+                onChange={handleTimelineChange}
+                required={false}
+              />
+            </Animate>
+
+            <Animate>
+              <Dresscode
+                name="dressCode"
+                value={form.dressCode}
+                onChange={handleLngChange}
+                hide={handleHide}
+                required={false}
+                languages={form.languages}
+              />
+            </Animate>
+
+            <Animate>
+              <AlbumLink
+                name="albumLink"
+                value={form.albumLink}
+                onChange={handleChange}
+                hide={handleHide}
+                required={false}
+              />
+            </Animate>
+
+            <Animate>
+              <Story
+                name="ourStory"
+                value={form.ourStory}
+                onChange={handleLngChange}
+                hide={handleHide}
+                required={false}
+                languages={form.languages}
+              />
+            </Animate>
+
+            <Animate>
+              <Contact
+                name="connectWithUs"
+                value={form.connectWithUs}
+                onChange={handleChange}
+                hide={handleHide}
+                required={false}
+              />
+            </Animate>
           </Stack>
-          <Expire />
+
+          <Animate
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true, margin: "0px 0px -100px 0px" }}
+          >
+            <Expire />
+          </Animate>
         </Stack>
       </Container>
     </Box>
