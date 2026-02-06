@@ -1,0 +1,18 @@
+import { Box } from "@chakra-ui/react";
+import img from "@/assets/imgs/404.png";
+
+const NotFound = () => {
+  return (
+    <Box
+      style={{
+        backgroundImage: `url(${img.src})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        width: "100%",
+        height: "90vh",
+      }}
+    ></Box>
+  );
+};
+
+export default NotFound;

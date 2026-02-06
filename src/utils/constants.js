@@ -1,5 +1,11 @@
 export const locales = ["hy", "en", "ru"]
 
+export const prefixes = {
+  'hy': '/hy',
+  'en': '/en',
+  'ru': '/ru'
+}
+
 export const languages = [
   {
     code: "hy",
@@ -15,148 +21,83 @@ export const languages = [
   },
 ]
 
-import { grooms, church, welcome, registration, banquet, cake, afterparty, end } from '../assets/svgs';
+export const localesMap = {
+  hy: "am",
+  en: "gb",
+  ru: "ru",
+}
 
-export const agenda = [
-  {
-    icon: grooms,
-    venueName: {
-      hy: "",
-      en: "Groom's place",
-      ru: ""
-    },
-    time: "",
-    venueLocation: "",
-  },
-  {
-    icon: grooms,
-    venueName: {
-      hy: "",
-      en: "Bride's place",
-      ru: ""
-    },
-    time: "",
-    venueLocation: "",
-  },
-  {
-    icon: church,
-    venueName: {
-      hy: "",
-      en: "Church ceremony",
-      ru: ""
-    },
-    time: "",
-    venueLocation: "",
-  },
-  {
-    icon: welcome,
-    venueName: {
-      hy: "",
-      en: "Welcome Reception",
-      ru: ""
-    },
-    time: "",
-    venueLocation: "",
-  },
-  {
-    icon: registration,
-    venueName: {
-      hy: "",
-      en: "Registration ceremony",
-      ru: ""
-    },
-    time: "",
-    venueLocation: "",
-  },
-  {
-    icon: banquet,
-    venueName: {
-      hy: "",
-      en: "Banquet",
-      ru: ""
-    },
-    time: "",
-    venueLocation: "",
-  },
-  {
-    icon: cake,
-    venueName: {
-      hy: "",
-      en: "Cake Ceremony",
-      ru: ""
-    },
-    time: "",
-    venueLocation: "",
-  },
-  {
-    icon: afterparty,
-    venueName: {
-      hy: "",
-      en: "Afterparty",
-      ru: ""
-    },
-    time: "",
-    venueLocation: "",
-  },
-  {
-    icon: end,
-    venueName: {
-      hy: "",
-      en: "The End",
-      ru: ""
-    },
-    time: "",
-    venueLocation: "",
-  },
-]
+export const days = (difference) => Math.floor(difference / (1000 * 60 * 60 * 24));
+export const hours = (difference) => Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+export const minutes = (difference) => Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+
+export const expired = {
+  days: 0,
+  hours: 0,
+  minutes: 0,
+  seconds: 0,
+  expired: true,
+}
 
 import { enUS, ru, hy } from "react-day-picker/locale";
 
-export const calenarLocales = {
+export const calendarLocales = {
   en: enUS,
   hy: hy,
   ru: ru,
 };
 
-export const steps = {
-  "/": 1,
-  "/customisations": 1,
-  "/details": 2,
-  "/preview": 3,
-  "/confirm": 4,
-};
+export const mainPages = [
+  { path: "/digital-invitations", name: "Digital Invitations" },
+  // { path: "/builder/templates", name: "Digital Invitations" },
+  { path: "/event-vendors", name: "Event Vendors" },
+  { path: "/about-us", name: "About Us" },
+  { path: "/contacts", name: "Contacts" },
+]
 
-export const routes = [
-  { path: "/", name: "themes" },
-  { path: "/customisations", name: "customisations" },
-  { path: "/details", name: "details" },
-  { path: "/preview", name: "preview" },
-  { path: "/confirm", name: "confirm" },
-  { path: "/payment", name: "payment" },
+export const builderPages = [
+  { path: "/builder/templates", name: "themes" },
+  { path: "/builder/customisations", name: "customisations" },
+  { path: "/builder/details", name: "details" },
+  { path: "/builder/preview", name: "preview" },
+  { path: "/builder/confirm", name: "confirm" },
+  { path: "/builder/payment", name: "payment" },
 ];
 
-import allset from '../assets/allset.png'
-import details from '../assets/details.png'
-import preview from '../assets/preview.png'
-import confirm from '../assets/confirm.png'
+export const authPages = ["profile", "invitations", "vendors", "logout"]
+
+export const steps = {
+  "/builder/templates": 1,
+  "/builder/customisations": 2,
+  "/builder/details": 3,
+  "/builder/preview": 4,
+  "/builder/confirm": 5,
+};
+
+export const totalSteps = 4;
+
+import allset from '@/assets/imgs/allset.png'
+import details from '@/assets/imgs/details.png'
+import preview from '@/assets/imgs/preview.png'
+import confirm from '@/assets/imgs/confirm.png'
 
 export const contentMap = {
-  "/": {
+  "/builder/templates": {
     title: "template_title",
     text: "template_text",
     img: allset,
   },
-  "/details": {
+  "/builder/details": {
     title: "details_title",
     text: "details_text",
     img: details,
   },
-  "/preview": {
+  "/builder/preview": {
     title: "preview_title",
     text: "preview_text",
     img: preview,
   },
-  "/confirm": {
+  "/builder/confirm": {
     title: "confirm_title",
     text: "confirm_text",
     img: confirm,
@@ -175,14 +116,14 @@ export const responsive = [
   },
   {
     id: 2,
-    name: "mobile",
-    icon: <Icon>{mobile.icon}</Icon>
+    name: "laptop",
+    icon: <Icon>{laptop.icon}</Icon>
   },
   {
     id: 3,
-    name: "laptop",
-    icon: <Icon>{laptop.icon}</Icon>
-  }
+    name: "mobile",
+    icon: <Icon>{mobile.icon}</Icon>
+  },
 ]
 
 export const styles = [
@@ -213,10 +154,15 @@ export const detailsForm = {
     ru: ""
   },
   mainImages: [],
-  closingText: {
-    hy: "",
-    en: "",
-    ru: ""
+  rsvp: true,
+  // closingText: {
+  //   hy: "",
+  //   en: "",
+  //   ru: ""
+  // },
+  venue: {
+    location: "",
+    link: ""
   },
   timeline: [],
   countDown: true,
@@ -247,9 +193,9 @@ export const detailsForm = {
   languages: []
 }
 
-import visa from "../assets/visa.png";
-import idram from "../assets/idram.png";
-import arca from "../assets/arca.png";
+import visa from "@/assets/imgs/visa.png";
+import idram from "@/assets/imgs/idram.png";
+import arca from "@/assets/imgs/arca.png";
 
 export const paymentMethods = [
   {

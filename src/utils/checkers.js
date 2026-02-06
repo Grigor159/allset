@@ -65,22 +65,22 @@ export const isMenuOpen = (path, pathname, state, child) => {
     return false;
 };
 
-export const isContinueDisabled = (pathname, language, values) => {
+export const isContinueDisabled = (pathname, values) => {
     const rules = [
         {
-            path: `/${language}`,
+            path: `/builder/templates`,
             required: ["template"]
         },
         {
-            path: `/${language}/customisations`,
+            path: `/builder/customisations`,
             required: ["template", "palette"]
         },
         {
-            path: `/${language}/details`,
+            path: `/builder/details`,
             required: ["template", "palette"]
         },
         {
-            path: `/${language}/confirm`,
+            path: `/builder/confirm`,
             required: ["template", "palette", "accept"]
         },
     ];

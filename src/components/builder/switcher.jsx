@@ -1,0 +1,40 @@
+"use client";
+
+import { useId } from "react";
+import { Switch } from "@chakra-ui/react";
+import { Tooltip } from "../ui/tooltip";
+import { useTranslations } from "next-intl";
+
+export const Switcher = ({ checked, onChange }) => {
+  const id = useId();
+
+  const t = useTranslations();
+
+  const handleChange = (e) => {
+    onChange(e);
+  };
+
+  return (
+    <Tooltip
+      ids={{ trigger: id }}
+      positioning={{ placement: "top" }}
+      content={checked ? t("hide") : t("show")}
+    >
+      <Switch.Root
+        ids={{ root: id }}
+        checked={checked}
+        onCheckedChange={handleChange}
+        size="lg"
+        //   colorPalette="pink"
+      >
+        <Switch.HiddenInput />
+        <Switch.Control
+          _checked={{
+            bg: "#004143",
+            borderColor: "#004143",
+          }}
+        />
+      </Switch.Root>
+    </Tooltip>
+  );
+};

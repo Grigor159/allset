@@ -1,3 +1,5 @@
+"use client";
+
 export const scrollToTopWithDuration = (duration) => {
   const start = window.scrollY || document.documentElement.scrollTop;
   const startTime = performance.now();
@@ -17,25 +19,16 @@ export const scrollToTopWithDuration = (duration) => {
   requestAnimationFrame(scrollStep);
 }
 
-export const getLanguage = (pathname) => {
-  const match = pathname.match(/^\/([a-z]{2})/);
-  return match ? match[1] : '';
+import { localesMap } from "./constants";
+export const getFlagCode = (lang) => {
+  return localesMap[lang];
 };
 
-export const getFlagCode = (lang) => {
-  const map = {
-    hy: "am",
-    en: "gb",
-    ru: "ru",
-  };
-  return map[lang] || "un";
-};
 
 import { steps } from "./constants";
-import { pathWithoutLang } from "./formatters";
-
 export const getStepInfo = (pathname) => {
-  const step = steps[pathWithoutLang(pathname)];
+  const step = steps[pathname];
+
   if (!step) return { show: false };
 
   return {
@@ -43,78 +36,27 @@ export const getStepInfo = (pathname) => {
     value: (step / 4) * 100,
     show: true,
   };
-
-  // const step = stepMap[pathWithoutLang(pathname)] || 4;
-  // const valuePerStep = 25;
-  // const value = step * valuePerStep;
-
-  // return { step, value };
 };
 
-import { routes } from "./constants";
-
-// export const getPreviousRoute = (pathname) => {
-//   const language = getLanguage(pathname);
-//   const cleanPath = pathWithoutLang(pathname);
-
-//   const stepRoutes = routes.filter(r =>
-//     ["/", "/customisations", "/details", "/preview", "/confirm"].includes(r.path)
-//   );
-
-//   const index = stepRoutes.findIndex(r => r.path === cleanPath);
-
-//   if (index <= 0) return null;
-
-//   const prevRoute = stepRoutes[index - 1];
-//   return {
-//     path: `/${language}${prevRoute.path}`,
-//     name: prevRoute.name,
-//   };
-// };
-
+import { builderPages } from "./constants";
 export const getPreviousRoute = (pathname) => {
-  const language = getLanguage(pathname);
-  const cleanPath = pathWithoutLang(pathname);
-
-  const index = routes.findIndex(r => r.path === cleanPath);
+  const index = builderPages.findIndex(r => r.path === pathname);
   if (index <= 0) return null;
 
-  const prevRoute = routes[index - 1];
+  const prevRoute = builderPages[index - 1];
   return {
-    path: `/${language}${prevRoute.path}`,
+    path: `${prevRoute.path}`,
     name: prevRoute.name,
   };
 };
 
-// export const getNextRoute = (pathname) => {
-//   const language = getLanguage(pathname);
-//   const cleanPath = pathWithoutLang(pathname);
-
-//   const stepRoutes = routes.filter(r =>
-//     ["/", "/customisations", "/details", "/preview", "/confirm", "/payment"].includes(r.path)
-//   );
-
-//   const index = stepRoutes.findIndex(r => r.path === cleanPath);
-
-//   if (index === -1 || index === stepRoutes.length - 1) return null;
-
-//   const nextRoute = stepRoutes[index + 1];
-//   return {
-//     path: `/${language}${nextRoute.path}`,
-//     name: nextRoute.name,
-//   };
-// };
-
 export const getNextRoute = (pathname) => {
-  const language = getLanguage(pathname);
-  const cleanPath = pathWithoutLang(pathname) || "/";
+  const index = builderPages?.findIndex(r => r.path === pathname);
+  if (index === -1 || index === builderPages.length - 1) return null;
 
-  const index = routes.findIndex(r => r.path === cleanPath);
-  if (index === -1 || index === routes.length - 1) return null;
-
-  const nextRoute = routes[index + 1];
+  const nextRoute = builderPages[index + 1];
   return {
-    path: `/${language}${nextRoute.path}`,
+    path: `${nextRoute.path}`,
     name: nextRoute.name,
   };
 };
@@ -129,11 +71,6 @@ import { localesRegex } from "./regex";
 export const navigateWithLocal = (pathname) =>
   pathname.replace(localesRegex, "")
 
-export const getLanguageKey = (language) => {
-  if (language === "hy") return "am";
-  return language;
-};
-
 export function random(num) {
   return Math.floor(Math.random() * num);
 }
@@ -143,12 +80,12 @@ export function getCurrentYear() {
 }
 
 import cookies from "js-cookie";
-
 export function clearAllSiteCookies() {
   Object.keys(cookies.get()).forEach((cookieName) => {
     cookies.remove(cookieName);
   });
 }
+import { expired, days, hours, minutes } from "./constants";
 
 export function getTimeUntil(fullDate) {
   if (!fullDate) {
@@ -163,23 +100,13 @@ export function getTimeUntil(fullDate) {
   const difference = target - now;
 
   if (difference <= 0) {
-    return {
-      days: 0,
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
-      expired: true,
-    };
+    return expired;
   }
 
-  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-
   return {
-    days,
-    hours,
-    minutes,
+    days: days(difference),
+    hours: hours(difference),
+    minutes: minutes(difference),
     expired: false,
   };
 }
