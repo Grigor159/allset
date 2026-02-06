@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/Grigor%20Safaryan/Desktop/allset/src/app/%5Blocale%5D/client.jsx"],"sourcesContent":["\"use client\";\r\n\r\nimport React from \"react\";\r\n\r\nexport const HomeClient = () => {\r\n  return <div>Home</div>;\r\n};\r\n"],"names":[],"mappings":";;;;;AAEA;AAFA;;;AAIO,MAAM,aAAa;IACxB,qBAAO,kNAAC;kBAAI;;;;;;AACd;KAFa","debugId":null}}]
+}

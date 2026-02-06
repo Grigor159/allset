@@ -1,0 +1,6 @@
+{
+  "/[locale]/builder/customisations/page": "app/[locale]/builder/customisations/page.js",
+  "/[locale]/builder/details/page": "app/[locale]/builder/details/page.js",
+  "/[locale]/builder/preview/page": "app/[locale]/builder/preview/page.js",
+  "/[locale]/builder/templates/page": "app/[locale]/builder/templates/page.js"
+}

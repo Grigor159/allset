@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/Grigor%20Safaryan/Desktop/allset/src/app/%5Blocale%5D/builder/preview/client.jsx"],"sourcesContent":["\"use client\";\r\n\r\nimport { Box } from \"@chakra-ui/react\";\r\n\r\nexport const PreviewClient = () => {\r\n  return (\r\n      <Box maxW=\"1360px\" px={0}>\r\n        preview\r\n      </Box>\r\n  );\r\n};\r\n"],"names":[],"mappings":";;;;;AAEA;AAFA;;;AAIO,MAAM,gBAAgB;IAC3B,qBACI,kNAAC,mNAAG;QAAC,MAAK;QAAS,IAAI;kBAAG;;;;;;AAIhC;KANa","debugId":null}}]
+}
