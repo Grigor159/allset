@@ -1,1 +1,0 @@
-{"version":3,"sources":["turbopack:///[project]/Desktop/allset/src/app/[locale]/client.jsx"],"sourcesContent":["\"use client\";\r\n\r\nimport React from \"react\";\r\n\r\nexport const HomeClient = () => {\r\n  return <div>Home</div>;\r\n};\r\n"],"names":[],"mappings":"wDAEA,EAAA,CAAA,CAAA,2BAE0B,IACjB,CAAA,EAAA,EAAA,GAAA,EAAC,MAAA,UAAI"}

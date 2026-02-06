@@ -11,6 +11,7 @@ package-lock.json
 node_modules
 dist
 dist-ssr
+.next
 *.local
 
 # Environment variables
@@ -26,3 +27,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+

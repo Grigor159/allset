@@ -1,1 +1,0 @@
-(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,13060,e=>{"use strict";var i=e.i(17572),t=e.i(10591);e.s(["PreviewClient",0,()=>(0,i.jsx)(t.Box,{maxW:"1360px",px:0,children:"preview"})])}]);
