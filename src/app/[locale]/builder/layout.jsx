@@ -1,12 +1,16 @@
 "use client";
 
 import React from "react";
+import { usePathname } from "@/i18n/routing";
 import { TopPart } from "@/components/builder/topPart";
 import { BottomPart } from "@/components/builder/bottomPart";
 import { Box, Container } from "@chakra-ui/react";
 import bg from "@/assets/imgs/builder_bg.png";
 
 export default function Layout({ children }) {
+  const pathname = usePathname();
+  console.log(pathname);
+
   return (
     <Box
       bgImage={{ base: `url(${bg.src})` }}
@@ -26,7 +30,7 @@ export default function Layout({ children }) {
       >
         {children}
       </Container>
-      <BottomPart />
+      {!pathname.includes("confirm") && <BottomPart />}
     </Box>
   );
 }

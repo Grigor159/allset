@@ -49,6 +49,8 @@ export function formatDate(date, format = "DD-MM-YYYY") {
       return `${year}-${month}-${day}`;
     case "MM/DD/YYYY":
       return `${month}/${day}/${year}`;
+    case "DD/MM/YYYY":
+      return `${day}/${month}/${year}`;
     default:
       return `${day}-${month}-${year}`;
   }

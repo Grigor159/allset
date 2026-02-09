@@ -20,6 +20,8 @@ import { format } from "date-fns";
 import useOutsideClick from "../../hooks/useOutsideClick";
 
 export const Calendar = ({ name, value, onChange, required }) => {
+  console.log(value);
+
   const ref = useRef();
 
   const t = useTranslations();
@@ -50,13 +52,13 @@ export const Calendar = ({ name, value, onChange, required }) => {
     });
   };
 
-  // const formatted = selected ? formatDate(selected, "DD-MM-YYYY") : "";
+  // const formatted = selected
+  // ? format(selected, "EEEE, MMMM d, yyyy", {
+  //     locale: calendarLocales[language],
+  //   })
+  // : "";
 
-  const formatted = selected
-    ? format(selected, "EEEE, MMMM d, yyyy", {
-        locale: calendarLocales[language],
-      })
-    : "";
+  const formatted = selected ? formatDate(selected, "DD/MM/YYYY") : "";
 
   useOutsideClick(ref, open, setOpen);
 
@@ -76,6 +78,7 @@ export const Calendar = ({ name, value, onChange, required }) => {
             borderRadius={"4px"}
             bg="#F9FAFB"
             h="52px"
+            format="yyyy-MM-dd"
           />
         </InputGroup>
       </Dialog.Trigger>

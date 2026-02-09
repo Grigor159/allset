@@ -6,13 +6,11 @@ import {
   Avatar,
   Button,
   Circle,
-  Flex,
   Float,
   For,
   Menu,
   Portal,
   Show,
-  Spinner,
   Link as ChakraLink,
 } from "@chakra-ui/react";
 import { Link } from "@/i18n/routing";
@@ -78,15 +76,17 @@ export const OAuth = () => {
             </Button>
             <Button
               w="171px"
-              border="1px solid"
-              borderColor="#4B5563"
               // borderColor="#80A0A14D"
               // bg={isLoading ? "#749596" : "#004143"}
               bg={"#004143"}
               color="white"
               fontWeight="400"
               lineHeight="24px"
-              _hover={{ bg: "white", color: "#004143" }}
+              border="1px solid"
+              borderColor="white"
+              boxShadow="xl"
+              _hover={{ bg: "white", color: "#004143", borderColor: "#004143" }}
+              transition="all 0.3s ease"
               loading={isLoading}
               onClick={() =>
                 loginWithPopup({

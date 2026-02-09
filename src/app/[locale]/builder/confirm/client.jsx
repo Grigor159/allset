@@ -5,11 +5,12 @@ import { useState } from "react";
 import apiClient from "@/lib/apiClient";
 import { Box, Container, Stack } from "@chakra-ui/react";
 import { error, success } from "@/components/ui/alerts";
+import { Animate } from "@/components/ui/animate";
 import { TitleDemo } from "@/components/builder/titleDemo";
 import { ConfirmDate } from "@/components/builder/confirmDate";
 import { Promocode } from "@/components/builder/promocode";
 import { Payment } from "@/components/builder/payment";
-import { Legal } from "@/components/builder/legal";
+import { Pay } from "@/components/builder/pay";
 
 export const ConfirmClient = () => {
   const router = useRouter();
@@ -33,24 +34,34 @@ export const ConfirmClient = () => {
   };
 
   return (
-      <Box pt="32px" pb="40px">
-        <Container maxW="1360px" px={0}>
-          <Stack gap="24px" w="748px" mx="auto">
-            <Stack
-              id="confirm"
-              as="form"
-              gap="24px"
-              autoComplete="on"
-              onSubmit={submit}
-            >
+    <Box pt="32px" pb="40px">
+      <Container maxW="1360px" px={0}>
+        <Stack gap="24px" w="748px" mx="auto">
+          <Stack
+            id="confirm"
+            as="form"
+            gap="24px"
+            autoComplete="on"
+            onSubmit={submit}
+          >
+            <Animate>
               <TitleDemo />
+            </Animate>
+            <Animate>
               <ConfirmDate />
-            </Stack>
-            <Promocode />
-            <Payment />
-            <Legal />
+            </Animate>
           </Stack>
-        </Container>
-      </Box>
+          <Animate>
+            <Promocode />
+          </Animate>
+          <Animate>
+            <Payment />
+          </Animate>
+          <Animate>
+            <Pay />
+          </Animate>
+        </Stack>
+      </Container>
+    </Box>
   );
 };

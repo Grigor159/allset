@@ -1,11 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
 import { Field, Flex, HStack, Icon, Stack, Text } from "@chakra-ui/react";
 import { BASE_URL } from "@/lib/config";
 import { Label } from "@/components/ui/typography/label";
-import { LngSwitcher } from "@/components/builder/lngSwitcher";
 import { cleanUrlExtension } from "../../utils/formatters";
 import { copied, copy } from "@/assets/svgs";
 import { Tooltip } from "../ui/tooltip";
