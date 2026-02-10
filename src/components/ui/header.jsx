@@ -30,7 +30,7 @@ export const Header = () => {
       right="0"
       zIndex="100"
       bg="white"
-      boxShadow="sm"
+      // boxShadow="sm"
       py="16px"
       px="0"
     >

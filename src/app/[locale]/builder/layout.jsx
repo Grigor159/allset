@@ -9,7 +9,6 @@ import bg from "@/assets/imgs/builder_bg.png";
 
 export default function Layout({ children }) {
   const pathname = usePathname();
-  console.log(pathname);
 
   return (
     <Box

@@ -15,37 +15,36 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "@/i18n/routing";
 import { authPages } from "@/utils/constants";
+import { fetchToken } from "@/services/auth";
+import { storage } from "@/api/storage";
+import { cookie } from "@/api/cookie";
 
 export const OAuth = () => {
   const t = useTranslations();
-  const { isLoading, user, loginWithPopup, logout } = useAuth0();
+  const { isLoading, user, loginWithPopup, logout, getAccessTokenSilently } =
+    useAuth0();
+
+  const handleLogin = async () => {
+    await loginWithPopup();
+    await fetchToken(getAccessTokenSilently);
+  };
+
+  const handleSignup = async () => {
+    await loginWithPopup({
+      authorizationParams: {
+        screen_hint: "signup",
+      },
+    });
+    await fetchToken(getAccessTokenSilently);
+  };
+
+  const handleLogout = () => {
+    logout();
+    cookie.remove("access_token")
+  };
 
   return (
     <Menu.Root>
-      {/* <Menu.Trigger asChild>
-        <Button variant="plain" p={0}>
-          <Show
-            when={user}
-            fallback={
-              isLoading ? (
-                <Spinner />
-              ) : (
-                <Button variant="outline" onClick={loginWithPopup}>
-                  Login
-                </Button>
-              )
-            }
-          >
-              <Avatar.Root size="xs">
-                <Avatar.Fallback name={user?.given_name} />
-                <Avatar.Image src={user?.picture || ""} />
-                <Float>
-                  <Circle size="2" bg="green" />
-                </Float>
-              </Avatar.Root>
-          </Show>
-        </Button>
-      </Menu.Trigger> */}
       <Menu.Trigger asChild>
         {user ? (
           <Button variant="plain" p="0">
@@ -62,22 +61,17 @@ export const OAuth = () => {
           <>
             <Button
               w="60px"
-              // variant={"plain"}
               variant="ghost"
-              // bg={isLoading ? "#749596" : "#004143"}
               color="#004143"
               fontWeight="400"
               lineHeight="24px"
-              // _hover={{ border: "1px solid", borderColor: "#004143" }}
               loading={isLoading}
-              onClick={loginWithPopup}
+              onClick={handleLogin}
             >
               {t("login")}
             </Button>
             <Button
               w="171px"
-              // borderColor="#80A0A14D"
-              // bg={isLoading ? "#749596" : "#004143"}
               bg={"#004143"}
               color="white"
               fontWeight="400"
@@ -88,13 +82,7 @@ export const OAuth = () => {
               _hover={{ bg: "white", color: "#004143", borderColor: "#004143" }}
               transition="all 0.3s ease"
               loading={isLoading}
-              onClick={() =>
-                loginWithPopup({
-                  authorizationParams: {
-                    screen_hint: "signup",
-                  },
-                })
-              }
+              onClick={handleSignup}
             >
               {t("signup")}
             </Button>
@@ -111,7 +99,7 @@ export const OAuth = () => {
                   <Menu.Item key={el}>
                     {el === "logout" ? (
                       <ChakraLink
-                        onClick={logout}
+                        onClick={handleLogout}
                         bg="white"
                         color="#4B5563"
                         fontWeight="400"
