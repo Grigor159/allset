@@ -111,6 +111,39 @@ export function getTimeUntil(fullDate) {
   };
 }
 
-export const currentYear = new Date().getFullYear();
+//
+import profile_bg from "@/assets/imgs/profile_bg.png";
+import invitations_bg from "@/assets/imgs/invitations_bg.png";
 
-export const today = new Date();
+export function getAuthBg(pathname) {
+  if (pathname?.includes("profile")) {
+    return `url(${profile_bg.src})`
+  } else {
+    return `url(${invitations_bg.src})`
+  }
+}
+
+export function getAuthBgSize(pathname) {
+  if (pathname?.includes("profile")) {
+    return "contain"
+  } else {
+    return "cover"
+  }
+}
+
+export function getAuthBgPos(pathname) {
+  if (pathname?.includes("profile")) {
+    return "right"
+  } else {
+    return "center"
+  }
+}
+
+
+export function getAuthTitle(pathname) {
+  if (pathname?.includes("profile")) {
+    return "profile"
+  } else {
+    return "invitations"
+  }
+}

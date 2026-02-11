@@ -31,6 +31,10 @@ export const days = (difference) => Math.floor(difference / (1000 * 60 * 60 * 24
 export const hours = (difference) => Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 export const minutes = (difference) => Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
 
+export const currentYear = new Date().getFullYear();
+
+export const today = new Date();
+
 export const expired = {
   days: 0,
   hours: 0,
@@ -204,6 +208,21 @@ export const paymentMethods = [
   {
     value: "idram",
     src: idram,
+  },
+]
+
+export const invitationTabs = [
+  {
+    id: 1,
+    name: "active"
+  },
+  {
+    id: 2,
+    name: "drafts"
+  },
+  {
+    id: 3,
+    name: "expired"
   },
 ]
 

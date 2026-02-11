@@ -14,9 +14,7 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
 import { calendar } from "../../assets/svgs";
 import { formatDate } from "../../utils/formatters";
-import { currentYear, today } from "../../utils/helpers";
-import { calendarLocales } from "../../utils/constants";
-import { format } from "date-fns";
+import { calendarLocales, currentYear, today } from "../../utils/constants";
 import useOutsideClick from "../../hooks/useOutsideClick";
 
 export const Calendar = ({ name, value, onChange, required }) => {

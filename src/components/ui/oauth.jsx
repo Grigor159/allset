@@ -13,14 +13,15 @@ import {
   Show,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-import { Link } from "@/i18n/routing";
+import { Link, usePathname } from "@/i18n/routing";
 import { authPages } from "@/utils/constants";
 import { fetchToken } from "@/services/auth";
-import { storage } from "@/api/storage";
 import { cookie } from "@/api/cookie";
 
 export const OAuth = () => {
   const t = useTranslations();
+  const pathname = usePathname();
+
   const { isLoading, user, loginWithPopup, logout, getAccessTokenSilently } =
     useAuth0();
 
@@ -40,7 +41,7 @@ export const OAuth = () => {
 
   const handleLogout = () => {
     logout();
-    cookie.remove("access_token")
+    cookie.remove("access_token");
   };
 
   return (
@@ -95,42 +96,49 @@ export const OAuth = () => {
           <Show when={user}>
             <Menu.Content w="auto" minW="unset" autoFocus={false}>
               <For each={authPages}>
-                {(el) => (
-                  <Menu.Item key={el}>
-                    {el === "logout" ? (
-                      <ChakraLink
-                        onClick={handleLogout}
-                        bg="white"
-                        color="#4B5563"
-                        fontWeight="400"
-                        fontSize="14px"
-                        borderRadius="8px"
-                        lineHeight="24px"
-                        w="100%"
-                        display="flex"
-                        justifyContent="center"
-                      >
-                        {t("logout")}
-                      </ChakraLink>
-                    ) : (
-                      <ChakraLink
-                        as={Link}
-                        href={`/auth/${el}`}
-                        bg="white"
-                        color="#4B5563"
-                        fontWeight="400"
-                        fontSize="14px"
-                        borderRadius="8px"
-                        lineHeight="24px"
-                        w="100%"
-                        display="flex"
-                        justifyContent="center"
-                      >
-                        {t(el)}
-                      </ChakraLink>
-                    )}
-                  </Menu.Item>
-                )}
+                {(el) => {
+                  const isActive = pathname?.includes(el);
+
+                  return (
+                    <Menu.Item key={el}>
+                      {el === "logout" ? (
+                        <ChakraLink
+                          onClick={handleLogout}
+                          bg="white"
+                          color="#4B5563"
+                          fontWeight="400"
+                          fontSize="14px"
+                          borderRadius="8px"
+                          lineHeight="24px"
+                          w="100%"
+                          display="flex"
+                          justifyContent="center"
+                        >
+                          {t("logout")}
+                        </ChakraLink>
+                      ) : (
+                        <ChakraLink
+                          as={Link}
+                          outline={"none"}
+                          textDecoration={isActive && "underline"}
+                          href={`/auth/${el}`}
+                          bg="white"
+                          color={isActive ? "#013220" :"#4B5563"}
+                          fontWeight="400"
+                          fontSize="14px"
+                          borderRadius="8px"
+                          // p="5px"
+                          lineHeight="24px"
+                          w="100%"
+                          display="flex"
+                          justifyContent="center"
+                        >
+                          {t(el)}
+                        </ChakraLink>
+                      )}
+                    </Menu.Item>
+                  );
+                }}
               </For>
             </Menu.Content>
           </Show>
