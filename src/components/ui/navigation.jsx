@@ -3,20 +3,22 @@
 import { Link, usePathname } from "@/i18n/routing";
 import { mainPages } from "@/utils/constants";
 import { Flex, For, Link as ChakraLink } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 
 export const Navigation = () => {
+  const t = useTranslations();
   const pathname = usePathname();
 
   return (
     <Flex gap="20px">
       <For each={mainPages}>
-        {({ name, path }) => {
-          const isActive = pathname === `/${path}`;
+        {(el) => {
+          const isActive = pathname === `/${el}`;
 
           return (
             <ChakraLink
-              href={path}
-              key={name}
+              href={`/${el}`}
+              key={el}
               as={Link}
               borderBottom={isActive ? "2px solid #013220" : "none"}
               color="#013220"
@@ -25,7 +27,7 @@ export const Navigation = () => {
               borderRadius="0"
               w="fit-content"
             >
-              {name}
+              {t(el)}
             </ChakraLink>
           );
         }}

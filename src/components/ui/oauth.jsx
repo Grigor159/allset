@@ -15,33 +15,48 @@ import {
 } from "@chakra-ui/react";
 import { Link, usePathname } from "@/i18n/routing";
 import { authPages } from "@/utils/constants";
-import { fetchToken } from "@/services/auth";
+// import { fetchToken } from "@/services/auth";
 import { cookie } from "@/api/cookie";
+import { error } from "./alerts";
 
 export const OAuth = () => {
   const t = useTranslations();
   const pathname = usePathname();
 
-  const { isLoading, user, loginWithPopup, logout, getAccessTokenSilently } =
-    useAuth0();
+  const { isLoading, user, loginWithPopup, logout } = useAuth0();
+
+  // const fetchToken = async () => {
+  //   try {
+  //     const token = await getAccessTokenWithPopup({
+  //       audience: process.env.NEXT_PUBLIC_AUTH0_AUDIENCE,
+  //       scope: "admin",
+  //     });
+  //     cookie.set("access_token", token);
+  //   } catch (err) {
+  //     error(err);
+  //   }
+  // };
 
   const handleLogin = async () => {
-    await loginWithPopup();
-    await fetchToken(getAccessTokenSilently);
+    try {
+      await loginWithPopup();
+    } catch (err) {
+      error(err);
+    }
   };
 
   const handleSignup = async () => {
-    await loginWithPopup({
-      authorizationParams: {
-        screen_hint: "signup",
-      },
-    });
-    await fetchToken(getAccessTokenSilently);
+    try {
+      await loginWithPopup({
+        authorizationParams: { screen_hint: "signup" },
+      });
+    } catch (err) {
+      error(err);
+    }
   };
 
   const handleLogout = () => {
     logout();
-    cookie.remove("access_token");
   };
 
   return (
@@ -123,7 +138,7 @@ export const OAuth = () => {
                           textDecoration={isActive && "underline"}
                           href={`/auth/${el}`}
                           bg="white"
-                          color={isActive ? "#013220" :"#4B5563"}
+                          color={isActive ? "#013220" : "#4B5563"}
                           fontWeight="400"
                           fontSize="14px"
                           borderRadius="8px"

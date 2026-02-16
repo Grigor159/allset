@@ -1,26 +1,56 @@
 "use client";
 
 import React from "react";
-import { Avatar, HStack, Spinner, Stack, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  HStack,
+  Stack,
+  Text,
+  Image,
+  Flex,
+  SkeletonCircle,
+  SkeletonText,
+} from "@chakra-ui/react";
+import premium from "@/assets/imgs/premium.png";
 
 export const Me = ({ isLoading, user }) => {
-  if (isLoading) {
-    return <Spinner size="xl" color="#004143" />;
-  }
-
   return (
     <HStack py="16px" gap="30px">
-      <Avatar.Root w="124px" h="124px">
-        <Avatar.Fallback name={user?.given_name} />
-        <Avatar.Image src={user?.picture || ""} />
-      </Avatar.Root>
+      {isLoading ? (
+        <SkeletonCircle w="124px" h="124px" />
+      ) : (
+        <Avatar.Root w="124px" h="124px">
+          <Avatar.Fallback name={user?.given_name} />
+          <Avatar.Image src={user?.picture || ""} />
+        </Avatar.Root>
+      )}
 
-      <Stack gap="4px">
-        <Text fontSize={"20px"} color={"#4B5563"} fontWeight="500">
-          {user?.name}
-        </Text>
-        <Text>{user?.email}</Text>
-      </Stack>
+      {isLoading ? (
+        <SkeletonText w="200px" height="7" noOfLines={3} />
+      ) : (
+        <Stack gap="4px">
+          <Text fontSize={"20px"} color={"#4B5563"} fontWeight="500">
+            {user?.name}
+          </Text>
+          <Text>{user?.email}</Text>
+
+          <Flex
+            w="158px"
+            align={"center"}
+            justify={"center"}
+            borderRadius={"30px"}
+            border={"1px solid"}
+            borderColor={"#E38D83"}
+            py="8px"
+            mt={"9px"}
+          >
+            <Image src={premium.src} w="21px" h="21px" />
+            <Text fontSize={"14px"} fontWeight={"500"} color={"#E38D83"}>
+              Premium user
+            </Text>
+          </Flex>
+        </Stack>
+      )}
     </HStack>
   );
 };

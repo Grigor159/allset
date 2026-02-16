@@ -11,12 +11,13 @@ import { Opt } from "@/components/auth/opt";
 
 export const ProfileClient = () => {
   const { isLoading, user } = useAuth0();
+console.log(user);
 
   return (
     <Stack gap="16px">
       <Me isLoading={isLoading} user={user} />
       <Flex w="100%" gap="16px" justify={"space-between"}>
-        <MyInfo user={user} />
+        <MyInfo isLoading={isLoading} user={user} />
         <Stack w="100%" gap="16px">
           <Promocode />
           <Opt />

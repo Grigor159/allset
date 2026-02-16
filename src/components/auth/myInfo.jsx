@@ -1,9 +1,11 @@
 "use client";
 
 import React from "react";
-import { Field, Input, Stack, Text } from "@chakra-ui/react";
+import { Field, Input, Skeleton, Stack, Text } from "@chakra-ui/react";
 
-export const MyInfo = ({ user }) => {
+export const MyInfo = ({ isLoading, user }) => {
+  if (isLoading) return <Skeleton w="672px" h="394px" borderRadius={"8px"}/>;
+
   return (
     <Stack borderRadius="8px" bg="white" p="24px" gap="16px">
       <Text fontSize={"16px"} color={"#4B5563"} fontWeight={"500"}>

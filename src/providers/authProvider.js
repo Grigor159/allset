@@ -8,8 +8,12 @@ export function AuthProvider({ children }) {
             domain={process.env.NEXT_PUBLIC_DOMAIN}
             clientId={process.env.NEXT_PUBLIC_CLIENT_ID}
             authorizationParams={{
-                redirect_uri: window.location.origin,
-            }}>
+                redirect_uri: typeof window !== "undefined" && `${window.location.origin}/en`,
+                // redirect_uri: typeof window !== "undefined" && window.location.origin,
+                // audience: process.env.NEXT_PUBLIC_AUTH0_AUDIENCE,
+                // scope: "openid profile email admin"
+            }}
+        >
             {children}
         </Auth0Provider>
     )

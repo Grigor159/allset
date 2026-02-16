@@ -52,11 +52,12 @@ export const calendarLocales = {
 };
 
 export const mainPages = [
-  { path: "/digital-invitations", name: "Digital Invitations" },
-  // { path: "/builder/templates", name: "Digital Invitations" },
-  { path: "/event-vendors", name: "Event Vendors" },
-  { path: "/about-us", name: "About Us" },
-  { path: "/contacts", name: "Contacts" },
+  // { path: "/digital-invitations", name: "digital-invitations" },
+  // { path: "/favorite-vendors", name: "favorite-vendors" },
+  // { path: "/about-us", name: "about" },
+  // { path: "/contacts", name: "contacts" },
+
+  "digital-invitations", "event-vendors", "about-us", "contacts"
 ]
 
 export const builderPages = [
@@ -68,7 +69,7 @@ export const builderPages = [
   { path: "/builder/payment", name: "payment" },
 ];
 
-export const authPages = ["profile", "invitations", "vendors", "logout"]
+export const authPages = ["profile", "invitations", "favorite-vendors", "logout"]
 
 export const steps = {
   "/builder/templates": 1,

@@ -61,7 +61,7 @@ export const Payment = () => {
                   bg="#F9FAFB"
                   br="4px"
                 >
-                  <Image src={src.src} />
+                  <Image src={src.src} alt="img"/>
                 </Flex>
                 {/* <RadioGroup.ItemText>{value}</RadioGroup.ItemText> */}
               </RadioGroup.Item>

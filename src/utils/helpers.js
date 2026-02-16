@@ -118,7 +118,7 @@ import invitations_bg from "@/assets/imgs/invitations_bg.png";
 export function getAuthBg(pathname) {
   if (pathname?.includes("profile")) {
     return `url(${profile_bg.src})`
-  } else {
+  } else if ((pathname?.includes("invitations"))) {
     return `url(${invitations_bg.src})`
   }
 }
@@ -126,7 +126,7 @@ export function getAuthBg(pathname) {
 export function getAuthBgSize(pathname) {
   if (pathname?.includes("profile")) {
     return "contain"
-  } else {
+  } else if ((pathname?.includes("invitations"))) {
     return "cover"
   }
 }
@@ -134,7 +134,7 @@ export function getAuthBgSize(pathname) {
 export function getAuthBgPos(pathname) {
   if (pathname?.includes("profile")) {
     return "right"
-  } else {
+  } else if ((pathname?.includes("invitations"))) {
     return "center"
   }
 }
@@ -143,7 +143,9 @@ export function getAuthBgPos(pathname) {
 export function getAuthTitle(pathname) {
   if (pathname?.includes("profile")) {
     return "profile"
-  } else {
+  } else if ((pathname?.includes("invitations"))) {
     return "invitations"
+  } else {
+    return "favorite-vendors"
   }
 }
