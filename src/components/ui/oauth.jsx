@@ -15,49 +15,12 @@ import {
 } from "@chakra-ui/react";
 import { Link, usePathname } from "@/i18n/routing";
 import { authPages } from "@/utils/constants";
-// import { fetchToken } from "@/services/auth";
-import { cookie } from "@/api/cookie";
-import { error } from "./alerts";
 
 export const OAuth = () => {
   const t = useTranslations();
   const pathname = usePathname();
 
   const { isLoading, user, loginWithPopup, logout } = useAuth0();
-
-  // const fetchToken = async () => {
-  //   try {
-  //     const token = await getAccessTokenWithPopup({
-  //       audience: process.env.NEXT_PUBLIC_AUTH0_AUDIENCE,
-  //       scope: "admin",
-  //     });
-  //     cookie.set("access_token", token);
-  //   } catch (err) {
-  //     error(err);
-  //   }
-  // };
-
-  const handleLogin = async () => {
-    try {
-      await loginWithPopup();
-    } catch (err) {
-      error(err);
-    }
-  };
-
-  const handleSignup = async () => {
-    try {
-      await loginWithPopup({
-        authorizationParams: { screen_hint: "signup" },
-      });
-    } catch (err) {
-      error(err);
-    }
-  };
-
-  const handleLogout = () => {
-    logout();
-  };
 
   return (
     <Menu.Root>
@@ -82,7 +45,7 @@ export const OAuth = () => {
               fontWeight="400"
               lineHeight="24px"
               loading={isLoading}
-              onClick={handleLogin}
+              onClick={loginWithPopup}
             >
               {t("login")}
             </Button>
@@ -98,7 +61,11 @@ export const OAuth = () => {
               _hover={{ bg: "white", color: "#004143", borderColor: "#004143" }}
               transition="all 0.3s ease"
               loading={isLoading}
-              onClick={handleSignup}
+              onClick={() =>
+                loginWithPopup({
+                  authorizationParams: { screen_hint: "signup" },
+                })
+              }
             >
               {t("signup")}
             </Button>
@@ -118,7 +85,7 @@ export const OAuth = () => {
                     <Menu.Item key={el}>
                       {el === "logout" ? (
                         <ChakraLink
-                          onClick={handleLogout}
+                          onClick={logout}
                           bg="white"
                           color="#4B5563"
                           fontWeight="400"

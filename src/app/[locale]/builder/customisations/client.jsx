@@ -16,7 +16,7 @@ export const CustomisationsClient = () => {
 
   const selectedTemplate = data?.find((item) => item.id === template) || [];
 
-  if (!selectedTemplate) return <Loader />;
+  // if (!selectedTemplate) return <Loader />;
 
   return (
     <Flex position={"relative"} pt="32px" pb="54px" gap={"24px"}>

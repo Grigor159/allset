@@ -66,7 +66,7 @@
     "days": "Days",
     "hours": "Hours",
     "minutes": "Minutes",
-    "expired": "Expired date",
+    "expired_date": "Expired date",
     "name": "Name (Optional)",
     "phone": "Phone (Optional)",
     "email": "Email (Optional)",
@@ -101,5 +101,8 @@
     "and": "and ",
     "hide": "Hide",
     "show": "Show",
-    "top": "Top"
+    "top": "Top",
+    "active": "Active",
+    "drafts": "Drafts",
+    "expired": "Expired"
 }

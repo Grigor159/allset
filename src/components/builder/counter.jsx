@@ -63,7 +63,7 @@ export const Counter = ({ name, value, hide, required }) => {
 
           {remaining?.expired && (
             <Text textStyle="sm" color="#6B7280">
-              {t("expired")}
+              {t("expired_date")}
             </Text>
           )}
         </Show>

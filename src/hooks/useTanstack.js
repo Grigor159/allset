@@ -1,34 +1,52 @@
 "use client";
 
 import { useQuery, useMutation } from "@tanstack/react-query";
-import apiClient from "@/lib/apiClient";
-// import { getAxiosConfig } from "@/lib/config";
 import { useAuth0 } from "@auth0/auth0-react";
+import apiClient from "@/lib/apiClient";
 
-export const useGetTanstack = (name, scope) => {
-    const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+export const useGetTanstack = (name) => {
+    return useQuery({
+        queryKey: [name],
+        queryFn: async () => {
+            const { data } = await apiClient.get(`${name}`);
+            return data;
+        },
+    });
+};
+
+export const useGetAuthTanstack = (name) => {
+    const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
 
     return useQuery({
         queryKey: [name],
-        // queryFn: async () => {
-        //     const config = getAxiosConfig()
-        //     const { data } = await apiClient.get(`${name}`, config);
-        //     return data;
-        // },
         queryFn: async () => {
             if (!isAuthenticated) throw new Error("User not authenticated");
 
             const token = await getAccessTokenSilently({
                 audience: process.env.NEXT_PUBLIC_API_AUDIENCE,
-                scope: `get:${scope}`
+                // scope: "profile email openid"
             });
+
+            const tokenParts = token.split('.');
+            if (tokenParts.length === 3) {
+                const payload = JSON.parse(atob(tokenParts[1]));
+                console.log('Token payload:', payload);
+                console.log('Token audience:', payload.aud);
+                console.log('Token scopes:', payload.scope);
+            }
+
+            console.log('Token being sent:', token.substring(0, 50) + '...');
+
+            console.log(token);
 
             const { data } = await apiClient.get(name, {
                 headers: { Authorization: `Bearer ${token}` },
+                // headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}` },
             });
 
             return data;
         },
+        enabled: !isLoading && isAuthenticated,
     });
 };
 
