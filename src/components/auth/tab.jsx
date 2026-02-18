@@ -5,7 +5,6 @@ import { For, Tabs } from "@chakra-ui/react";
 import { invitationTabs } from "@/utils/constants";
 import { Link } from "@/i18n/routing";
 
-
 export const Tab = () => {
   return (
     <Tabs.Root defaultValue="active" variant="enclosed" width="full" isFitted>

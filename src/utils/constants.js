@@ -60,52 +60,46 @@ export const mainPages = [
   "digital-invitations", "event-vendors", "about-us", "contacts"
 ]
 
-export const builderPages = [
-  { path: "/builder/templates", name: "themes" },
-  { path: "/builder/customisations", name: "customisations" },
-  { path: "/builder/details", name: "details" },
-  { path: "/builder/preview", name: "preview" },
-  { path: "/builder/confirm", name: "confirm" },
-  { path: "/builder/payment", name: "payment" },
+export const socialPages = ["policies/privacy-policy", "policies/terms-of-service", "tech", "blog"]
+
+export const buildPages = [
+  { path: "/build/templates", name: "themes" },
+  { path: "/build/customisations", name: "customisations" },
+  { path: "/build/details", name: "details" },
+  { path: "/build/preview", name: "preview" },
+  { path: "/build/confirm", name: "confirm" },
+  { path: "/build/payment", name: "payment" },
 ];
 
 export const authPages = ["profile", "invitations", "favorite-vendors", "logout"]
 
 export const steps = {
-  "/builder/templates": 1,
-  "/builder/customisations": 2,
-  "/builder/details": 3,
-  "/builder/preview": 4,
-  "/builder/confirm": 5,
+  "/build/templates": 1,
+  "/build/customisations": 2,
+  "/build/details": 3,
+  "/build/preview": 4,
+  "/build/confirm": 5,
 };
 
 export const totalSteps = 4;
 
-import allset from '@/assets/imgs/allset.png'
-import details from '@/assets/imgs/details.png'
-import preview from '@/assets/imgs/preview.png'
-import confirm from '@/assets/imgs/confirm.png'
 
 export const contentMap = {
-  "/builder/templates": {
+  "/build/templates": {
     title: "template_title",
     text: "template_text",
-    img: allset,
   },
-  "/builder/details": {
+  "/build/details": {
     title: "details_title",
     text: "details_text",
-    img: details,
   },
-  "/builder/preview": {
+  "/build/preview": {
     title: "preview_title",
     text: "preview_text",
-    img: preview,
   },
-  "/builder/confirm": {
+  "/build/confirm": {
     title: "confirm_title",
     text: "confirm_text",
-    img: confirm,
   },
 };
 
@@ -224,6 +218,35 @@ export const invitationTabs = [
   {
     id: 3,
     name: "expired"
+  },
+]
+
+import { fb, insta, twitter, youtube, tiktok, pinterest } from "../assets/svgs";
+
+export const social = [
+  {
+    href: "https://",
+    icon: fb
+  },
+  {
+    href: "https://",
+    icon: insta
+  },
+  {
+    href: "https://",
+    icon: twitter
+  },
+  {
+    href: "https://",
+    icon: youtube
+  },
+  {
+    href: "https://",
+    icon: tiktok
+  },
+  {
+    href: "https://",
+    icon: pinterest
   },
 ]
 

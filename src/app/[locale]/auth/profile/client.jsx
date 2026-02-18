@@ -2,12 +2,12 @@
 
 import React from "react";
 import { Flex, Stack } from "@chakra-ui/react";
-import { Me } from "@/components/auth/me";
-import { MyInfo } from "@/components/auth/myInfo";
-import { Promocode } from "@/components/auth/promocode";
+import { Me } from "@/components/auth/profile/me";
+import { MyInfo } from "@/components/auth/profile/myInfo";
+import { Promocode } from "@/components/auth/profile/promocode";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Referal } from "@/components/auth/referal";
-import { Opt } from "@/components/auth/opt";
+import { Referal } from "@/components/auth/profile/referal";
+import { Opt } from "@/components/auth/profile/opt";
 
 export const ProfileClient = () => {
   const { isLoading, user } = useAuth0();

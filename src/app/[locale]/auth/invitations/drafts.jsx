@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Flex, For, Skeleton } from "@chakra-ui/react";
-import { NoActive } from "@/components/auth/noActive";
+import { Empty } from "@/components/auth/invitations/empty";
 import { isNotEmptyArray } from "@/utils/checkers";
 
 export default function Drafts({ isLoading, data }) {
@@ -15,6 +15,6 @@ export default function Drafts({ isLoading, data }) {
       <For each={data}>{(el, index) => <></>}</For>
     </Flex>
   ) : (
-    <NoActive />
+    <Empty />
   );
 }

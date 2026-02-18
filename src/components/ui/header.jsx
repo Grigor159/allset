@@ -1,6 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { usePathname } from "@/i18n/routing";
+import { useEffect, useState } from "react";
 import {
   Box,
   Container,
@@ -11,14 +13,25 @@ import {
 import { Link } from "@/i18n/routing";
 // import { Steps } from "./steps";
 // import { Language } from "../globals/language";
-import { OAuth } from "./oauth";
+import { OAuth } from "../public/oauth";
 import logo from "@/assets/imgs/allset.png";
-import { Language } from "./language";
-import { Navigation } from "./navigation";
+import { Language } from "../public/language";
+import { Navigation } from "../public/navigation";
 // import { Navigation } from "../globals/navigation";
 
 export const Header = () => {
   const t = useTranslations();
+  // const [scrolled, setScrolled] = useState(false);
+
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     setScrolled(window.scrollY > 0);
+  //   };
+
+  //   handleScroll();
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
 
   return (
     <Box
@@ -29,6 +42,8 @@ export const Header = () => {
       left="0"
       right="0"
       zIndex="100"
+      // bg={scrolled ? "white" : "#f6f6f7"}
+      // transition="background 0.2s ease"
       bg="white"
       // boxShadow="sm"
       py="16px"

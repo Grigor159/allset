@@ -68,19 +68,19 @@ export const isMenuOpen = (path, pathname, state, child) => {
 export const isContinueDisabled = (pathname, values) => {
     const rules = [
         {
-            path: `/builder/templates`,
+            path: `/build/templates`,
             required: ["template"]
         },
         {
-            path: `/builder/customisations`,
+            path: `/build/customisations`,
             required: ["template", "palette"]
         },
         {
-            path: `/builder/details`,
+            path: `/build/details`,
             required: ["template", "palette"]
         },
         {
-            path: `/builder/confirm`,
+            path: `/build/confirm`,
             required: ["template", "palette", "accept"]
         },
     ];

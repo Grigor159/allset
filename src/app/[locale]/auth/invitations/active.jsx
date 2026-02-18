@@ -2,8 +2,8 @@
 
 import React from "react";
 import { Flex, For, Skeleton } from "@chakra-ui/react";
-import { NoActive } from "@/components/auth/noActive";
-import { ActiveCard } from "@/components/auth/activeCard";
+import { Empty } from "@/components/auth/invitations/empty";
+import { Card } from "@/components/auth/invitations/card";
 import { isNotEmptyArray } from "@/utils/checkers";
 
 export default function Active({ isLoading, data }) {
@@ -13,9 +13,9 @@ export default function Active({ isLoading, data }) {
 
   return isNotEmptyArray(data) ? (
     <Flex justify={"space-between"} gap="44px" flexWrap={"wrap"}>
-      <For each={data}>{(el, index) => <ActiveCard key={index} el={el} />}</For>
+      <For each={data}>{(el, index) => <Card key={index} el={el} />}</For>
     </Flex>
   ) : (
-    <NoActive />
+    <Empty />
   );
 }
