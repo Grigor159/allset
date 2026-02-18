@@ -22,26 +22,14 @@ export const useGetAuthTanstack = (name) => {
         queryFn: async () => {
             if (!isAuthenticated) throw new Error("User not authenticated");
 
-            const token = await getAccessTokenSilently({
-                audience: process.env.NEXT_PUBLIC_API_AUDIENCE,
-                // scope: "profile email openid"
-            });
-
-            const tokenParts = token.split('.');
-            if (tokenParts.length === 3) {
-                const payload = JSON.parse(atob(tokenParts[1]));
-                console.log('Token payload:', payload);
-                console.log('Token audience:', payload.aud);
-                console.log('Token scopes:', payload.scope);
-            }
-
-            console.log('Token being sent:', token.substring(0, 50) + '...');
-
-            console.log(token);
+            // const token = await getAccessTokenSilently({
+            //     audience: process.env.NEXT_PUBLIC_API_AUDIENCE,
+            //     // scope: "profile email openid"
+            // });
+            const token = await getAccessTokenSilently();
 
             const { data } = await apiClient.get(name, {
                 headers: { Authorization: `Bearer ${token}` },
-                // headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}` },
             });
 
             return data;
