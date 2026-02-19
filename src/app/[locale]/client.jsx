@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Box, Container } from "@chakra-ui/react";
+import { Animate } from "@/components/ui/animate";
 import { Faqs } from "@/components/public/faqs";
 
 export const HomeClient = () => {
@@ -125,7 +126,9 @@ export const HomeClient = () => {
           nihil pariatur voluptates dolores. Asperiores error corrupti soluta
           exercitationem, aliquam ipsum omnis modi?
         </p> */}
-        <Faqs />
+        <Animate>
+          <Faqs />
+        </Animate>
       </Container>
     </Box>
   );
