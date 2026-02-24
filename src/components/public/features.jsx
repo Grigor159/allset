@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
-import { Stack, Container, For, Box, Flex, Text, Span } from "@chakra-ui/react";
+import { Stack, Container, For, Flex, Text, Span } from "@chakra-ui/react";
 import bg from "@/assets/imgs/features_bg.png";
 import { Title } from "./typography/title";
 import { SubTitle } from "./typography/subTitle";
@@ -10,6 +10,7 @@ import { features } from "@/utils/constants";
 
 export const Features = () => {
   const t = useTranslations();
+
   return (
     <Stack
       bgImage={`url(${bg.src})`}
