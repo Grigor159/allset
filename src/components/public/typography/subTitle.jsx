@@ -1,0 +1,24 @@
+"use client";
+
+import React from "react";
+import { useTranslations } from "next-intl";
+import { Heading } from "@chakra-ui/react";
+
+export const SubTitle = ({ text, color }) => {
+  console.log(color);
+  
+  const t = useTranslations();
+
+  return (
+    <Heading
+      as="h4"
+      fontSize={"23px"}
+      lineHeight={"36px"}
+      fontStyle={"italic"}
+      fontWeight={400}
+      color={color ?? "#AC8A5F"}
+    >
+      {t(text)}
+    </Heading>
+  );
+};

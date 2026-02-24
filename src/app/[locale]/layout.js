@@ -8,6 +8,7 @@ import { Header } from "@/components/ui/header";
 import { ScrollToTop } from "@/components/ui/scrollToTop";
 import { Scroll } from "@/components/ui/scroll";
 import "../index.css";
+import { Footer } from "@/components/public/footer";
 
 export default async function RootLayout({ children, params }) {
   const { locale } = params;
@@ -81,6 +82,7 @@ export default async function RootLayout({ children, params }) {
                   <Scroll>
                     {children}
                   </Scroll>
+                  <Footer/>
                   <ScrollToTop />
                 </NextIntlClientProvider>
               </NuqsProvider>

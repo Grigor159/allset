@@ -17,7 +17,7 @@ export function truncateText(text, maxLength, suffix = "...") {
 
 export function formatUrl(url) {
   const oldBase = "http://localhost:8080";
-  const newBase = "https://allset-bxuk.onrender.com";
+  const newBase = process.env.NEXT_PUBLIC_API_DEV?.slice(0, -1);
 
   if (url.startsWith(oldBase)) {
     return url.replace(oldBase, newBase);
@@ -49,6 +49,8 @@ export function formatDate(date, format = "DD-MM-YYYY") {
       return `${year}-${month}-${day}`;
     case "MM/DD/YYYY":
       return `${month}/${day}/${year}`;
+    case "DD/MM/YYYY":
+      return `${day}/${month}/${year}`;
     default:
       return `${day}-${month}-${year}`;
   }
@@ -70,3 +72,13 @@ export const generateAgendaKey = (text) => {
     .replace(/[^a-z0-9]+/g, "_")
     .replace(/^_+|_+$/g, "");
 };
+
+export const formatDDMMYYYY = (date) => {
+  const d = new Date(date);
+
+  const day = String(d.getDate()).padStart(2, "0");
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const year = d.getFullYear();
+
+  return `${day}.${month}.${year}`;
+}

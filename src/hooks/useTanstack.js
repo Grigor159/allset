@@ -1,6 +1,7 @@
 "use client";
 
 import { useQuery, useMutation } from "@tanstack/react-query";
+import { useAuth0 } from "@auth0/auth0-react";
 import apiClient from "@/lib/apiClient";
 
 export const useGetTanstack = (name) => {
@@ -10,6 +11,30 @@ export const useGetTanstack = (name) => {
             const { data } = await apiClient.get(`${name}`);
             return data;
         },
+    });
+};
+
+export const useGetAuthTanstack = (name) => {
+    const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
+
+    return useQuery({
+        queryKey: [name],
+        queryFn: async () => {
+            if (!isAuthenticated) throw new Error("User not authenticated");
+
+            // const token = await getAccessTokenSilently({
+            //     audience: process.env.NEXT_PUBLIC_API_AUDIENCE,
+            //     // scope: "profile email openid"
+            // });
+            const token = await getAccessTokenSilently();
+
+            const { data } = await apiClient.get(name, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+
+            return data;
+        },
+        enabled: !isLoading && isAuthenticated,
     });
 };
 

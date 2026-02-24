@@ -2,12 +2,16 @@
 
 import cookies from "js-cookie";
 
-export const cookie = () => ({
-    setItem(key) {
-        cookies.setItem(key);
+export const cookie = {
+    set(key, data) {
+        cookies.set(key, data);
     },
 
-    getItem(key) {
-        return cookies.getItem(key);
+    get(key) {
+        return cookies.get(key);
     },
-})
+
+    remove(key) {
+        return cookies.remove(key);
+    },
+}

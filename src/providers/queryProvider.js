@@ -4,16 +4,15 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister'
 import { persistQueryClient } from '@tanstack/react-query-persist-client'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-
-const MODE = process.env.NODE_ENV
+import { MODE } from '@/lib/config'
 
 export const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
             staleTime: 1000 * 60 * 2,
             cacheTime: 1000 * 60 * 5,
-            refetchOnWindowFocus: true,
-            refetchOnMount: true,
+            refetchOnWindowFocus: false, // dev
+            refetchOnMount: false, // dev
         },
     },
 })

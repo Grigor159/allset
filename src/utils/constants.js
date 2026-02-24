@@ -31,6 +31,10 @@ export const days = (difference) => Math.floor(difference / (1000 * 60 * 60 * 24
 export const hours = (difference) => Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 export const minutes = (difference) => Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
 
+export const currentYear = new Date().getFullYear();
+
+export const today = new Date();
+
 export const expired = {
   days: 0,
   hours: 0,
@@ -48,59 +52,54 @@ export const calendarLocales = {
 };
 
 export const mainPages = [
-  { path: "/digital-invitations", name: "Digital Invitations" },
-  // { path: "/builder/templates", name: "Digital Invitations" },
-  { path: "/event-vendors", name: "Event Vendors" },
-  { path: "/about-us", name: "About Us" },
-  { path: "/contacts", name: "Contacts" },
+  // { path: "/digital-invitations", name: "digital-invitations" },
+  // { path: "/favorite-vendors", name: "favorite-vendors" },
+  // { path: "/about-us", name: "about" },
+  // { path: "/contacts", name: "contacts" },
+
+  "digital-invitations", "event-vendors", "about-us", "contacts"
 ]
 
-export const builderPages = [
-  { path: "/builder/templates", name: "themes" },
-  { path: "/builder/customisations", name: "customisations" },
-  { path: "/builder/details", name: "details" },
-  { path: "/builder/preview", name: "preview" },
-  { path: "/builder/confirm", name: "confirm" },
-  { path: "/builder/payment", name: "payment" },
+export const socialPages = ["policies/privacy-policy", "policies/terms-of-service", "tech", "blog"]
+
+export const buildPages = [
+  { path: "/build/templates", name: "themes" },
+  { path: "/build/customisations", name: "customisations" },
+  { path: "/build/details", name: "details" },
+  { path: "/build/preview", name: "preview" },
+  { path: "/build/confirm", name: "confirm" },
+  { path: "/build/payment", name: "payment" },
 ];
 
-export const authPages = ["profile", "invitations", "vendors", "logout"]
+export const authPages = ["profile", "invitations", "favorite-vendors", "logout"]
 
 export const steps = {
-  "/builder/templates": 1,
-  "/builder/customisations": 2,
-  "/builder/details": 3,
-  "/builder/preview": 4,
-  "/builder/confirm": 5,
+  "/build/templates": 1,
+  "/build/customisations": 2,
+  "/build/details": 3,
+  "/build/preview": 4,
+  "/build/confirm": 5,
 };
 
 export const totalSteps = 4;
 
-import allset from '@/assets/imgs/allset.png'
-import details from '@/assets/imgs/details.png'
-import preview from '@/assets/imgs/preview.png'
-import confirm from '@/assets/imgs/confirm.png'
 
 export const contentMap = {
-  "/builder/templates": {
+  "/build/templates": {
     title: "template_title",
     text: "template_text",
-    img: allset,
   },
-  "/builder/details": {
+  "/build/details": {
     title: "details_title",
     text: "details_text",
-    img: details,
   },
-  "/builder/preview": {
+  "/build/preview": {
     title: "preview_title",
     text: "preview_text",
-    img: preview,
   },
-  "/builder/confirm": {
+  "/build/confirm": {
     title: "confirm_title",
     text: "confirm_text",
-    img: confirm,
   },
 };
 
@@ -195,7 +194,6 @@ export const detailsForm = {
 
 import visa from "@/assets/imgs/visa.png";
 import idram from "@/assets/imgs/idram.png";
-import arca from "@/assets/imgs/arca.png";
 
 export const paymentMethods = [
   {
@@ -206,10 +204,68 @@ export const paymentMethods = [
     value: "idram",
     src: idram,
   },
+]
+
+export const invitationTabs = [
   {
-    value: "arca",
-    src: arca,
+    id: 1,
+    name: "active"
   },
+  {
+    id: 2,
+    name: "drafts"
+  },
+  {
+    id: 3,
+    name: "expired"
+  },
+]
+
+import { fb, insta, twitter, youtube, tiktok, pinterest } from "../assets/svgs";
+
+export const social = [
+  {
+    href: "https://",
+    icon: fb
+  },
+  {
+    href: "https://",
+    icon: insta
+  },
+  {
+    href: "https://",
+    icon: twitter
+  },
+  {
+    href: "https://",
+    icon: youtube
+  },
+  {
+    href: "https://",
+    icon: tiktok
+  },
+  {
+    href: "https://",
+    icon: pinterest
+  },
+]
+
+export const features = [
+  {
+    id: 1,
+    title: "feature_one_title",
+    description: "feature_one_desc"
+  },
+  {
+    id: 2,
+    title: "feature_two_title",
+    description: "feature_two_desc"
+  },
+  {
+    id: 3,
+    title: "feature_three_title",
+    description: "feature_three_desc"
+  }
 ]
 
 // templates page local data
