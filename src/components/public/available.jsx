@@ -7,10 +7,8 @@ import {
   Container,
   Flex,
   For,
-  Box,
   Text,
   Span,
-  Icon,
 } from "@chakra-ui/react";
 import { Title } from "./typography/title";
 import { Description } from "./typography/description";
@@ -32,7 +30,6 @@ export const Available = () => {
             <For each={available}>
               {({ id, bg, icon, iconBg, title, description }) => (
                 <Stack key={id} bg={bg} p="16px" borderRadius="5px">
-                  {/* <Icon /> */}
                   <Flex
                     w="62px"
                     h="62px"
