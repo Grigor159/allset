@@ -1,12 +1,15 @@
 "use client";
 
 import React from "react";
-import { Flex, InputGroup, Input, Icon, Button } from "@chakra-ui/react";
+import { Flex, InputGroup, Input, Icon } from "@chakra-ui/react";
 import { plus, search } from "@/assets/svgs";
-import { useRouter } from "@/i18n/routing";
+import { usePathname, useRouter } from "@/i18n/routing";
 
 export const Actions = () => {
   const router = useRouter();
+  const pathname = usePathname();
+
+  if (!pathname?.includes("invitations")) return;
 
   return (
     <Flex gap="21px" align={"center"}>

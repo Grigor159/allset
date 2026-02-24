@@ -4,9 +4,7 @@ import React from "react";
 import { useTranslations } from "next-intl";
 import { Heading } from "@chakra-ui/react";
 
-export const SubTitle = ({ text, color }) => {
-  console.log(color);
-  
+export const SubTitle = ({ text, color }) => {  
   const t = useTranslations();
 
   return (

@@ -6,9 +6,8 @@ import { NuqsProvider } from "@/providers/nuqsProvider";
 import { NextIntlClientProvider } from "next-intl";
 import { Header } from "@/components/ui/header";
 import { ScrollToTop } from "@/components/ui/scrollToTop";
-import { Scroll } from "@/components/ui/scroll";
-import "../index.css";
 import { Footer } from "@/components/public/footer";
+import "../index.css";
 
 export default async function RootLayout({ children, params }) {
   const { locale } = params;
@@ -79,9 +78,7 @@ export default async function RootLayout({ children, params }) {
               <NuqsProvider>
                 <NextIntlClientProvider locale={locale} messages={messages}>
                   <Header />
-                  <Scroll>
                     {children}
-                  </Scroll>
                   <Footer/>
                   <ScrollToTop />
                 </NextIntlClientProvider>
