@@ -4,7 +4,7 @@ import React from "react";
 import { useTranslations } from "next-intl";
 import { Text } from "@chakra-ui/react";
 
-export const Description = ({ text, width }) => {
+export const Description = ({ text, width, textAlign }) => {
   const t = useTranslations();
 
   return (
@@ -13,7 +13,7 @@ export const Description = ({ text, width }) => {
       fontSize={"16px"}
       color={"#4B5563"}
       fontWeight={400}
-      textAlign={"center"}
+      textAlign={textAlign ?? "center"}
     >
       {t(text)}
     </Text>

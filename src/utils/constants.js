@@ -250,6 +250,34 @@ export const social = [
   },
 ]
 
+import { create, manage, check } from '../assets/svgs';
+export const available = [
+  {
+    id: 1,
+    bg: "#8D6F49",
+    icon: create,
+    iconBg: "#AC8A5F",
+    title: "available_one_title",
+    description: "available_one_desc"
+  },
+  {
+    id: 2,
+    bg: "#AC8A5F",
+    icon: manage,
+    iconBg: "#A17F54",
+    title: "available_two_title",
+    description: "available_two_desc"
+  },
+  {
+    id: 3,
+    bg: "#C2A989",
+    icon: check,
+    iconBg: "#AC8A5F",
+    title: "available_three_title",
+    description: "available_three_desc"
+  }
+]
+
 export const features = [
   {
     id: 1,

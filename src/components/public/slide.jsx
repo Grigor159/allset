@@ -33,7 +33,7 @@ export const Slide = () => {
           borderRadius={"100%"}
           bg={showPrevArrow ? "#004143" : "#00414333"}
           color={"white"}
-          cursor={"pointer"}
+          cursor={showPrevArrow ? " pointer" : "not-allowed"}
           w="31px"
           h="31px"
           p="4px"
@@ -46,7 +46,7 @@ export const Slide = () => {
           borderRadius={"100%"}
           bg={showNextArrow ? "#004143" : "#00414333"}
           color={"white"}
-          cursor={"pointer"}
+          cursor={showNextArrow ? " pointer" : "not-allowed"}
           w="31px"
           h="31px"
           p="4px"
@@ -63,7 +63,7 @@ export const Slide = () => {
         }}
         slidesPerView={3}
         spaceBetween={16}
-        speed={1500}
+        speed={500}
         loop={false}
         // autoplay={{
         //   delay: 5000,
