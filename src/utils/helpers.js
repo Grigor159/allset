@@ -143,9 +143,7 @@ export function getAuthBgPos(pathname) {
 export function getAuthTitle(pathname) {
   if (pathname?.includes("profile")) {
     return "profile"
-  } else if ((pathname?.includes("invitations"))) {
-    return "invitations"
   } else {
-    return "favorite-vendors"
-  }
+    return "invitations"
+  } 
 }

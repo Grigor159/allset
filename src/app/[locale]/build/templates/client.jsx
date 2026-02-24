@@ -1,8 +1,9 @@
 "use client";
 
 import React from "react";
-import { Flex, For, Skeleton } from "@chakra-ui/react";
 import { useGetTanstack } from "@/hooks/useTanstack";
+import { Animate } from "@/components/ui/animate";
+import { Flex, For, Skeleton } from "@chakra-ui/react";
 import { Card } from "@/components/build/card";
 
 export const TemplatesClient = () => {
@@ -23,8 +24,10 @@ export const TemplatesClient = () => {
   }
 
   return (
-    <Flex justify="space-between" gap="32px" pt="48px" pb="22px">
-      <For each={data}>{(el, index) => <Card key={index} el={el} />}</For>
-    </Flex>
+    <Animate>
+      <Flex justify="space-between" gap="32px" pt="48px" pb="22px">
+        <For each={data}>{(el, index) => <Card key={index} el={el} />}</For>
+      </Flex>
+    </Animate>
   );
 };

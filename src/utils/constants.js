@@ -52,15 +52,27 @@ export const calendarLocales = {
 };
 
 export const mainPages = [
-  // { path: "/digital-invitations", name: "digital-invitations" },
-  // { path: "/favorite-vendors", name: "favorite-vendors" },
-  // { path: "/about-us", name: "about" },
-  // { path: "/contacts", name: "contacts" },
-
-  "digital-invitations", "event-vendors", "about-us", "contacts"
+  // "digital_invitations", "about-us", "contacts"
+  {
+    name: "digital_invitations",
+    path: "/build/templates"
+  },
+  {
+    name: "about",
+    path: "about-us"
+  },
+  {
+    name: "contacts",
+    path: "contacts"
+  },
 ]
 
-export const socialPages = ["policies/privacy-policy", "policies/terms-of-service", "tech", "blog"]
+export const socialPages = [
+  { name: "privacy_policy", path: "policies/privacy-policy" },
+  { name: "terms_of_service", path: "policies/terms-of-service" },
+  { name: "guides", path: "guides" },
+  { name: "blog", path: "blog" },
+]
 
 export const buildPages = [
   { path: "/build/templates", name: "themes" },
@@ -71,7 +83,7 @@ export const buildPages = [
   { path: "/build/payment", name: "payment" },
 ];
 
-export const authPages = ["profile", "invitations", "favorite-vendors", "logout"]
+export const authPages = ["profile", "invitations", "logout"]
 
 export const steps = {
   "/build/templates": 1,

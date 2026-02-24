@@ -12,13 +12,13 @@ export const Navigation = () => {
   return (
     <Flex gap="20px">
       <For each={mainPages}>
-        {(el) => {
-          const isActive = pathname === `/${el}`;
+        {({ name, path }) => {
+          const isActive = pathname === `/${path}`;
 
           return (
             <ChakraLink
-              key={el}
-              href={`/${el}`}
+              key={path}
+              href={`/${path}`}
               as={Link}
               borderBottom={isActive ? "2px solid #4B5563" : "none"}
               color={isActive ? "#004143" : "#4B5563"}
@@ -28,7 +28,7 @@ export const Navigation = () => {
               borderRadius="0"
               w="fit-content"
             >
-              {t(el)}
+              {t(name)}
             </ChakraLink>
           );
         }}

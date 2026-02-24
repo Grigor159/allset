@@ -23,7 +23,7 @@ export const Footer = () => {
   const t = useTranslations();
   const pathname = usePathname();
 
-  if(pathname?.includes("build") || pathname?.includes("auth")) return
+  if (pathname?.includes("build") || pathname?.includes("auth")) return;
 
   return (
     <Box bg="#FFFFFF">
@@ -56,13 +56,13 @@ export const Footer = () => {
           <Flex gap={"56px"}>
             <Stack gap={"12px"}>
               <For each={mainPages}>
-                {(el) => {
-                  const isActive = pathname === `/${el}`;
+                {({ name, path }) => {
+                  const isActive = pathname === `/${path}`;
 
                   return (
                     <ChakraLink
-                      key={el}
-                      href={`/${el}`}
+                      key={path}
+                      href={`/${path}`}
                       as={Link}
                       color={isActive ? "#004143" : "#4B5563"}
                       fontSize={"16px"}
@@ -70,7 +70,7 @@ export const Footer = () => {
                       borderRadius="0"
                       w="fit-content"
                     >
-                      {t(el)}
+                      {t(name)}
                     </ChakraLink>
                   );
                 }}
@@ -78,13 +78,13 @@ export const Footer = () => {
             </Stack>
             <Stack gap={"12px"}>
               <For each={socialPages}>
-                {(el) => {
-                  const isActive = pathname === `/${el}`;
+                {({ name, path }) => {
+                  const isActive = pathname === `/${path}`;
 
                   return (
                     <ChakraLink
-                      key={el}
-                      href={`/${el}`}
+                      key={path}
+                      href={`/${path}`}
                       as={Link}
                       color={isActive ? "#004143" : "#4B5563"}
                       fontSize={"16px"}
@@ -92,7 +92,7 @@ export const Footer = () => {
                       borderRadius="0"
                       w="fit-content"
                     >
-                      {t(el)}
+                      {t(name)}
                     </ChakraLink>
                   );
                 }}

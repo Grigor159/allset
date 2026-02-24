@@ -1,32 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useScrollPosition } from "@/hooks/useScrollPosition";
+import { scrollToTopWithDuration } from "@/utils/helpers";
 import { Button } from "@chakra-ui/react";
 import { HiArrowNarrowUp } from "react-icons/hi";
 
 export const ScrollToTop = () => {
-
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      if (scrollY > 300) {
-        setIsVisible(true);
-      } else {
-        return setIsVisible(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const isVisible = useScrollPosition(300);
 
   if (!isVisible) return;
 
   return (
     <Button
-      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      onClick={() => scrollToTopWithDuration(1000)}
       position="fixed"
       right={{ base: "33px", md: "10px" }}
       bottom={{ base: "99px", md: "70px" }}
@@ -40,7 +26,7 @@ export const ScrollToTop = () => {
       transition="all 0.3s ease"
       _hover={{ bg: "white", color: "#004143", borderColor: "#004143" }}
     >
-      <HiArrowNarrowUp  />
+      <HiArrowNarrowUp />
     </Button>
   );
 };
