@@ -3,7 +3,6 @@
 import { useLocale } from "next-intl";
 import { useNuqs } from "@/hooks/useNuqs";
 import { useGetTanstack } from "@/hooks/useTanstack";
-import { Loader } from "@/components/ui/loader";
 import { Flex } from "@chakra-ui/react";
 import { Aside } from "@/components/build/aside";
 import { Preview } from "@/components/build/preview";

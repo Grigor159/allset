@@ -101,7 +101,6 @@
     "and": "and ",
     "hide": "Hide",
     "show": "Show",
-    "top": "Top",
     "active": "Active",
     "drafts": "Drafts",
     "expired": "Expired",
@@ -111,5 +110,16 @@
     "blog": "Blog",
     "fooer_about": "AllSet was created to transform the entire event planning experience in Armenia. Our vision is to become a complete digital assistant for events, where everything is possible on one platform — fast, beautiful, and stress-free.",
     "faqs": "Frequently Asked Questions",
-    "faqs_description": "Find quick answers to the most common questions related to creation and receiving."
+    "faqs_description": "Find quick answers to the most common questions related to creation and receiving.",
+    "feedback": "A little love from our clients",
+    "feedback_description": "How they created their invitations",
+    "features": "Coming soon to our platform",
+    "features_description": "Beautiful, simple, unforgettable",
+    "feature_one_title": "Find and book services",
+    "feature_one_desc": "From venues to photographers, planners, and decoration teams…",
+    "feature_two_title": "Useful digital tools",
+    "feature_two_desc": "From guest management to budget tracking and an AI-powered assistant",
+    "feature_three_title": "Get inspired and plan",
+    "feature_three_desc": "Explore other events and discover unique ideas for your own",
+    "invitation": "invitation"
 }

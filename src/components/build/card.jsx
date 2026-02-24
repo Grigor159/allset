@@ -12,7 +12,6 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { MidText } from "@/components/build/typography/midText";
 import { SubText } from "@/components/build/typography/subText";
 import {
   palletDesc,
@@ -72,13 +71,11 @@ export const Card = ({ el }) => {
         border="24px solid"
         borderColor="#F1F1F1"
         background={"#F1F1F1"}
-              transition="all 0.3s ease"
+        transition="all 0.3s ease"
       >
-        {/* <Image w="100%" h="272px" src={formatUrl(templateImage)} p="24px" /> */}
         <Image
           w="100%"
           h="100%"
-          // src={img.src}
           src={formatUrl(templateImage)}
           borderRadius="8px"
           transition="transform 0.3s ease"

@@ -250,6 +250,24 @@ export const social = [
   },
 ]
 
+export const features = [
+  {
+    id: 1,
+    title: "feature_one_title",
+    description: "feature_one_desc"
+  },
+  {
+    id: 2,
+    title: "feature_two_title",
+    description: "feature_two_desc"
+  },
+  {
+    id: 3,
+    title: "feature_three_title",
+    description: "feature_three_desc"
+  }
+]
+
 // templates page local data
 // import one from '../assets/template1.png'
 // import two from '../assets/template2.png'

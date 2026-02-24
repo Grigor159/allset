@@ -17,7 +17,7 @@ export function truncateText(text, maxLength, suffix = "...") {
 
 export function formatUrl(url) {
   const oldBase = "http://localhost:8080";
-  const newBase = "https://allset-bxuk.onrender.com";
+  const newBase = process.env.NEXT_PUBLIC_API_DEV?.slice(0, -1);
 
   if (url.startsWith(oldBase)) {
     return url.replace(oldBase, newBase);
@@ -76,7 +76,7 @@ export const generateAgendaKey = (text) => {
 export const formatDDMMYYYY = (date) => {
   const d = new Date(date);
 
-  const day = String(d.getDate()).padStart(2, "0"); 
+  const day = String(d.getDate()).padStart(2, "0");
   const month = String(d.getMonth() + 1).padStart(2, "0");
   const year = d.getFullYear();
 
