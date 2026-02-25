@@ -55,7 +55,7 @@ export const mainPages = [
   // "digital_invitations", "about-us", "contacts"
   {
     name: "digital_invitations",
-    path: "/build/templates"
+    path: "build/templates"
   },
   {
     name: "about",
@@ -305,6 +305,34 @@ export const features = [
     id: 3,
     title: "feature_three_title",
     description: "feature_three_desc"
+  }
+]
+
+export const choose = [
+  {
+    id: 1,
+    title: "choose_one_title",
+    description: "choose_one_desc"
+  },
+  {
+    id: 2,
+    title: "choose_two_title",
+    description: "choose_two_desc"
+  },
+  {
+    id: 3,
+    title: "choose_three_title",
+    description: "choose_three_desc"
+  },
+  {
+    id: 4,
+    title: "choose_four_title",
+    description: "choose_four_desc",
+  },
+  {
+    id: 5,
+    title: "choose_five_title",
+    description: "choose_five_desc"
   }
 ]
 

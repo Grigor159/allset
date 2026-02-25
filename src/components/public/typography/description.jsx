@@ -11,6 +11,7 @@ export const Description = ({ text, width, textAlign }) => {
     <Text
       width={width ?? "fit-content"}
       fontSize={"16px"}
+      lineHeight={"26px"}
       color={"#4B5563"}
       fontWeight={400}
       textAlign={textAlign ?? "center"}

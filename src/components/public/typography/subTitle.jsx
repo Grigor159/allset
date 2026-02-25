@@ -4,7 +4,7 @@ import React from "react";
 import { useTranslations } from "next-intl";
 import { Heading } from "@chakra-ui/react";
 
-export const SubTitle = ({ text, color }) => {  
+export const SubTitle = ({ text, color, textAlign }) => {
   const t = useTranslations();
 
   return (
@@ -14,6 +14,7 @@ export const SubTitle = ({ text, color }) => {
       lineHeight={"36px"}
       fontStyle={"italic"}
       fontWeight={400}
+      textAlign={textAlign ?? "unset"}
       color={color ?? "#AC8A5F"}
     >
       {t(text)}

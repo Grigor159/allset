@@ -40,7 +40,7 @@ export const Footer = () => {
               fontWeight={"300"}
               color={"#4B5563"}
             >
-              {t("fooer_about")}
+              {t("footer_about")}
             </Text>
             <Flex gap={"16px"}>
               <For each={social}>

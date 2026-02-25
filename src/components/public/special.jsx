@@ -11,7 +11,7 @@ export const Special = () => {
   const t = useTranslations();
 
   return (
-    <Stack>
+    <Stack py="64px">
       <Container maxW="1360px" px={0}>
         <Flex
           bgImage={`url(${bg.src})`}
