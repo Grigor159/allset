@@ -6,6 +6,7 @@ import { Animate } from "@/components/ui/animate";
 import { Planning } from "@/components/public/planning";
 import { Choose } from "@/components/public/choose";
 import { Special } from "@/components/public/special";
+import { Instruction } from "@/components/public/instruction";
 import { Faqs } from "@/components/public/faqs";
 import { Story } from "@/components/public/story";
 import { Feedback } from "@/components/public/feedback";
@@ -23,6 +24,9 @@ export const HomeClient = () => {
       </Animate>
       <Animate>
         <Special />
+      </Animate>
+      <Animate>
+        <Instruction />
       </Animate>
       <Animate>
         <Feedback />

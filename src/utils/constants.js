@@ -336,6 +336,125 @@ export const choose = [
   }
 ]
 
+export const instruction = [
+  {
+    id: 1,
+    title: "create_one_title",
+    description: "create_one_desc"
+  },
+  {
+    id: 2,
+    title: "create_two_title",
+    description: "create_two_desc"
+  },
+  {
+    id: 3,
+    title: "create_three_title",
+    description: "create_three_desc"
+  }
+]
+
+import templateOne from "@/assets/imgs/template_one.png";
+import templateTwo from "@/assets/imgs/template_two.png";
+import templateThree from "@/assets/imgs/template_three.png";
+
+export const templates = [
+  {
+    id: 1,
+    img: templateOne.src,
+    href: "",
+  },
+  {
+    id: 2,
+    img: templateTwo.src,
+    href: "",
+  },
+  {
+    id: 3,
+    img: templateThree.src,
+    href: "",
+  },
+  {
+    id: 4,
+    img: "https://i.pravatar.cc/150?img=44",
+    href: "",
+  },
+  {
+    id: 5,
+    img: "https://i.pravatar.cc/150?img=2",
+    href: "",
+  },
+  {
+    id: 6,
+    img: "https://i.pravatar.cc/150?img=13",
+    href: "",
+  },
+  {
+    id: 7,
+    img: "https://i.pravatar.cc/150?img=10",
+    href: "",
+  },
+]
+
+export const feedback = [
+  {
+    id: 1,
+    name: "Անի Հակոբյան",
+    invitations: 2,
+    stars: 4,
+    feedback:
+      "Մեր փորձը անհավանական էր։ Հիմնարկը շատ արագ և պարզ էր — մենք ստացանք մեր գեղեցիկ թվային հրավիրատոմսը ընդամենը մի քանի ժամում։ Մեր բոլոր հյուրերը դա շատ սիրեցին։",
+  },
+  {
+    id: 2,
+    name: "Luiza Abrahamyan",
+    invitations: 2,
+    stars: 5,
+    feedback:
+      "Մեր փորձը անհավանական էր։ Հիմնարկը շատ արագ և պարզ էր — մենք ստացանք մեր գեղեցիկ թվային հրավիրատոմսը ընդամենը մի քանի ժամում։ Մեր բոլոր հյուրերը դա շատ սիրեցին։",
+  },
+  {
+    id: 3,
+    name: "Anna Ayvazyan",
+    invitations: 8,
+    stars: 4,
+    feedback:
+      "Մեր փորձը անհավանական էր։ Հիմնարկը շատ արագ և պարզ էր — մենք ստացանք մեր գեղեցիկ թվային հրավիրատոմսը ընդամենը մի քանի ժամում։ Մեր բոլոր հյուրերը դա շատ սիրեցին։",
+  },
+  {
+    id: 4,
+    name: "Alina Avagyan",
+    invitations: 1,
+    stars: 5,
+    feedback:
+      "Մեր փորձը անհավանական էր։ Հիմնարկը շատ արագ և պարզ էր — մենք ստացանք մեր գեղեցիկ թվային հրավիրատոմսը ընդամենը մի քանի ժամում։ Մեր բոլոր հյուրերը դա շատ սիրեցին։",
+  },
+];
+
+export const faqs = [
+  {
+    value: "1",
+    title: "faqs_one_title",
+    text: "faqs_one_text",
+  },
+  {
+    value: "2",
+    title: "faqs_two_title",
+    text: "faqs_two_text",
+  },
+  {
+    value: "3",
+    title: "faqs_three_title",
+    text: "faqs_three_text",
+  },
+  {
+    value: "4",
+    title: "faqs_four_title",
+    text: "faqs_four_text",
+  },
+]
+  
+
 // templates page local data
 // import one from '../assets/template1.png'
 // import two from '../assets/template2.png'

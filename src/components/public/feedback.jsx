@@ -4,7 +4,7 @@ import React from "react";
 import { Stack, Container } from "@chakra-ui/react";
 import { Title } from "./typography/title";
 import { SubTitle } from "./typography/subTitle";
-import { Slide } from "./slide";
+import { FeedbackSlide } from "./feedback_slide";
 
 export const Feedback = () => {
   return (
@@ -15,7 +15,7 @@ export const Feedback = () => {
             <Title text="feedback" color="#004143" />
             <SubTitle text="feedback_description" color="#004143" />
           </Stack>
-          <Slide />
+          <FeedbackSlide />
         </Stack>
       </Container>
     </Stack>

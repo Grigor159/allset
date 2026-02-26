@@ -2,12 +2,21 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
-import { Stack, Container, Flex, Image, For, Box } from "@chakra-ui/react";
+import {
+  Stack,
+  Container,
+  Flex,
+  Image,
+  For,
+  Icon,
+  HStack,
+} from "@chakra-ui/react";
 import { Title } from "./typography/title";
 import { SubTitle } from "./typography/subTitle";
 import bg from "@/assets/imgs/choose_bg.png";
 import img from "@/assets/imgs/choose_img.png";
 import { choose } from "@/utils/constants";
+import { dash } from "@/assets/svgs";
 
 export const Choose = () => {
   const t = useTranslations();
@@ -26,13 +35,32 @@ export const Choose = () => {
             <Title text="choose_title" color="#FFFFFF" />
             <SubTitle text="choose_desc" />
 
-            <Stack>
+            <Stack gap="34px">
               <For each={choose}>
                 {({ id, title, description }) => (
-                  <Box as="ul" key={id}>
-                    <li>{t(title)}</li>
-                    <li>{t(description)}</li>
-                  </Box>
+                  <Stack as="ul" key={id} gap="6px">
+                    <HStack
+                      as="li"
+                      gap="13px"
+                      fontSize={"18px"}
+                      lineHeight={"24px"}
+                      fontWeight={500}
+                      color={"#FFFFFF"}
+                    >
+                      <Icon>{dash.icon}</Icon>
+                      {t(title)}
+                    </HStack>
+                    <HStack
+                      as="li"
+                      fontSize={"14px"}
+                      lineHeight={"24px"}
+                      fontWeight={300}
+                      color={"#FFFFFF"}
+                      pl={"43px"}
+                    >
+                      {t(description)}
+                    </HStack>
+                  </Stack>
                 )}
               </For>
             </Stack>

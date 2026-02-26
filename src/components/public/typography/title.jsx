@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { Heading } from "@chakra-ui/react";
 import Typewritter from "typewriter-effect";
 
-export const Title = ({ as, text, fontSize, color }) => {
+export const Title = ({ as, text, fontSize, color, textAlign }) => {
   const t = useTranslations();
 
   return (
@@ -13,8 +13,9 @@ export const Title = ({ as, text, fontSize, color }) => {
       as={as ?? "h2"}
       lineHeight={"42px"}
       fontWeight={"700"}
-      fontSize={fontSize ??"32px"}
+      fontSize={fontSize ?? "32px"}
       color={color ?? "#161E24"}
+      textAlign={textAlign ?? "unset"}
     >
       <Typewritter
         options={{

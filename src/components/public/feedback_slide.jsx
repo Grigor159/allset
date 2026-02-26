@@ -17,8 +17,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { GrFormPreviousLink, GrFormNextLink } from "react-icons/gr";
 import { star, starEmpty } from "@/assets/svgs";
+import { feedback } from "@/utils/constants";
 
-export const Slide = () => {
+export const FeedbackSlide = () => {
   const t = useTranslations();
 
   const [swiper, setSwiper] = useState(null);
@@ -71,9 +72,9 @@ export const Slide = () => {
         // }}
         // modules={[Autoplay]}
       >
-        {slides.map(({ id, name, invitations, stars, feedback }) => {
+        {feedback.map(({ id, name, invitations, stars, feedback }) => {
           return (
-            <SwiperSlide key={id} width="443px">
+            <SwiperSlide key={id} >
               <Stack
                 gap="8px"
                 p="16px"
@@ -120,38 +121,3 @@ export const Slide = () => {
     </Box>
   );
 };
-
-const slides = [
-  {
-    id: 1,
-    name: "Անի Հակոբյան",
-    invitations: 2,
-    stars: 4,
-    feedback:
-      "Մեր փորձը անհավանական էր։ Հիմնարկը շատ արագ և պարզ էր — մենք ստացանք մեր գեղեցիկ թվային հրավիրատոմսը ընդամենը մի քանի ժամում։ Մեր բոլոր հյուրերը դա շատ սիրեցին։",
-  },
-  {
-    id: 2,
-    name: "Luiza Abrahamyan",
-    invitations: 2,
-    stars: 5,
-    feedback:
-      "Մեր փորձը անհավանական էր։ Հիմնարկը շատ արագ և պարզ էր — մենք ստացանք մեր գեղեցիկ թվային հրավիրատոմսը ընդամենը մի քանի ժամում։ Մեր բոլոր հյուրերը դա շատ սիրեցին։",
-  },
-  {
-    id: 3,
-    name: "Anna Ayvazyan",
-    invitations: 8,
-    stars: 4,
-    feedback:
-      "Մեր փորձը անհավանական էր։ Հիմնարկը շատ արագ և պարզ էր — մենք ստացանք մեր գեղեցիկ թվային հրավիրատոմսը ընդամենը մի քանի ժամում։ Մեր բոլոր հյուրերը դա շատ սիրեցին։",
-  },
-  {
-    id: 4,
-    name: "Alina Avagyan",
-    invitations: 1,
-    stars: 5,
-    feedback:
-      "Մեր փորձը անհավանական էր։ Հիմնարկը շատ արագ և պարզ էր — մենք ստացանք մեր գեղեցիկ թվային հրավիրատոմսը ընդամենը մի քանի ժամում։ Մեր բոլոր հյուրերը դա շատ սիրեցին։",
-  },
-];
