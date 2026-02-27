@@ -61,8 +61,8 @@ export const Header = () => {
           <Navigation />
 
           <Flex gap="16px">
-            <Language />
-            <OAuth />
+            <Language bg={bg}/>
+            <OAuth bg={bg}/>
           </Flex>
         </Flex>
       </Container>

@@ -19,6 +19,7 @@ export const Pay = () => {
         w="100%"
         h="52px"
         border="1px solid"
+        boxShadow="xl"
         borderColor="#4B5563"
         _hover={{ bg: "white", color: "#004143" }}
       >

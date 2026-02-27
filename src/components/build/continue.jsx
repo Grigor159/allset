@@ -43,6 +43,19 @@ export const Continue = () => {
       bg="#004143"
       w="137px"
       h="52px"
+      border="1px solid"
+      borderColor="white"
+      boxShadow="xl"
+      _hover={{
+        bg: "white",
+        color: "#004143",
+        borderColor: "#004143",
+        "& path": {
+          fill: "#004143",
+          transition: "all 0.3s ease",
+        },
+      }}
+      transition="all 0.3s ease"
       disabled={disabled}
     >
       {/* {hasMultipleWords(name) ? name : `Continue to ${name}`} */}
@@ -59,6 +72,19 @@ export const Continue = () => {
       bg="#004143"
       w="137px"
       h="52px"
+      border="1px solid"
+      borderColor="white"
+      boxShadow="xl"
+      _hover={{
+        bg: "white",
+        color: "#004143",
+        borderColor: "#004143",
+        "& path": {
+          fill: "#004143",
+          transition: "all 0.3s ease",
+        },
+      }}
+      transition="all 0.3s ease"
       disabled={disabled && !(accept == true || accept === "true")}
     >
       {t(name)}
@@ -73,6 +99,19 @@ export const Continue = () => {
       bg="#004143"
       w="137px"
       h="52px"
+      border="1px solid"
+      borderColor="white"
+      boxShadow="xl"
+      _hover={{
+        bg: "white",
+        color: "#004143",
+        borderColor: "#004143",
+        "& path": {
+          fill: "#004143",
+          transition: "all 0.3s ease",
+        },
+      }}
+      transition="all 0.3s ease"
       disabled={disabled}
     >
       {t("next")} {next.icon}
