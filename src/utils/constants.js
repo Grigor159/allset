@@ -52,7 +52,7 @@ export const calendarLocales = {
 };
 
 export const mainPages = [
-  // "digital_invitations", "about-us", "contacts"
+  // "digital_invitations", "about-us"
   {
     name: "digital_invitations",
     path: "build/templates"
@@ -60,10 +60,6 @@ export const mainPages = [
   {
     name: "about",
     path: "about-us"
-  },
-  {
-    name: "contacts",
-    path: "contacts"
   },
 ]
 
