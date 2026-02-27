@@ -8,15 +8,25 @@ import { Title } from "./typography/title";
 import { SubTitle } from "./typography/subTitle";
 import { Description } from "./typography/description";
 import { PlanningSlide } from "./planning_slide";
+import bg from "@/assets/imgs/planning_bg.png";
 
 export const Planning = () => {
   const t = useTranslations();
   const router = useRouter();
 
   return (
-    <Stack p="96px 0 100px 0" bg="#FFFFFF">
+    <Stack
+      p="96px 0 100px 0"
+      bg="#FFFFFF"
+    >
       <Container maxW="1360px" px={0}>
-        <Stack gap="100px">
+        <Stack
+          gap="100px"
+          bgImage={`url(${bg.src})`}
+          bgPos={"right 250px"}
+          bgRepeat={"no-repeat"}
+          bgSize={"225px"}
+        >
           <Flex w="100%" justify={"space-between"} gap="118px">
             <Stack flex="1" gap="24px">
               <Title
@@ -53,7 +63,7 @@ export const Planning = () => {
             </Stack>
           </Flex>
 
-          <Stack gap="27px">
+          <Stack gap="27px" pt={"30px"}>
             <Stack gap="16px" align={"center"}>
               <Title text="plan_title_two" />
               <Description text="plan_desc_two" />

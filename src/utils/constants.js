@@ -354,48 +354,6 @@ export const instruction = [
   }
 ]
 
-import templateOne from "@/assets/imgs/template_one.png";
-import templateTwo from "@/assets/imgs/template_two.png";
-import templateThree from "@/assets/imgs/template_three.png";
-
-export const templates = [
-  {
-    id: 1,
-    img: templateOne.src,
-    href: "",
-  },
-  {
-    id: 2,
-    img: templateTwo.src,
-    href: "",
-  },
-  {
-    id: 3,
-    img: templateThree.src,
-    href: "",
-  },
-  {
-    id: 4,
-    img: "https://i.pravatar.cc/150?img=44",
-    href: "",
-  },
-  {
-    id: 5,
-    img: "https://i.pravatar.cc/150?img=2",
-    href: "",
-  },
-  {
-    id: 6,
-    img: "https://i.pravatar.cc/150?img=13",
-    href: "",
-  },
-  {
-    id: 7,
-    img: "https://i.pravatar.cc/150?img=10",
-    href: "",
-  },
-]
-
 export const feedback = [
   {
     id: 1,
@@ -454,35 +412,3 @@ export const faqs = [
   },
 ]
   
-
-// templates page local data
-// import one from '../assets/template1.png'
-// import two from '../assets/template2.png'
-// import three from '../assets/template3.png'
-
-// export const templates = [
-//   {
-//     id: 1,
-//     img: one,
-//     bg: "rgba(250, 245, 255, 1)",
-//     name: "Classic Elegance",
-//     text: "Timeless and sophisticated design with rich colors and traditional typography. Perfect for formal ceremonies.",
-//     features: []
-//   },
-//   {
-//     id: 2,
-//     img: two,
-//     bg: "rgba(255, 241, 242, 1)",
-//     name: "Modern Romance",
-//     text: "Clean and contemporary design with soft colors and modern typography. Perfect for modern couples.",
-//     features: []
-//   },
-//   {
-//     id: 3,
-//     img: three,
-//     bg: "rgba(255, 251, 235, 1)",
-//     name: "Rustic Charm",
-//     text: "Warm and natural design with earthy colors and organic elements. Perfect for outdoor and rustic weddings.",
-//     features: []
-//   },
-// ]

@@ -43,6 +43,16 @@ select:-webkit-autofill:focus {
 }
 
 /* slide customization */
+.swiper {
+  width: 100% !important;
+}
+
+.slider {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
 .swiper-pagination {
   position: relative !important;
   padding-top: 64px !important;
