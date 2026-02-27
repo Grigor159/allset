@@ -18,6 +18,7 @@ export const Features = () => {
       bgRepeat={"no-repeat"}
       bgSize={"162px"}
       py="100px"
+      backgroundColor="#f6f6f7"
     >
       <Container maxW="1360px" px={0}>
         <Stack gap="8px">

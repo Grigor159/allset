@@ -15,7 +15,7 @@ import { Features } from "@/components/public/features";
 
 export const HomeClient = () => {
   return (
-    <Box background="#f6f6f7">
+    <Box bg="#f6f6f7">
       <Animate>
         <Planning />
       </Animate>

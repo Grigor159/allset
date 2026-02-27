@@ -15,10 +15,7 @@ export const Planning = () => {
   const router = useRouter();
 
   return (
-    <Stack
-      p="96px 0 100px 0"
-      bg="#FFFFFF"
-    >
+    <Stack p="96px 0 100px 0" bg="#f6f6f7">
       <Container maxW="1360px" px={0}>
         <Stack
           gap="100px"
