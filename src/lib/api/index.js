@@ -7,9 +7,6 @@ import { error } from "@/components/ui/alerts";
 
 const instance = axios.create({
     baseURL: BASE_API,
-//     headers: {
-//     "Accept": "*/*",
-//   },
 });
 
 instance.interceptors.response.use(

@@ -4,7 +4,7 @@ import { useRouter } from "@/i18n/routing";
 import { useRef, useState, useEffect } from "react";
 import { useNuqs } from "@/hooks/useNuqs";
 import { detailsForm } from "@/utils/constants";
-import apiClient from "@/lib/apiClient";
+import apiClient from "@/lib/api";
 import { Animate } from "@/components/ui/animate";
 import { Box, Container, Stack } from "@chakra-ui/react";
 import { LngSelector } from "@/components/build/lngSelector";

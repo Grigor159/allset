@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister'
 import { persistQueryClient } from '@tanstack/react-query-persist-client'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { MODE } from '@/lib/config'
+import { MODE } from '@/lib/api/config'
 
 export const queryClient = new QueryClient({
     defaultOptions: {

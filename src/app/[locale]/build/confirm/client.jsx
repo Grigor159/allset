@@ -2,7 +2,7 @@
 
 import { useRouter } from "@/i18n/routing";
 import { useState } from "react";
-import apiClient from "@/lib/apiClient";
+import apiClient from "@/lib/api";
 import { Box, Container, Stack } from "@chakra-ui/react";
 import { error, success } from "@/components/ui/alerts";
 import { Animate } from "@/components/ui/animate";
