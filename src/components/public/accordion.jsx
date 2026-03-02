@@ -4,47 +4,29 @@ import React from "react";
 import { useTranslations } from "next-intl";
 import { useNuqs } from "@/hooks/useNuqs";
 import { Accordion as Acc, For, Span, Image } from "@chakra-ui/react";
+import { faqs } from "@/utils/constants";
 import plus from "@/assets/imgs/plus.png";
 import minus from "@/assets/imgs/minus.png";
-
-const items = [
-  {
-    value: "1",
-    title: "Ի՞նչ ժամանակ է անհրաժեշտ իմ հրավիրատոմսը ստանալու համար։",
-    text: "Դուք կստանաք ձեր անհատականացված հրավիրատոմսը մինչև 24 ժամվա ընթացքում՝ բոլոր անհրաժեշտ տվյալները տրամադրելու և վճարումը կատարելուց հետո։",
-  },
-  {
-    value: "2",
-    title:
-      "Կարող եմ արդյոք խմբագրել իմ հրավիրատոմսը այն պատրաստ լինելուց հետո։",
-    text: "Դուք կստանաք ձեր անհատականացված հրավիրատոմսը մինչև 24 ժամվա ընթացքում՝ բոլոր անհրաժեշտ տվյալները տրամադրելու և վճարումը կատարելուց հետո։",
-  },
-  {
-    value: "3",
-    title: "Կստանամ արդյոք թե թվային, թե տպագիր տարբերակները։",
-    text: "Դուք կստանաք ձեր անհատականացված հրավիրատոմսը մինչև 24 ժամվա ընթացքում՝ բոլոր անհրաժեշտ տվյալները տրամադրելու և վճարումը կատարելուց հետո։",
-  },
-];
 
 export const Accordion = () => {
   const t = useTranslations();
 
-  const [faqs, setFaqs] = useNuqs("faqs");
+  const [question, setQuestion] = useNuqs("question");
 
   const handleChange = (e) => {
     const next = e.value?.[0];
     if (!next) {
-      setFaqs(null);
+      setQuestion(null);
     } else {
-      setFaqs(next);
+      setQuestion(next);
     }
   };
 
   return (
-    <Acc.Root collapsible value={[faqs]} onValueChange={(e) => handleChange(e)}>
-      <For each={items}>
+    <Acc.Root collapsible value={[question]} onValueChange={(e) => handleChange(e)}>
+      <For each={faqs}>
         {({ value, title, text }) => {
-          const isOpen = faqs == value;
+          const isOpen = question == value;
 
           return (
             <Acc.Item
@@ -63,7 +45,7 @@ export const Accordion = () => {
                   fontWeight={500}
                   color={"#4B5563"}
                 >
-                  {title}
+                  {t(title)}
                 </Span>
 
                 <Acc.ItemIndicator>
@@ -82,7 +64,7 @@ export const Accordion = () => {
                   fontWeight={300}
                   color={"#4B5563"}
                 >
-                  {text}
+                  {t(text)}
                 </Acc.ItemBody>
               </Acc.ItemContent>
             </Acc.Item>

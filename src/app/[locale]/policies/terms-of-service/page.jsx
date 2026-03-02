@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { BASE_URL } from "@/lib/config";
+import { BASE_URL } from "@/lib/api/config";
 import logo from "@/assets/imgs/allset.png";
 import { TermsClient } from "./client";
 

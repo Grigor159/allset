@@ -16,7 +16,7 @@ import {
 import { Link, usePathname } from "@/i18n/routing";
 import { authPages } from "@/utils/constants";
 
-export const OAuth = () => {
+export const OAuth = ({ bg }) => {
   const t = useTranslations();
   const pathname = usePathname();
 
@@ -76,7 +76,7 @@ export const OAuth = () => {
       <Portal>
         <Menu.Positioner>
           <Show when={user}>
-            <Menu.Content w="auto" minW="unset" autoFocus={false}>
+            <Menu.Content w="auto" minW="unset" autoFocus={false} bg={bg}>
               <For each={authPages}>
                 {(el) => {
                   const isActive = pathname?.includes(el);
@@ -86,7 +86,7 @@ export const OAuth = () => {
                       {el === "logout" ? (
                         <ChakraLink
                           onClick={logout}
-                          bg="white"
+                          bg="transparent"
                           color="#4B5563"
                           fontWeight="400"
                           fontSize="14px"
@@ -104,7 +104,7 @@ export const OAuth = () => {
                           outline={"none"}
                           textDecoration={isActive && "underline"}
                           href={`/auth/${el}`}
-                          bg="white"
+                          bg="transparent"
                           color={isActive ? "#013220" : "#4B5563"}
                           fontWeight="400"
                           fontSize="14px"

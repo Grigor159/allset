@@ -22,7 +22,7 @@ export const Timeline = ({
 }) => {
   const t = useTranslations();
   const language = useLocale();
-  console.log(data);
+  // console.log(data);
 
   const [disabled, setDisabled] = useState(true);
 
@@ -31,7 +31,6 @@ export const Timeline = ({
     hide(name, !e.checked);
   };
 
-  // find if current agenda item is selected
   const getItem = (venueKey) =>
     value?.find((item) => item.venueKey === venueKey);
 
@@ -72,75 +71,79 @@ export const Timeline = ({
         </Field.Label>
       </Field.Root>
 
-      {Object.entries(data || {}).map(([venueKey, venueName]) => {
-        const item = getItem(venueKey);
-        const isChecked = !!item;
+      {disabled && (
+        <>
+          {Object.entries(data || {}).map(([venueKey, venueName]) => {
+            const item = getItem(venueKey);
+            const isChecked = !!item;
 
-        return (
-          <Checkbox.Root
-            key={venueKey}
-            checked={isChecked}
-            onCheckedChange={(e) =>
-              handleCheckboxChange(
-                venueKey,
-                e.checked === true,
-                venueName[language] || venueName.en,
-              )
-            }
-            w="100%"
-            justifyContent="space-between"
-            cursor="pointer"
-            p="16px 0"
-            borderRadius="4px"
-            disabled={!disabled}
-            borderBottom="2px solid"
-            borderColor="#F9FAFB"
-          >
-            <Flex align="center" gap="12px">
-              <Checkbox.HiddenInput />
-              <Checkbox.Control
-                w="24px"
-                h="24px"
-                _checked={{ border: "none", bg: "transparent" }}
-              >
-                {isChecked && <Icon>{checked.icon}</Icon>}
-              </Checkbox.Control>
-              <Checkbox.Label
-                as={Flex}
-                gap={"8px"}
-                alignItems={"center"}
-                fontSize={"14px"}
-                fontWeight={"600"}
-                lineHeight={"24px"}
-              >
-                {/* <Icon>{icon.icon}</Icon> */}
-                {venueName[language] || venueName.en}
-              </Checkbox.Label>
-            </Flex>
-
-            <Flex gap="32px">
-              <InputTime
-                value={item?.time}
-                onChange={(e) =>
-                  handleInputChange(venueKey, "time", e.target.value)
+            return (
+              <Checkbox.Root
+                key={venueKey}
+                checked={isChecked}
+                onCheckedChange={(e) =>
+                  handleCheckboxChange(
+                    venueKey,
+                    e.checked === true,
+                    venueName[language] || venueName.en,
+                  )
                 }
-                disabled={!isChecked}
-              />
-              <InputUrl
-                name="venueLocation"
-                value={item?.venueLocation}
-                onChange={(e) =>
-                  handleInputChange(venueKey, e.target.name, e.target.value)
-                }
-                placeholder={t("location")}
-                disabled={!isChecked}
-              />
-            </Flex>
-          </Checkbox.Root>
-        );
-      })}
+                w="100%"
+                justifyContent="space-between"
+                cursor="pointer"
+                p="16px 0"
+                borderRadius="4px"
+                disabled={!disabled}
+                borderBottom="2px solid"
+                borderColor="#F9FAFB"
+              >
+                <Flex align="center" gap="12px">
+                  <Checkbox.HiddenInput />
+                  <Checkbox.Control
+                    w="24px"
+                    h="24px"
+                    _checked={{ border: "none", bg: "transparent" }}
+                  >
+                    {isChecked && <Icon>{checked.icon}</Icon>}
+                  </Checkbox.Control>
+                  <Checkbox.Label
+                    as={Flex}
+                    gap={"8px"}
+                    alignItems={"center"}
+                    fontSize={"14px"}
+                    fontWeight={"600"}
+                    lineHeight={"24px"}
+                  >
+                    {/* <Icon>{icon.icon}</Icon> */}
+                    {venueName[language] || venueName.en}
+                  </Checkbox.Label>
+                </Flex>
 
-      <AddAgenda setData={setData} languages={languages}/>
+                <Flex gap="32px">
+                  <InputTime
+                    value={item?.time}
+                    onChange={(e) =>
+                      handleInputChange(venueKey, "time", e.target.value)
+                    }
+                    disabled={!isChecked}
+                  />
+                  <InputUrl
+                    name="venueLocation"
+                    value={item?.venueLocation}
+                    onChange={(e) =>
+                      handleInputChange(venueKey, e.target.name, e.target.value)
+                    }
+                    placeholder={t("location")}
+                    disabled={!isChecked}
+                  />
+                </Flex>
+              </Checkbox.Root>
+            );
+          })}
+
+          <AddAgenda setData={setData} languages={languages} />
+        </>
+      )}
     </Stack>
   );
 };

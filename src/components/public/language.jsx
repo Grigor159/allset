@@ -17,7 +17,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { down } from "../../assets/svgs";
 import cookies from "js-cookie";
 
-export const Language = () => {
+export const Language = ({ bg }) => {
   const t = useTranslations();
   const pathname = usePathname();
   const params = useParams();
@@ -57,7 +57,7 @@ export const Language = () => {
       </Menu.Trigger>
       <Portal>
         <Menu.Positioner>
-          <Menu.Content w="auto" minW="unset" p="0">
+          <Menu.Content w="auto" minW="unset" p="0" bg={bg}>
             <For each={languages.filter(({ code }) => code !== language)}>
               {({ code, flag }) => (
                 <Menu.Item

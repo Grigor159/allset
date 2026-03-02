@@ -13,7 +13,7 @@ import {
 import { Tooltip } from "@/components/ui/tooltip";
 import { Label } from "@/components/build/typography/label";
 import { copied, copy } from "../../assets/svgs";
-import { BASE_URL } from "@/lib/config";
+import { BASE_URL } from "@/lib/api/config";
 import { error, success } from "../ui/alerts";
 
 export const TitleDemo = () => {

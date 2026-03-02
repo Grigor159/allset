@@ -29,7 +29,7 @@ export const Available = () => {
           <Flex gap="16px">
             <For each={available}>
               {({ id, bg, icon, iconBg, title, description }) => (
-                <Stack key={id} bg={bg} p="16px" borderRadius="5px">
+                <Stack key={id} bg={bg} p="16px" borderRadius="5px" w="294px">
                   <Flex
                     w="62px"
                     h="62px"

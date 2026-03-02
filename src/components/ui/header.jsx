@@ -1,6 +1,5 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/routing";
 import { useEffect, useState } from "react";
 import {
@@ -11,27 +10,31 @@ import {
   Link as ChakraLink,
 } from "@chakra-ui/react";
 import { Link } from "@/i18n/routing";
-// import { Steps } from "./steps";
-// import { Language } from "../globals/language";
 import { OAuth } from "../public/oauth";
 import logo from "@/assets/imgs/allset.png";
 import { Language } from "../public/language";
 import { Navigation } from "../public/navigation";
-// import { Navigation } from "../globals/navigation";
+import { useLocale } from "next-intl";
 
 export const Header = () => {
-  const t = useTranslations();
-  // const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     setScrolled(window.scrollY > 0);
-  //   };
+  const [scrolled, setScrolled] = useState(false);
 
-  //   handleScroll();
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, []);
+  const isPublic = pathname === `/` || pathname === `/about-us`;
+  const bg = isPublic ? (scrolled ? "#FFFFFF" : "#f6f6f7") : "#FFFFFF";
+
+  useEffect(() => {
+    if (!isPublic) return;
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 0);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <Box
@@ -42,12 +45,12 @@ export const Header = () => {
       left="0"
       right="0"
       zIndex="100"
-      // bg={scrolled ? "white" : "#f6f6f7"}
-      // transition="background 0.2s ease"
-      bg="white"
+      bg={bg}
+      // bg="#f6f6f7"
       // boxShadow="sm"
       py="16px"
       px="0"
+      transition="background 0.3s ease"
     >
       <Container maxW="1360px" px={0}>
         <Flex align="center" justify="space-between">
@@ -58,8 +61,8 @@ export const Header = () => {
           <Navigation />
 
           <Flex gap="16px">
-            <Language />
-            <OAuth />
+            <Language bg={bg}/>
+            <OAuth bg={bg}/>
           </Flex>
         </Flex>
       </Container>

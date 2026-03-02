@@ -15,17 +15,6 @@ export function truncateText(text, maxLength, suffix = "...") {
   return text.slice(0, maxLength) + suffix;
 }
 
-export function formatUrl(url) {
-  const oldBase = "http://localhost:8080";
-  const newBase = process.env.NEXT_PUBLIC_API_DEV?.slice(0, -1);
-
-  if (url.startsWith(oldBase)) {
-    return url.replace(oldBase, newBase);
-  }
-
-  return newBase + url;
-}
-
 export const cleanUrlExtension = (str) => {
   if (!str) return "";
   return str

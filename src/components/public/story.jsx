@@ -16,7 +16,7 @@ import { Title } from "./typography/title";
 
 export const Story = () => {
   return (
-    <Stack p={"50px 0 100px 0"}>
+    <Stack p={"50px 0 100px 0"} bg="#f6f6f7">
       <Container maxW="1360px" px={0}>
         <Flex w="100%" gap="85px" justify={"space-between"}>
           <Stack gap="42px">

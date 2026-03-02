@@ -114,6 +114,7 @@ export function getTimeUntil(fullDate) {
 //
 import profile_bg from "@/assets/imgs/profile_bg.png";
 import invitations_bg from "@/assets/imgs/invitations_bg.png";
+import { transliterate } from "./formatters";
 
 export function getAuthBg(pathname) {
   if (pathname?.includes("profile")) {
@@ -145,5 +146,5 @@ export function getAuthTitle(pathname) {
     return "profile"
   } else {
     return "invitations"
-  } 
+  }
 }

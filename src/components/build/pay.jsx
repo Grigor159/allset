@@ -1,29 +1,47 @@
 "use client";
 
+import React from "react";
 import { back } from "@/assets/svgs";
 import { useRouter } from "@/i18n/routing";
 import { Button, Icon, Stack } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
-import React from "react";
+import { useQueryState } from "nuqs";
+import { Tooltip } from "../ui/tooltip";
 
 export const Pay = () => {
   const t = useTranslations();
   const router = useRouter();
+  const [accept] = useQueryState("terms_accepted");
+  const [pay] = useQueryState("payment_method");
 
   return (
     <Stack gap="16px">
-      <Button
-        fontWeight="400"
-        lineHeight="24px"
-        bg="#004143"
-        w="100%"
-        h="52px"
-        border="1px solid"
-        borderColor="#4B5563"
-        _hover={{ bg: "white", color: "#004143" }}
+      <Tooltip
+        // ids={{ trigger: id }}
+        positioning={{ placement: "top" }}
+        content={
+          !pay
+            ? "Choose paymant method"
+            : !accept
+              ? "Please agree terms and policy"
+              : "Pay"
+        }
       >
-        {t("pay")}
-      </Button>
+        <Button
+          fontWeight="400"
+          lineHeight="24px"
+          bg="#004143"
+          w="100%"
+          h="52px"
+          border="1px solid"
+          boxShadow="xl"
+          borderColor="#4B5563"
+          disabled={!accept || !pay}
+          _hover={{ bg: "white", color: "#004143" }}
+        >
+          {t("pay")}
+        </Button>
+      </Tooltip>
       <Button
         onClick={() => router.back()}
         variant="ghost"

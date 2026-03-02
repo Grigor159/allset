@@ -1,6 +1,6 @@
 "use client";
 
-import { supabase } from "@/lib/supabaseClient";
+import { supabase } from "@/lib/email";
 import { isValidEmail } from "@/utils/checkers";
 
 export async function subscribe(email) {

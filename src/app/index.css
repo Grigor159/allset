@@ -1,10 +1,11 @@
+/* default */
 body {
   font-family: "Montserrat";
 }
 
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
-  width: 7px;
+  width: 5px;
 }
 
 html::-webkit-scrollbar-track,
@@ -39,4 +40,33 @@ select:-webkit-autofill:focus {
 /* calendar customization */
 .rdp-root {
   --rdp-accent-color: #004143 !important;
+}
+
+/* slide customization */
+.swiper {
+  width: 100% !important;
+}
+
+.slider {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.swiper-pagination {
+  position: relative !important;
+  padding-top: 64px !important;
+}
+
+.swiper-pagination-bullet {
+  background: #d9d9d9 !important;
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 10px !important;
+  transition: all 0.3s ease !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #ac8a5f !important;
+  width: 24px !important;
 }

@@ -52,26 +52,22 @@ export const calendarLocales = {
 };
 
 export const mainPages = [
-  // "digital_invitations", "about-us", "contacts"
+  // "digital_invitations", "about-us"
   {
     name: "digital_invitations",
-    path: "/build/templates"
+    path: "build/templates"
   },
   {
     name: "about",
     path: "about-us"
-  },
-  {
-    name: "contacts",
-    path: "contacts"
   },
 ]
 
 export const socialPages = [
   { name: "privacy_policy", path: "policies/privacy-policy" },
   { name: "terms_of_service", path: "policies/terms-of-service" },
-  { name: "guides", path: "guides" },
-  { name: "blog", path: "blog" },
+  // { name: "guides", path: "guides" },
+  // { name: "blog", path: "blog" },
 ]
 
 export const buildPages = [
@@ -150,6 +146,7 @@ export const schemes = [
 ]
 
 export const detailsForm = {
+  languages: ["hy"],
   templateId: "",
   colorPaletteId: "",
   title: {
@@ -200,8 +197,7 @@ export const detailsForm = {
       ru: ""
     },
     photoUrls: [],
-  },
-  languages: []
+  }
 }
 
 import visa from "@/assets/imgs/visa.png";
@@ -308,34 +304,121 @@ export const features = [
   }
 ]
 
-// templates page local data
-// import one from '../assets/template1.png'
-// import two from '../assets/template2.png'
-// import three from '../assets/template3.png'
+export const choose = [
+  {
+    id: 1,
+    title: "choose_one_title",
+    description: "choose_one_desc"
+  },
+  {
+    id: 2,
+    title: "choose_two_title",
+    description: "choose_two_desc"
+  },
+  {
+    id: 3,
+    title: "choose_three_title",
+    description: "choose_three_desc"
+  },
+  {
+    id: 4,
+    title: "choose_four_title",
+    description: "choose_four_desc",
+  },
+  {
+    id: 5,
+    title: "choose_five_title",
+    description: "choose_five_desc"
+  }
+]
 
-// export const templates = [
-//   {
-//     id: 1,
-//     img: one,
-//     bg: "rgba(250, 245, 255, 1)",
-//     name: "Classic Elegance",
-//     text: "Timeless and sophisticated design with rich colors and traditional typography. Perfect for formal ceremonies.",
-//     features: []
-//   },
-//   {
-//     id: 2,
-//     img: two,
-//     bg: "rgba(255, 241, 242, 1)",
-//     name: "Modern Romance",
-//     text: "Clean and contemporary design with soft colors and modern typography. Perfect for modern couples.",
-//     features: []
-//   },
-//   {
-//     id: 3,
-//     img: three,
-//     bg: "rgba(255, 251, 235, 1)",
-//     name: "Rustic Charm",
-//     text: "Warm and natural design with earthy colors and organic elements. Perfect for outdoor and rustic weddings.",
-//     features: []
-//   },
-// ]
+export const instruction = [
+  {
+    id: 1,
+    title: "create_one_title",
+    description: "create_one_desc"
+  },
+  {
+    id: 2,
+    title: "create_two_title",
+    description: "create_two_desc"
+  },
+  {
+    id: 3,
+    title: "create_three_title",
+    description: "create_three_desc"
+  }
+]
+
+export const feedback = [
+  {
+    id: 1,
+    name: "Անի Հակոբյան",
+    invitations: 2,
+    stars: 4,
+    feedback:
+      "Մեր փորձը անհավանական էր։ Հիմնարկը շատ արագ և պարզ էր — մենք ստացանք մեր գեղեցիկ թվային հրավիրատոմսը ընդամենը մի քանի ժամում։ Մեր բոլոր հյուրերը դա շատ սիրեցին։",
+  },
+  {
+    id: 2,
+    name: "Luiza Abrahamyan",
+    invitations: 2,
+    stars: 5,
+    feedback:
+      "Մեր փորձը անհավանական էր։ Հիմնարկը շատ արագ և պարզ էր — մենք ստացանք մեր գեղեցիկ թվային հրավիրատոմսը ընդամենը մի քանի ժամում։ Մեր բոլոր հյուրերը դա շատ սիրեցին։",
+  },
+  {
+    id: 3,
+    name: "Anna Ayvazyan",
+    invitations: 8,
+    stars: 4,
+    feedback:
+      "Մեր փորձը անհավանական էր։ Հիմնարկը շատ արագ և պարզ էր — մենք ստացանք մեր գեղեցիկ թվային հրավիրատոմսը ընդամենը մի քանի ժամում։ Մեր բոլոր հյուրերը դա շատ սիրեցին։",
+  },
+  {
+    id: 4,
+    name: "Alina Avagyan",
+    invitations: 1,
+    stars: 5,
+    feedback:
+      "Մեր փորձը անհավանական էր։ Հիմնարկը շատ արագ և պարզ էր — մենք ստացանք մեր գեղեցիկ թվային հրավիրատոմսը ընդամենը մի քանի ժամում։ Մեր բոլոր հյուրերը դա շատ սիրեցին։",
+  },
+];
+
+export const faqs = [
+  {
+    value: "1",
+    title: "faqs_one_title",
+    text: "faqs_one_text",
+  },
+  {
+    value: "2",
+    title: "faqs_two_title",
+    text: "faqs_two_text",
+  },
+  {
+    value: "3",
+    title: "faqs_three_title",
+    text: "faqs_three_text",
+  },
+  {
+    value: "4",
+    title: "faqs_four_title",
+    text: "faqs_four_text",
+  },
+]
+
+// export const translitMap = {
+//   // Armenian letters
+//   ա: "a", բ: "b", գ: "g", դ: "d", ե: "e", զ: "z", է: "e", ը: "y",
+//   թ: "t", ժ: "zh", ի: "i", լ: "l", խ: "kh", ծ: "ts", կ: "k", հ: "h",
+//   ձ: "dz", ղ: "gh", ճ: "ch", մ: "m", յ: "y", ն: "n", շ: "sh", ո: "vo",
+//   չ: "ch", պ: "p", ջ: "j", ռ: "r", ս: "s", վ: "v", տ: "t", ր: "r",
+//   ց: "ts", ւ: "u", փ: "p", ք: "q", օ: "o", ֆ: "f",
+
+//   // Russian letters
+//   а: "a", б: "b", в: "v", г: "g", д: "d", е: "e", ё: "yo", ж: "zh",
+//   з: "z", и: "i", й: "y", к: "k", л: "l", м: "m", н: "n", о: "o",
+//   п: "p", р: "r", с: "s", т: "t", у: "u", ф: "f", х: "kh", ц: "ts",
+//   ч: "ch", ш: "sh", щ: "shch", ъ: "", ы: "y", ь: "", э: "e", ю: "yu", я: "ya",
+// };

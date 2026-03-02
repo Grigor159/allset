@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Field, Flex, HStack, Icon, Stack, Text } from "@chakra-ui/react";
-import { BASE_URL } from "@/lib/config";
+import { BASE_URL } from "@/lib/api/config";
 import { Label } from "@/components/build/typography/label";
 import { cleanUrlExtension } from "../../utils/formatters";
 import { copied, copy } from "@/assets/svgs";

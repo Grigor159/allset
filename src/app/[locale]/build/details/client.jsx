@@ -4,7 +4,7 @@ import { useRouter } from "@/i18n/routing";
 import { useRef, useState, useEffect } from "react";
 import { useNuqs } from "@/hooks/useNuqs";
 import { detailsForm } from "@/utils/constants";
-import apiClient from "@/lib/apiClient";
+import apiClient from "@/lib/api";
 import { Animate } from "@/components/ui/animate";
 import { Box, Container, Stack } from "@chakra-ui/react";
 import { LngSelector } from "@/components/build/lngSelector";
@@ -43,7 +43,7 @@ export const DetailsClient = () => {
   console.log(form); //
 
   const [agenda, setAgenda] = useState(defaults?.agendaTitles);
-  console.log(agenda); //
+  // console.log(agenda); //
 
   // useEffect(() => {
   //   if (defaults?.ourStoryText) {
