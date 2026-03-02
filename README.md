@@ -1,6 +1,7 @@
 # Allset
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app). It includes features such as **Auth0 authentication**, **AWS S3 image uploads**, **Chakra UI components**, **React Query state management**, and **multi-language support with next-intl**.
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app). 
+It is built as a Next.js App Router application with SSR (Server-Side Rendering) and SSG (Static Site Generation) support, and includes multi-language support via [`next-intl`](https://next-intl.dev/)
 
 ---
 
