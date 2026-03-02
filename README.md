@@ -8,15 +8,15 @@ It is built as a Next.js App Router application with SSR (Server-Side Rendering)
 ## Features
 
 - **User Authentication** via [Auth0](https://auth0.com/docs/quickstart/spa/react)
-- **Invitation management** with create/edit functionality
-- **Image upload per invitation** directly to AWS S3 (`invitations/{id}/` folder)
-- **Image lifecycle management**: images remain until invitation expiration; cleaned up later via cron job
+- **Invitation management** create, edit, and manage invitations with draft, active, and expired states.
+<!-- - **Image upload** directly to AWS S3.
+- **Data Lifecycle Management**: all invitation-related data, including images, remain available until the invitation expires; expired content is cleaned up automatically via a cron job. -->
 - **Responsive UI** using [Chakra UI](https://chakra-ui.com)
-- **Data fetching & caching** with [React Query](https://tanstack.com/query)
+- **Data fetching & caching** with [React Query](https://tanstack.com/query) & [Axios](https://axios-http.com/docs/intro)
 - **Date handling** via [date-fns](https://date-fns.org)
-- **Interactive components** like sliders and day pickers
-- **Animations** via [Framer Motion](https://www.framer.com/motion/)
+- **Interactive components** like sliders and day pickers 
 - **Multi-language support** with [next-intl](https://next-intl-docs.vercel.app)
+- **Animations** via [Framer Motion](https://www.framer.com/motion/)
 
 ---
 
