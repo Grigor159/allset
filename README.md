@@ -23,24 +23,12 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ### Install Dependencies
 
-npm install
-#### or
-yarn install
-#### or
-pnpm install
+npm install || yarn install || pnpm install
 
 ### Local Run
 
-npm run dev
-#### or
-yarn dev
-#### or
-pnpm dev
+npm run dev || yarn dev || pnpm dev
 
 ### Build
 
-npm run build
-#### or
-yarn build
-#### or
-pnpm build
+npm run build || yarn build || pnpm build
