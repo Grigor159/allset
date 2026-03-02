@@ -28,13 +28,15 @@ export const AlbumLink = ({ name, value, onChange, hide, required }) => {
           )}
         </Field.Label>
 
-        <InputUrl
-          name={name}
-          value={value ?? ""}
-          onChange={onChange}
-          placeholder={t("photo_video_placeholder")}
-          disabled={!checked}
-        />
+        {checked && (
+          <InputUrl
+            name={name}
+            value={value ?? ""}
+            onChange={onChange}
+            placeholder={t("photo_video_placeholder")}
+            // disabled={!checked}
+          />
+        )}
       </Field.Root>
     </Stack>
   );

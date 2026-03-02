@@ -17,6 +17,7 @@ import bg from "@/assets/imgs/choose_bg.png";
 import img from "@/assets/imgs/choose_img.png";
 import { choose } from "@/utils/constants";
 import { dash } from "@/assets/svgs";
+import { Animate } from "../ui/animate";
 
 export const Choose = () => {
   const t = useTranslations();
@@ -38,29 +39,31 @@ export const Choose = () => {
             <Stack gap="34px">
               <For each={choose}>
                 {({ id, title, description }) => (
-                  <Stack as="ul" key={id} gap="6px">
-                    <HStack
-                      as="li"
-                      gap="13px"
-                      fontSize={"18px"}
-                      lineHeight={"24px"}
-                      fontWeight={500}
-                      color={"#FFFFFF"}
-                    >
-                      <Icon>{dash.icon}</Icon>
-                      {t(title)}
-                    </HStack>
-                    <HStack
-                      as="li"
-                      fontSize={"14px"}
-                      lineHeight={"24px"}
-                      fontWeight={300}
-                      color={"#FFFFFF"}
-                      pl={"43px"}
-                    >
-                      {t(description)}
-                    </HStack>
-                  </Stack>
+                  <Animate>
+                    <Stack as="ul" key={id} gap="6px">
+                      <HStack
+                        as="li"
+                        gap="13px"
+                        fontSize={"18px"}
+                        lineHeight={"24px"}
+                        fontWeight={500}
+                        color={"#FFFFFF"}
+                      >
+                        <Icon>{dash.icon}</Icon>
+                        {t(title)}
+                      </HStack>
+                      <HStack
+                        as="li"
+                        fontSize={"14px"}
+                        lineHeight={"24px"}
+                        fontWeight={300}
+                        color={"#FFFFFF"}
+                        pl={"43px"}
+                      >
+                        {t(description)}
+                      </HStack>
+                    </Stack>
+                  </Animate>
                 )}
               </For>
             </Stack>

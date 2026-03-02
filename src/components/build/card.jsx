@@ -18,16 +18,25 @@ import {
   palleteName,
   palletHex,
   palletLast,
-  selected,
 } from "../../assets/svgs";
-import { formatPrice, formatUrl } from "../../utils/formatters";
+import { formatPrice } from "../../utils/formatters";
 
 export const Card = ({ el }) => {
   const t = useTranslations();
 
   const language = useLocale();
 
-  const { id, templateImage, name, description, pricing, paletteKeyword } = el;
+  const {
+    id,
+    templateImage,
+    name,
+    description,
+    pricing,
+    paletteKeyword,
+    createdByKeyword,
+    lovedByKeyword,
+    styleKeyword,
+  } = el;
 
   const [template, setTemplate] = useNuqs("template");
   const [_, setPalette] = useNuqs("palette");
@@ -76,7 +85,8 @@ export const Card = ({ el }) => {
         <Image
           w="100%"
           h="100%"
-          src={formatUrl(templateImage)}
+          // src={formatUrl(templateImage)}
+          src={templateImage}
           borderRadius="8px"
           transition="transform 0.3s ease"
         />
@@ -128,13 +138,13 @@ export const Card = ({ el }) => {
           <HStack>
             <Icon>{palleteName.icon}</Icon>
             <Text fontSize={"14px"} color={"#6B7280"}>
-              {paletteKeyword?.name[language]}
+              {createdByKeyword[language]}
             </Text>
           </HStack>
           <HStack>
             <Icon>{palletDesc.icon}</Icon>
             <Text fontSize={"14px"} color={"#6B7280"}>
-              {paletteKeyword?.description[language]}
+              {lovedByKeyword[language]}
             </Text>
           </HStack>
         </Flex>
@@ -156,12 +166,12 @@ export const Card = ({ el }) => {
               />
             ))}
           </HStack>
-          {/* <HStack>
+          <HStack>
             <Icon>{palletLast.icon}</Icon>
             <Text fontSize={"14px"} color={"#6B7280"}>
-              {paletteKeyword?.name[language]}
+              {styleKeyword[language]}
             </Text>
-          </HStack> */}
+          </HStack>
         </Flex>
       </VStack>
     </Stack>

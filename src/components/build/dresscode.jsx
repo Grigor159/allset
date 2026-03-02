@@ -29,7 +29,7 @@ export const Dresscode = ({
   const language = useLocale();
 
   const { data } = useGetTanstack("color-palettes");
-  console.log(data);
+  // console.log(data);
 
   const [checked, setChecked] = useState(true);
   const [selected, setSelected] = useState(null);
@@ -59,77 +59,79 @@ export const Dresscode = ({
         </Field.Label>
 
         {checked && (
-          <Flex gap={"16px"} flexWrap={"wrap"}>
-            {data?.map((item) => {
-              const isSelected = selected === item.id;
+          <>
+            <Flex gap={"16px"} flexWrap={"wrap"}>
+              {data?.map((item) => {
+                const isSelected = selected === item.id;
 
-              return (
-                <Box
-                  key={item.id}
-                  border="1px solid"
-                  borderColor={isSelected ? "#0041434D" : "transparent"}
-                  boxShadow={
-                    isSelected && "0px 4px 10px 0px rgba(0, 65, 67, 0.1)"
-                  }
-                  borderRadius="8px"
-                  bg="#F9FAFB"
-                  p="16px"
-                  transition="all 0.3s ease"
-                  _hover={{
-                    background: "#0041430D",
-                    cursor: "pointer",
-                  }}
-                  tabIndex={0}
-                  w="222px"
-                  onClick={() => setSelected(item.id)}
-                >
-                  <HStack gap={"8px"} pb="12px">
-                    {item.colors.map((color, index) => (
-                      <VStack key={color} spacing={1}>
-                        <Box
-                          w="34px"
-                          h="34px"
-                          borderRadius="50%"
-                          bg={color}
-                          ml={index === 0 ? 0 : "-22px"}
-                          border={"1px solid"}
-                          borderColor={"white"}
-                        />
-                      </VStack>
-                    ))}
-                  </HStack>
+                return (
+                  <Box
+                    key={item.id}
+                    border="1px solid"
+                    borderColor={isSelected ? "#0041434D" : "transparent"}
+                    boxShadow={
+                      isSelected && "0px 4px 10px 0px rgba(0, 65, 67, 0.1)"
+                    }
+                    borderRadius="8px"
+                    bg="#F9FAFB"
+                    p="16px"
+                    transition="all 0.3s ease"
+                    _hover={{
+                      background: "#0041430D",
+                      cursor: "pointer",
+                    }}
+                    tabIndex={0}
+                    w="222px"
+                    onClick={() => setSelected(item.id)}
+                  >
+                    <HStack gap={"8px"} pb="12px">
+                      {item.colors.map((color, index) => (
+                        <VStack key={color} spacing={1}>
+                          <Box
+                            w="34px"
+                            h="34px"
+                            borderRadius="50%"
+                            bg={color}
+                            ml={index === 0 ? 0 : "-22px"}
+                            border={"1px solid"}
+                            borderColor={"white"}
+                          />
+                        </VStack>
+                      ))}
+                    </HStack>
 
-                  <Text fontSize="14px" fontWeight={"500"}>
-                    {item.name[language] || item.name.en}
-                  </Text>
-                  <Text fontSize="12px" color="#6B7280">
-                    {item.description[language] || item.description.en}
-                  </Text>
+                    <Text fontSize="14px" fontWeight={"500"}>
+                      {item.name[language] || item.name.en}
+                    </Text>
+                    <Text fontSize="12px" color="#6B7280">
+                      {item.description[language] || item.description.en}
+                    </Text>
 
-                  <Flex flexWrap={"wrap"}>
-                    <For each={item.colors}>
-                      {(el, index) => (
-                        <Text key={index} fontSize="12px" color="#BBBEC3">
-                          {el}
-                          {index !== item.colors.length - 1 ? "," : ""}
-                        </Text>
-                      )}
-                    </For>
-                  </Flex>
-                </Box>
-              );
-            })}
-          </Flex>
+                    <Flex flexWrap={"wrap"}>
+                      <For each={item.colors}>
+                        {(el, index) => (
+                          <Text key={index} fontSize="12px" color="#BBBEC3">
+                            {el}
+                            {index !== item.colors.length - 1 ? "," : ""}
+                          </Text>
+                        )}
+                      </For>
+                    </Flex>
+                  </Box>
+                );
+              })}
+            </Flex>
+
+            <TextArea
+              languages={languages}
+              name={name}
+              value={value?.description}
+              onChange={handleInputChange}
+              placeholder={t("dresscode_placeholder")}
+              // disabled={!checked}
+            />
+          </>
         )}
-
-        <TextArea
-          languages={languages}
-          name={name}
-          value={value?.description}
-          onChange={handleInputChange}
-          placeholder={t("dresscode_placeholder")}
-          disabled={!checked}
-        />
       </Field.Root>
     </Stack>
   );

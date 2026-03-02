@@ -43,7 +43,7 @@ export const DetailsClient = () => {
   console.log(form); //
 
   const [agenda, setAgenda] = useState(defaults?.agendaTitles);
-  console.log(agenda); //
+  // console.log(agenda); //
 
   // useEffect(() => {
   //   if (defaults?.ourStoryText) {

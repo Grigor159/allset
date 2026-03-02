@@ -3,7 +3,6 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 import { Heading } from "@chakra-ui/react";
-import Typewritter from "typewriter-effect";
 
 export const Title = ({ as, text, fontSize, color, textAlign }) => {
   const t = useTranslations();
@@ -16,16 +15,7 @@ export const Title = ({ as, text, fontSize, color, textAlign }) => {
       fontSize={fontSize ?? "32px"}
       color={color ?? "#161E24"}
       textAlign={textAlign ?? "unset"}
-    >
-      <Typewritter
-        options={{
-          delay: 70,
-          strings: t(text),
-          autoStart: true,
-          loop: false,
-          cursor: "",
-        }}
-      />
-    </Heading>
+      dangerouslySetInnerHTML={{ __html: t(text) }}
+    />
   );
 };

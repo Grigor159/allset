@@ -41,29 +41,32 @@ export const Contact = ({ name, value, onChange, hide, required }) => {
             <Switcher checked={checked} onChange={handleSwitchChange} />
           )}
         </Field.Label>
-        <Flex w="100%" gap="16px" justify={"space-between"}>
-          <InputSimple
-            name="name"
-            value={value?.name ?? ""}
-            onChange={handleNestedChange}
-            placeholder={t("name")}
-            disabled={!checked}
-          />
-          <InputSimple
-            name="phone"
-            value={value?.phone ?? ""}
-            onChange={handleNestedChange}
-            placeholder={t("phone")}
-            disabled={!checked}
-          />
-          <InputSimple
-            name="email"
-            value={value?.email ?? ""}
-            onChange={handleNestedChange}
-            placeholder={t("email")}
-            disabled={!checked}
-          />
-        </Flex>
+
+        {checked && (
+          <Flex w="100%" gap="16px" justify={"space-between"}>
+            <InputSimple
+              name="name"
+              value={value?.name ?? ""}
+              onChange={handleNestedChange}
+              placeholder={t("name")}
+              // disabled={!checked}
+            />
+            <InputSimple
+              name="phone"
+              value={value?.phone ?? ""}
+              onChange={handleNestedChange}
+              placeholder={t("phone")}
+              // disabled={!checked}
+            />
+            <InputSimple
+              name="email"
+              value={value?.email ?? ""}
+              onChange={handleNestedChange}
+              placeholder={t("email")}
+              // disabled={!checked}
+            />
+          </Flex>
+        )}
       </Field.Root>
     </Stack>
   );
