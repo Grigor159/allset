@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useGetTanstack } from "@/hooks/useTanstack";
-import { useNuqs } from "@/hooks/useNuqs";
+import { useQueryState } from "nuqs";
 import { useRouter } from "@/i18n/routing";
 import { Box, Flex, For, Image, Skeleton } from "@chakra-ui/react";
 // import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,7 +15,7 @@ export const PlanningSlide = () => {
   const router = useRouter();
 
   const { isLoading, data } = useGetTanstack("templates");
-  const [_, setTemplate] = useNuqs("template");
+  const [_, setTemplate] = useQueryState("template");
 
   const handleSelect = (id) => {
     setTemplate(id);

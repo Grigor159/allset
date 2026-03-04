@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import { useNuqs } from "@/hooks/useNuqs";
+import { useQueryState } from "nuqs";
 import { useGetTanstack } from "@/hooks/useTanstack";
 import { Animate } from "@/components/ui/animate";
 import { Flex } from "@chakra-ui/react";
@@ -12,7 +12,7 @@ export const CustomisationsClient = () => {
   const language = useLocale();
 
   const { data } = useGetTanstack("templates");
-  const [template] = useNuqs("template");
+  const [template] = useQueryState("template");
 
   const selectedTemplate = data?.find((item) => item.id === template) || [];
 

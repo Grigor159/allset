@@ -20,7 +20,7 @@ export const Me = ({ isLoading, data }) => {
         <SkeletonCircle w="124px" h="124px" />
       ) : (
         <Avatar.Root w="124px" h="124px">
-          <Avatar.Fallback name={name} />
+          <Avatar.Fallback name={data?.name} />
           <Avatar.Image src={data?.picture} />
         </Avatar.Root>
       )}
@@ -34,7 +34,7 @@ export const Me = ({ isLoading, data }) => {
           </Text>
           <Text>{data?.email}</Text>
 
-          <Flex
+          {data?.staus && <Flex
             w="158px"
             align={"center"}
             justify={"center"}
@@ -46,9 +46,10 @@ export const Me = ({ isLoading, data }) => {
           >
             <Image src={premium.src} w="21px" h="21px" />
             <Text fontSize={"14px"} fontWeight={"500"} color={"#E38D83"}>
-              Premium user
+              {/* Premium user */}
+              {data?.staus}
             </Text>
-          </Flex>
+          </Flex>}
         </Stack>
       )}
     </HStack>

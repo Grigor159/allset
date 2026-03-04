@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { useQueryState } from "nuqs";
 import {
   Button,
   Field,
@@ -17,7 +18,6 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { checked, payment } from "../../assets/svgs";
-import { useQueryState } from "nuqs";
 import { Label } from "@/components/build/typography/label";
 import { paymentMethods } from "../../utils/constants";
 import { Link } from "@/i18n/routing";
@@ -27,12 +27,6 @@ export const Payment = () => {
 
   const [pay, setPay] = useQueryState("payment_method");
   const [accept, setAccept] = useQueryState("terms_accepted");
-
-  const handleChange = (value) => {
-    const checked =
-      typeof value === "object" && "checked" in value ? value.checked : value;
-    setAccept(checked);
-  };
 
   return (
     <Stack borderRadius={"8px"} bg="white" p="24px" gap={"16px"}>
@@ -61,7 +55,7 @@ export const Payment = () => {
                   bg="#F9FAFB"
                   br="4px"
                 >
-                  <Image src={src.src} alt="img"/>
+                  <Image src={src.src} alt="img" />
                 </Flex>
                 {/* <RadioGroup.ItemText>{value}</RadioGroup.ItemText> */}
               </RadioGroup.Item>
@@ -72,8 +66,9 @@ export const Payment = () => {
 
       <Checkbox.Root
         size="sm"
-        defaultChecked={accept == "true" ? true : false}
-        onCheckedChange={handleChange}
+        checked={accept}
+        onCheckedChange={(e) => setAccept(!!e.checked)}
+        // onCheckedChange={handleChange}
         alignItems="start"
       >
         <Checkbox.HiddenInput />

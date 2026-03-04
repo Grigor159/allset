@@ -29,8 +29,8 @@ export default function Layout({ children }) {
       minH={"100%"}
       pt={"50px"}
       bgSize={getAuthBgSize(pathname)}
-      bgRepeat="no-repeat"
       bgPos={getAuthBgPos(pathname)}
+      bgRepeat="no-repeat"
     >
       <Container maxW="1360px" px={0}>
         <Head text={getAuthTitle(pathname)} />

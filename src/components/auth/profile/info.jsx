@@ -6,19 +6,22 @@ import { queryClient } from "@/providers/queryProvider";
 import { error, success } from "@/components/ui/alerts";
 import { Field, Input, Skeleton, Stack, Text } from "@chakra-ui/react";
 
-export const MyInfo = ({ isLoading, data }) => {
+export const Info = ({ isLoading, data }) => {
   const timers = useRef({});
   const [edited, setEdited] = useState({});
 
-  const { mutate } = useMutateAuthTanstack("user", "patch", {
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["user"] });
-      success("Personal info has been changed.");
+  const { isPending, mutate } = useMutateAuthTanstack(
+    "user",
+    "patch",
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["user"] });
+        success("Profile information has been changed.");
+      },
+      onError: (err) =>
+        error(err?.response?.data?.error || "Personal info editing error!"),
     },
-    onError: (err) =>
-      error(err?.response?.data?.error || "Personal info editing error!"),
-  });
-
+  );
 
   const handleChange = (field) => (e) => {
     const value = e.target.value;
@@ -31,10 +34,10 @@ export const MyInfo = ({ isLoading, data }) => {
       if (value !== data?.[field]) {
         mutate({ [field]: value });
       }
-    }, 700);
+    }, 1000);
   };
 
-  if (isLoading) return <Skeleton w="672px" h="394px" borderRadius={"8px"} />;
+  if (isLoading || isPending) return <Skeleton w="672px" h="448px" borderRadius={"8px"} />;
 
   const val = (key) => edited[key] ?? data?.[key] ?? "";
 

@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect } from "react";
 import { detailsForm } from "@/utils/constants";
 import { useRouter } from "@/i18n/routing";
-import { useNuqs } from "@/hooks/useNuqs";
+import { useQueryState } from "nuqs";
 import { useGetTanstack } from "@/hooks/useTanstack";
 import apiClient from "@/lib/api";
 import { Box, Container, Stack } from "@chakra-ui/react";
@@ -28,8 +28,8 @@ export const DetailsClient = () => {
 
   const hiddenFieldsRef = useRef({});
 
-  const [template] = useNuqs("template");
-  const [palette] = useNuqs("palette");
+  const [template] = useQueryState("template");
+  const [palette] = useQueryState("palette");
 
   const { data } = useGetTanstack("templates");
 

@@ -114,12 +114,12 @@ export function getTimeUntil(fullDate) {
 //
 import profile_bg from "@/assets/imgs/profile_bg.png";
 import invitations_bg from "@/assets/imgs/invitations_bg.png";
-import { transliterate } from "./formatters";
+// import { transliterate } from "./formatters";
 
 export function getAuthBg(pathname) {
   if (pathname?.includes("profile")) {
     return `url(${profile_bg.src})`
-  } else if ((pathname?.includes("invitations"))) {
+  } else if ((pathname?.includes("invitations") && !pathname?.includes("guests"))) {
     return `url(${invitations_bg.src})`
   }
 }
@@ -127,7 +127,7 @@ export function getAuthBg(pathname) {
 export function getAuthBgSize(pathname) {
   if (pathname?.includes("profile")) {
     return "contain"
-  } else if ((pathname?.includes("invitations"))) {
+  } else if ((pathname?.includes("invitations") && !pathname?.includes("guests"))) {
     return "cover"
   }
 }
@@ -135,7 +135,7 @@ export function getAuthBgSize(pathname) {
 export function getAuthBgPos(pathname) {
   if (pathname?.includes("profile")) {
     return "right"
-  } else if ((pathname?.includes("invitations"))) {
+  } else if ((pathname?.includes("invitations") && !pathname?.includes("guests"))) {
     return "center"
   }
 }
@@ -144,7 +144,7 @@ export function getAuthBgPos(pathname) {
 export function getAuthTitle(pathname) {
   if (pathname?.includes("profile")) {
     return "profile"
-  } else {
+  } else if ((pathname?.includes("invitations") && !pathname?.includes("guests"))) {
     return "invitations"
-  }
+  } else return "guests"
 }

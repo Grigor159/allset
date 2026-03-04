@@ -51,7 +51,7 @@ export const useGetAuthTanstack = (name) => {
 
 // TODO get token by getAccessTokenSilently,store in cookies and remove from here
 export const useMutateAuthTanstack = (name, method, options) => {
-    const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
+    const { isAuthenticated, getAccessTokenSilently } = useAuth0();
 
     return useMutation({
         mutationFn: async (body) => {
@@ -70,6 +70,5 @@ export const useMutateAuthTanstack = (name, method, options) => {
             return data;
         },
         ...options,
-        enabled: !isLoading && isAuthenticated,
     });
 };

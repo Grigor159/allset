@@ -10,6 +10,7 @@ export const Head = ({ text }) => {
 
   return (
     <Flex
+    align={"center"}
       justify={"space-between"}
       pb={"21px"}
     >

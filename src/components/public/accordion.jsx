@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useLocale } from "next-intl";
-import { useNuqs } from "@/hooks/useNuqs";
+import { useQueryState } from "nuqs";
 import { Accordion as Acc, For, Span, Image } from "@chakra-ui/react";
 import plus from "@/assets/imgs/plus.png";
 import minus from "@/assets/imgs/minus.png";
@@ -10,7 +10,7 @@ import minus from "@/assets/imgs/minus.png";
 export const Accordion = ({ faqs }) => {
   const language = useLocale();
 
-  const [question, setQuestion] = useNuqs("question");
+  const [question, setQuestion] = useQueryState("question");
 
   const handleChange = (e) => {
     const next = e.value?.[0];

@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/routing";
 import {
   Stack,
   Image,
@@ -14,19 +16,16 @@ import {
 import img from "@/assets/imgs/active_bg.png";
 import { editActive, guestList } from "@/assets/svgs";
 import { formatDDMMYYYY } from "@/utils/formatters";
-import { useLocale } from "next-intl";
-import { useRouter } from "@/i18n/routing";
 import { useQueryState } from "nuqs";
 
 export const Card = ({ el }) => {
+  const t = useTranslations();
   const router = useRouter();
   const language = useLocale();
 
   const [tab] = useQueryState("tab", {
     defaultValue: "active",
   });
-
-  console.log(el);
 
   const { id, publishedAt, title } = el;
 
@@ -111,11 +110,10 @@ export const Card = ({ el }) => {
             },
           }}
           transition="all 0.3s ease"
+          onClick={() => router.push(`invitations/${tab}/${id}/guests`)}
         >
-          <Icon onClick={() => router.push(`invitations/${tab}/${id}/guests`)}>
-            {guestList.icon}
-          </Icon>
-          Guest list
+          <Icon>{guestList.icon}</Icon>
+          {t("guests")}
         </Button>
         <Button
           w="52px"

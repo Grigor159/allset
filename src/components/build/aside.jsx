@@ -1,12 +1,12 @@
 "use client";
 
-import { useNuqs } from "../../hooks/useNuqs";
+import { useQueryState } from "nuqs";
 import { Box, Text, VStack, HStack, Stack, For, Flex } from "@chakra-ui/react";
 import { MidText } from "@/components/build/typography/midText";
 import { SubText } from "@/components/build/typography/subText";
 
 export const Aside = ({ data, language }) => {
-  const [palette, setPalette] = useNuqs("palette");
+  const [palette, setPalette] = useQueryState("palette");
   // console.log(data);
 
   return (

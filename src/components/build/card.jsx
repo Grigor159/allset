@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { useNuqs } from "../../hooks/useNuqs";
+import { useQueryState } from "nuqs";
 import {
   Box,
   Flex,
@@ -37,8 +37,8 @@ export const Card = ({ el }) => {
     styleKeyword,
   } = el;
 
-  const [template, setTemplate] = useNuqs("template");
-  const [_, setPalette] = useNuqs("palette");
+  const [template, setTemplate] = useQueryState("template");
+  const [_, setPalette] = useQueryState("palette");
 
   const isSelected = template == id;
 

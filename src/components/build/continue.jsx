@@ -1,6 +1,5 @@
 "use client";
 
-import { useNuqs } from "../../hooks/useNuqs";
 import { useQueryState } from "nuqs";
 import { Link, usePathname } from "@/i18n/routing";
 import { useSearch } from "@/hooks/useSearch";
@@ -11,8 +10,8 @@ import { Button } from "@chakra-ui/react";
 import { next } from "@/assets/svgs";
 
 export const Continue = () => {
-  const [template] = useNuqs("template");
-  const [palette] = useNuqs("palette");
+  const [template] = useQueryState("template");
+  const [palette] = useQueryState("palette");
   const [accept] = useQueryState("terms_accepted");
 
   const t = useTranslations();
