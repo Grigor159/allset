@@ -138,7 +138,7 @@ export const List = ({ isLoading, data }) => {
                       <Menu.Positioner>
                         <Menu.Content p="0">
                           <Menu.Item value="edit" p="0">
-                            <Edit guestID={item.id} />
+                            <Edit id={item.id} />
                           </Menu.Item>
                           <Menu.Item value="delete" p="0">
                             <Button
@@ -148,7 +148,7 @@ export const List = ({ isLoading, data }) => {
                               _hover={{ bg: "#CF2B2B", color: "#FFFFFF" }}
                               onClick={(e) => e.stopPropagation()}
                             >
-                              Delete
+                              {t("delete")}
                             </Button>
                           </Menu.Item>
                         </Menu.Content>

@@ -56,6 +56,9 @@
     "add_agenda": "Add my version of wedding agenda",
     "add_variant": "Add my variant",
     "add": "Add",
+    "edit": "Edit",
+    "save":"Save",
+    "delete": "Delete",
     "time": "Time",
     "location": "URL Location",
     "export": "Export to Excel (available after publishing)",
@@ -169,5 +172,7 @@
     "table_number": "Table Number",
     "by_me": "Added by me",
     "guest": "Guests",
-    "edit_guest": "Edit guest information"
+    "edit_guest": "Edit guest information",
+    "groom":"Groom",
+    "bride":"Bride"
 }

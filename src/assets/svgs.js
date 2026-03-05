@@ -458,3 +458,19 @@ export const actions = {
         </svg>
     )
 }
+
+export const increase = {
+    icon: (
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.5 6.5H0V5.5H5.5V0H6.5V5.5H12V6.5H6.5V12H5.5V6.5Z" fill="#6B7280" />
+        </svg>
+    )
+}
+
+export const decrease = {
+    icon: (
+        <svg width="12" height="1" viewBox="0 0 12 1" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.5 1H0V0H5.5H6.5H12V1H6.5H5.5Z" fill="#6B7280" />
+        </svg>
+    )
+}

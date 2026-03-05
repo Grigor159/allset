@@ -361,6 +361,8 @@ export const guestsTableHeader = [
   ""
 ];
 
+export const guestEditOptions = ["GROOM", "BRIDE"];
+
 
 // export const translitMap = {
 //   // Armenian letters

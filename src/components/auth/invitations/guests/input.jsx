@@ -2,9 +2,9 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
-import { Field, Input } from "@chakra-ui/react";
+import { Field, Input as Ipt } from "@chakra-ui/react";
 
-export const InputLabel = ({ label, name, value, onChange }) => {
+export const Input = ({ label, name, value, onChange }) => {
   const t = useTranslations();
 
   return (
@@ -13,7 +13,7 @@ export const InputLabel = ({ label, name, value, onChange }) => {
       <Field.Label fontSize="12px" fontWeight="400" color="#6B7280">
         {t(label)} <Field.RequiredIndicator />
       </Field.Label>
-      <Input
+      <Ipt
         name={`${name}`}
         value={value ?? ""}
         onChange={onChange}

@@ -10,18 +10,14 @@ export const Info = ({ isLoading, data }) => {
   const timers = useRef({});
   const [edited, setEdited] = useState({});
 
-  const { isPending, mutate } = useMutateAuthTanstack(
-    "user",
-    "patch",
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["user"] });
-        success("Profile information has been changed.");
-      },
-      onError: (err) =>
-        error(err?.response?.data?.error || "Personal info editing error!"),
+  const { mutate, isPending } = useMutateAuthTanstack("user", "patch", {
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      success("Profile information has been changed.");
     },
-  );
+    onError: (err) =>
+      error(err?.response?.data?.error || "Personal info editing error!"),
+  });
 
   const handleChange = (field) => (e) => {
     const value = e.target.value;
@@ -37,7 +33,8 @@ export const Info = ({ isLoading, data }) => {
     }, 1000);
   };
 
-  if (isLoading || isPending) return <Skeleton w="672px" h="448px" borderRadius={"8px"} />;
+  if (isLoading || isPending)
+    return <Skeleton w="672px" h="448px" borderRadius={"8px"} />;
 
   const val = (key) => edited[key] ?? data?.[key] ?? "";
 

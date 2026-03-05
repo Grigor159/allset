@@ -1,31 +1,94 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
-import { Button, CloseButton, Dialog, Portal, Stack } from "@chakra-ui/react";
-import { InputLabel } from "./inputLabel";
-import { useGetAuthTanstack } from "@/hooks/useTanstack";
+import { useGetAuthTanstack, useMutateAuthTanstack } from "@/hooks/useTanstack";
+import { queryClient } from "@/providers/queryProvider";
+import {
+  Button,
+  CloseButton,
+  Dialog,
+  For,
+  Portal,
+  Stack,
+} from "@chakra-ui/react";
+import { Input } from "./input";
+import { Radio } from "./radio";
+import { Collection } from "./collection";
+import { error, success } from "@/components/ui/alerts";
 
-export const Edit = ({ guestID }) => {
+export const Edit = ({ id }) => {
   const t = useTranslations();
-  const { id } = useParams();
+  const closeButtonRef = useRef(null);
+  const { isLoading, data } = useGetAuthTanstack(`confirmations/${id}`);
+  console.log(data);
 
-  //   const { isLoading, data } = useGetAuthTanstack(
-  //     `confirmations/invitation/${id}?filterId=${guestID}`,
-  //   );
-  // console.log("filtered_guest",data);
+  const { mutate, isPending } = useMutateAuthTanstack("", "", {
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [""] });
+      success(" has been changed.");
+    },
+    onError: (err) => error(err?.response?.data?.error || " editing error!"),
+  });
+
+  const [form, setForm] = useState({
+    mainGuest: "",
+    secondaryGuests: [],
+    tableNumber: 0,
+    guestSide: "",
+  });
+  console.log(form);
+
+  const handleOpen = () => {
+    if (data) {
+      setForm({
+        mainGuest: data.mainGuest || "",
+        secondaryGuests: data.secondaryGuests || [],
+        tableNumber: data.tableNumber || 0,
+        guestSide: data.guestSide || "",
+      });
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSecondaryGuestChange = (index, value) => {
+    setForm((prev) => {
+      const updated = [...prev.secondaryGuests];
+      updated[index] = value;
+
+      return {
+        ...prev,
+        secondaryGuests: updated,
+      };
+    });
+  };
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    mutate(form);
+    console.log("submit", form);
+    if (closeButtonRef.current) closeButtonRef.current.click();
+  };
 
   return (
-    <Dialog.Root placement="center" motionPreset="slide-in-bottom">
+    <Dialog.Root placement="center" motionPreset="slide-in-bottom" as="form">
       <Dialog.Trigger asChild onClick={(e) => e.stopPropagation()}>
         <Button
           w="100%"
           variant="plain"
           outline="none"
           _hover={{ bg: "#80A0A133" }}
+          onClick={handleOpen}
         >
-          Edit
+          {t("edit")}
         </Button>
       </Dialog.Trigger>
       <Portal>
@@ -35,12 +98,47 @@ export const Edit = ({ guestID }) => {
             <Dialog.Header>
               <Dialog.Title>{t("edit_guest")}</Dialog.Title>
             </Dialog.Header>
-            <Dialog.Body
-              as={Stack}
-              gap="24px"
-            >
-              <InputLabel label="guest_name" name="name" value onChange />
-              <InputLabel label="accompanying_name" name="" value onChange />
+            <Dialog.Body as={Stack} gap="24px">
+              <Input
+                label="guest_name"
+                name="mainGuest"
+                value={form.mainGuest}
+                onChange={handleChange}
+              />
+              <For each={form.secondaryGuests}>
+                {(el, idx) => (
+                  <Input
+                    key={idx}
+                    label="accompanying_name"
+                    value={el}
+                    onChange={(e) =>
+                      handleSecondaryGuestChange(idx, e.target.value)
+                    }
+                  />
+                )}
+              </For>
+              {/* {form.secondaryGuests.map((guest, index) => (
+                <Input
+                  key={index}
+                  label="accompanying_name"
+                  value={guest}
+                  onChange={(e) =>
+                    handleSecondaryGuestChange(index, e.target.value)
+                  }
+                />
+              ))} */}
+              <Radio
+                value={form.guestSide}
+                onChange={(value) =>
+                  setForm((prev) => ({ ...prev, guestSide: value }))
+                }
+              />
+              <Collection
+                value={form.tableNumber}
+                onChange={(value) =>
+                  setForm((prev) => ({ ...prev, tableNumber: value }))
+                }
+              />
             </Dialog.Body>
             <Dialog.Footer>
               <Button
@@ -63,12 +161,15 @@ export const Edit = ({ guestID }) => {
                   },
                 }}
                 transition="all 0.3s ease"
+                type="button" // not submit
+                onClick={handleSave}
+                // onClick={()=>}
               >
-                Save
+                {t("save")}
               </Button>
             </Dialog.Footer>
             <Dialog.CloseTrigger asChild>
-              <CloseButton size="sm" />
+              <CloseButton size="sm" ref={closeButtonRef} />
             </Dialog.CloseTrigger>
           </Dialog.Content>
         </Dialog.Positioner>
