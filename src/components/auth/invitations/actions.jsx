@@ -6,9 +6,11 @@ import { usePathname, useRouter } from "@/i18n/routing";
 import { Flex, InputGroup, Input, Icon } from "@chakra-ui/react";
 import { plus, search } from "@/assets/svgs";
 import { Tooltip } from "@/components/ui/tooltip";
+import { Add } from "./guests/add";
+import { Filter } from "./guests/filter";
 
 export const Actions = () => {
-  const t = useTranslations()
+  const t = useTranslations();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -16,6 +18,11 @@ export const Actions = () => {
 
   return (
     <Flex gap="21px" align={"center"}>
+      {pathname?.includes("guests") && (
+        <Tooltip positioning={{ placement: "top" }} content={t("filter")}>
+          <Filter />
+        </Tooltip>
+      )}
       <InputGroup startElement={<Icon>{search.icon}</Icon>}>
         <Input
           w="326px"
@@ -33,18 +40,22 @@ export const Actions = () => {
         positioning={{ placement: "top" }}
         content={t("add")}
       >
-        <Icon
-          onClick={() => router.push("/build/templates")}
-          cursor={"pointer"}
-          _hover={{
-            "& path": {
-              fill: "#004143",
-              transition: "all 0.3s ease",
-            },
-          }}
-        >
-          {plus.icon}
-        </Icon>
+        {pathname?.includes("guests") ? (
+          <Add />
+        ) : (
+          <Icon
+            onClick={() => router.push("/build/templates")}
+            cursor={"pointer"}
+            _hover={{
+              "& path": {
+                fill: "#004143",
+                transition: "all 0.3s ease",
+              },
+            }}
+          >
+            {plus.icon}
+          </Icon>
+        )}
       </Tooltip>
     </Flex>
   );

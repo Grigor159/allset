@@ -2,13 +2,14 @@
 
 import React, { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { useGetAuthTanstack, useMutateAuthTanstack } from "@/hooks/useTanstack";
+import { useMutateAuthTanstack } from "@/hooks/useTanstack";
 import { queryClient } from "@/providers/queryProvider";
 import {
   Button,
   CloseButton,
   Dialog,
   For,
+  Icon,
   Portal,
   Stack,
 } from "@chakra-ui/react";
@@ -16,12 +17,14 @@ import { Input } from "./input";
 import { Radio } from "./radio";
 import { Collection } from "./collection";
 import { error, success } from "@/components/ui/alerts";
+import { plus } from "@/assets/svgs";
+import { useParams } from "next/navigation";
 
-export const Edit = ({ id }) => {
+export const Add = () => {
   const t = useTranslations();
   const closeButtonRef = useRef(null);
-  const { isLoading, data } = useGetAuthTanstack(`confirmations/${id}`);
-  console.log(data);
+  const { id } = useParams();
+  console.log(id);
 
   const { mutate, isPending } = useMutateAuthTanstack("", "", {
     onSuccess: () => {
@@ -38,17 +41,6 @@ export const Edit = ({ id }) => {
     guestSide: "",
   });
   console.log(form);
-
-  const handleOpen = () => {
-    if (data) {
-      setForm({
-        mainGuest: data.mainGuest || "",
-        secondaryGuests: data.secondaryGuests || [],
-        tableNumber: data.tableNumber || 0,
-        guestSide: data.guestSide || "",
-      });
-    }
-  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -71,7 +63,7 @@ export const Edit = ({ id }) => {
     });
   };
 
-  const handleSave = (e) => {
+  const handleAdd = (e) => {
     e.preventDefault();
     mutate(form);
     console.log("submit", form);
@@ -81,22 +73,24 @@ export const Edit = ({ id }) => {
   return (
     <Dialog.Root placement="center" motionPreset="slide-in-bottom" as="form">
       <Dialog.Trigger asChild onClick={(e) => e.stopPropagation()}>
-        <Button
-          w="100%"
-          variant="plain"
-          outline="none"
-          _hover={{ bg: "#80A0A133" }}
-          onClick={handleOpen}
+        <Icon
+          cursor={"pointer"}
+          _hover={{
+            "& path": {
+              fill: "#004143",
+              transition: "all 0.3s ease",
+            },
+          }}
         >
-          {t("edit")}
-        </Button>
+          {plus.icon}
+        </Icon>
       </Dialog.Trigger>
       <Portal>
         <Dialog.Backdrop />
         <Dialog.Positioner onClick={(e) => e.stopPropagation()}>
           <Dialog.Content>
             <Dialog.Header>
-              <Dialog.Title>{t("edit_guest")}</Dialog.Title>
+              <Dialog.Title>{t("add_guest")}</Dialog.Title>
             </Dialog.Header>
             <Dialog.Body as={Stack} gap="24px">
               <Input
@@ -152,9 +146,9 @@ export const Edit = ({ id }) => {
                 }}
                 transition="all 0.3s ease"
                 type="button"
-                onClick={handleSave}
+                onClick={handleAdd}
               >
-                {t("save")}
+                {t("add")}
               </Button>
             </Dialog.Footer>
             <Dialog.CloseTrigger asChild>

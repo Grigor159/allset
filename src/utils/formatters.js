@@ -71,3 +71,6 @@ export const formatDDMMYYYY = (date) => {
 
   return `${day}.${month}.${year}`;
 }
+
+export const joinFilters = (filters) => filters.join(",");
+

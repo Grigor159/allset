@@ -58,6 +58,7 @@
     "add": "Add",
     "edit": "Edit",
     "save":"Save",
+    "filter":"Filter",
     "delete": "Delete",
     "time": "Time",
     "location": "URL Location",
@@ -173,6 +174,7 @@
     "by_me": "Added by me",
     "guest": "Guests",
     "edit_guest": "Edit guest information",
+    "add_guest": "Add guest",
     "groom":"Groom",
     "bride":"Bride"
 }
