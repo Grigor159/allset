@@ -15,7 +15,7 @@ import {
   Portal,
   Stack,
 } from "@chakra-ui/react";
-import { error, success } from "@/components/ui/alerts";
+import { error } from "@/components/ui/alerts";
 import { checked, filter } from "@/assets/svgs";
 import { useParams } from "next/navigation";
 import { joinFilters } from "@/utils/formatters";
@@ -25,20 +25,23 @@ export const Filter = () => {
   const locale = useLocale();
   const closeButtonRef = useRef(null);
 
-  const { id } = useParams();
   const [checkedFilters, setCheckedFilters] = useState([]);
 
-  const { isLoading, data } = useGetAuthTanstack("confirmations/filters");
+  const { id } = useParams();
+  const { data } = useGetAuthTanstack("confirmations/filters");
 
   const { mutate, isPending } = useMutateAuthTanstack(
     `confirmations/invitation/${id}?filterId=${joinFilters(checkedFilters)}`,
     "get",
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["confirmations/invitation"] });
-        success(" has been changed.");
+      onSuccess: (data) => {
+        console.log(data);
+
+        // queryClient.invalidateQueries({ queryKey: [`confirmations/invitation/${id}`] });
+        queryClient.setQueryData([`confirmations/invitation/${id}`], data);
       },
-      onError: (err) => error(err?.response?.data?.error || " editing error!"),
+      onError: (err) =>
+        error(err?.response?.data?.error || "Filtration error!"),
     },
   );
 
@@ -57,7 +60,7 @@ export const Filter = () => {
   };
 
   return (
-    <Dialog.Root placement="center" motionPreset="slide-in-bottom" as="form">
+    <Dialog.Root placement="center" motionPreset="slide-in-bottom">
       <Dialog.Trigger asChild onClick={(e) => e.stopPropagation()}>
         <IconButton variant="ghost">{filter.icon}</IconButton>
       </Dialog.Trigger>

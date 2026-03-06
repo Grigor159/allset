@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useMutateAuthTanstack } from "@/hooks/useTanstack";
+import { useParams } from "next/navigation";
 import { queryClient } from "@/providers/queryProvider";
 import {
   Button,
@@ -18,7 +19,6 @@ import { Radio } from "./radio";
 import { Collection } from "./collection";
 import { error, success } from "@/components/ui/alerts";
 import { plus } from "@/assets/svgs";
-import { useParams } from "next/navigation";
 
 export const Add = () => {
   const t = useTranslations();
