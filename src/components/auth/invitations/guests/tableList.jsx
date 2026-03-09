@@ -11,9 +11,11 @@ import {
   Flex,
   Text,
   Skeleton,
+  For,
 } from "@chakra-ui/react";
 import { downloadTable, table } from "@/assets/svgs";
 import { downloadTableList } from "@/utils/helpers";
+import { TableCard } from "./tableCard";
 
 export const TableList = () => {
   const t = useTranslations();
@@ -30,7 +32,7 @@ export const TableList = () => {
   }
 
   return (
-    <Dialog.Root placement="center" motionPreset="slide-in-bottom" size="lg">
+    <Dialog.Root placement="center" motionPreset="slide-in-bottom" >
       <Dialog.Trigger asChild onClick={(e) => e.stopPropagation()}>
         <IconButton px="3px" color={"#0C6DE2"} variant="ghost" h="44px">
           {table.icon} {t("table_list")}
@@ -39,7 +41,7 @@ export const TableList = () => {
       <Portal>
         <Dialog.Backdrop />
         <Dialog.Positioner onClick={(e) => e.stopPropagation()}>
-          <Dialog.Content>
+          <Dialog.Content maxW="1016px" w="95vw">
             <Dialog.Header>
               <Dialog.Title
                 as={Flex}
@@ -65,15 +67,13 @@ export const TableList = () => {
               </Dialog.Title>
             </Dialog.Header>
             <Dialog.Body gap="24px">
-              <p ref={printRef}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Ducimus obcaecati, facilis consectetur, aspernatur, laborum sunt
-                exercitationem voluptatem quisquam magni quia autem quo
-                veritatis aperiam delectus quam sit! Beatae odit corrupti at
-                alias quisquam quaerat debitis vitae, rem excepturi voluptatibus
-                veritatis nisi ipsa numquam nesciunt eos explicabo incidunt quos
-                voluptate ut.
-              </p>
+              <Flex ref={printRef} gap="16px" flexWrap={"wrap"}>
+                <For each={Object.entries(data?.tables)}>
+                  {([number, guests]) => (
+                    <TableCard key={number} number={number} guests={guests} />
+                  )}
+                </For>
+              </Flex>
             </Dialog.Body>
             <Dialog.Footer></Dialog.Footer>
             {/* <Dialog.CloseTrigger asChild>

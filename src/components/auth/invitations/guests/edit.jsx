@@ -16,20 +16,34 @@ import { Input } from "./input";
 import { Radio } from "./radio";
 import { Collection } from "./collection";
 import { error, success } from "@/components/ui/alerts";
+import { useParams } from "next/navigation";
 
-export const Edit = ({ id }) => {
+export const Edit = ({ guestId }) => {
   const t = useTranslations();
   const closeButtonRef = useRef(null);
-  const { isLoading, data } = useGetAuthTanstack(`confirmations/${id}`);
-  console.log(data);
+  
+  const { id } = useParams();
+  const { data } = useGetAuthTanstack(`confirmations/${guestId}`);
 
-  const { mutate, isPending } = useMutateAuthTanstack("", "", {
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [""] });
-      success(" has been changed.");
+  const { mutate } = useMutateAuthTanstack(
+    `confirmations/${guestId}`,
+    "patch",
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [`confirmations/invitation/${id}`],
+        });
+        queryClient.invalidateQueries({
+          queryKey: [`confirmations/invitation/${id}/tables`],
+        });
+        queryClient.invalidateQueries({
+          queryKey: [`confirmations/${guestId}`],
+        });
+        success(" has been changed.");
+      },
+      onError: (err) => error(err?.response?.data?.error || " editing error!"),
     },
-    onError: (err) => error(err?.response?.data?.error || " editing error!"),
-  });
+  );
 
   const [form, setForm] = useState({
     mainGuest: "",
@@ -37,7 +51,7 @@ export const Edit = ({ id }) => {
     tableNumber: 0,
     guestSide: "",
   });
-  console.log(form);
+  // console.log(form);
 
   const handleOpen = () => {
     if (data) {

@@ -72,5 +72,16 @@ export const formatDDMMYYYY = (date) => {
   return `${day}.${month}.${year}`;
 }
 
-export const joinFilters = (filters) => filters.join(",");
+// V1
+// export const joinFilters = (filters) => filters?.join(",");
 
+// V2
+export const joinFilters = (filters) => {
+  if (!filters) return "";
+
+  if (Array.isArray(filters)) {
+    return filters.join(",");
+  }
+
+  return filters; // already a string from query
+};

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
+import { useQueryState } from "nuqs";
 import { useGetAuthTanstack } from "@/hooks/useTanstack";
 import { isNotEmptyArray } from "@/utils/checkers";
 import { format } from "date-fns";
@@ -19,14 +20,17 @@ import {
 import { guestsTableHeader } from "@/utils/constants";
 import { openClose, status, actions, asc } from "@/assets/svgs";
 import { Edit } from "./edit";
+import { joinFilters } from "@/utils/formatters";
 
 export const List = () => {
   const t = useTranslations();
   const [expandedId, setExpandedId] = useState(null);
-
+  const [filters] = useQueryState("filters", {
+    defaultValue: ["show_all_guests"],
+  });
   const { id } = useParams();
   const { isLoading, data } = useGetAuthTanstack(
-    `confirmations/invitation/${id}`,
+    `confirmations/invitation/${id}?filterId=${joinFilters(filters)}`,
   );
 
   const toggleRow = (id) => {
@@ -144,7 +148,7 @@ export const List = () => {
                       <Menu.Positioner>
                         <Menu.Content p="0">
                           <Menu.Item value="edit" p="0">
-                            <Edit id={item.id} />
+                            <Edit guestId={item.id} />
                           </Menu.Item>
                           <Menu.Item value="delete" p="0">
                             <Button

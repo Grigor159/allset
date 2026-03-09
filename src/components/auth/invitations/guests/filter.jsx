@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
+import { useQueryState } from "nuqs";
 import { useGetAuthTanstack, useMutateAuthTanstack } from "@/hooks/useTanstack";
 import { queryClient } from "@/providers/queryProvider";
 import {
@@ -15,45 +16,41 @@ import {
   Portal,
   Stack,
 } from "@chakra-ui/react";
-import { error } from "@/components/ui/alerts";
 import { checked, filter } from "@/assets/svgs";
-import { useParams } from "next/navigation";
-import { joinFilters } from "@/utils/formatters";
 
 export const Filter = () => {
   const t = useTranslations();
   const locale = useLocale();
   const closeButtonRef = useRef(null);
 
-  const [checkedFilters, setCheckedFilters] = useState([]);
+  const [filters, setFilters] = useQueryState("filters", {
+    defaultValue: ["show_all_guests"],
+  });
+  const [tempFilters, setTempFilters] = useState([]);
 
-  const { id } = useParams();
   const { data } = useGetAuthTanstack("confirmations/filters");
 
-  const { mutate, isPending } = useMutateAuthTanstack(
-    `confirmations/invitation/${id}?filterId=${joinFilters(checkedFilters)}`,
-    "get",
-    {
-      onSuccess: (data) => {
-        // queryClient.invalidateQueries({ queryKey: [`confirmations/invitation/${id}`] });
-        queryClient.setQueryData([`confirmations/invitation/${id}`], data);
-      },
-      onError: (err) =>
-        error(err?.response?.data?.error || "Filtration error!"),
-    },
-  );
+  useEffect(() => {
+    if (Array.isArray(filters)) {
+      setTempFilters(filters);
+    } else if (typeof filters === "string") {
+      setTempFilters(filters.split(",").filter(Boolean));
+    } else {
+      setTempFilters(["show_all_guests"]);
+    }
+  }, [filters]);
 
   // V2
   const handleCheckboxChange = (id) => {
-    setCheckedFilters((prev) =>
+    setTempFilters((prev) =>
       prev.includes(id) ? prev.filter((v) => v !== id) : [...prev, id],
     );
   };
 
+  // V2
   const handleFilter = (e) => {
     e.preventDefault();
-    mutate();
-    console.log("submit");
+    setFilters(tempFilters);
     if (closeButtonRef.current) closeButtonRef.current.click();
   };
 
@@ -76,7 +73,7 @@ export const Filter = () => {
                     key={option.id}
                     size="sm"
                     value={option.id}
-                    checked={checkedFilters.includes(option.id)}
+                    checked={tempFilters.includes(option.id)}
                     onCheckedChange={() => handleCheckboxChange(option.id)}
                   >
                     <Checkbox.HiddenInput />
@@ -86,7 +83,7 @@ export const Filter = () => {
                       _checked={{ border: "none", bg: "transparent" }}
                       cursor="pointer"
                     >
-                      {checkedFilters.includes(option.id) && (
+                      {tempFilters.includes(option.id) && (
                         <Icon>{checked.icon}</Icon>
                       )}
                     </Checkbox.Control>

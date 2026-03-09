@@ -40,7 +40,7 @@ export const DetailsClient = () => {
     templateId: template,
     colorPaletteId: palette,
   });
-  console.log(form); //
+  // console.log(form); //
 
   const [agenda, setAgenda] = useState(defaults?.agendaTitles);
   // console.log(agenda); //

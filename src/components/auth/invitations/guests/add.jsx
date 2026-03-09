@@ -47,7 +47,7 @@ export const Add = () => {
     guestSide: "",
     // createdBy: "GUEST",
   });
-  console.log(form);
+  // console.log(form);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
