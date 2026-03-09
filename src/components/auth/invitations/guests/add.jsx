@@ -19,6 +19,7 @@ import { Radio } from "./radio";
 import { Collection } from "./collection";
 import { error, success } from "@/components/ui/alerts";
 import { plus } from "@/assets/svgs";
+import { Tooltip } from "@/components/ui/tooltip";
 
 export const Add = () => {
   const t = useTranslations();
@@ -85,19 +86,25 @@ export const Add = () => {
 
   return (
     <Dialog.Root placement="center" motionPreset="slide-in-bottom" as="form">
-      <Dialog.Trigger asChild onClick={(e) => e.stopPropagation()}>
-        <Icon
-          cursor={"pointer"}
-          _hover={{
-            "& path": {
-              fill: "#004143",
-              transition: "all 0.3s ease",
-            },
-          }}
-        >
-          {plus.icon}
-        </Icon>
-      </Dialog.Trigger>
+      <Tooltip
+        ids={{ trigger: id }}
+        positioning={{ placement: "top" }}
+        content={t("add_guest")}
+      >
+        <Dialog.Trigger asChild onClick={(e) => e.stopPropagation()}>
+          <Icon
+            cursor={"pointer"}
+            _hover={{
+              "& path": {
+                fill: "#004143",
+                transition: "all 0.3s ease",
+              },
+            }}
+          >
+            {plus.icon}
+          </Icon>
+        </Dialog.Trigger>
+      </Tooltip>
       <Portal>
         <Dialog.Backdrop />
         <Dialog.Positioner onClick={(e) => e.stopPropagation()}>

@@ -17,6 +17,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { checked, filter } from "@/assets/svgs";
+import { Tooltip } from "@/components/ui/tooltip";
 
 export const Filter = () => {
   const t = useTranslations();
@@ -56,9 +57,15 @@ export const Filter = () => {
 
   return (
     <Dialog.Root placement="center" motionPreset="slide-in-bottom">
-      <Dialog.Trigger asChild onClick={(e) => e.stopPropagation()}>
-        <IconButton variant="ghost">{filter.icon}</IconButton>
-      </Dialog.Trigger>
+      <Tooltip
+        ids={{ trigger: "filter guests" }}
+        positioning={{ placement: "top" }}
+        content={t("filter")}
+      >
+        <Dialog.Trigger asChild onClick={(e) => e.stopPropagation()}>
+          <IconButton variant="ghost">{filter.icon}</IconButton>
+        </Dialog.Trigger>
+      </Tooltip>
       <Portal>
         <Dialog.Backdrop />
         <Dialog.Positioner onClick={(e) => e.stopPropagation()}>

@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { Flex, InputGroup, Input, Icon } from "@chakra-ui/react";
 import { plus, search } from "@/assets/svgs";
+import { Tooltip } from "@/components/ui/tooltip";
 import { Add } from "./guests/add";
 import { Filter } from "./guests/filter";
 
@@ -33,18 +34,24 @@ export const Actions = () => {
       {pathname?.includes("guests") ? (
         <Add />
       ) : (
-        <Icon
-          onClick={() => router.push("/build/templates")}
-          cursor={"pointer"}
-          _hover={{
-            "& path": {
-              fill: "#004143",
-              transition: "all 0.3s ease",
-            },
-          }}
+        <Tooltip
+          ids={{ trigger: "add invitation" }}
+          positioning={{ placement: "top" }}
+          content={t("add")}
         >
-          {plus.icon}
-        </Icon>
+          <Icon
+            onClick={() => router.push("/build/templates")}
+            cursor={"pointer"}
+            _hover={{
+              "& path": {
+                fill: "#004143",
+                transition: "all 0.3s ease",
+              },
+            }}
+          >
+            {plus.icon}
+          </Icon>
+        </Tooltip>
       )}
     </Flex>
   );
