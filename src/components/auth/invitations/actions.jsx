@@ -27,7 +27,7 @@ export const Actions = () => {
           borderColor={"#C7D5D6"}
           borderRadius={"34px"}
           bg="#FFFFFF"
-          placeholder="Search"
+          placeholder={t("search")}
         />
       </InputGroup>
 

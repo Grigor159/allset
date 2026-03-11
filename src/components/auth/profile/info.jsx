@@ -5,8 +5,10 @@ import { useMutateAuthTanstack } from "@/hooks/useTanstack";
 import { queryClient } from "@/providers/queryProvider";
 import { error, success } from "@/components/ui/alerts";
 import { Field, Input, Skeleton, Stack, Text } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 
 export const Info = ({ isLoading, data }) => {
+  const t = useTranslations();
   const timers = useRef({});
   const [edited, setEdited] = useState({});
 
@@ -41,12 +43,12 @@ export const Info = ({ isLoading, data }) => {
   return (
     <Stack borderRadius="8px" bg="white" p="24px" gap="16px">
       <Text fontSize={"16px"} color={"#4B5563"} fontWeight={"500"}>
-        My information
+        {t("my_info")}
       </Text>
 
       <Field.Root>
         <Field.Label fontSize="12px" color="#6B7280">
-          Full name
+          {t("full_name")}
         </Field.Label>
         <Input
           value={val("name")}
@@ -62,7 +64,7 @@ export const Info = ({ isLoading, data }) => {
       </Field.Root>
       <Field.Root>
         <Field.Label fontSize="12px" color="#6B7280">
-          Phone number
+          {t("phone_number")}
         </Field.Label>
         <Input
           value={val("phoneNumber")}
@@ -78,7 +80,7 @@ export const Info = ({ isLoading, data }) => {
       </Field.Root>
       <Field.Root>
         <Field.Label fontSize="12px" color="#6B7280">
-          E-mail address
+          {t("email_address")}
         </Field.Label>
         <Input
           defaultValue={data?.email}
@@ -93,7 +95,7 @@ export const Info = ({ isLoading, data }) => {
       </Field.Root>
       <Field.Root>
         <Field.Label fontSize="12px" color="#6B7280">
-          Date of birth
+          {t("date_birth")}
         </Field.Label>
         <Input
           value={val("dateOfBirth")}

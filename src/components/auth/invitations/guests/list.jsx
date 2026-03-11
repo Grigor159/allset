@@ -27,10 +27,12 @@ import { Delete } from "./delete";
 
 export const List = () => {
   const t = useTranslations();
+
   const [expandedId, setExpandedId] = useState(null);
   const [filters] = useQueryState("filters", {
     defaultValue: ["show_all_guests"],
   });
+
   const { id } = useParams();
   const { isFetching, data } = useGetAuthTanstack(
     `confirmations/invitation/${id}?filterId=${joinFilters(filters)}`,
@@ -129,8 +131,7 @@ export const List = () => {
                 </Table.Cell>
                 <Table.Cell verticalAlign={expandedId === item.id && "top"}>
                   {item.guestSide
-                    ? item.guestSide.charAt(0).toUpperCase() +
-                      item.guestSide.slice(1).toLowerCase()
+                    ? t(item.guestSide.toLowerCase())
                     : "-"}
                 </Table.Cell>
                 <Table.Cell verticalAlign={expandedId === item.id && "top"}>

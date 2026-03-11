@@ -174,3 +174,11 @@ export async function downloadTableList(printRef) {
   pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
   pdf.save("table-list.pdf");
 }
+
+export const getMaxDiscountPromocode = (codes = []) => {
+  if (!codes.length) return null;
+
+  return codes.reduce((max, item) =>
+    item.discountValue > max.discountValue ? item : max
+  );
+};

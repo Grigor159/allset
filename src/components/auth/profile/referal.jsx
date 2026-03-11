@@ -59,12 +59,11 @@ export const Referal = ({ code }) => {
       justifyContent={"space-between"}
     >
       <Heading size="lg" color={"white"}>
-        Referral code
+        {t("referral")}
       </Heading>
 
       <Text fontSize={"14px"} color={"white"} w="50%">
-        Invite a friend with a 20% off promo code and get 20% off your next
-        invitation.
+        {t("referral_text")}
       </Text>
 
       <Button

@@ -182,5 +182,13 @@
     "table_list": "Table List",
     "download_guest_list": "Download guest list",
     "download_table_list": "Download table list",
-    "unassigned": "unassigned"
+    "unassigned": "unassigned",
+    "my_info": "My information",
+    "full_name": "Full name",
+    "phone_number": "Phone number",
+    "email_address": "E-mail address",
+    "date_birth": "Date of birth",
+    "search": "Search",
+    "referral": "Referral code",
+    "referral_text": "Invite a friend with a 10% off promo code and get 10% off your next invitation."
 }

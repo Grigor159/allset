@@ -14,29 +14,49 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import { isNotEmptyState } from "@/utils/checkers";
 import { Label } from "@/components/build/typography/label";
 import { error, success } from "@/components/ui/alerts";
+import { getMaxDiscountPromocode } from "@/utils/helpers";
 
 export const Promocode = ({ code }) => {
-  console.log(code);
-
-  const discount = 20;
-
   const t = useTranslations();
+  const maxPromocode = getMaxDiscountPromocode(code).code;
 
-  const [promocode, setPromocode] = useState("");
-  const [applied, setApplied] = useState(false);
-
-  const { mutate, isPending } = useMutateAuthTanstack("promocode", "post", {
-    onSuccess: (data) => success(`Aplied! Discount: ${data.discount}%`),
-    onError: (err) => error(err?.response?.data?.error || "Invalid promocode"),
+  const [promocode, setPromocode] = useState(maxPromocode ?? "");
+  const [data, setData] = useState({
+    discount: "",
+    basePrice: "",
+    discountAmount: "",
+    finalPrice: "",
   });
+  console.log(data);
+
+  // const { mutate, isPending } = useMutateAuthTanstack("promocode", "post", {
+  const { mutate, isPending } = useMutateAuthTanstack(
+    "promo-codes/apply",
+    "post",
+    {
+      onSuccess: (res) => {
+        const { promoCode, ...prices } = res;
+
+        setData({
+          discount: promoCode.discountValue,
+          ...prices,
+        });
+
+        success(`Applied! Discount: ${promoCode.discountValue}%`);
+      },
+      onError: (err) =>
+        error(err?.response?.data?.error || "Invalid promocode"),
+    },
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setApplied(true); //* test case
     if (!promocode) return;
-    mutate({ promocode });
+    // mutate({ promocode });
+    mutate({ code: promocode });
   };
 
   return (
@@ -52,23 +72,12 @@ export const Promocode = ({ code }) => {
           <Field.Label gap="16px">
             <Label text="promocode" />
           </Field.Label>
-
-          {/* {applied && !isPending && (
-            <Text
-              textStyle="sm"
-              fontWeight={"500"}
-              lineHeight={"28px"}
-              color={"#16A34A"}
-            >
-              Aplied
-            </Text>
-          )} */}
         </Flex>
 
         <Flex w="100%" gap="16px">
           <InputGroup
             endElement={
-              applied &&
+              isNotEmptyState(data) &&
               !isPending && (
                 <Text
                   fontSize={"14px"}
@@ -76,7 +85,7 @@ export const Promocode = ({ code }) => {
                   lineHeight={"24px"}
                   color={"#D80027"}
                 >
-                  {discount}% OFF
+                  {data?.discount}% OFF
                 </Text>
               )
             }
@@ -110,7 +119,7 @@ export const Promocode = ({ code }) => {
             {t("apply")}
           </Button>
         </Flex>
-        {applied && !isPending && (
+        {isNotEmptyState(data) && !isPending && (
           <DataList.Root w="100%" orientation="horizontal" gap="8px">
             <DataList.Item>
               <DataList.ItemLabel
@@ -127,7 +136,7 @@ export const Promocode = ({ code }) => {
                 lineHeight={"20px"}
                 justifyContent={"flex-end"}
               >
-                $49.99
+                {data?.basePrice} AMD
               </DataList.ItemValue>
             </DataList.Item>
             <DataList.Item>
@@ -137,14 +146,14 @@ export const Promocode = ({ code }) => {
                 lineHeight={"20px"}
                 fontWeight={"400"}
               >
-                {t("discount")} ({discount}%):
+                {t("discount")} ({data?.discount}%):
               </DataList.ItemLabel>
               <DataList.ItemValue
                 fontSize={"14px"}
                 lineHeight={"20px"}
                 justifyContent={"flex-end"}
               >
-                -$10.00
+                -{data?.discountAmount} AMD
               </DataList.ItemValue>
             </DataList.Item>
             <Separator />
@@ -162,7 +171,7 @@ export const Promocode = ({ code }) => {
                 lineHeight={"20px"}
                 justifyContent={"flex-end"}
               >
-                $39.99
+                {data?.finalPrice} AMD
               </DataList.ItemValue>
             </DataList.Item>
           </DataList.Root>

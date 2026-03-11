@@ -42,8 +42,14 @@ export function isNotEmptyArray(arr) {
 export const isEmptyObject = (obj) => !obj || Object.keys(obj).length === 0;
 
 export function isNotEmptyObject(obj) {
-  return obj && obj.constructor === Object && Object.keys(obj).length > 0;
+    return obj && obj.constructor === Object && Object.keys(obj).length > 0;
 }
+
+export const isEmptyState = (obj) =>
+    Object.values(obj).every((value) => value === "" || value === null);
+
+export const isNotEmptyState = (obj) =>
+  Object.values(obj).some((value) => value !== "" && value !== null);
 
 // export function isNotEmptyObject(obj) {
 //     return Object?.keys(obj)?.length > 0 || obj?.constructor !== Object;
