@@ -5,12 +5,12 @@ import { Link, usePathname } from "@/i18n/routing";
 import { mainPages } from "@/utils/constants";
 import { Flex, For, Link as ChakraLink } from "@chakra-ui/react";
 
-export const Navigation = () => {
+export const Navigation = ({ direction }) => {
   const t = useTranslations();
   const pathname = usePathname();
 
   return (
-    <Flex gap="20px">
+    <Flex gap="20px" flexDirection={direction ?? "unset"}>
       <For each={mainPages}>
         {({ name, path }) => {
           const isActive = pathname === `/${path}`;
@@ -22,7 +22,6 @@ export const Navigation = () => {
               as={Link}
               borderBottom={isActive ? "2px solid #4B5563" : "none"}
               color={isActive ? "#004143" : "#4B5563"}
-              // textStyle={{ base: "md", lg: "lg" }}
               fontSize={"16px"}
               fontWeight={isActive ? "500" : "400"}
               borderRadius="0"

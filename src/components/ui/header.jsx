@@ -8,13 +8,15 @@ import {
   Flex,
   Image,
   Link as ChakraLink,
+  HStack,
+  Stack,
 } from "@chakra-ui/react";
 import { Link } from "@/i18n/routing";
-import { OAuth } from "../public/oauth";
+import { OAuth } from "./oauth";
 import logo from "@/assets/imgs/allset.png";
-import { Language } from "../public/language";
-import { Navigation } from "../public/navigation";
-import { useLocale } from "next-intl";
+import { Language } from "./language";
+import { Navigation } from "./navigation";
+import { Humburger } from "./humburger";
 
 export const Header = () => {
   const pathname = usePathname();
@@ -58,12 +60,22 @@ export const Header = () => {
             <Image src={logo.src} w="94px" h="58px" alt="AllSet" />
           </ChakraLink>
 
-          <Navigation />
+          <HStack display={{ base: "none", md: "flex" }}>
+            <Navigation />
+          </HStack>
 
-          <Flex gap="16px">
-            <Language bg={bg}/>
-            <OAuth bg={bg}/>
+          <Flex gap="16px" display={{ base: "none", md: "flex" }}>
+            <Language bg={bg} />
+            <OAuth bg={bg} />
           </Flex>
+
+          <Humburger>
+            <Stack gap="20px">
+              <Navigation direction={"column"} />
+              <OAuth bg={bg} noMenu={true} />
+              <Language bg={bg} noMenu={true} />
+            </Stack>
+          </Humburger>
         </Flex>
       </Container>
     </Box>

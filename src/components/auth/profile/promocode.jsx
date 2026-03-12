@@ -18,10 +18,11 @@ import { isNotEmptyState } from "@/utils/checkers";
 import { Label } from "@/components/build/typography/label";
 import { error, success } from "@/components/ui/alerts";
 import { getMaxDiscountPromocode } from "@/utils/helpers";
+import { formatPrice } from "@/utils/formatters";
 
 export const Promocode = ({ code }) => {
   const t = useTranslations();
-  const maxPromocode = getMaxDiscountPromocode(code).code;
+  const maxPromocode = getMaxDiscountPromocode(code)?.code;
 
   const [promocode, setPromocode] = useState(maxPromocode ?? "");
   const [data, setData] = useState({
@@ -45,7 +46,7 @@ export const Promocode = ({ code }) => {
           ...prices,
         });
 
-        success(`Applied! Discount: ${promoCode.discountValue}%`);
+        success(`Promocode applied! Discount is ${promoCode.discountValue}%`);
       },
       onError: (err) =>
         error(err?.response?.data?.error || "Invalid promocode"),
@@ -54,8 +55,17 @@ export const Promocode = ({ code }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (!promocode) return;
-    // mutate({ promocode });
+
+    isNotEmptyState(data) &&
+      setData({
+        discount: "",
+        basePrice: "",
+        discountAmount: "",
+        finalPrice: "",
+      });
+      
     mutate({ code: promocode });
   };
 
@@ -136,7 +146,7 @@ export const Promocode = ({ code }) => {
                 lineHeight={"20px"}
                 justifyContent={"flex-end"}
               >
-                {data?.basePrice} AMD
+                {formatPrice(data?.basePrice)}
               </DataList.ItemValue>
             </DataList.Item>
             <DataList.Item>
@@ -153,7 +163,7 @@ export const Promocode = ({ code }) => {
                 lineHeight={"20px"}
                 justifyContent={"flex-end"}
               >
-                -{data?.discountAmount} AMD
+                -{formatPrice(data?.discountAmount)}
               </DataList.ItemValue>
             </DataList.Item>
             <Separator />
@@ -171,7 +181,7 @@ export const Promocode = ({ code }) => {
                 lineHeight={"20px"}
                 justifyContent={"flex-end"}
               >
-                {data?.finalPrice} AMD
+                {formatPrice(data?.finalPrice)}
               </DataList.ItemValue>
             </DataList.Item>
           </DataList.Root>

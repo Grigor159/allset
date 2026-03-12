@@ -17,7 +17,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { down } from "../../assets/svgs";
 import cookies from "js-cookie";
 
-export const Language = ({ bg }) => {
+export const Language = ({ bg, noMenu }) => {
   const t = useTranslations();
   const pathname = usePathname();
   const params = useParams();
@@ -35,6 +35,32 @@ export const Language = ({ bg }) => {
       router.replace({ pathname, params }, { locale: code });
     });
   };
+
+  if (noMenu) {
+    return (
+      <Flex gap="20px">
+        <For each={languages}>
+          {({ code, flag }) => (
+            <Flex
+              key={code}
+              align="center"
+              gap="8px"
+              cursor="pointer"
+              onClick={() => handleChangeLng(code)}
+            >
+              <Image
+                src={`https://flagcdn.com/${flag}.svg`}
+                boxSize="24px"
+                borderRadius="4px"
+                alt={t(code)}
+              />
+              {t(code)}
+            </Flex>
+          )}
+        </For>
+      </Flex>
+    );
+  }
 
   return (
     <Menu.Root>
