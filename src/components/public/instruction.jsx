@@ -14,7 +14,7 @@ export const Instruction = () => {
 
   return (
     <Stack p="36px 0 64px 0">
-      <Container maxW="1360px" px={0}>
+      <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
         <Stack gap="42px" align="center">
           <Stack gap="16px">
             <Title text="create_title" textAlign="center" />

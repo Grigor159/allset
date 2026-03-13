@@ -10,7 +10,7 @@ import bg from "@/assets/imgs/faqs_bg.png";
 export const Faqs = ({ faqs }) => {
   return (
     <Stack p={"100px 0 50px 0"} bg="#f6f6f7">
-      <Container maxW="1360px" px={0}>
+      <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
         <Stack gap="45px">
           <Center>
             <Flex gap={"41px"} align={"center"}>

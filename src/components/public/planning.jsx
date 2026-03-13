@@ -15,30 +15,48 @@ export const Planning = () => {
   const router = useRouter();
 
   return (
-    <Stack p="96px 0 100px 0" bg="#f6f6f7">
-      <Container maxW="1360px" px={0}>
+    <Stack p={{ base: "16px 0 100px 0", md: "80px 0 100px 0" }} bg="#f6f6f7">
+      <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
         <Stack
           gap="100px"
           bgImage={`url(${bg.src})`}
-          bgPos={"right 250px"}
+          bgPos={{ base: "right 396px", md: "right 255px" }}
           bgRepeat={"no-repeat"}
-          bgSize={"225px"}
+          bgSize={{ base: "97px", md: "225px" }}
         >
-          <Flex w="100%" justify={"space-between"} gap="118px">
-            <Stack flex="1" gap="24px">
+          <Flex
+            w="100%"
+            // justify={{ base: "unset", md: "space-between" }}
+            flexDirection={{ base: "column", md: "row" }}
+            gap={{ base: "16px", md: "118px" }}
+          >
+            <Stack
+              flex="1"
+              gap={{ base: "16px", md: "24px" }}
+              alignItems={{ base: "center", md: "unset" }}
+            >
               <Title
                 as="h1"
-                fontSize="42px"
+                fontSize={{ base: "26px", md: "42px" }}
                 text="plan_title"
                 color="#004143"
+                textAlign={{ base: "center", md: "unset" }}
               />
               <SubTitle text="plan_subtitle" textAlign="right" />
             </Stack>
 
-            <Stack w="537px" gap="32px">
-              <Description text="plan_desc" textAlign="start" />
+            <Stack
+              w={{ base: "100%", xl: "537px" }}
+              flex={{ base: 1, xl: "unset" }}
+              alignItems={{ base: "center", md: "unset" }}
+              gap="32px"
+            >
+              <Description
+                text="plan_desc"
+                textAlign={{ base: "center", md: "start" }}
+              />
               <Button
-                w="243px"
+                w={{ base: "100%", sm: "243px" }}
                 h="52px"
                 bg={"#004143"}
                 color="white"

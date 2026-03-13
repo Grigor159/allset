@@ -12,7 +12,7 @@ export const Promo = ({ promo }) => {
 
   return (
     <Stack py="64px" bg="#f6f6f7">
-      <Container maxW="1360px" px={0}>
+      <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
         <Flex
           bgImage={`url(${bg.src})`}
           bgSize="cover"

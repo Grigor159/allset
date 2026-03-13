@@ -30,7 +30,7 @@ export const Choose = () => {
       bgPos={"right"}
       bgRepeat={"no-repeat"}
     >
-      <Container maxW="1360px" px={0}>
+      <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
         <Flex w="100%" justify={"space-between"} gap="106px">
           <Stack gap="24px">
             <Title text="choose_title" color="#FFFFFF" />

@@ -20,7 +20,7 @@ export const Features = () => {
       py="100px"
       backgroundColor="#f6f6f7"
     >
-      <Container maxW="1360px" px={0}>
+      <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
         <Stack gap="8px">
           <Title text="features" />
           <SubTitle text="features_description" />

@@ -32,7 +32,7 @@ export default function Layout({ children }) {
       bgPos={getAuthBgPos(pathname)}
       bgRepeat="no-repeat"
     >
-      <Container maxW="1360px" px={0}>
+      <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
         <Head text={getAuthTitle(pathname)} />
         <Separator colorPalette="blue" pb={"16px"}/>
         {children}

@@ -20,7 +20,7 @@ export const BottomPart = () => {
       // width="100%"
       // zIndex="10"
     >
-      <Container maxW="1360px" px={0}>
+      <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
         <Flex justify="space-between">
           <Steps />
           <Flex gap={"8px"}>

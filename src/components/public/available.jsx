@@ -12,7 +12,7 @@ export const Available = () => {
 
   return (
     <Stack bg="#FFFFFF" py="62px">
-      <Container maxW="1360px" px={0}>
+      <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
         <Flex w="100%" justify={"space-between"} gap="17px">
           <Stack gap="16px" w="428px">
             <Title text="available" />

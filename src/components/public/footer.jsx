@@ -27,7 +27,7 @@ export const Footer = () => {
 
   return (
     <Box bg="#FFFFFF">
-      <Container maxW="1360px" px={0}>
+      <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
         {/* <Box> */}
         <Flex py={"29px"} justify={"space-between"} align={"center"}>
           <Stack gap={"24px"}>

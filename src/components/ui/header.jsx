@@ -54,7 +54,7 @@ export const Header = () => {
       px="0"
       transition="background 0.3s ease"
     >
-      <Container maxW="1360px" px={0}>
+      <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
         <Flex align="center" justify="space-between">
           <ChakraLink as={Link} href="/" gap="12px">
             <Image src={logo.src} w="94px" h="58px" alt="AllSet" />

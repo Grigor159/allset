@@ -178,7 +178,7 @@ export const DetailsClient = () => {
 
   return (
     <Box pt="32px" pb="65px">
-      <Container maxW="1360px" px={0}>
+      <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
         {/* VStack */}
         <Stack gap="24px" w="748px" mx="auto">
           <Stack
