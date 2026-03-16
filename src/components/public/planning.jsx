@@ -26,6 +26,7 @@ export const Planning = () => {
         >
           <Flex
             w="100%"
+            align={"center"}
             // justify={{ base: "unset", md: "space-between" }}
             flexDirection={{ base: "column", md: "row" }}
             gap={{ base: "16px", md: "118px" }}
@@ -87,12 +88,20 @@ export const Planning = () => {
             <PlanningSlide />
           </Stack>
 
-          <Flex w="100%" justify={"space-between"} gap="74px">
-            <Title text="plan_title_three" />
+          <Flex
+            w="100%"
+            align={"center"}
+            flexDirection={{ base: "column", md: "row" }}
+            gap={{ base: "24px", md: "74px" }}
+          >
+            <Title
+              text="plan_title_three"
+              textAlign={{ base: "center", md: "unset" }}
+            />
             <Description
               text="plan_desc_three"
               width={"690px"}
-              textAlign={"start"}
+              textAlign={{ base: "center", md: "start" }}
             />
           </Flex>
         </Stack>

@@ -47,8 +47,10 @@ export const PlanningSlide = () => {
             alignItems="center"
             // w="100%"
             // h="100%"
-            w="286px"
-            h="457px"
+            w={{ base: "168px", md: "286px" }}
+            h={{ base: "268px", md: "457px" }}
+            // w="286px"
+            // h="457px"
             borderRadius={"25px"}
             overflow={"hidden"}
             onClick={() => handleSelect(id)}
