@@ -44,7 +44,7 @@ export const Accordion = ({ faqs }) => {
               <Acc.ItemTrigger cursor="pointer">
                 <Span
                   flex="1"
-                  fontSize={"18px"}
+                  fontSize={{ base: "16px", md: "18px" }}
                   fontWeight={500}
                   color={"#4B5563"}
                 >
@@ -63,7 +63,7 @@ export const Accordion = ({ faqs }) => {
 
               <Acc.ItemContent>
                 <Acc.ItemBody
-                  fontSize={"14px"}
+                  fontSize={{ base: "12px", md: "14px" }}
                   fontWeight={300}
                   color={"#4B5563"}
                 >

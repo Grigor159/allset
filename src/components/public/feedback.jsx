@@ -12,8 +12,16 @@ export const Feedback = ({ feedbacks }) => {
       <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
         <Stack gap="20px">
           <Stack gap="8px">
-            <Title text="feedback" color="#004143" />
-            <SubTitle text="feedback_description" color="#004143" />
+            <Title
+              text="feedback"
+              color="#004143"
+              textAlign={{ base: "center", md: "unset" }}
+            />
+            <SubTitle
+              text="feedback_description"
+              color="#004143"
+              textAlign={{ base: "center", md: "unset" }}
+            />
           </Stack>
           <FeedbackSlide feedbacks={feedbacks} />
         </Stack>

@@ -11,14 +11,25 @@ export const Faqs = ({ faqs }) => {
   return (
     <Stack p={"100px 0 50px 0"} bg="#f6f6f7">
       <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
-        <Stack gap="45px">
-          <Center>
-            <Flex gap={"41px"} align={"center"}>
-              <Stack gap={"16px"} textAlign={"center"}>
-                <Title text="faqs" />
-                <Description text="faqs_description" width={"479px"} />
+        <Stack gap={{ base: "32px", md: "45px" }}>
+          <Center justifyContent={{ base: "flex-start", md: "center" }}>
+            <Flex
+              gap={{ base: "28px", md: "41px" }}
+              align={{ base: "start", md: "center" }}
+            >
+              <Stack gap={{ base: "8px", md: "16px" }} textAlign={"center"}>
+                <Title text="faqs" textAlign={{ base: "start", md: "unset" }} />
+                <Description
+                  text="faqs_description"
+                  width={{ base: "fit-content", md: "479px" }}
+                  textAlign={{ base: "start", md: "unset" }}
+                />
               </Stack>
-              <Image src={bg.src} alt="faqs" />
+              <Image
+                src={bg.src}
+                alt="faqs"
+                h={{ base: "102px", md: "fit-content" }}
+              />
             </Flex>
           </Center>
           <Accordion faqs={faqs} />
