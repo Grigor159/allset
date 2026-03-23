@@ -16,7 +16,10 @@ export const Info = () => {
 
   if (isFetching) {
     return (
-      <Flex gap="16px">
+      <Flex
+        gap={{ base: "8px", md: "16px" }}
+        flexWrap={{ base: "wrap", md: "nowrap" }}
+      >
         <Skeleton w="156px" h="40px" borderRadius="8px" />
         <Skeleton w="156px" h="40px" borderRadius="8px" />
         <Skeleton w="156px" h="40px" borderRadius="8px" />
@@ -25,7 +28,10 @@ export const Info = () => {
   }
 
   return (
-    <Flex gap="16px">
+    <Flex
+      gap={{ base: "8px", md: "16px" }}
+      flexWrap={{ base: "wrap", md: "nowrap" }}
+    >
       <Text
         fontSize={"14px"}
         fontWeight={"400"}

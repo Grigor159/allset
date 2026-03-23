@@ -8,8 +8,17 @@ import { Info } from "./info";
 
 export const Head = () => {
   return (
-    <Flex align={"center"} justify={"space-between"}>
-      <Flex gap="32px">
+    <Flex
+      align={"center"}
+      justify={"space-between"}
+      gap={{ base: "24px", lg: "32px" }}
+      flexWrap={{ base: "wrap", lg: "nowrap" }}
+    >
+      <Flex
+        gap={{ base: "24px", lg: "32px" }}
+        w={{ base: "100%", md: "fit-content" }}
+        justify={{ base: "space-between", md: "unset" }}
+      >
         <TableList />
         <Download />
       </Flex>
