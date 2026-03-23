@@ -35,7 +35,7 @@ export default function Invitations() {
               key={id}
               bg="#FFFFFF"
               w="100%"
-              p="8px"
+              p={{ base: "1px", sm: "8px" }}
               borderRadius="8px"
             >
               <Tabs.Trigger

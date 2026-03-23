@@ -182,3 +182,12 @@ export const getMaxDiscountPromocode = (codes = []) => {
     item.discountValue > max.discountValue ? item : max
   );
 };
+
+export const getInitialForm = (id) => ({
+  invitationId: id,
+  mainGuest: "",
+  secondaryGuests: [""],
+  guestSide: "",
+  status: "DECLINED",
+  createdBy: "INVITATION_OWNER",
+});

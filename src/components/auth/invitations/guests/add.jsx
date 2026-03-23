@@ -10,16 +10,17 @@ import {
   CloseButton,
   Dialog,
   For,
+  HStack,
   Icon,
   Portal,
   Stack,
 } from "@chakra-ui/react";
 import { Input } from "./input";
 import { Radio } from "./radio";
-import { Collection } from "./collection";
 import { error, success } from "@/components/ui/alerts";
-import { plus } from "@/assets/svgs";
+import { add, plus, remove } from "@/assets/svgs";
 import { Tooltip } from "@/components/ui/tooltip";
+import { getInitialForm } from "@/utils/helpers";
 
 export const Add = () => {
   const t = useTranslations();
@@ -34,22 +35,15 @@ export const Add = () => {
         predicate: (query) =>
           query.queryKey[0]?.startsWith(`confirmations/invitation/${id}`),
       });
+      if (closeButtonRef.current) closeButtonRef.current.click();
+      setForm(getInitialForm(id));
       success("Guest list has been changed.");
     },
     onError: (err) =>
       error(err?.response?.data?.error || "Guest list adding error!"),
   });
 
-  const [form, setForm] = useState({
-    invitationId: id,
-    mainGuest: "",
-    secondaryGuests: [""],
-    // tableNumber: 0,
-    guestSide: "",
-    status: "DECLINED",
-    createdBy: "INVITATION_OWNER",
-  });
-  // console.log(form);
+  const [form, setForm] = useState(getInitialForm(id));
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -72,11 +66,23 @@ export const Add = () => {
     });
   };
 
+  const addSecondaryGuest = () => {
+    setForm((prev) => ({
+      ...prev,
+      secondaryGuests: [...prev.secondaryGuests, ""],
+    }));
+  };
+
+  const removeSecondaryGuest = (index) => {
+    setForm((prev) => ({
+      ...prev,
+      secondaryGuests: prev.secondaryGuests.filter((_, i) => i !== index),
+    }));
+  };
+
   const handleAdd = (e) => {
     e.preventDefault();
     mutate(form);
-    console.log("submit", form);
-    if (closeButtonRef.current) closeButtonRef.current.click();
   };
 
   return (
@@ -114,7 +120,7 @@ export const Add = () => {
                 value={form.mainGuest}
                 onChange={handleChange}
               />
-              <For each={form.secondaryGuests}>
+              {/* <For each={form.secondaryGuests}>
                 {(el, idx) => (
                   <Input
                     key={idx}
@@ -125,19 +131,46 @@ export const Add = () => {
                     }
                   />
                 )}
+              </For> */}
+
+              <For each={form.secondaryGuests}>
+                {(el, idx) => (
+                  <HStack key={idx} align="flex-end">
+                    <Input
+                      label="accompanying_name"
+                      value={el}
+                      onChange={(e) =>
+                        handleSecondaryGuestChange(idx, e.target.value)
+                      }
+                    />
+
+                    {form?.secondaryGuests?.length > 1 && (
+                      <Button
+                        h="44px"
+                        variant="ghost"
+                        onClick={() => removeSecondaryGuest(idx)}
+                      >
+                        {remove.icon}
+                      </Button>
+                    )}
+                  </HStack>
+                )}
               </For>
+
+              <Button
+                w="fit-content"
+                variant="ghost"
+                onClick={addSecondaryGuest}
+              >
+                {t("add_guest")} {add.icon}
+              </Button>
+
               <Radio
                 value={form.guestSide}
                 onChange={(value) =>
                   setForm((prev) => ({ ...prev, guestSide: value }))
                 }
               />
-              {/* <Collection
-                value={form.tableNumber}
-                onChange={(value) =>
-                  setForm((prev) => ({ ...prev, tableNumber: value }))
-                }
-              /> */}
             </Dialog.Body>
             <Dialog.Footer>
               <Button

@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { useMutateAuthTanstack } from "@/hooks/useTanstack";
 import { queryClient } from "@/providers/queryProvider";
 import { Button } from "@chakra-ui/react";
-import { error } from "@/components/ui/alerts";
+import { error, success } from "@/components/ui/alerts";
 
 export const Delete = ({ id, guestId }) => {
   const t = useTranslations();

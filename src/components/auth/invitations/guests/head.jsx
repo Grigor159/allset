@@ -15,9 +15,10 @@ export const Head = () => {
       flexWrap={{ base: "wrap", lg: "nowrap" }}
     >
       <Flex
-        gap={{ base: "24px", lg: "32px" }}
+        gap={{ base: "0", sm: "24px", lg: "32px" }}
         w={{ base: "100%", md: "fit-content" }}
         justify={{ base: "space-between", md: "unset" }}
+        flexWrap={{ base: "wrap", sm: "nowrap" }}
       >
         <TableList />
         <Download />

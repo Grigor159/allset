@@ -37,6 +37,7 @@ export const Edit = ({ id, guestId }) => {
           predicate: (query) =>
             query.queryKey[0]?.startsWith(`confirmations/invitation/${id}`),
         });
+        if (closeButtonRef.current) closeButtonRef.current.click();
         success("Guest has been changed.");
       },
       onError: (err) =>
@@ -50,7 +51,6 @@ export const Edit = ({ id, guestId }) => {
     tableNumber: 0,
     guestSide: "",
   });
-  // console.log(form);
 
   const handleOpen = () => {
     if (data) {
@@ -87,7 +87,6 @@ export const Edit = ({ id, guestId }) => {
   const handleSave = (e) => {
     e.preventDefault();
     mutate(form);
-    if (closeButtonRef.current) closeButtonRef.current.click();
   };
 
   return (
