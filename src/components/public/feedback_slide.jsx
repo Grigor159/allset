@@ -24,6 +24,7 @@ export const FeedbackSlide = ({ feedbacks }) => {
   const language = useLocale();
 
   const [isMobile] = useMediaQuery("(max-width: 768px)");
+  const [isLaptop] = useMediaQuery("(max-width: 992px)");
   const [swiper, setSwiper] = useState(null);
   const [showPrevArrow, setShowPrevArrow] = useState(false);
   const [showNextArrow, setShowNextArrow] = useState(
@@ -70,7 +71,7 @@ export const FeedbackSlide = ({ feedbacks }) => {
           setShowPrevArrow(!swiper.isBeginning);
           setShowNextArrow(!swiper.isEnd);
         }}
-        slidesPerView={isMobile ? 2 : 3}
+        slidesPerView={isMobile ? 1 : isLaptop ? 2 : 3}
         spaceBetween={16}
         speed={500}
         loop={false}
@@ -88,8 +89,8 @@ export const FeedbackSlide = ({ feedbacks }) => {
               borderRadius="5px"
               bg="#FFFFFF"
               cursor={"pointer"}
-              minW={{ base: "268px", md: "443px" }}
-              maxW={{ base: "268px", md: "443px" }}
+              minW={{ base: "268px", xl: "100%" }}
+              maxW={{ base: "100%", xl: "442px" }}
             >
               <Flex gap="16px">
                 <Avatar.Root size="md">
