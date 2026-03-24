@@ -19,9 +19,9 @@ export const TermsClient = () => {
     <Box bg="#f6f6f7" py={{ base: "40px", md: "60px" }}>
       <Animate>
         <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
-          <Stack spacing="32px">
+          <Stack gap="32px">
             {/* Header */}
-            <Stack spacing="8px">
+            <Stack gap="8px">
               <Heading as="h1" size="3xl">
                 {t("terms_conditions")} {t("terms_digital")}
               </Heading>
@@ -34,7 +34,7 @@ export const TermsClient = () => {
             <Separator />
 
             {/* Section 1 */}
-            <Stack spacing="16px">
+            <Stack gap="16px">
               <Heading size="2xl">{t("terms_section1_title")}</Heading>
 
               <Text>{t("terms_section1_1_intro_1")}</Text>
@@ -59,7 +59,7 @@ export const TermsClient = () => {
             <Separator />
 
             {/* Section 2 */}
-            <Stack spacing="12px">
+            <Stack gap="12px">
               <Heading size="2xl">{t("terms_section2_title")}</Heading>
               <Text>{t("terms_usage_intro")}</Text>
 
@@ -77,7 +77,7 @@ export const TermsClient = () => {
             <Separator />
 
             {/* Section 3 */}
-            <Stack spacing="12px">
+            <Stack gap="12px">
               <Heading size="2xl">{t("terms_section3_title")}</Heading>
               <Text>{t("terms_section3_intro")}</Text>
 
@@ -94,7 +94,7 @@ export const TermsClient = () => {
             <Separator />
 
             {/* Section 4 */}
-            <Stack spacing="12px">
+            <Stack gap="12px">
               <Heading size="2xl">{t("terms_section4_title")}</Heading>
 
               <Box as="ul" pl="20px" listStyleType="circle">
@@ -107,7 +107,7 @@ export const TermsClient = () => {
             <Separator />
 
             {/* Section 5 */}
-            <Stack spacing="12px">
+            <Stack gap="12px">
               <Heading size="2xl">{t("terms_section5_title")}</Heading>
 
               <Box as="ul" pl="20px" listStyleType="circle">
@@ -120,7 +120,7 @@ export const TermsClient = () => {
             <Separator />
 
             {/* Section 6 */}
-            <Stack spacing="12px">
+            <Stack gap="12px">
               <Heading size="2xl">{t("terms_section6_title")}</Heading>
 
               <Box as="ul" pl="20px" listStyleType="circle">
@@ -151,7 +151,7 @@ export const TermsClient = () => {
             <Separator />
 
             {/* Section 7 */}
-            <Stack spacing="12px">
+            <Stack gap="12px">
               <Heading size="2xl">{t("terms_section7_title")}</Heading>
 
               <Box as="ul" pl="20px" listStyleType="circle">
@@ -165,7 +165,7 @@ export const TermsClient = () => {
             <Separator />
 
             {/* Section 8 */}
-            <Stack spacing="12px">
+            <Stack gap="12px">
               <Heading size="2xl">{t("terms_section8_title")}</Heading>
 
               <Box as="ul" pl="20px" listStyleType="circle">
@@ -179,7 +179,7 @@ export const TermsClient = () => {
             <Separator />
 
             {/* Section 9 */}
-            <Stack spacing="12px">
+            <Stack gap="12px">
               <Heading size="2xl">{t("terms_section9_title")}</Heading>
 
               <Box as="ul" pl="20px" listStyleType="circle">
@@ -191,7 +191,7 @@ export const TermsClient = () => {
             <Separator />
 
             {/* Section 10*/}
-            <Stack spacing="12px">
+            <Stack gap="12px">
               <Heading size="2xl">{t("terms_section10_title")}</Heading>
 
               <Box as="ul" pl="20px" listStyleType="circle">
@@ -206,7 +206,7 @@ export const TermsClient = () => {
             <Separator />
 
             {/* Section 11*/}
-            <Stack spacing="12px">
+            <Stack gap="12px">
               <Heading size="2xl">{t("terms_section11_title")}</Heading>
               <Text fontWeight={600}>{t("terms_section11_intro")}</Text>
 
@@ -217,32 +217,31 @@ export const TermsClient = () => {
                 <li>{t("terms_section11_li_4")}</li>
               </Box>
             </Stack>
-
             <Separator />
-          </Stack>
 
-          {/* Section 12 */}
-          <Stack spacing="12px">
-            <Heading size="2xl">{t("terms_section12_title")}</Heading>
+            {/* Section 12 */}
+            <Stack gap="12px">
+              <Heading size="2xl">{t("terms_section12_title")}</Heading>
 
-            <Text>{t("terms_section12_intro")}</Text>
-          </Stack>
-          <Separator />
+              <Text>{t("terms_section12_intro")}</Text>
+            </Stack>
+            <Separator />
 
-          {/* Section 13 */}
-          <Stack spacing="12px">
-            <Heading size="2xl">{t("terms_section13_title")}</Heading>
+            {/* Section 13 */}
+            <Stack gap="12px">
+              <Heading size="2xl">{t("terms_section13_title")}</Heading>
 
-            <Text>{t("terms_section13_intro")}</Text>
-          </Stack>
-          <Separator />
+              <Text>{t("terms_section13_intro")}</Text>
+            </Stack>
+            <Separator />
 
-          {/* Section 14 */}
-          <Stack spacing="8px">
-            <Heading size="2xl">{t("terms_section14_title")}</Heading>
+            {/* Section 14 */}
+            <Stack gap="8px">
+              <Heading size="2xl">{t("terms_section14_title")}</Heading>
 
-            <Text>{t("terms_for_email")}</Text>
-            <Text fontWeight={600}>{t("privacyPolicy_email")}</Text>
+              <Text>{t("terms_for_email")}</Text>
+              <Text fontWeight={600}>{t("privacyPolicy_email")}</Text>
+            </Stack>
           </Stack>
         </Container>
       </Animate>

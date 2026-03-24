@@ -19,9 +19,9 @@ export const PolicyClient = () => {
     <Box bg="#f6f6f7" py={{ base: "40px", md: "60px" }}>
       <Animate>
         <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
-          <Stack spacing="32px">
+          <Stack gap="32px">
             {/* Header */}
-            <Stack spacing="8px">
+            <Stack gap="8px">
               <Heading as="h1" size="3xl">
                 {t("privacyPolicy_title")}
               </Heading>
@@ -31,7 +31,7 @@ export const PolicyClient = () => {
             </Stack>
 
             {/* Intro */}
-            <Stack spacing="12px">
+            <Stack gap="12px">
               <Text>
                 {t("privacyPolicy_welcome")}
                 <br />
@@ -51,7 +51,7 @@ export const PolicyClient = () => {
             <Separator />
 
             {/* Section 1 */}
-            <Stack spacing="16px">
+            <Stack gap="16px">
               <Heading size="2xl">{t("privacyPolicy_section1_title")}</Heading>
 
               <Heading size="lg" as="h3">
@@ -99,7 +99,7 @@ export const PolicyClient = () => {
             <Separator />
 
             {/* Section 2 */}
-            <Stack spacing="12px">
+            <Stack gap="12px">
               <Heading size="2xl">{t("privacyPolicy_section2_title")}</Heading>
               <Text>{t("privacyPolicy_usage_intro")}</Text>
 
@@ -117,7 +117,7 @@ export const PolicyClient = () => {
             <Separator />
 
             {/* Section 3 */}
-            <Stack spacing="12px">
+            <Stack gap="12px">
               <Heading size="2xl">{t("privacyPolicy_section3_title")}</Heading>
               <Text fontWeight={600}>{t("privacyPolicy_no_sell")}</Text>
               <Text>{t("privacyPolicy_section3_intro")}</Text>
@@ -146,7 +146,7 @@ export const PolicyClient = () => {
             <Separator />
 
             {/* Section 4 */}
-            <Stack spacing="12px">
+            <Stack gap="12px">
               <Heading size="2xl">{t("privacyPolicy_section4_title")}</Heading>
 
               <Text>{t("privacyPolicy_cookies_intro")}</Text>
@@ -163,7 +163,7 @@ export const PolicyClient = () => {
             <Separator />
 
             {/* Section 5 */}
-            <Stack spacing="12px">
+            <Stack gap="12px">
               <Heading size="2xl">{t("privacyPolicy_section5_title")}</Heading>
 
               <Text>{t("privacyPolicy_retention_intro")}</Text>
@@ -180,7 +180,7 @@ export const PolicyClient = () => {
             <Separator />
 
             {/* Section 6 */}
-            <Stack spacing="12px">
+            <Stack gap="12px">
               <Heading size="2xl">{t("privacyPolicy_section6_title")}</Heading>
               <Text>{t("privacyPolicy_security_text")}</Text>
             </Stack>
@@ -188,7 +188,7 @@ export const PolicyClient = () => {
             <Separator />
 
             {/* Section 7 */}
-            <Stack spacing="12px">
+            <Stack gap="12px">
               <Heading size="2xl">{t("privacyPolicy_section7_title")}</Heading>
               <Text>{t("privacyPolicy_rights")}</Text>
 
@@ -207,58 +207,58 @@ export const PolicyClient = () => {
 
             {/* Section 8 - 13 (compact) */}
             {["8", "9", "10", "11"].map((num) => (
-              <Stack key={num} spacing="8px">
-                <Heading size="2xl">
-                  {t(`privacyPolicy_section${num}_title`)}
-                </Heading>
-                <Text>
-                  {t(`privacyPolicy_section${num}_text`, {
-                    default: "",
-                  })}
-                </Text>
+              <>
+                <Stack key={num} gap="8px">
+                  <Heading size="2xl">
+                    {t(`privacyPolicy_section${num}_title`)}
+                  </Heading>
+                  <Text>
+                    {t(`privacyPolicy_section${num}_text`, {
+                      default: "",
+                    })}
+                  </Text>
+                </Stack>
                 <Separator />
-              </Stack>
+              </>
             ))}
-          </Stack>
+            {/* Section 12 */}
+            <Stack gap="8px">
+              <Heading size="2xl">{t("privacyPolicy_section12_title")}</Heading>
 
-          {/* Section 12 */}
-          <Stack spacing="8px">
-            <Heading size="2xl">{t("privacyPolicy_section12_title")}</Heading>
+              <Text fontWeight={600}>{t("privacyPolicy_company")}</Text>
+              <Text>{t("privacyPolicy_email")}</Text>
+              <Text>{t("privacyPolicy_website")}</Text>
+            </Stack>
+            <Separator />
 
-            <Text fontWeight={600}>{t("privacyPolicy_company")}</Text>
-            <Text>{t("privacyPolicy_email")}</Text>
-            <Text>{t("privacyPolicy_website")}</Text>
-          </Stack>
+            {/* Section 13 */}
+            <Stack gap="12px">
+              <Heading size="2xl">{t("privacyPolicy_section13_title")}</Heading>
 
-          <Separator />
+              <Text>{t("privacyPolicy_marketing_intro")}</Text>
 
-          {/* Section 13 */}
-          <Stack spacing="12px">
-            <Heading size="2xl">{t("privacyPolicy_section13_title")}</Heading>
+              <Box as="ul" pl="20px" listStyleType="circle">
+                <li>{t("privacyPolicy_marketing_newsletter")}</li>
+                <li>{t("privacyPolicy_marketing_updates")}</li>
+                <li>{t("privacyPolicy_marketing_ads")}</li>
+                <li>{t("privacyPolicy_marketing_info")}</li>
+              </Box>
 
-            <Text>{t("privacyPolicy_marketing_intro")}</Text>
+              <Text>{t("privacyPolicy_marketing_legal")}</Text>
 
-            <Box as="ul" pl="20px" listStyleType="circle">
-              <li>{t("privacyPolicy_marketing_newsletter")}</li>
-              <li>{t("privacyPolicy_marketing_updates")}</li>
-              <li>{t("privacyPolicy_marketing_ads")}</li>
-              <li>{t("privacyPolicy_marketing_info")}</li>
-            </Box>
+              <Text>{t("privacyPolicy_marketing_unsubscribe")}</Text>
+              <Box as="ul" pl="20px" listStyleType="circle">
+                <li>{t("privacyPolicy_marketing_unsubscribe_li_1")}</li>
+                <li>{t("privacyPolicy_marketing_unsubscribe_li_2")}</li>
+              </Box>
 
-            <Text>{t("privacyPolicy_marketing_legal")}</Text>
-
-            <Text>{t("privacyPolicy_marketing_unsubscribe")}</Text>
-            <Box as="ul" pl="20px" listStyleType="circle">
-              <li>{t("privacyPolicy_marketing_unsubscribe_li_1")}</li>
-              <li>{t("privacyPolicy_marketing_unsubscribe_li_2")}</li>
-            </Box>
-
-            <Text>{t("privacyPolicy_marketing_notice")}</Text>
-            <Box as="ul" pl="20px" listStyleType="circle">
-              <li>{t("privacyPolicy_marketing_notice_li_1")}</li>
-              <li>{t("privacyPolicy_marketing_notice_li_2")}</li>
-              <li>{t("privacyPolicy_marketing_notice_li_3")}</li>
-            </Box>
+              <Text>{t("privacyPolicy_marketing_notice")}</Text>
+              <Box as="ul" pl="20px" listStyleType="circle">
+                <li>{t("privacyPolicy_marketing_notice_li_1")}</li>
+                <li>{t("privacyPolicy_marketing_notice_li_2")}</li>
+                <li>{t("privacyPolicy_marketing_notice_li_3")}</li>
+              </Box>
+            </Stack>
           </Stack>
         </Container>
       </Animate>
