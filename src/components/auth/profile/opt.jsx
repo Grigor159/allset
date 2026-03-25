@@ -19,7 +19,7 @@ export const Opt = () => {
       checked={accept}
       onCheckedChange={handleChange}
       alignItems="start"
-      pl="27px"
+      justifyContent="center"
     >
       <Checkbox.HiddenInput />
       <Checkbox.Control

@@ -16,7 +16,7 @@ import {
   CloseButton,
 } from "@chakra-ui/react";
 import { downloadTable, table } from "@/assets/svgs";
-import { downloadTableList } from "@/utils/helpers";
+import { downloadTableList } from "@/services/download";
 import { TableCard } from "./tableCard";
 
 export const TableList = () => {

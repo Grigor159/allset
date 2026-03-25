@@ -15,7 +15,6 @@ export const Referal = ({ code }) => {
     <Stack
       w="100%"
       minH="154px"
-      //   bgImage={{ base: `url(${bg.src})` }}
       bgImage={{
         base: `
       url(${bg.src}),
