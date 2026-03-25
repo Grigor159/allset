@@ -21,8 +21,6 @@ import { guestsTableHeader } from "@/utils/constants";
 import { openClose, status, actions, asc } from "@/assets/svgs";
 import { Edit } from "./edit";
 import { joinFilters } from "@/utils/formatters";
-import { error } from "@/components/ui/alerts";
-import { queryClient } from "@/providers/queryProvider";
 import { Delete } from "./delete";
 
 export const List = () => {

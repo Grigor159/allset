@@ -6,18 +6,25 @@ import { useIsFetching } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import { IconButton, Skeleton } from "@chakra-ui/react";
 import { downloadGuest } from "@/assets/svgs";
+import { queryClient } from "@/providers/queryProvider";
+import { downloadGuestList } from "@/services/download";
 
 export const Download = () => {
   const t = useTranslations();
 
-  const handleDownload = (e) => {
-    alert("In progress");
-  };
   const { id } = useParams();
 
   const isFetching = useIsFetching({
     queryKey: [`confirmations/invitation/${id}/tables`],
   });
+
+  const handleDownload = () => {
+    const data = queryClient.getQueryData([
+      `confirmations/invitation/${id}?filterId=show_all_guests`,
+    ]);
+
+    downloadGuestList(data, t);
+  };
 
   if (isFetching) {
     return <Skeleton w="177px" h="44px" />;

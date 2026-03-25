@@ -246,6 +246,7 @@
     "invitation": "приглашение",
     "guest_name": "Основной гость",
     "accompanying_name": "Сопровождающий гость(и)",
+    "accompanying_names": "Сопровождающий гость(и) имнена",
     "status": "Статус",
     "confirmed": "Подтверждено",
     "declined": "Не придёт",

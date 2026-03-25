@@ -54,3 +54,52 @@ export async function downloadTableList(printRef) {
 
     pdf.save("table-list.pdf");
 }
+
+
+import { format } from "date-fns";
+
+export const downloadGuestList = (data, t) => {
+  if (!data || !data.length) return;
+
+  const headers = [
+    t("guest_name"),
+    t("accompanying_name"),
+    t("accompanying_names"),
+    t("status"),
+    t("note"),
+    t("group_count"),
+    t("guest_group"),
+    t("table_number"),
+  ];
+
+  const rows = data.map((item) => [
+    item.mainGuest,
+    item.secondaryGuests?.length || 0,
+    item.secondaryGuests?.join(", ") || "-",
+    item.status === "CONFIRMED"
+      ? t(item.status.toLowerCase()) +
+        format(new Date(item.createdAt), " (dd.MM.yy)")
+      : t(item.status.toLowerCase()),
+    item.notes || "-",
+    (item.secondaryGuests?.length || 0) + 1,
+    item.guestSide ? t(item.guestSide.toLowerCase()) : "-",
+    item.tableNumber || "-",
+  ]);
+
+  const csvContent = [headers, ...rows]
+    .map((row) => row.map((v) => `"${v}"`).join(","))
+    .join("\n");
+
+  const blob = new Blob(["\uFEFF" + csvContent], {
+    type: "text/csv;charset=utf-8;",
+  });
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.setAttribute("download", "guest-list.csv");
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+};

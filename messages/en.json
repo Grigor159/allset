@@ -246,6 +246,7 @@
     "invitation": "invitation",
     "guest_name": "Main Guest Name",
     "accompanying_name": "Accompanying guest(s)",
+    "accompanying_names": "Accompanying guest(s) names",
     "status": "Status",
     "confirmed": "Confirmed",
     "declined": "Not Coming",
