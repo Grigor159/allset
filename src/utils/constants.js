@@ -6,26 +6,32 @@ export const prefixes = {
   'ru': '/ru'
 }
 
+import { hyFlag, enFlag, ruFlag } from '../assets/svgs';
 export const languages = [
-  {
-    code: "hy",
-    flag: "am",
-  },
-  {
-    code: "en",
-    flag: "gb",
-  },
-  {
-    code: "ru",
-    flag: "ru",
-  },
-]
+  { code: "hy", flag: hyFlag },
+  { code: "en", flag: enFlag },
+  { code: "ru", flag: ruFlag },
+];
+// export const languages = [
+//   {
+//     code: "hy",
+//     flag: "am",
+//   },
+//   {
+//     code: "en",
+//     flag: "gb",
+//   },
+//   {
+//     code: "ru",
+//     flag: "ru",
+//   },
+// ]
 
-export const localesMap = {
-  hy: "am",
-  en: "gb",
-  ru: "ru",
-}
+// export const localesMap = {
+//   hy: "am",
+//   en: "gb",
+//   ru: "ru",
+// }
 
 export const days = (difference) => Math.floor(difference / (1000 * 60 * 60 * 24));
 export const hours = (difference) => Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));

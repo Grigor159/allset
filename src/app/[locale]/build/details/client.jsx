@@ -6,7 +6,7 @@ import { useRouter } from "@/i18n/routing";
 import { useQueryState } from "nuqs";
 import { useGetTanstack } from "@/hooks/useTanstack";
 import apiClient from "@/lib/api";
-import { Box, Container, Stack } from "@chakra-ui/react";
+import { Box, Stack } from "@chakra-ui/react";
 import { Animate } from "@/components/ui/animate";
 import { LngSelector } from "@/components/build/lngSelector";
 import { TitleCreator } from "@/components/build/titleCreator";
@@ -25,7 +25,6 @@ import { Rsvp } from "@/components/build/rsvp";
 
 export const DetailsClient = () => {
   const router = useRouter();
-
   const hiddenFieldsRef = useRef({});
 
   const [template] = useQueryState("template");

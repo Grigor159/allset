@@ -19,11 +19,14 @@ export const scrollToTopWithDuration = (duration) => {
   requestAnimationFrame(scrollStep);
 }
 
-import { localesMap } from "./constants";
+import { languages } from "./constants";
+// export const getFlagCode = (lang) => {
+//   return localesMap[lang];
+// };
 export const getFlagCode = (lang) => {
-  return localesMap[lang];
+  const found = languages.find((l) => l.code === lang);
+  return found?.flag || null;
 };
-
 
 import { steps } from "./constants";
 export const getStepInfo = (pathname) => {

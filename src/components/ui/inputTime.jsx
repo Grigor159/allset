@@ -46,6 +46,7 @@ export const InputTime = ({ value, onChange, disabled }) => {
         ref={hoursRef}
         name="time_hours"
         value={hours}
+        type="number"
         onChange={handleHoursChange}
         disabled={disabled}
         placeholder="00"

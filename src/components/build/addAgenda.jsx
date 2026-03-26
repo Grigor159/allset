@@ -179,12 +179,10 @@ export const AddAgenda = ({ setData, languages }) => {
                   <InputGroup
                     key={el}
                     startElement={
-                      <Image
-                        src={`https://flagcdn.com/${getFlagCode(el)}.svg`}
-                        boxSize="24px"
-                        borderRadius={"50%"}
-                        alt={el}
-                      />
+                  
+                      <Icon boxSize="24px" borderRadius="100%">
+                        {getFlagCode(el)?.icon}
+                      </Icon>
                     }
                   >
                     <Input

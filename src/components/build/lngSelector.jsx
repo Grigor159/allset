@@ -5,7 +5,6 @@ import {
   Field,
   Flex,
   Icon,
-  Image,
   Stack,
   Text,
   useMediaQuery,
@@ -65,12 +64,9 @@ export const LngSelector = ({ name, value, onChange, required }) => {
           >
             <Checkbox.HiddenInput />
             <Checkbox.Label as={Flex} gap={"18px"} alignItems={"center"}>
-              <Image
-                src={`https://flagcdn.com/${flag}.svg`}
-                boxSize="24px"
-                borderRadius="50%"
-                alt={t(code)}
-              />
+              <Icon boxSize="24px" borderRadius="100%">
+                {flag.icon}
+              </Icon>
               <Text fontSize={"16px"} fontWeight={"300"} lineHeight={"24px"}>
                 {t(code)}
               </Text>

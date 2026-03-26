@@ -13,6 +13,7 @@ export const Title = ({ text }) => {
       fontWeight={"700"}
       fontSize={{ base: "26px", md: "28px" }}
       letterSpacing={"0"}
+      textAlign="center"
     >
       {t(text)}
     </Heading>
