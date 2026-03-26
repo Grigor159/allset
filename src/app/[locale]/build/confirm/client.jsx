@@ -34,9 +34,8 @@ export const ConfirmClient = () => {
   };
 
   return (
-    <Box pt="32px" pb="40px">
-      <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
-        <Stack gap="24px" w="748px" mx="auto">
+    <Box pt={{ base: "32px", md: "48px" }} pb={{ base: "22px", md: "40px" }}>
+        <Stack gap="24px" w={{ base: "100%", lg: "748px" }} mx="auto">
           <Stack
             id="confirm"
             as="form"
@@ -61,7 +60,6 @@ export const ConfirmClient = () => {
             <Pay />
           </Animate>
         </Stack>
-      </Container>
     </Box>
   );
 };

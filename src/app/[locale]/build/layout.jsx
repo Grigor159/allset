@@ -15,8 +15,6 @@ export default function Layout({ children }) {
       bgImage={{ base: `url(${bg.src})` }}
       minW={"100%"}
       minH={"100%"}
-      // for fixed bottom part
-      // minH="100vh"
       bgSize="contain"
       bgRepeat="no-repeat"
     >
@@ -24,8 +22,6 @@ export default function Layout({ children }) {
       <Container
         maxW="1440px"
         px={{ base: "24px", md: "40px" }}
-        // for fixed bottom part
-        // pb="80px"
       >
         {children}
       </Container>

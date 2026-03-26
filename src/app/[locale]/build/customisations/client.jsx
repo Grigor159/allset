@@ -32,8 +32,6 @@ export const CustomisationsClient = () => {
 
       <Flex
         position={"relative"}
-        // pt="32px"
-        // pb={{ base: "24px", md: "54px" }}
         pt={{ base: "32px", md: "48px" }}
         pb="22px"
         gap={"24px"}

@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import { back } from "@/assets/svgs";
-import { useRouter } from "@/i18n/routing";
-import { Button, Icon, Stack } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import { useQueryState } from "nuqs";
+import { useRouter } from "@/i18n/routing";
+import { back } from "@/assets/svgs";
+import { Button, Icon, Stack } from "@chakra-ui/react";
 import { Tooltip } from "../ui/tooltip";
 
 export const Pay = () => {

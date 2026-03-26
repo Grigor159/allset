@@ -3,19 +3,16 @@
 import { useTranslations } from "next-intl";
 import { useQueryState } from "nuqs";
 import {
-  Button,
   Field,
   Flex,
-  For,
   Icon,
   Image,
   Stack,
   Checkbox,
   Link as ChakraLink,
-  Text,
   RadioGroup,
   HStack,
-  Box,
+  Text,
 } from "@chakra-ui/react";
 import { checked, payment } from "../../assets/svgs";
 import { Label } from "@/components/build/typography/label";
@@ -29,35 +26,55 @@ export const Payment = () => {
   const [accept, setAccept] = useQueryState("terms_accepted");
 
   return (
-    <Stack borderRadius={"8px"} bg="white" p="24px" gap={"16px"}>
-      <Field.Root gap="24px">
+    <Stack
+      bg="white"
+      borderRadius={"8px"}
+      p={{ base: "16px", md: "24px" }}
+      gap={"16px"}
+    >
+      <Field.Root gap={{ base: "16px", md: "24px" }}>
         <Field.Label gap="16px">
           <Icon>{payment.icon}</Icon>
           <Label text="payment_method" />
         </Field.Label>
 
         <RadioGroup.Root value={pay} onValueChange={(e) => setPay(e.value)}>
-          <HStack gap="16px">
+          <HStack gap={{ base: "10px", md: "16px" }}>
             {paymentMethods.map(({ value, src }) => (
               <RadioGroup.Item
                 key={value}
                 value={value}
                 cursor="pointer"
-                gap="16px"
+                gap={{ base: "10px", md: "16px" }}
               >
                 <RadioGroup.ItemHiddenInput />
                 <RadioGroup.ItemIndicator />
                 <Flex
                   align={"center"}
                   justify={"center"}
-                  w="165px"
+                  flexDirection={"column"}
+                  gap="10px"
+                  w={{ base: "116px", md: "165px" }}
                   h="72px"
                   bg="#F9FAFB"
                   br="4px"
+                  p="16px"
                 >
-                  <Image src={src.src} alt="img" />
+                  {value == "visa" && (
+                    <Text
+                      fontSize={{ base: "14px", md: "16px" }}
+                      color={"#4B5563"}
+                      lineHeight={"18px"}
+                    >
+                      Credit Card
+                    </Text>
+                  )}
+                  <Image
+                    src={src.src}
+                    alt="img"
+                    w={value === "visa" ? "63px" : "100%"}
+                  />
                 </Flex>
-                {/* <RadioGroup.ItemText>{value}</RadioGroup.ItemText> */}
               </RadioGroup.Item>
             ))}
           </HStack>

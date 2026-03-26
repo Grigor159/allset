@@ -76,7 +76,7 @@ export const Promocode = ({ code }) => {
     <Stack
       borderRadius={"8px"}
       bg="white"
-      p="24px"
+      p={{ base: "16px", md: "24px" }}
       as="form"
       onSubmit={handleSubmit}
     >

@@ -64,10 +64,10 @@ export const Preview = () => {
         // p={"60px 25px 0 25px"}
       /> */}
 
-      <Box position="relative" w="100%">
+      <Box position="relative" w="100%"  h={{ base: "430px", md: "685px" }}>
         <Image
           w="100%"
-          h={{ base: "430px", md: "685px" }}
+          h="100%"
           objectFit={"cover"}
           src={img.src}
           borderRadius={"8px"}
