@@ -35,31 +35,35 @@ export const ConfirmClient = () => {
 
   return (
     <Box pt={{ base: "32px", md: "48px" }} pb={{ base: "22px", md: "40px" }}>
-        <Stack gap="24px" w={{ base: "100%", lg: "748px" }} mx="auto">
-          <Stack
-            id="confirm"
-            as="form"
-            gap="24px"
-            autoComplete="on"
-            onSubmit={submit}
-          >
-            <Animate>
-              <TitleDemo />
-            </Animate>
-            <Animate>
-              <ConfirmDate />
-            </Animate>
-          </Stack>
+      <Stack
+        gap={{ base: "16px", md: "24px" }}
+        w={{ base: "100%", lg: "748px" }}
+        mx="auto"
+      >
+        <Stack
+          id="confirm"
+          as="form"
+          gap={{ base: "16px", md: "24px" }}
+          autoComplete="on"
+          onSubmit={submit}
+        >
           <Animate>
-            <Promocode />
+            <TitleDemo />
           </Animate>
           <Animate>
-            <Payment />
-          </Animate>
-          <Animate>
-            <Pay />
+            <ConfirmDate />
           </Animate>
         </Stack>
+        <Animate>
+          <Promocode />
+        </Animate>
+        <Animate>
+          <Payment />
+        </Animate>
+        <Animate>
+          <Pay />
+        </Animate>
+      </Stack>
     </Box>
   );
 };

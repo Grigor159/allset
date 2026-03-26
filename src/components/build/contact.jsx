@@ -30,7 +30,7 @@ export const Contact = ({ name, value, onChange, hide, required }) => {
   };
 
   return (
-    <Stack borderRadius={"8px"} bg="white" p="24px">
+    <Stack borderRadius={"8px"} bg="white" p={{ base: "16px", md: "24px" }}>
       <Field.Root required={required} gap={"16px"}>
         <Field.Label as={Flex} w="100%" justify={"space-between"}>
           <HStack>
@@ -43,7 +43,12 @@ export const Contact = ({ name, value, onChange, hide, required }) => {
         </Field.Label>
 
         {checked && (
-          <Flex w="100%" gap="16px" justify={"space-between"}>
+          <Flex
+            w="100%"
+            gap="16px"
+            justify={"space-between"}
+            flexDirection={{ base: "column", md: "row" }}
+          >
             <InputSimple
               name="name"
               value={value?.name ?? ""}

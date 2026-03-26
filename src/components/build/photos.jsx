@@ -19,7 +19,12 @@ export const Photos = ({ name, onChange, required }) => {
   };
 
   return (
-    <Stack borderRadius={"8px"} bg="white" p="24px" gap="16px">
+    <Stack
+      borderRadius={"8px"}
+      bg="white"
+      p={{ base: "16px", md: "24px" }}
+      gap="16px"
+    >
       <Field.Root required={required}>
         <Field.Label>
           <Field.RequiredIndicator />

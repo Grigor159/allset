@@ -177,147 +177,151 @@ export const DetailsClient = () => {
   };
 
   return (
-    <Box pt="32px" pb="65px">
-        {/* VStack */}
-        <Stack gap="24px" w="748px" mx="auto">
-          <Stack
-            id="details"
-            as="form"
-            gap="24px"
-            autoComplete="on"
-            onSubmit={submit}
-          >
-            <Animate>
-              <LngSelector
-                name="languages"
-                value={form.languages}
-                onChange={handleChange}
-                required={true}
-              />
-            </Animate>
+    <Box pt={{ base: "32px", md: "48px" }} pb="22px">
+      {/* VStack */}
+      <Stack
+        gap={{ base: "16px", md: "24px" }}
+        w={{ base: "100%", lg: "748px" }}
+        mx="auto"
+      >
+        <Stack
+          id="details"
+          as="form"
+          gap={{ base: "16px", md: "24px" }}
+          autoComplete="on"
+          onSubmit={submit}
+        >
+          <Animate>
+            <LngSelector
+              name="languages"
+              value={form.languages}
+              onChange={handleChange}
+              required={true}
+            />
+          </Animate>
 
-            <Animate>
-              <TitleCreator
-                name="title"
-                value={form.title}
-                onChange={handleLngChange}
-                setForm={setForm}
-                required={true}
-                languages={form.languages}
-              />
-            </Animate>
+          <Animate>
+            <TitleCreator
+              name="title"
+              value={form.title}
+              onChange={handleLngChange}
+              setForm={setForm}
+              required={true}
+              languages={form.languages}
+            />
+          </Animate>
 
-            <Animate>
-              <EventDate
-                name="eventDate"
-                value={form.eventDate}
-                onChange={handleChange}
-                required={true}
-              />
-            </Animate>
+          <Animate>
+            <EventDate
+              name="eventDate"
+              value={form.eventDate}
+              onChange={handleChange}
+              required={true}
+            />
+          </Animate>
 
-            <Animate>
-              <TextAreaField
-                name="description"
-                value={form.description}
-                onChange={handleLngChange}
-                required={true}
-                text="description"
-                placeholder="description_placeholder"
-                languages={form.languages}
-              />
-            </Animate>
+          <Animate>
+            <TextAreaField
+              name="description"
+              value={form.description}
+              onChange={handleLngChange}
+              required={true}
+              text="description"
+              placeholder="description_placeholder"
+              languages={form.languages}
+            />
+          </Animate>
 
-            <Animate>
-              <Photos
-                // onFileSelect={(file) =>
-                //   setForm((prev) => ({ ...prev, mainImages: file }))
-                // }
-                name="mainImages"
-                onChange={handleChange}
-                required={true}
-              />
-            </Animate>
+          <Animate>
+            <Photos
+              // onFileSelect={(file) =>
+              //   setForm((prev) => ({ ...prev, mainImages: file }))
+              // }
+              name="mainImages"
+              onChange={handleChange}
+              required={true}
+            />
+          </Animate>
 
-            <Animate>
-              <Rsvp name="rsvp" hide={handleHide} text="rsvp" />
-            </Animate>
+          <Animate>
+            <Rsvp name="rsvp" hide={handleHide} text="rsvp" />
+          </Animate>
 
-            <Animate>
-              <Venue
-                name="venue"
-                value={form.venue}
-                onChange={handleChange}
-                required={true}
-              />
-            </Animate>
+          <Animate>
+            <Venue
+              name="venue"
+              value={form.venue}
+              onChange={handleChange}
+              required={true}
+            />
+          </Animate>
 
-            <Animate>
-              <Timeline
-                data={agenda}
-                setData={setAgenda}
-                languages={form.languages}
-                //
-                name="timeline"
-                value={form.timeline}
-                hide={handleHide}
-                onChange={handleTimelineChange}
-                required={false}
-              />
-            </Animate>
+          <Animate>
+            <Timeline
+              data={agenda}
+              setData={setAgenda}
+              languages={form.languages}
+              //
+              name="timeline"
+              value={form.timeline}
+              hide={handleHide}
+              onChange={handleTimelineChange}
+              required={false}
+            />
+          </Animate>
 
-            <Animate>
-              <Dresscode
-                name="dressCode"
-                value={form.dressCode}
-                onChange={handleLngChange}
-                hide={handleHide}
-                required={false}
-                languages={form.languages}
-              />
-            </Animate>
+          <Animate>
+            <Dresscode
+              name="dressCode"
+              value={form.dressCode}
+              onChange={handleLngChange}
+              hide={handleHide}
+              required={false}
+              languages={form.languages}
+            />
+          </Animate>
 
-            <Animate>
-              <AlbumLink
-                name="albumLink"
-                value={form.albumLink}
-                onChange={handleChange}
-                hide={handleHide}
-                required={false}
-              />
-            </Animate>
+          <Animate>
+            <AlbumLink
+              name="albumLink"
+              value={form.albumLink}
+              onChange={handleChange}
+              hide={handleHide}
+              required={false}
+            />
+          </Animate>
 
-            <Animate>
-              <Story
-                name="ourStory"
-                value={form.ourStory}
-                onChange={handleLngChange}
-                hide={handleHide}
-                required={false}
-                languages={form.languages}
-              />
-            </Animate>
+          <Animate>
+            <Story
+              name="ourStory"
+              value={form.ourStory}
+              onChange={handleLngChange}
+              hide={handleHide}
+              required={false}
+              languages={form.languages}
+            />
+          </Animate>
 
-            <Animate>
-              <Contact
-                name="connectWithUs"
-                value={form.connectWithUs}
-                onChange={handleChange}
-                hide={handleHide}
-                required={false}
-              />
-            </Animate>
-          </Stack>
-
-          <Animate
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true, margin: "0px 0px -100px 0px" }}
-          >
-            <Expire />
+          <Animate>
+            <Contact
+              name="connectWithUs"
+              value={form.connectWithUs}
+              onChange={handleChange}
+              hide={handleHide}
+              required={false}
+            />
           </Animate>
         </Stack>
+
+        <Animate
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, margin: "0px 0px -100px 0px" }}
+        >
+          <Expire />
+        </Animate>
+      </Stack>
     </Box>
   );
 };

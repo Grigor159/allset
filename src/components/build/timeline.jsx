@@ -61,7 +61,12 @@ export const Timeline = ({
   };
 
   return (
-    <Stack borderRadius="8px" bg="white" p="24px" gap="16px">
+    <Stack
+      borderRadius="8px"
+      bg="white"
+      p={{ base: "16px", md: "24px" }}
+      gap="16px"
+    >
       <Field.Root required={required} gap="16px">
         <Field.Label as={Flex} w="100%" justify="space-between">
           <Label text="agenda" />
@@ -90,6 +95,8 @@ export const Timeline = ({
                 }
                 w="100%"
                 justifyContent="space-between"
+                flexDirection={{ base: "column", md: "row" }}
+                alignItems={{ base: "flex-start", md: "unset" }}
                 cursor="pointer"
                 p="16px 0"
                 borderRadius="4px"
@@ -100,8 +107,8 @@ export const Timeline = ({
                 <Flex align="center" gap="12px">
                   <Checkbox.HiddenInput />
                   <Checkbox.Control
-                    w="24px"
-                    h="24px"
+                    w={{ base: "16px", md: "24px" }}
+                    h={{ base: "16px", md: "24px" }}
                     _checked={{ border: "none", bg: "transparent" }}
                   >
                     {isChecked && <Icon>{checked.icon}</Icon>}
