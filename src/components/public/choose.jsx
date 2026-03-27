@@ -23,7 +23,7 @@ import { Animate } from "../ui/animate";
 
 export const Choose = () => {
   const t = useTranslations();
-  const [isMobile] = useMediaQuery("(max-width: 767px)");
+  const [isLaptop] = useMediaQuery("(max-width: 1023px)");
 
   return (
     <Stack
@@ -37,20 +37,40 @@ export const Choose = () => {
         <Flex
           w="100%"
           flexDirection={{ base: "column", lg: "row" }}
-          gap={{ base: "52px", md: "106px" }}
+          gap={{ base: "52px", lg: "106px" }}
         >
-          <Stack gap={{ base: "16px", md: "24px" }}>
-            <Title
-              text="choose_title"
-              color="#FFFFFF"
-              textAlign={{ base: "center", md: "unset" }}
-            />
-            <SubTitle
-              text="choose_desc"
-              textAlign={{ base: "center", md: "unset" }}
-            />
+          <Stack gap={"32px"}>
+            <Stack gap={{ base: "16px", md: "8px" }}>
+              <Title
+                text="choose_title"
+                color="#FFFFFF"
+                textAlign={{ base: "center", lg: "unset" }}
+              />
+              <SubTitle
+                text="choose_desc"
+                textAlign={{ base: "center", lg: "unset" }}
+              />
+            </Stack>
 
-            <Stack gap="34px">
+            {isLaptop && (
+              <Stack
+                // w={{ base: "100%", md: "fit-content" }}
+                mx={"auto"}
+                maxW={"264px"}
+                maxH={"440px"}
+              >
+                <Image
+                  src={imgMobile.src}
+                  w="100%"
+                  h="100%"
+                  objectFit={"contain"}
+                  borderRadius={"20px"}
+                  alt="Choose Image"
+                />
+              </Stack>
+            )}
+
+            <Stack gap={{ base: "24px", lg: "34px" }}>
               <For each={choose}>
                 {({ id, title, description }) => (
                   <Animate>
@@ -93,21 +113,23 @@ export const Choose = () => {
             </Stack>
           </Stack>
 
-          <Stack
-            // w={{ base: "100%", md: "fit-content" }}
-            mx={{ base: "auto", md: "auto" }}
-            maxW={{ base: "264px", md: "710px" }}
-            maxH={{ base: "440px", md: "688px" }}
-          >
-            <Image
-              src={isMobile ? imgMobile.src : img.src}
-              w="100%"
-              h="100%"
-              objectFit={"contain"}
-              borderRadius={"20px"}
-              alt="Choose Image"
-            />
-          </Stack>
+          {!isLaptop && (
+            <Stack
+              // w={{ base: "100%", md: "fit-content" }}
+              mx={"auto"}
+              maxW={"710px"}
+              maxH={"688px"}
+            >
+              <Image
+                src={img.src}
+                w="100%"
+                h="100%"
+                objectFit={"contain"}
+                borderRadius={"20px"}
+                alt="Choose Image"
+              />
+            </Stack>
+          )}
         </Flex>
       </Container>
     </Stack>

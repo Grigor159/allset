@@ -235,33 +235,33 @@ export const invitationTabs = [
   },
 ]
 
-import { fb, insta, twitter, youtube, tiktok, pinterest } from "../assets/svgs";
+import { fb, insta } from "../assets/svgs";
 
 export const social = [
   {
-    href: "https://",
+    href: "https://www.facebook.com/profile.php?id=61550794792772",
     icon: fb
   },
   {
-    href: "https://",
+    href: "https://www.instagram.com/allset_event/",
     icon: insta
   },
-  {
-    href: "https://",
-    icon: twitter
-  },
-  {
-    href: "https://",
-    icon: youtube
-  },
-  {
-    href: "https://",
-    icon: tiktok
-  },
-  {
-    href: "https://",
-    icon: pinterest
-  },
+  // {
+  //   href: "https://",
+  //   icon: twitter
+  // },
+  // {
+  //   href: "https://",
+  //   icon: youtube
+  // },
+  // {
+  //   href: "https://",
+  //   icon: tiktok
+  // },
+  // {
+  //   href: "https://",
+  //   icon: pinterest
+  // },
 ]
 
 import { create, manage, check } from '../assets/svgs';

@@ -164,6 +164,6 @@ export const getInitialForm = (id) => ({
   mainGuest: "",
   secondaryGuests: [""],
   guestSide: "",
-  status: "DECLINED",
+  status: "CONFIRMED",
   createdBy: "INVITATION_OWNER",
 });

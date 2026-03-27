@@ -11,7 +11,7 @@ export const Feedback = ({ feedbacks }) => {
     <Stack p="40px 0 50px 0" bg="#0041431A">
       <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
         <Stack gap="20px">
-          <Stack gap="8px">
+          <Stack gap={{ base: "16px", md: "8px" }}>
             <Title
               text="feedback"
               color="#004143"

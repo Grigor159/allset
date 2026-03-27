@@ -64,8 +64,8 @@ export const PlanningSlide = () => {
               w={"100%"}
               h={{ base: "268px", sm: "457px" }}
               alignItems={"center"}
-              justifyContent={"Center"}
-              overflow={"hidden"}
+              // justifyContent={"center"}
+              // overflow={"hidden"}
             >
               <Image
                 src={templateImageMobile}
@@ -75,9 +75,9 @@ export const PlanningSlide = () => {
                 objectFit="contain"
                 transition="all 0.3s ease"
                 borderRadius={"25px"}
-                _hover={{
-                  transform: "scale(1.1)",
-                }}
+                // _hover={{
+                //   transform: "scale(1.1)",
+                // }}
               />
             </Stack>
           </SwiperSlide>

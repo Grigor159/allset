@@ -104,7 +104,7 @@ export const Card = ({ el }) => {
             letterSpacing={0}
             color={isSelected ? "#0C4A4C" : "#004143"}
             transition="all 0.3s ease"
-            w={{ base: "fit-content", md: "160px" }}
+            w={{ base: "fit-content", md: "165px" }}
           >
             {t(name[language])}
           </Text>
@@ -128,36 +128,28 @@ export const Card = ({ el }) => {
           p="6px 0"
           w="127px"
           textAlign="center"
+          fontWeight={isSelected ? 700 : 400}
         >
           {formatPrice(pricing?.finalPrice)}
         </Text>
       </Flex>
       <SubText
         fs="14px"
-        color={isSelected && "#004143"}
+        color={isSelected ? "#004143" : "#4B5563"}
         text={description[language]}
         lineClamp={4}
       />
 
-      <VStack gap="16px">
-        <Flex w="100%" justify={"space-between"}>
+      <Flex gap="46px">
+        <Flex flexDirection={"column"} gap="16px">
           <HStack>
             <Icon>{palleteName.icon}</Icon>
-            <Text fontSize={"14px"} color={"#6B7280"}>
+            <Text fontSize={"14px"} color={isSelected ? "#004143" : "#6B7280"}>
               {createdByKeyword[language]}
             </Text>
           </HStack>
           <HStack>
             <Icon>{palletDesc.icon}</Icon>
-            <Text fontSize={"14px"} color={"#6B7280"}>
-              {lovedByKeyword[language]}
-            </Text>
-          </HStack>
-        </Flex>
-
-        <Flex w="100%" justify={"space-between"}>
-          <HStack>
-            <Icon>{palletHex.icon}</Icon>
             {paletteKeyword?.colors?.map((color, index) => (
               <Box
                 key={color}
@@ -172,14 +164,23 @@ export const Card = ({ el }) => {
               />
             ))}
           </HStack>
+        </Flex>
+
+        <Flex flexDirection={"column"} gap="16px">
+          <HStack>
+            <Icon>{palletHex.icon}</Icon>
+            <Text fontSize={"14px"} color={isSelected ? "#004143" : "#6B7280"}>
+              {lovedByKeyword[language]}
+            </Text>
+          </HStack>
           <HStack>
             <Icon>{palletLast.icon}</Icon>
-            <Text fontSize={"14px"} color={"#6B7280"}>
+            <Text fontSize={"14px"} color={isSelected ? "#004143" : "#6B7280"}>
               {styleKeyword[language]}
             </Text>
           </HStack>
         </Flex>
-      </VStack>
+      </Flex>
     </Stack>
   );
 };

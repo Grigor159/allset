@@ -12,10 +12,10 @@ export const BottomPart = () => {
       boxShadow="sm"
       bg="white"
       py={{ base: "24px", md: "32px" }}
-      position={{ base: "sticky", md: "static" }}
-      bottom={{ base: "0", md: "auto" }}
-      left={{ base: "0", md: "unset" }}
-      zIndex={{ base: "10", md: "unset" }}
+      position={"sticky"}
+      bottom={"0"}
+      left={"0"}
+      zIndex={10}
     >
       <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
         <Flex
