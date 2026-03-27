@@ -4,7 +4,8 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { useQueryState } from "nuqs";
-import { useGetAuthTanstack, useMutateAuthTanstack } from "@/hooks/useTanstack";
+import { useGetAuthTanstack } from "@/hooks/useTanstack";
+import { filterGuestsByName } from "@/utils/helpers";
 import { isNotEmptyArray } from "@/utils/checkers";
 import { format } from "date-fns";
 import {
@@ -27,6 +28,7 @@ export const List = () => {
   const t = useTranslations();
 
   const [expandedId, setExpandedId] = useState(null);
+  const [name] = useQueryState("name");
   const [filters] = useQueryState("filters", {
     defaultValue: ["show_all_guests"],
   });
@@ -35,6 +37,8 @@ export const List = () => {
   const { isFetching, data } = useGetAuthTanstack(
     `confirmations/invitation/${id}?filterId=${joinFilters(filters)}`,
   );
+
+  const filteredData = filterGuestsByName(data, name);
 
   const toggleRow = (id) => {
     setExpandedId(expandedId === id ? null : id);
@@ -45,7 +49,7 @@ export const List = () => {
   }
 
   return (
-    isNotEmptyArray(data) && (
+    isNotEmptyArray(filteredData) && (
       <Table.ScrollArea>
         <Table.Root>
           <Table.Header>
@@ -72,7 +76,7 @@ export const List = () => {
           </Table.Header>
 
           <Table.Body>
-            <For each={data}>
+            <For each={filteredData}>
               {(item) => (
                 <Table.Row
                   bg={expandedId === item.id ? "#F4F8FD" : "#f6f6f7"}

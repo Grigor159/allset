@@ -167,3 +167,23 @@ export const getInitialForm = (id) => ({
   status: "CONFIRMED",
   createdBy: "INVITATION_OWNER",
 });
+
+export const filterGuestsByName = (data = [], name = "") => {
+  if (!name) return data;
+
+  const nameLower = name.toLowerCase().trim();
+
+  return data.filter((item) => {
+    const mainMatch =
+      item.mainGuest &&
+      item.mainGuest.toLowerCase().includes(nameLower);
+
+    const secondaryMatch =
+      item.secondaryGuests &&
+      item.secondaryGuests.some((guest) =>
+        guest && guest.toLowerCase().includes(nameLower),
+      );
+
+    return mainMatch || secondaryMatch;
+  });
+};

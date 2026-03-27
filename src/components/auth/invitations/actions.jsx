@@ -17,11 +17,16 @@ import { plus, search } from "@/assets/svgs";
 import { Tooltip } from "@/components/ui/tooltip";
 import { Add } from "./guests/add";
 import { Filter } from "./guests/filter";
+import { useQueryState } from "nuqs";
 
 export const Actions = () => {
   const t = useTranslations();
   const router = useRouter();
   const pathname = usePathname();
+
+  const [name, setName] = useQueryState("name", {
+    defaultValue: "",
+  });
 
   const [isMobile] = useMediaQuery("(max-width: 767px)");
 
@@ -51,6 +56,8 @@ export const Actions = () => {
                   _focus={{
                     outline: "none",
                   }}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </Menu.Content>
             </Menu.Positioner>
@@ -66,6 +73,8 @@ export const Actions = () => {
             borderRadius={"34px"}
             bg="#FFFFFF"
             placeholder={t("search")}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </InputGroup>
       )}
