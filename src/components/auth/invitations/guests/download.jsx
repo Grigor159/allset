@@ -4,6 +4,8 @@ import React from "react";
 import { useTranslations } from "next-intl";
 import { useIsFetching } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
+import { useQueryState } from "nuqs";
+import { joinFilters } from "@/utils/formatters";
 import { IconButton, Skeleton } from "@chakra-ui/react";
 import { downloadGuest } from "@/assets/svgs";
 import { queryClient } from "@/providers/queryProvider";
@@ -14,13 +16,15 @@ export const Download = () => {
 
   const { id } = useParams();
 
+  const [filters] = useQueryState("filters");
+
   const isFetching = useIsFetching({
     queryKey: [`confirmations/invitation/${id}/tables`],
   });
 
   const handleDownload = () => {
     const data = queryClient.getQueryData([
-      `confirmations/invitation/${id}?filterId=show_all_guests`,
+      `confirmations/invitation/${id}?filterId=${joinFilters(filters)}`,
     ]);
 
     downloadGuestList(data, t);

@@ -53,8 +53,7 @@ export const Accordion = ({ faqs }) => {
 
                 <Acc.ItemIndicator>
                   <Image
-                    w="26px"
-                    h="26px"
+                    boxSize="26px"
                     src={isOpen ? minus.src : plus.src}
                     alt="toggle icon"
                   />
