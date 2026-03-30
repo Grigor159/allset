@@ -42,7 +42,7 @@ export const Available = () => {
                   p="16px"
                   borderRadius="5px"
                   w={{ base: "100%", md: "294px" }}
-                  h="270px"
+                  maxH="270px"
                 >
                   <Flex
                     w="62px"

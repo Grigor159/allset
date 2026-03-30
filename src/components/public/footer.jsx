@@ -63,7 +63,10 @@ export const Footer = () => {
             align={"center"}
             flexDirection={{ base: "column", sm: "row" }}
           >
-            <Stack gap={"12px"} align={{ base: "center", sm: "unset" }}>
+            <Stack
+              gap={{ base: "24px", sm: "12px" }}
+              align={{ base: "center", sm: "unset" }}
+            >
               <For each={mainPages}>
                 {({ name, path }) => {
                   const isActive = pathname === `/${path}`;
@@ -85,7 +88,10 @@ export const Footer = () => {
                 }}
               </For>
             </Stack>
-            <Stack gap={"12px"} align={{ base: "center", sm: "unset" }}>
+            <Stack
+              gap={{ base: "24px", sm: "12px" }}
+              align={{ base: "center", sm: "unset" }}
+            >
               <For each={socialPages}>
                 {({ name, path }) => {
                   const isActive = pathname === `/${path}`;
@@ -115,7 +121,7 @@ export const Footer = () => {
           fontSize={"14px"}
           fontWeight={"300"}
           color={"#4B5563"}
-          py={{ base: "32px", sm: "16px" }}
+          py={{ base: "24px", sm: "16px" }}
           textAlign={{ base: "center", sm: "unset" }}
         >
           © {getCurrentYear()} AllSet All rights reserved
