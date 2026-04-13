@@ -1,6 +1,14 @@
-/* default */
+:root {
+  --font-main: var(--font-montserrat);
+}
+
+html,
 body {
-  font-family: "Montserrat";
+  font-family: var(--font-main), sans-serif !important;
+}
+
+[class*="chakra"] {
+  font-family: var(--font-montserrat), sans-serif !important;
 }
 
 html::-webkit-scrollbar,

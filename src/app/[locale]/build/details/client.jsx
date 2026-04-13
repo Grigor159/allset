@@ -1,10 +1,10 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { detailsForm } from "@/utils/constants";
 import { useRouter } from "@/i18n/routing";
 import { useQueryState } from "nuqs";
 import { useGetTanstack } from "@/hooks/useTanstack";
+import { detailsForm } from "@/utils/constants";
 import apiClient from "@/lib/api";
 import { Box, Stack } from "@chakra-ui/react";
 import { Animate } from "@/components/ui/animate";

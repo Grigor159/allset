@@ -23,7 +23,7 @@ export const Navigation = ({ direction }) => {
               borderBottom={isActive ? "2px solid #4B5563" : "none"}
               color={isActive ? "#004143" : "#4B5563"}
               fontSize={"16px"}
-              fontWeight={isActive ? "500" : "400"}
+              fontWeight={isActive ? "500" : "300"}
               borderRadius="0"
               w="fit-content"
             >
