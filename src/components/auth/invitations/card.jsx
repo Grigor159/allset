@@ -27,12 +27,13 @@ export const Card = ({ el }) => {
     defaultValue: "active",
   });
 
-  const { id, publishedAt, title } = el;
+  const { id,expiresAt, publishedAt,createdAt, title } = el;
+console.log(publishedAt);
 
   return (
     <Stack
       w="307px"
-      h="550px"
+      // h="550px"
       gap={"12px"}
       p="12px"
       bg="white"
@@ -63,6 +64,18 @@ export const Card = ({ el }) => {
       <Separator />
 
       <Stack>
+        {expiresAt && <Text
+          w="100%"
+          border={"1px solid"}
+          borderColor={" #1A1A1A1A"}
+          borderRadius={"32px"}
+          py="7.5px"
+          textAlign={"center"}
+          fontSize={"12px"}
+          fontWeight={400}
+        >
+          Exp.date: {formatDDMMYYYY(expiresAt)}
+        </Text>}
         <Text
           w="100%"
           border={"1px solid"}
@@ -73,19 +86,8 @@ export const Card = ({ el }) => {
           fontSize={"12px"}
           fontWeight={400}
         >
-          Exp.date:
-        </Text>
-        <Text
-          w="100%"
-          border={"1px solid"}
-          borderColor={" #1A1A1A1A"}
-          borderRadius={"32px"}
-          py="7.5px"
-          textAlign={"center"}
-          fontSize={"12px"}
-          fontWeight={400}
-        >
-          Pub.date: {formatDDMMYYYY(publishedAt)}
+          {publishedAt ? `Pub.date: ${formatDDMMYYYY(publishedAt)}` : `Create.date: ${formatDDMMYYYY(createdAt)}`}
+          
         </Text>
       </Stack>
 

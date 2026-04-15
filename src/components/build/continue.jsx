@@ -29,8 +29,8 @@ export const Continue = () => {
     palette,
   });
 
-  const isDetailsPage = pathname === `/details`;
-  const isConfirmPage = pathname === `/confirm`;
+  const isDetailsPage = pathname?.includes(`/details`);
+  const isConfirmPage = pathname?.includes(`/confirm`);
 
   return isDetailsPage ? (
     <Button

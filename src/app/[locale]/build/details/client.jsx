@@ -3,9 +3,8 @@
 import { useRef, useState, useEffect } from "react";
 import { useRouter } from "@/i18n/routing";
 import { useQueryState } from "nuqs";
-import { useGetTanstack } from "@/hooks/useTanstack";
+import { useGetTanstack, useMutateAuthTanstack } from "@/hooks/useTanstack";
 import { detailsForm } from "@/utils/constants";
-import apiClient from "@/lib/api";
 import { Box, Stack } from "@chakra-ui/react";
 import { Animate } from "@/components/ui/animate";
 import { LngSelector } from "@/components/build/lngSelector";
@@ -19,80 +18,81 @@ import { Story } from "@/components/build/story";
 import { TextAreaField } from "@/components/build/textareaField";
 import { Photos } from "@/components/build/photos";
 import { Expire } from "@/components/build/expire";
-import { error } from "@/components/ui/alerts";
+import { error, success } from "@/components/ui/alerts";
 import { Venue } from "@/components/build/venue";
 import { Rsvp } from "@/components/build/rsvp";
+import { queryClient } from "@/providers/queryProvider";
 
 export const DetailsClient = () => {
   const router = useRouter();
   const hiddenFieldsRef = useRef({});
+  const lastSavedFormRef = useRef(null);
 
   const [template] = useQueryState("template");
   const [palette] = useQueryState("palette");
 
-  const { data } = useGetTanstack("templates");
+  // TODO: use data albumImageMaxCount & mainImageMaxCount for images count limits in Photos component
+  // const { data } = useGetTanstack(`templates`); // V1
+  const { data } = useGetTanstack(`templates/${template}`); // V2
+  const { mutate, isPending } = useMutateAuthTanstack("invitations", "post", {
+    onSuccess: () => {
+      success("Basic Wedding Information Completed.");
+      setForm(detailsForm);
+      router.push(`/preview`);
+    },
+    onError: (err) =>
+      error(err?.response?.data?.error || "Personal info editing error!"),
+  });
+  const { mutate: mutateDraft } = useMutateAuthTanstack(
+    "invitations/draft",
+    "post",
+    {
+      onSuccess: (res) => {
+        console.log(res);
 
-  const defaults = data?.find((item) => item.id === template)?.defaults || {};
+        const draftId = res?.id;
+        if (draftId) {
+          setForm((prev) => {
+            if (prev.id === draftId) return prev;
+            const updated = { ...prev, id: draftId };
+            lastSavedFormRef.current = JSON.stringify(updated);
+            return updated;
+          });
+        }
+      },
+      onError: (err) => error(err?.response?.data?.error || "Draft error!"),
+    },
+  );
+
+  // const defaults = data?.find((item) => item.id === template)?.defaults || {}; // V1
+  // console.log(data);
 
   const [form, setForm] = useState({
     ...detailsForm,
     templateId: template,
     colorPaletteId: palette,
   });
-  // console.log(form); //
-
-  const [agenda, setAgenda] = useState(defaults?.agendaTitles);
-  // console.log(agenda); //
-
-  // useEffect(() => {
-  //   if (defaults?.ourStoryText) {
-  //     setForm((prev) => ({
-  //       ...prev,
-  //       ourStory: {
-  //         ...prev.ourStory,
-  //         text: defaults?.ourStoryText,
-  //       },
-  //     }));
-  //   }
-  //   if (defaults?.description) {
-  //     setForm((prev) => ({
-  //       ...prev,
-  //       description: {
-  //         ...defaults?.description,
-  //       },
-  //     }));
-  //   }
-  //   if (defaults?.dressCodeDescription) {
-  //     setForm((prev) => ({
-  //       ...prev,
-  //       dressCode: {
-  //         ...prev.dressCode,
-  //         description: defaults?.dressCodeDescription,
-  //       },
-  //     }));
-  //   }
-  // }, [defaults]);
+  const [agenda, setAgenda] = useState(data?.agendaTitles);
 
   useEffect(() => {
     setForm((prev) => {
       const updates = { ...prev };
 
-      if (defaults?.ourStoryText) {
-        updates.ourStory = { ...prev.ourStory, text: defaults.ourStoryText };
+      if (data?.ourStoryText) {
+        updates.ourStory = { ...prev.ourStory, text: data.ourStoryText };
       }
-      if (defaults?.description) {
-        updates.description = defaults.description;
+      if (data?.description) {
+        updates.description = data.description;
       }
-      if (defaults?.dressCodeDescription) {
+      if (data?.dressCodeDescription) {
         updates.dressCode = {
           ...prev.dressCode,
-          description: defaults.dressCodeDescription,
+          description: data.dressCodeDescription,
         };
       }
-
       return updates;
     });
-  }, [defaults]);
+  }, [data]);
 
   const handleHide = (key, hidden) => {
     setForm((prev) => {
@@ -108,72 +108,85 @@ export const DetailsClient = () => {
     });
   };
 
-  // single language
+  // single language V2
   const handleChange = (e) => {
-    setForm({
+    const updated = {
       ...form,
       [e.target.name]: e.target.value,
-    });
+    };
+
+    setForm(updated);
   };
 
-  // multi language
-  // const handleLngChange = (name, lang, value) => {
-  //   setForm((prev) => ({
-  //     ...prev,
-  //     [name]: {
-  //       ...(prev[name] || { hy: "", ru: "", en: "" }),
-  //       [lang]: value,
-  //     },
-  //   }));
-  // };
-  // mixed with handleChange
+  // mixed with handleChange V2
   const handleLngChange = (field, lang, value, nestedKey) => {
     setForm((prev) => {
+      let updated;
+
       if (!nestedKey) {
-        return {
+        updated = {
           ...prev,
           [field]: {
             ...(prev[field] || { hy: "", ru: "", en: "" }),
             [lang]: value,
           },
         };
+      } else {
+        updated = {
+          ...prev,
+          [field]: {
+            ...(prev[field] || {}),
+            [nestedKey]: {
+              ...(prev[field]?.[nestedKey] || { hy: "", ru: "", en: "" }),
+              [lang]: value,
+            },
+          },
+        };
       }
 
-      return {
-        ...prev,
-        [field]: {
-          ...(prev[field] || {}),
-          [nestedKey]: {
-            ...(prev[field]?.[nestedKey] || { hy: "", ru: "", en: "" }),
-            [lang]: value,
-          },
-        },
-      };
+      return updated;
     });
   };
 
-  // for timeline updates (array)
+  // for timeline updates (array) V2
   const handleTimelineChange = (newTimeline) => {
-    setForm((prev) => ({
-      ...prev,
-      timeline: newTimeline,
-    }));
+    setForm((prev) => {
+      const updated = {
+        ...prev,
+        timeline: newTimeline,
+      };
+
+      return updated;
+    });
   };
 
   const submit = async (e) => {
     e.preventDefault();
-    try {
-      const { data } = await apiClient.post(`/invitations`, form);
+    mutate(form);
+  };
 
-      if (data.status === "ok") {
-        success("Basic Wedding Information Completed.");
-        setForm(detailsForm);
-        router.push(`/preview`);
-      }
-    } catch (err) {
-      error(`Error - ${err}`);
+  const handleSmartBlur = () => {
+    const currentDataString = JSON.stringify(form);
+
+    if (lastSavedFormRef.current !== currentDataString) {
+      mutateDraft(form);
+      lastSavedFormRef.current = currentDataString;
     }
   };
+
+  // const handleSmartBlur = () => {
+  //   if (!template || !palette) return;
+
+  //   // optional: wait until template data loaded
+  //   if (!data) return;
+
+  //   const currentDataString = JSON.stringify(form);
+
+  //   if (lastSavedFormRef.current !== currentDataString) {
+  //     console.log("SENDING DRAFT:", form);
+  //     mutateDraft(form);
+  //   }
+  // };
 
   return (
     <Box pt={{ base: "32px", md: "48px" }} pb="22px">
@@ -189,6 +202,7 @@ export const DetailsClient = () => {
           gap={{ base: "16px", md: "24px" }}
           autoComplete="on"
           onSubmit={submit}
+          onBlur={handleSmartBlur}
         >
           <Animate>
             <LngSelector
@@ -324,3 +338,85 @@ export const DetailsClient = () => {
     </Box>
   );
 };
+
+// for timeline updates (array) V1
+// const handleTimelineChange = (newTimeline) => {
+//   setForm((prev) => ({
+//     ...prev,
+//     timeline: newTimeline,
+//   }));
+// };
+
+// single language V1
+// const handleChange = (e) => {
+//   setForm({
+//     ...form,
+//     [e.target.name]: e.target.value,
+//   });
+// };
+
+// mixed with handleChange V1
+// const handleLngChange = (field, lang, value, nestedKey) => {
+//   setForm((prev) => {
+//     if (!nestedKey) {
+//       return {
+//         ...prev,
+//         [field]: {
+//           ...(prev[field] || { hy: "", ru: "", en: "" }),
+//           [lang]: value,
+//         },
+//       };
+//     }
+
+//     return {
+//       ...prev,
+//       [field]: {
+//         ...(prev[field] || {}),
+//         [nestedKey]: {
+//           ...(prev[field]?.[nestedKey] || { hy: "", ru: "", en: "" }),
+//           [lang]: value,
+//         },
+//       },
+//     };
+//   });
+// };
+
+// multi language
+// const handleLngChange = (name, lang, value) => {
+//   setForm((prev) => ({
+//     ...prev,
+//     [name]: {
+//       ...(prev[name] || { hy: "", ru: "", en: "" }),
+//       [lang]: value,
+//     },
+//   }));
+// };
+
+// useEffect(() => {
+//   if (defaults?.ourStoryText) {
+//     setForm((prev) => ({
+//       ...prev,
+//       ourStory: {
+//         ...prev.ourStory,
+//         text: defaults?.ourStoryText,
+//       },
+//     }));
+//   }
+//   if (defaults?.description) {
+//     setForm((prev) => ({
+//       ...prev,
+//       description: {
+//         ...defaults?.description,
+//       },
+//     }));
+//   }
+//   if (defaults?.dressCodeDescription) {
+//     setForm((prev) => ({
+//       ...prev,
+//       dressCode: {
+//         ...prev.dressCode,
+//         description: defaults?.dressCodeDescription,
+//       },
+//     }));
+//   }
+// }, [defaults]);
