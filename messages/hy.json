@@ -389,5 +389,9 @@
     "privacyPolicy_marketing_notice_li_1": "հաշվի ծանուցումներ,",
     "privacyPolicy_marketing_notice_li_2": "RSVP թարմացումներ,",
     "privacyPolicy_marketing_notice_li_3": "տեխնիկական հաղորդագրություններ",
-    "currency": "ՀՀԴ"
+    "currency": "ՀՀԴ",
+    "get_off": "Ստացեք 30% զեղչ առաջին պատվերի համար",
+    "no_active": "Դուք դեռ չունեք ակտիվ հրավերներ:",
+    "no_drafts": "Դուք դեռ չունեք հրավերների սևագրեր:",
+    "no_expired": "Դուք դեռ չունեք ժամկետանց հրավերներ:"
 }

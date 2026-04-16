@@ -19,6 +19,6 @@ export default function Expired({ isLoading, data }) {
       <For each={data}>{(el, index) => <></>}</For>
     </Flex>
   ) : (
-    <Empty />
+    <Empty type="expired" />
   );
 }

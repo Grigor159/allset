@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useQueryState } from "nuqs";
+import { parseAsString, useQueryStates } from "nuqs";
 import {
   Field,
   Flex,
@@ -14,7 +14,7 @@ import {
   HStack,
   Text,
 } from "@chakra-ui/react";
-import { checked, payment } from "../../assets/svgs";
+import { checked, pay } from "../../assets/svgs";
 import { Label } from "@/components/build/typography/label";
 import { paymentMethods } from "../../utils/constants";
 import { Link } from "@/i18n/routing";
@@ -22,8 +22,10 @@ import { Link } from "@/i18n/routing";
 export const Payment = () => {
   const t = useTranslations();
 
-  const [pay, setPay] = useQueryState("payment_method");
-  const [accept, setAccept] = useQueryState("terms_accepted");
+  const [{ accept, payment }, setQuery] = useQueryStates({
+    accept: parseAsString,
+    payment: parseAsString,
+  });
 
   return (
     <Stack
@@ -34,7 +36,7 @@ export const Payment = () => {
     >
       <Field.Root gap={{ base: "16px", md: "24px" }}>
         <Field.Label gap="16px">
-          <Icon>{payment.icon}</Icon>
+          <Icon>{pay.icon}</Icon>
           <Label text="payment_method" />
         </Field.Label>
 
@@ -42,7 +44,10 @@ export const Payment = () => {
           {t("payment_method_text")}
         </Text>
 
-        <RadioGroup.Root value={pay} onValueChange={(e) => setPay(e.value)}>
+        <RadioGroup.Root
+          value={payment}
+          onValueChange={(e) => setQuery({ payment: e.value })}
+        >
           <HStack gap={{ base: "10px", md: "16px" }}>
             {paymentMethods.map(({ value, src }) => (
               <RadioGroup.Item
@@ -88,7 +93,7 @@ export const Payment = () => {
       <Checkbox.Root
         size="sm"
         checked={accept}
-        onCheckedChange={(e) => setAccept(!!e.checked)}
+        onCheckedChange={(e) => setQuery({ accept: !!e.checked })}
         // onCheckedChange={handleChange}
         alignItems="start"
       >

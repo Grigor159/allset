@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import { useRouter } from "@/i18n/routing";
-import { useQueryState } from "nuqs";
+import { useQueryStates, parseAsString } from "nuqs";
 import { useGetTanstack, useMutateAuthTanstack } from "@/hooks/useTanstack";
 import { detailsForm } from "@/utils/constants";
 import { Box, Stack } from "@chakra-ui/react";
@@ -28,10 +28,11 @@ export const DetailsClient = () => {
   const hiddenFieldsRef = useRef({});
   const lastSavedFormRef = useRef(null);
 
-  const [template] = useQueryState("template");
-  const [palette] = useQueryState("palette");
+  const [{ template, palette }] = useQueryStates({
+    template: parseAsString,
+    palette: parseAsString,
+  });
 
-  // TODO: use data albumImageMaxCount & mainImageMaxCount for images count limits in Photos component
   // const { data } = useGetTanstack(`templates`); // V1
   const { data } = useGetTanstack(`templates/${template}`); // V2
   const { mutate, isPending } = useMutateAuthTanstack("invitations", "post", {
@@ -63,6 +64,22 @@ export const DetailsClient = () => {
       onError: (err) => error(err?.response?.data?.error || "Draft error!"),
     },
   );
+
+  // clear drafts
+  // const { mutate: mutateDelete } = useMutateAuthTanstack(
+  //   "invitations/drafts",
+  //   "delete",
+  //   {
+  //     onSuccess: () => {
+  //       success("Drafts deleted.");
+  //     },
+  //   },
+  // );
+
+  // useEffect(() => {
+  //   mutateDelete();
+  // }, []);
+  //
 
   // const defaults = data?.find((item) => item.id === template)?.defaults || {}; // V1
   // console.log(data);
@@ -252,6 +269,7 @@ export const DetailsClient = () => {
               // }
               name="mainImages"
               onChange={handleChange}
+              count={data?.mainImageMaxCount}
               required={true}
             />
           </Animate>
@@ -312,6 +330,7 @@ export const DetailsClient = () => {
               hide={handleHide}
               required={false}
               languages={form.languages}
+              count={data?.albumImageMaxCount}
             />
           </Animate>
 

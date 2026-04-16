@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
+import { useQueryState } from "nuqs";
 import { usePathname, useRouter } from "@/i18n/routing";
 import {
   Flex,
@@ -17,7 +18,6 @@ import { plus, search } from "@/assets/svgs";
 import { Tooltip } from "@/components/ui/tooltip";
 import { Add } from "./guests/add";
 import { Filter } from "./guests/filter";
-import { useQueryState } from "nuqs";
 
 export const Actions = () => {
   const t = useTranslations();

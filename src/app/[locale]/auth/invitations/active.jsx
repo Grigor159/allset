@@ -20,6 +20,6 @@ export default function Active({ isLoading, data }) {
       <For each={data}>{(el, index) => <Card key={index} el={el} />}</For>
     </Flex>
   ) : (
-    <Empty />
+    <Empty type="active" />
   );
 }

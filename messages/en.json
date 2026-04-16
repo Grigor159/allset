@@ -389,5 +389,9 @@
     "privacyPolicy_marketing_notice_li_1": "Account notifications",
     "privacyPolicy_marketing_notice_li_2": "Invitation or RSVP updates",
     "privacyPolicy_marketing_notice_li_3": "Technical or support-related communications",
-    "currency": "AMD"
+    "currency": "AMD",
+    "get_off": "Get first 30% off",
+    "no_active": "You don't have any active invitation yet.",
+    "no_drafts": "You don't have any draft invitation yet.",
+    "no_expired": "You don't have any expired invitation yet."
 }

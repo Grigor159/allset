@@ -16,19 +16,22 @@ import {
 import img from "@/assets/imgs/active_bg.png";
 import { editActive, guestList } from "@/assets/svgs";
 import { formatDDMMYYYY } from "@/utils/formatters";
-import { useQueryState } from "nuqs";
+import { Tooltip } from "@/components/ui/tooltip";
 
 export const Card = ({ el }) => {
   const t = useTranslations();
   const router = useRouter();
   const language = useLocale();
 
-  const [tab] = useQueryState("tab", {
-    defaultValue: "active",
-  });
-
-  const { id,expiresAt, publishedAt,createdAt, title } = el;
-console.log(publishedAt);
+  const {
+    id,
+    colorPaletteId,
+    finalPrice,
+    expiresAt,
+    publishedAt,
+    createdAt,
+    title,
+  } = el;
 
   return (
     <Stack
@@ -54,28 +57,30 @@ console.log(publishedAt);
 
         <Flex justify={"space-between"}>
           <Text fontSize={"14px"} fontWeight={700} color={"#6B7280"}>
-            AMD
+            {finalPrice} {t("currency")}
           </Text>
-          <Text fontSize={"14px"} fontWeight={500} color={"#6B7280"}>
+          {/* <Text fontSize={"14px"} fontWeight={500} color={"#6B7280"}>
             Guest RSVP 210
-          </Text>
+          </Text> */}
         </Flex>
       </Stack>
       <Separator />
 
       <Stack>
-        {expiresAt && <Text
-          w="100%"
-          border={"1px solid"}
-          borderColor={" #1A1A1A1A"}
-          borderRadius={"32px"}
-          py="7.5px"
-          textAlign={"center"}
-          fontSize={"12px"}
-          fontWeight={400}
-        >
-          Exp.date: {formatDDMMYYYY(expiresAt)}
-        </Text>}
+        {expiresAt && (
+          <Text
+            w="100%"
+            border={"1px solid"}
+            borderColor={" #1A1A1A1A"}
+            borderRadius={"32px"}
+            py="7.5px"
+            textAlign={"center"}
+            fontSize={"12px"}
+            fontWeight={400}
+          >
+            Exp.date: {formatDDMMYYYY(expiresAt)}
+          </Text>
+        )}
         <Text
           w="100%"
           border={"1px solid"}
@@ -86,8 +91,9 @@ console.log(publishedAt);
           fontSize={"12px"}
           fontWeight={400}
         >
-          {publishedAt ? `Pub.date: ${formatDDMMYYYY(publishedAt)}` : `Create.date: ${formatDDMMYYYY(createdAt)}`}
-          
+          {publishedAt
+            ? `Pub.date: ${formatDDMMYYYY(publishedAt)}`
+            : `Create.date: ${formatDDMMYYYY(createdAt)}`}
         </Text>
       </Stack>
 
@@ -117,24 +123,34 @@ console.log(publishedAt);
           <Icon>{guestList.icon}</Icon>
           {t("guests")}
         </Button>
-        <Button
-          w="52px"
-          h="52px"
-          bg="transparent"
-          borderRadius={"10px"}
-          border={"1px solid"}
-          borderColor={"#80A0A1"}
-          _hover={{
-            borderColor: "#004143",
-            "& path": {
-              fill: "#004143",
-              transition: "all 0.3s ease",
-            },
-          }}
-          transition="all 0.3s ease"
+        <Tooltip
+          positioning={{ placement: "top" }}
+          content={t("edit")}
         >
-          <Icon>{editActive.icon}</Icon>
-        </Button>
+          <Button
+            w="52px"
+            h="52px"
+            bg="transparent"
+            borderRadius={"10px"}
+            border={"1px solid"}
+            borderColor={"#80A0A1"}
+            _hover={{
+              borderColor: "#004143",
+              "& path": {
+                fill: "#004143",
+                transition: "all 0.3s ease",
+              },
+            }}
+            transition="all 0.3s ease"
+            onClick={() =>
+              router.push(
+                `/build/details?template=${id}&palette=${colorPaletteId}`,
+              )
+            }
+          >
+            <Icon>{editActive.icon}</Icon>
+          </Button>
+        </Tooltip>
       </Flex>
     </Stack>
   );

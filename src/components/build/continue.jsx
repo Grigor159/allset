@@ -1,6 +1,6 @@
 "use client";
 
-import { useQueryState } from "nuqs";
+import { parseAsString, useQueryStates } from "nuqs";
 import { Link, usePathname } from "@/i18n/routing";
 import { useSearch } from "@/hooks/useSearch";
 import { useTranslations } from "next-intl";
@@ -10,9 +10,11 @@ import { Button } from "@chakra-ui/react";
 import { next } from "@/assets/svgs";
 
 export const Continue = () => {
-  const [template] = useQueryState("template");
-  const [palette] = useQueryState("palette");
-  const [accept] = useQueryState("terms_accepted");
+  const [{ template, palette, accept }] = useQueryStates({
+    template: parseAsString,
+    palette: parseAsString,
+    accept: parseAsString,
+  });
 
   const t = useTranslations();
   const pathname = usePathname();

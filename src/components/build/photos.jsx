@@ -6,7 +6,7 @@ import { upload } from "../../assets/svgs";
 import { Label } from "@/components/build/typography/label";
 import { FileUploadList } from "@/components/build/filleUpload";
 
-export const Photos = ({ name, onChange, required }) => {
+export const Photos = ({ name, onChange, required, count }) => {
   const t = useTranslations();
 
   const handleFileSelect = (files) => {
@@ -36,7 +36,7 @@ export const Photos = ({ name, onChange, required }) => {
       </Field.Root>
       <FileUpload.Root
         accept="image/*"
-        maxFiles={2}
+        maxFiles={count}
         as={Flex}
         gap="16px"
         flexDirection="row"

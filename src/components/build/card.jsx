@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { useQueryState } from "nuqs";
+import { parseAsString, useQueryStates } from "nuqs";
 import {
   Box,
   Flex,
@@ -38,15 +38,19 @@ export const Card = ({ el }) => {
     styleKeyword,
   } = el;
 
-  const [template, setTemplate] = useQueryState("template");
-  const [_, setPalette] = useQueryState("palette");
+  const [{ template }, setQuery] = useQueryStates({
+    template: parseAsString,
+    palette: parseAsString,
+  });
   const [isMobile] = useMediaQuery("(max-width: 767px)");
 
   const isSelected = template == id;
 
   const handleSelect = () => {
-    setTemplate(id);
-    setPalette(null);
+    setQuery({
+      template: id,
+      palette: null,
+    });
   };
 
   return (

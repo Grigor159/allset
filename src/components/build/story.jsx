@@ -9,7 +9,15 @@ import { FileUploadList } from "@/components/build/filleUpload";
 import { Switcher } from "@/components/build/switcher";
 import { TextArea } from "../ui/textarea";
 
-export const Story = ({ name, value, onChange, hide, required, languages }) => {
+export const Story = ({
+  name,
+  value,
+  onChange,
+  hide,
+  required,
+  languages,
+  count,
+}) => {
   const t = useTranslations();
 
   const [checked, setChecked] = useState(true);
@@ -88,7 +96,7 @@ export const Story = ({ name, value, onChange, hide, required, languages }) => {
       {checked && (
         <FileUpload.Root
           accept="image/*"
-          maxFiles={5}
+          maxFiles={count}
           // disabled={!checked}
           as={Flex}
           gap="16px"

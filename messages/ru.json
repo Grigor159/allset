@@ -389,5 +389,9 @@
     "privacyPolicy_marketing_notice_li_1": "уведомления по аккаунту",
     "privacyPolicy_marketing_notice_li_2": "обновления RSVP или приглашений",
     "privacyPolicy_marketing_notice_li_3": "технические или сервисные сообщения",
-    "currency": "Драм"
+    "currency": "Драм",
+    "get_off": "Получите скидку 30% на первый заказ",
+    "no_active": "У вас пока нет активных приглашений.",
+    "no_drafts": "У вас пока нет черновиков приглашений.",
+    "no_expired": "У вас пока нет просроченных приглашений."
 }

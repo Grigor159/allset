@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
-import { useQueryState } from "nuqs";
+import { parseAsArrayOf, parseAsString, useQueryStates } from "nuqs";
 import { useGetAuthTanstack } from "@/hooks/useTanstack";
 import { filterGuestsByName } from "@/utils/helpers";
 import { isNotEmptyArray } from "@/utils/checkers";
@@ -28,9 +28,9 @@ export const List = () => {
   const t = useTranslations();
 
   const [expandedId, setExpandedId] = useState(null);
-  const [name] = useQueryState("name");
-  const [filters] = useQueryState("filters", {
-    defaultValue: ["show_all_guests"],
+  const [{ name, filters }] = useQueryStates({
+    name: parseAsString,
+    filters: parseAsArrayOf(parseAsString).withDefault(["show_all_guests"]),
   });
 
   const { id } = useParams();
