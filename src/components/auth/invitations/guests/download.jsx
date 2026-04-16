@@ -8,7 +8,6 @@ import { useQueryState } from "nuqs";
 import { joinFilters } from "@/utils/formatters";
 import { IconButton, Skeleton } from "@chakra-ui/react";
 import { downloadGuest } from "@/assets/svgs";
-import { queryClient } from "@/providers/queryProvider";
 import { isEmptyArray } from "@/utils/checkers";
 import { downloadGuestList } from "@/services/download";
 import { useGetAuthTanstack } from "@/hooks/useTanstack";

@@ -56,9 +56,11 @@ export const Card = ({ el }) => {
         </Heading>
 
         <Flex justify={"space-between"}>
-          <Text fontSize={"14px"} fontWeight={700} color={"#6B7280"}>
-            {finalPrice} {t("currency")}
-          </Text>
+          {finalPrice && (
+            <Text fontSize={"14px"} fontWeight={700} color={"#6B7280"}>
+              {finalPrice} {t("currency")}
+            </Text>
+          )}
           {/* <Text fontSize={"14px"} fontWeight={500} color={"#6B7280"}>
             Guest RSVP 210
           </Text> */}
@@ -123,10 +125,7 @@ export const Card = ({ el }) => {
           <Icon>{guestList.icon}</Icon>
           {t("guests")}
         </Button>
-        <Tooltip
-          positioning={{ placement: "top" }}
-          content={t("edit")}
-        >
+        <Tooltip positioning={{ placement: "top" }} content={t("edit")}>
           <Button
             w="52px"
             h="52px"

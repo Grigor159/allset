@@ -38,7 +38,7 @@ export const DetailsClient = () => {
     onSuccess: () => {
       success("Basic Wedding Information Completed.");
       setForm(detailsForm);
-      router.push(`/preview`);
+      router.push(`preview`);
     },
     onError: (err) =>
       error(err?.response?.data?.error || "Personal info editing error!"),

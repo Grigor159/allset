@@ -20,7 +20,7 @@ import { Add } from "./guests/add";
 import { Filter } from "./guests/filter";
 
 export const Actions = () => {
-  // TODO: Add search logic comunicated with cached queries and add reset button for search input
+  // TODO: Add search logic comunicated with cached que
   const t = useTranslations();
   const router = useRouter();
   const pathname = usePathname();

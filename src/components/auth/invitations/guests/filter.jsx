@@ -3,8 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useQueryState } from "nuqs";
-import { useGetAuthTanstack, useMutateAuthTanstack } from "@/hooks/useTanstack";
-import { queryClient } from "@/providers/queryProvider";
+import { useGetAuthTanstack } from "@/hooks/useTanstack";
 import {
   Button,
   Checkbox,
@@ -18,7 +17,6 @@ import {
 } from "@chakra-ui/react";
 import { checked, filter } from "@/assets/svgs";
 import { Tooltip } from "@/components/ui/tooltip";
-import { joinFilters } from "@/utils/formatters";
 import { useParams } from "next/navigation";
 import { isEmptyArray } from "@/utils/checkers";
 

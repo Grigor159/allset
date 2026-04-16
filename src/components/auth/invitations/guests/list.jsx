@@ -37,7 +37,7 @@ export const List = () => {
   const { isFetching, data } = useGetAuthTanstack(
     `confirmations/invitation/${id}?filterId=${joinFilters(filters)}`,
   );
-
+  
   const filteredData = filterGuestsByName(data, name);
 
   const toggleRow = (id) => {

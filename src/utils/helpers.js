@@ -187,3 +187,20 @@ export const filterGuestsByName = (data = [], name = "") => {
     return mainMatch || secondaryMatch;
   });
 };
+
+export const filterInvitations = (data = [], name = "") => {
+  if (!name) return data;
+
+  const query = name.toLowerCase().trim();
+
+  return data.filter((item) => {
+    const titles = item?.title;
+
+    const match =
+      (titles?.en?.toLowerCase().includes(query) ?? false) ||
+      (titles?.hy?.toLowerCase().includes(query) ?? false) ||
+      (titles?.ru?.toLowerCase().includes(query) ?? false);
+
+    return match;
+  });
+};
