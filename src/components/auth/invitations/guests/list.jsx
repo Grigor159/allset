@@ -16,12 +16,12 @@ import {
   Stack,
   Menu,
   Portal,
-  Button,
+  Button
 } from "@chakra-ui/react";
 import { guestsTableHeader } from "@/utils/constants";
 import { openClose, status, actions, asc } from "@/assets/svgs";
 import { Edit } from "./edit";
-import { joinFilters } from "@/utils/formatters";
+import { highlightText, joinFilters } from "@/utils/formatters";
 import { Delete } from "./delete";
 
 export const List = () => {
@@ -37,7 +37,7 @@ export const List = () => {
   const { isFetching, data } = useGetAuthTanstack(
     `confirmations/invitation/${id}?filterId=${joinFilters(filters)}`,
   );
-  
+
   const filteredData = filterGuestsByName(data, name);
 
   const toggleRow = (id) => {
@@ -98,7 +98,7 @@ export const List = () => {
                     >
                       {openClose.icon}
                     </Icon>
-                    {item.mainGuest}
+                    {highlightText(item?.mainGuest, name)}
                     {expandedId === item.id && item.createdBy !== "GUEST" && (
                       <Stack pl="20px" pt="8px">
                         {/* {item.createdBy} */} {t("by_me")}
@@ -111,7 +111,7 @@ export const List = () => {
                     {expandedId === item.id && (
                       <Stack pt={"8px"} gap="8px" as="ul">
                         {item.secondaryGuests?.map((guest, index) => (
-                          <li key={index}>{guest}</li>
+                          <li key={index}>{highlightText(guest, name)}</li>
                         ))}
                       </Stack>
                     )}
