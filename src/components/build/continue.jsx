@@ -37,25 +37,15 @@ export const Continue = () => {
     palette,
   });
 
-  const handleClick = async (e) => {
-    if (disabled) return;
-
-    if (!isLoading && !isAuthenticated) {
-      e.preventDefault();
-
-      try {
+  const handleClick = async () => {
+    try {
+      if (!isAuthenticated) {
         await loginWithPopup();
-
-        if (isAuthenticated) {
-          router.push(`${path}${search}`);
-        }
-      } catch {
-        return;
       }
-    }
 
-    if (isAuthenticated) {
       router.push(`${path}${search}`);
+    } catch (err) {
+      return;
     }
   };
 

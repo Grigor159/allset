@@ -22,7 +22,6 @@ import { Expire } from "@/components/build/expire";
 import { error, success } from "@/components/ui/alerts";
 import { Venue } from "@/components/build/venue";
 import { Rsvp } from "@/components/build/rsvp";
-// import { queryClient } from "@/providers/queryProvider";
 
 export const DetailsClient = () => {
   const router = useRouter();
@@ -36,10 +35,8 @@ export const DetailsClient = () => {
     palette: parseAsString,
   });
 
-  if (!isAuthenticated) {
-    return router.push(
-      `/build/customisations?template=${template}${palette && `&palette=${palette}`}`,
-    );
+  if(!isAuthenticated) {
+   return router.push(`/build/customisations?template=${template}${palette ? `&palette=${palette}` : ""}`);
   }
 
   const { data } = useGetTanstack(`templates/${template}`); // V2
