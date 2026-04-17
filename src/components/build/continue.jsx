@@ -16,6 +16,9 @@ export const Continue = () => {
     palette: parseAsString,
     accept: parseAsString,
   });
+  // console.log(template);
+  // console.log(palette);
+  // console.log(palette);
 
   const t = useTranslations();
   const pathname = usePathname();

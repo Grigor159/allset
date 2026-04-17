@@ -1,10 +1,14 @@
 "use client";
 
 import { useAuth0 } from "@auth0/auth0-react";
+import { parseAsString, useQueryStates } from "nuqs";
 import { useRef, useState, useEffect } from "react";
 import { useRouter } from "@/i18n/routing";
-import { useQueryStates, parseAsString } from "nuqs";
-import { useGetTanstack, useMutateAuthTanstack } from "@/hooks/useTanstack";
+import {
+  useGetAuthTanstack,
+  useGetTanstack,
+  useMutateAuthTanstack,
+} from "@/hooks/useTanstack";
 import { detailsForm } from "@/utils/constants";
 import { Box, Stack } from "@chakra-ui/react";
 import { Animate } from "@/components/ui/animate";
@@ -28,18 +32,26 @@ export const DetailsClient = () => {
   const hiddenFieldsRef = useRef({});
   const lastSavedFormRef = useRef(null);
 
-  const { isAuthenticated } = useAuth0();
-
-  const [{ template, palette }] = useQueryStates({
+  const { isAuthenticated, isLoading } = useAuth0();
+  const [{ template, palette, id }] = useQueryStates({
     template: parseAsString,
     palette: parseAsString,
+    id: parseAsString,
   });
 
-  if(!isAuthenticated) {
-   return router.push(`/build/customisations?template=${template}${palette ? `&palette=${palette}` : ""}`);
+  if (!isLoading && !isAuthenticated) {
+    return router.push(
+      `/build/customisations?template=${template}${palette ? `&palette=${palette}` : ""}`,
+    );
   }
 
-  const { data } = useGetTanstack(`templates/${template}`); // V2
+  // const { data } = useGetTanstack(`templates/${template}`); // V2
+  const { data } = useGetTanstack(`templates/${template}`, !id); // V3
+  const { data: invitationData } = useGetAuthTanstack(
+    `invitations/${id}`,
+    !!id,
+  );
+
   const { mutate, isPending } = useMutateAuthTanstack("invitations", "post", {
     onSuccess: () => {
       success("Basic Wedding Information Completed.");
@@ -73,9 +85,20 @@ export const DetailsClient = () => {
     templateId: template,
     colorPaletteId: palette,
   });
+  // console.log(data);
+  // console.log(form);
+  // console.log(invitationData);
+
   const [agenda, setAgenda] = useState(data?.agendaTitles);
 
   useEffect(() => {
+    if (!invitationData) return;
+    setForm(invitationData);
+  }, [invitationData]);
+
+  useEffect(() => {
+    if (!data) return;
+
     setForm((prev) => {
       const updates = { ...prev };
 
@@ -167,6 +190,10 @@ export const DetailsClient = () => {
   };
 
   const handleSmartBlur = () => {
+    console.log(form.status);
+
+    if (form.status === "ACTIVE") return;
+
     const currentDataString = JSON.stringify(form);
 
     if (lastSavedFormRef.current !== currentDataString) {

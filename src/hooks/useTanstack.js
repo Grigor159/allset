@@ -4,18 +4,19 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { useAuth0 } from "@auth0/auth0-react";
 import apiClient from "@/lib/api";
 
-export const useGetTanstack = (name) => {
+export const useGetTanstack = (name,enabled = true) => {
     return useQuery({
         queryKey: [name],
         queryFn: async () => {
             const { data } = await apiClient.get(`${name}`);
             return data;
         },
+        enabled
     });
 };
 
 // TODO get token by getAccessTokenSilently,store in cookies and remove from here
-export const useGetAuthTanstack = (name) => {
+export const useGetAuthTanstack = (name, enabled) => {
     const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
 
     return useQuery({
@@ -35,7 +36,8 @@ export const useGetAuthTanstack = (name) => {
 
             return data;
         },
-        enabled: !isLoading && isAuthenticated,
+        // enabled: !isLoading && isAuthenticated, // V1
+        enabled: !isLoading && isAuthenticated && enabled, // V2 (if in details client query is not id)
     });
 };
 

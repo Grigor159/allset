@@ -17,6 +17,7 @@ import img from "@/assets/imgs/active_bg.png";
 import { editActive, guestList } from "@/assets/svgs";
 import { formatDDMMYYYY } from "@/utils/formatters";
 import { Tooltip } from "@/components/ui/tooltip";
+import { parseAsString, useQueryStates } from "nuqs";
 
 export const Card = ({ el }) => {
   const t = useTranslations();
@@ -25,6 +26,7 @@ export const Card = ({ el }) => {
 
   const {
     id,
+    templateId,
     colorPaletteId,
     finalPrice,
     expiresAt,
@@ -32,6 +34,23 @@ export const Card = ({ el }) => {
     createdAt,
     title,
   } = el;
+
+  const [, setQuery] = useQueryStates({
+    template: parseAsString,
+    palette: parseAsString,
+    id: parseAsString,
+  });
+
+  const handleNavigate = () => {
+    setQuery({
+      template: templateId,
+      palette: colorPaletteId,
+      id: id,
+    });
+    router.push(
+      `/build/details?template=${templateId}&palette=${colorPaletteId}&id=${id}`,
+    );
+  };
 
   return (
     <Stack
@@ -127,6 +146,7 @@ export const Card = ({ el }) => {
         </Button>
         <Tooltip positioning={{ placement: "top" }} content={t("edit")}>
           <Button
+            // as={Link}
             w="52px"
             h="52px"
             bg="transparent"
@@ -141,11 +161,13 @@ export const Card = ({ el }) => {
               },
             }}
             transition="all 0.3s ease"
-            onClick={() =>
-              router.push(
-                `/build/details?template=${id}&palette=${colorPaletteId}`,
-              )
-            }
+            // href={`/${language}/build/details?template=${templateId}&palette=${colorPaletteId}&id=${id}`}
+            // onClick={() =>
+            //   router.push(
+            //     `/build/details?template=${templateId}&palette=${colorPaletteId}&id=${id}`,
+            //   )
+            // }
+            onClick={handleNavigate}
           >
             <Icon>{editActive.icon}</Icon>
           </Button>
