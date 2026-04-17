@@ -3,7 +3,7 @@
 import React from "react";
 import { useRouter, usePathname } from "@/i18n/routing";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Box, Container, Separator } from "@chakra-ui/react";
+import { Box, Container } from "@chakra-ui/react";
 import { Head } from "@/components/auth/head";
 import {
   getAuthBg,

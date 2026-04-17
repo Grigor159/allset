@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth0 } from "@auth0/auth0-react";
 import { useRef, useState, useEffect } from "react";
 import { useRouter } from "@/i18n/routing";
 import { useQueryStates, parseAsString } from "nuqs";
@@ -28,10 +29,18 @@ export const DetailsClient = () => {
   const hiddenFieldsRef = useRef({});
   const lastSavedFormRef = useRef(null);
 
+  const { isAuthenticated } = useAuth0();
+
   const [{ template, palette }] = useQueryStates({
     template: parseAsString,
     palette: parseAsString,
   });
+
+  if (!isAuthenticated) {
+    return router.push(
+      `/build/customisations?template=${template}${palette && `&palette=${palette}`}`,
+    );
+  }
 
   const { data } = useGetTanstack(`templates/${template}`); // V2
   const { mutate, isPending } = useMutateAuthTanstack("invitations", "post", {

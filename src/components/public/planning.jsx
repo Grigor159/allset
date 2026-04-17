@@ -10,10 +10,11 @@ import { Description } from "./typography/description";
 import { PlanningSlide } from "./planning_slide";
 import bg from "@/assets/imgs/planning_bg.png";
 
+// TODO: 2 Containers to fix PC UI swiper issue!
 export const Planning = () => {
   const t = useTranslations();
   const router = useRouter();
-
+  
   return (
     <Stack p={{ base: "16px 0 100px 0", md: "80px 0 100px 0" }} bg="#f6f6f7">
       <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>

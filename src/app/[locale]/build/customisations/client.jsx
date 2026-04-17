@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "@/i18n/routing";
 import { useLocale } from "next-intl";
 import { useQueryState } from "nuqs";
 import { useGetTanstack } from "@/hooks/useTanstack";
@@ -11,15 +12,18 @@ import { Title } from "@/components/build/typography/title";
 import { SubTitle } from "@/components/build/typography/subTitle";
 
 export const CustomisationsClient = () => {
+  const router = useRouter();
   const language = useLocale();
 
   const { data } = useGetTanstack("templates");
   const [template] = useQueryState("template");
   const [isMobile] = useMediaQuery("(max-width: 767px)");
 
-  const selectedTemplate = data?.find((item) => item.id === template) || [];
+  if (!template) {
+    return router.push("/build/templates");
+  }
 
-  // if (!selectedTemplate) return <Loader />;
+  const selectedTemplate = data?.find((item) => item.id === template) || [];
 
   return (
     <Animate>
