@@ -26,6 +26,7 @@ import { Expire } from "@/components/build/expire";
 import { error, success } from "@/components/ui/alerts";
 import { Venue } from "@/components/build/venue";
 import { Rsvp } from "@/components/build/rsvp";
+import { queryClient } from "@/providers/queryProvider";
 
 export const DetailsClient = () => {
   const router = useRouter();
@@ -75,6 +76,7 @@ export const DetailsClient = () => {
             return updated;
           });
         }
+        queryClient.invalidateQueries({ queryKey: [`invitations/drafts`] });
       },
       onError: (err) => error(err?.response?.data?.error || "Draft error!"),
     },
@@ -85,8 +87,8 @@ export const DetailsClient = () => {
     templateId: template,
     colorPaletteId: palette,
   });
-  // console.log(data);
-  // console.log(form);
+  console.log("data", data);
+  console.log("form", form);
   // console.log(invitationData);
 
   const [agenda, setAgenda] = useState(data?.agendaTitles);
@@ -190,8 +192,6 @@ export const DetailsClient = () => {
   };
 
   const handleSmartBlur = () => {
-    console.log(form.status);
-
     if (form.status === "ACTIVE") return;
 
     const currentDataString = JSON.stringify(form);
