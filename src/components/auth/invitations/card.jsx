@@ -146,7 +146,6 @@ export const Card = ({ el }) => {
         </Button>
         <Tooltip positioning={{ placement: "top" }} content={t("edit")}>
           <Button
-            // as={Link}
             w="52px"
             h="52px"
             bg="transparent"
@@ -161,12 +160,6 @@ export const Card = ({ el }) => {
               },
             }}
             transition="all 0.3s ease"
-            // href={`/${language}/build/details?template=${templateId}&palette=${colorPaletteId}&id=${id}`}
-            // onClick={() =>
-            //   router.push(
-            //     `/build/details?template=${templateId}&palette=${colorPaletteId}&id=${id}`,
-            //   )
-            // }
             onClick={handleNavigate}
           >
             <Icon>{editActive.icon}</Icon>

@@ -22,7 +22,7 @@ import { isEmptyArray } from "@/utils/checkers";
 
 export const Filter = () => {
   const t = useTranslations();
-  const locale = useLocale();
+  const language = useLocale();
   const closeButtonRef = useRef(null);
 
   const [filters, setFilters] = useQueryState("filters", {
@@ -101,7 +101,7 @@ export const Filter = () => {
                         <Icon>{checked.icon}</Icon>
                       )}
                     </Checkbox.Control>
-                    <Checkbox.Label>{option.label[locale]}</Checkbox.Label>
+                    <Checkbox.Label>{option.label[language]}</Checkbox.Label>
                   </Checkbox.Root>
                 )}
               </For>
