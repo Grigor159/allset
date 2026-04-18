@@ -3,6 +3,7 @@
 import React from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/routing";
+import { parseAsString, useQueryStates } from "nuqs";
 import {
   Stack,
   Image,
@@ -13,11 +14,11 @@ import {
   Button,
   Icon,
 } from "@chakra-ui/react";
-import img from "@/assets/imgs/active_bg.png";
+import { Tooltip } from "@/components/ui/tooltip";
 import { editActive, guestList } from "@/assets/svgs";
 import { formatDDMMYYYY } from "@/utils/formatters";
-import { Tooltip } from "@/components/ui/tooltip";
-import { parseAsString, useQueryStates } from "nuqs";
+import img from "@/assets/imgs/active_bg.png";
+import { queryClient } from "@/providers/queryProvider";
 
 export const Card = ({ el }) => {
   const t = useTranslations();
@@ -47,6 +48,10 @@ export const Card = ({ el }) => {
       palette: colorPaletteId,
       id: id,
     });
+    // queryClient.invalidateQueries({
+    //   queryKey: [`templates/${templateId}`],
+    //   refetchType: "all",
+    // });
     router.push(
       `/build/details?template=${templateId}&palette=${colorPaletteId}&id=${id}`,
     );
