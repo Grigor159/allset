@@ -46,8 +46,9 @@ export const Continue = () => {
   // V2 with side effects
   const handleClick = async () => {
     try {
+      setShouldNavigate(true);
+
       if (!isAuthenticated) {
-        setShouldNavigate(true);
         await loginWithPopup();
         return;
       }

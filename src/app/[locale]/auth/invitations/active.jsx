@@ -8,7 +8,13 @@ import { isNotEmptyArray } from "@/utils/checkers";
 
 export default function Active({ isLoading, data }) {
   if (isLoading) {
-    return <Skeleton w="307px" h="550px" borderRadius="10px" />;
+    return (
+      <Flex
+        justify={{ base: "center", md: "flex-start" }}
+      >
+        <Skeleton w="307px" h="545px" borderRadius="10px" />
+      </Flex>
+    );
   }
 
   return isNotEmptyArray(data) ? (

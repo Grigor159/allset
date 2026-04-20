@@ -53,7 +53,7 @@ export const DetailsClient = () => {
     !!id,
   );
 
-  const { mutate, isPending } = useMutateAuthTanstack("invitations", "post", {
+  const { mutate } = useMutateAuthTanstack("invitations", "post", {
     onSuccess: () => {
       success("Basic Wedding Information Completed.");
       setForm(detailsForm);
@@ -87,11 +87,15 @@ export const DetailsClient = () => {
     templateId: template,
     colorPaletteId: palette,
   });
-  console.log("data", data);
-  console.log("form", form);
+  // console.log("data", data);
+  // console.log("form", form);
   // console.log(invitationData);
 
-  const [agenda, setAgenda] = useState(data?.agendaTitles);
+  const [agenda, setAgenda] = useState(
+    data
+      ? data?.defaults?.agendaTitles
+      : invitationData?.template?.defaults?.agendaTitles,
+  );
 
   useEffect(() => {
     if (!invitationData) return;
@@ -104,13 +108,13 @@ export const DetailsClient = () => {
     setForm((prev) => {
       const updates = { ...prev };
 
-      if (data?.ourStoryText) {
+      if (data?.defaults?.ourStoryText) {
         updates.ourStory = { ...prev.ourStory, text: data.ourStoryText };
       }
-      if (data?.description) {
+      if (data?.defaults?.description) {
         updates.description = data.description;
       }
-      if (data?.dressCodeDescription) {
+      if (data?.defaults?.dressCodeDescription) {
         updates.dressCode = {
           ...prev.dressCode,
           description: data.dressCodeDescription,
@@ -266,7 +270,7 @@ export const DetailsClient = () => {
               // }
               name="mainImages"
               onChange={handleChange}
-              count={data?.mainImageMaxCount}
+              count={data? data?.mainImageMaxCount : invitationData?.template?.mainImageMaxCount}
               required={true}
             />
           </Animate>
@@ -327,7 +331,7 @@ export const DetailsClient = () => {
               hide={handleHide}
               required={false}
               languages={form.languages}
-              count={data?.albumImageMaxCount}
+              count={data?  data?.albumImageMaxCount: invitationData?.template?.albumImageMaxCount}
             />
           </Animate>
 
