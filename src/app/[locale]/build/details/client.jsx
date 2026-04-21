@@ -52,12 +52,64 @@ export const DetailsClient = () => {
     `invitations/${id}`,
     !!id,
   );
+  console.log(data);
+  console.log(invitationData);
 
   const { mutate } = useMutateAuthTanstack("invitations", "post", {
     onSuccess: () => {
-      success("Basic Wedding Information Completed.");
-      setForm(detailsForm);
-      router.push(`preview`);
+      const isDraft = invitationData?.status === "DRAFT";
+
+      if (id) {
+        queryClient.invalidateQueries({
+          queryKey: [`invitations/active`],
+          refetchType: "all",
+        });
+
+        if (isDraft) {
+          queryClient.invalidateQueries({
+            queryKey: [`invitations/drafts`],
+            refetchType: "all",
+          });
+        }
+      }
+
+      const message =
+        id && !isDraft
+          ? "Basic Wedding Information Edited Successfully."
+          : "Basic Wedding Information Completed.";
+
+      success(message);
+      router.push(id && !isDraft ? `/auth/invitations` : `preview`);
+
+      // const status = invitationData?.status;
+
+      // if (id) {
+      //   if (status === "ACTIVE") {
+      //     queryClient.invalidateQueries({
+      //       queryKey: [`invitations/active`],
+      //       refetchType: "all",
+      //     });
+      //     success("Basic Wedding Information Edited Successfully.");
+      //     router.push(`/auth/invitations`);
+      //   } else {
+      //     alert("Draft case");
+      //     queryClient.invalidateQueries({
+      //       queryKey: [`invitations/active`],
+      //       refetchType: "all",
+      //     });
+      //     queryClient.invalidateQueries({
+      //       queryKey: [`invitations/drafts`],
+      //       refetchType: "all",
+      //     });
+      //     success("Basic Wedding Information Completed.");
+      //     // // setForm(detailsForm);
+      //     router.push(`preview`);
+      //   }
+      // } else {
+      //   success("Basic Wedding Information Completed.");
+      //   // // setForm(detailsForm);
+      //   router.push(`preview`);
+      // }
     },
     onError: (err) =>
       error(err?.response?.data?.error || "Personal info editing error!"),
@@ -92,9 +144,8 @@ export const DetailsClient = () => {
   // console.log(invitationData);
 
   const [agenda, setAgenda] = useState(
-    data
-      ? data?.defaults?.agendaTitles
-      : invitationData?.template?.defaults?.agendaTitles,
+    data?.defaults?.agendaTitles ??
+      invitationData?.template?.defaults?.agendaTitles,
   );
 
   useEffect(() => {
@@ -270,7 +321,10 @@ export const DetailsClient = () => {
               // }
               name="mainImages"
               onChange={handleChange}
-              count={data? data?.mainImageMaxCount : invitationData?.template?.mainImageMaxCount}
+              count={
+                data?.mainImageMaxCount ??
+                invitationData?.template?.mainImageMaxCount
+              }
               required={true}
             />
           </Animate>
@@ -331,7 +385,10 @@ export const DetailsClient = () => {
               hide={handleHide}
               required={false}
               languages={form.languages}
-              count={data?  data?.albumImageMaxCount: invitationData?.template?.albumImageMaxCount}
+              count={
+                data?.albumImageMaxCount ??
+                invitationData?.template?.albumImageMaxCount
+              }
             />
           </Animate>
 
