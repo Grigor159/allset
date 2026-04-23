@@ -10,7 +10,6 @@
 !.yarn/releases
 !.yarn/versions
 .vscode
-package-lock.json
 
 # testing
 /coverage
@@ -44,6 +43,3 @@ next-env.d.ts
 
 ## dev notes
 notes.txt
-
-##
-amplify-LIVE.yml

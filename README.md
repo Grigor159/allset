@@ -14,7 +14,7 @@ It is built as a Next.js App Router application with SSR (Server-Side Rendering)
 - **Responsive UI** using [Chakra UI](https://chakra-ui.com)
 - **Data fetching & caching** with [React Query](https://tanstack.com/query) & [Axios](https://axios-http.com/docs/intro)
 - **Date handling** via [date-fns](https://date-fns.org)
-- **Interactive components** like sliders and day pickers 
+- **Interactive components** like swipersliders and day pickers 
 - **Multi-language support** with [next-intl](https://next-intl-docs.vercel.app)
 - **Animations** via [Framer Motion](https://www.framer.com/motion/)
 
