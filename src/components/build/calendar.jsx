@@ -16,31 +16,26 @@ export const Calendar = ({ name, value, onChange, required }) => {
   const t = useTranslations();
   const language = useLocale();
 
-  const [selected, setSelected] = useState(null);
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    if (value) {
-      // const [day, month, year] = value.split("-").map(Number);
-      const [year, month, day] = value.split("-").map(Number);
-      setSelected(new Date(year, month - 1, day));
-    } else {
-      setSelected(null);
-    }
-  }, [value]);
+  const selected = value
+    ? (() => {
+        const [year, month, day] = value.split("-").map(Number);
+        return new Date(year, month - 1, day);
+      })()
+    : null;
 
   const handleSelect = (date) => {
     if (!date) return;
-    setSelected(date);
-    setOpen(false);
 
     onChange?.({
       target: {
         name,
-        // value: formatDate(date, "DD-MM-YYYY"),
         value: formatDate(date, "YYYY-MM-DD"),
       },
     });
+
+    setOpen(false);
   };
 
   // const formatted = selected

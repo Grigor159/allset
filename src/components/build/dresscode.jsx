@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { useGetTanstack } from "@/hooks/useTanstack";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Field,
@@ -21,6 +21,7 @@ export const Dresscode = ({
   name,
   value,
   onChange,
+  setForm,
   hide,
   required,
   languages,
@@ -33,6 +34,12 @@ export const Dresscode = ({
   const [checked, setChecked] = useState(true);
   const [selected, setSelected] = useState(null);
 
+  useEffect(() => {
+    if (value?.colorPaletteId) {
+      setSelected(value.colorPaletteId);
+    }
+  }, [value?.colorPaletteId]);
+
   const handleSwitchChange = (e) => {
     setChecked(e.checked);
     hide(name, !e.checked);
@@ -41,6 +48,17 @@ export const Dresscode = ({
 
   const handleInputChange = (e, lng) => {
     onChange(name, lng, e.target.value, "description");
+  };
+
+  const handlePaletteSelect = (item) => {
+    setSelected(item.id);
+    setForm((prev) => ({
+      ...prev,
+      dressCode: {
+        ...prev.dressCode,
+        colorPaletteId: item.id,
+      },
+    }));
   };
 
   return (
@@ -85,7 +103,8 @@ export const Dresscode = ({
                     }}
                     tabIndex={0}
                     w={{ base: "100%", md: "222px" }}
-                    onClick={() => setSelected(item.id)}
+                    // onClick={() => setSelected(item.id)}
+                    onClick={() => handlePaletteSelect(item)}
                   >
                     <HStack gap={"8px"} pb="12px">
                       {item.colors.map((color, index) => (

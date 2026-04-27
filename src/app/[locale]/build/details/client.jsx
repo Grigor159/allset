@@ -195,6 +195,7 @@ export const DetailsClient = () => {
   const router = useRouter();
   const hiddenFieldsRef = useRef({});
   const lastSavedFormRef = useRef(null);
+  const formRef = useRef(null);
 
   const { isAuthenticated, isLoading } = useAuth0();
   const [{ template, palette, id }] = useQueryStates({
@@ -203,11 +204,11 @@ export const DetailsClient = () => {
     id: parseAsString,
   });
 
-  if (!isLoading && !isAuthenticated) {
-    return router.push(
-      `/build/customisations?template=${template}${palette ? `&palette=${palette}` : ""}`,
-    );
-  }
+  // if (!isLoading && !isAuthenticated) {
+  //   return router.push(
+  //     `/build/customisations?template=${template}${palette ? `&palette=${palette}` : ""}`,
+  //   );
+  // }
 
   const { data } = useGetTanstack(`templates/${template}`, !id);
   const { data: invitationData } = useGetAuthTanstack(
@@ -237,12 +238,22 @@ export const DetailsClient = () => {
     colorPaletteId: palette,
   });
 
+  formRef.current = form;
+
   // const [agenda, setAgenda] = useState(
   //   data?.defaults?.agendaTitles ??
   //     invitationData?.template?.defaults?.agendaTitles,
   // );
 
   const [agenda, setAgenda] = useState([]);
+
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      router.push(
+        `/build/customisations?template=${template}${palette ? `&palette=${palette}` : ""}`,
+      );
+    }
+  }, [isLoading, isAuthenticated]);
 
   useEffect(() => {
     const titles =
@@ -281,6 +292,11 @@ export const DetailsClient = () => {
     });
   }, [data]);
 
+  useEffect(() => {
+    if (!form.eventDate) return;
+    handleSmartBlur();
+  }, [form.eventDate]);
+
   const handleHide = (key, hidden) => {
     setForm((prev) => {
       const updated = { ...prev };
@@ -299,12 +315,18 @@ export const DetailsClient = () => {
     });
   };
 
+  // const handleChange = (e) => {
+  //   const updated = {
+  //     ...form,
+  //     [e.target.name]: e.target.value,
+  //   };
+  //   setForm(updated);
+  // };
   const handleChange = (e) => {
-    const updated = {
-      ...form,
+    setForm((prev) => ({
+      ...prev,
       [e.target.name]: e.target.value,
-    };
-    setForm(updated);
+    }));
   };
 
   const handleLngChange = (field, lang, value, nestedKey) => {
@@ -346,19 +368,47 @@ export const DetailsClient = () => {
   const handleSmartBlur = () => {
     // TODO: add post for active invitation edit
     if (form.status === "ACTIVE") return;
-
-    const isTitleFilled = form.languages?.some((lang) =>
-      form.title?.[lang]?.trim(),
-    );
     
+    const current = formRef.current;
+
+    const isTitleFilled = current.languages?.some((lang) =>
+      current.title?.[lang]?.trim(),
+    );
+
     if (!isTitleFilled) return;
 
-    const currentDataString = JSON.stringify(form);
+    const currentDataString = JSON.stringify(current);
 
+    // if (lastSavedFormRef.current !== currentDataString) {
+    //   mutate(buildPayload(form));
+    //   lastSavedFormRef.current = currentDataString;
+    // }
     if (lastSavedFormRef.current !== currentDataString) {
-      mutate(buildPayload(form));
+      // const { id, ...rest } = current;
+      // mutate(id ? { id, ...rest } : rest);
+      
+      mutate(buildPayload(current));
       lastSavedFormRef.current = currentDataString;
     }
+    // setTimeout(() => {
+    //   if (formRef.current.status === "ACTIVE") return;
+
+    //   const current = formRef.current;
+
+    //   const isTitleFilled = current.languages?.some((lang) =>
+    //     current.title?.[lang]?.trim(),
+    //   );
+
+    //   if (!isTitleFilled) return;
+
+    //   const currentDataString = JSON.stringify(current);
+
+    //   if (lastSavedFormRef.current !== currentDataString) {
+    //     const { id, ...rest } = current;
+    //     mutate(id ? { id, ...rest } : rest);
+    //     lastSavedFormRef.current = currentDataString;
+    //   }
+    // }, 100);
   };
 
   const submit = async (e) => {
@@ -477,6 +527,7 @@ export const DetailsClient = () => {
               name="dressCode"
               value={form.dressCode}
               onChange={handleLngChange}
+              setForm={setForm} //
               hide={handleHide}
               required={false}
               languages={form.languages}
@@ -520,10 +571,10 @@ export const DetailsClient = () => {
         </Stack>
 
         <Animate
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true, margin: "0px 0px -100px 0px" }}
+        // initial={{ opacity: 0, y: 40 }}
+        // whileInView={{ opacity: 1, y: 0 }}
+        // transition={{ duration: 0.5 }}
+        // viewport={{ once: true, margin: "0px 0px -100px 0px" }}
         >
           <Expire />
         </Animate>

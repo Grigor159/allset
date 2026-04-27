@@ -184,7 +184,6 @@ export const detailsForm = {
       en: "",
       ru: ""
     },
-    style: "",
     colorPaletteId: "",
   },
   albumLink: "",
@@ -218,7 +217,7 @@ export const INVITATION_FIELDS = [
   "eventDate",
   "description",
   "mainImages",
-  "closingText",
+  // "closingText",
   "confirmationEnabled",
   "timeline",
   "countDown",
