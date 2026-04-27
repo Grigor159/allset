@@ -167,9 +167,9 @@ export const detailsForm = {
   },
   mainImages: [],
   confirmationEnabled: true,
-  venue: {
-    location: "",
-    link: ""
+  eventVenue: {
+    name: "",
+    locationLink: ""
   },
   timeline: [],
   countDown: true,
@@ -227,7 +227,7 @@ export const INVITATION_FIELDS = [
   "ourStory",
   "languages",
   "colorPaletteId",
-  "venue",
+  "eventVenue",
   "templateId",
 ];
 

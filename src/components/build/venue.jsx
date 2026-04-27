@@ -33,14 +33,14 @@ export const Venue = ({ name, value, onChange, required }) => {
           {t("venue_text")}
         </Text>
         <InputSimple
-          name="location"
-          value={value?.location ?? ""}
+          name="name"
+          value={value?.name ?? ""}
           onChange={handleNestedChange}
           placeholder={t("venue_location")}
         />
         <InputUrl
-          name="link"
-          value={value?.link ?? ""}
+          name="locationLink"
+          value={value?.locationLink ?? ""}
           onChange={handleNestedChange}
           placeholder={t("venue_link")}
         />

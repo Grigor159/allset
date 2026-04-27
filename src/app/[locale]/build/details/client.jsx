@@ -204,6 +204,22 @@ export const DetailsClient = () => {
     id: parseAsString,
   });
 
+  // clear drafts
+  // const { mutate: mutateDelete } = useMutateAuthTanstack(
+  //   "invitations/drafts",
+  //   "delete",
+  //   {
+  //     onSuccess: () => {
+  //       success("Drafts deleted.");
+  //     },
+  //   },
+  // );
+
+  // useEffect(() => {
+  //   mutateDelete();
+  // }, []);
+  //
+
   // if (!isLoading && !isAuthenticated) {
   //   return router.push(
   //     `/build/customisations?template=${template}${palette ? `&palette=${palette}` : ""}`,
@@ -368,7 +384,7 @@ export const DetailsClient = () => {
   const handleSmartBlur = () => {
     // TODO: add post for active invitation edit
     if (form.status === "ACTIVE") return;
-    
+
     const current = formRef.current;
 
     const isTitleFilled = current.languages?.some((lang) =>
@@ -386,7 +402,7 @@ export const DetailsClient = () => {
     if (lastSavedFormRef.current !== currentDataString) {
       // const { id, ...rest } = current;
       // mutate(id ? { id, ...rest } : rest);
-      
+
       mutate(buildPayload(current));
       lastSavedFormRef.current = currentDataString;
     }
@@ -501,8 +517,8 @@ export const DetailsClient = () => {
 
           <Animate>
             <Venue
-              name="venue"
-              value={form.venue}
+              name="eventVenue"
+              value={form.eventVenue}
               onChange={handleChange}
               required={true}
             />
