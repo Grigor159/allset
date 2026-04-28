@@ -36,7 +36,8 @@ export const DetailsClient = () => {
   const hiddenFieldsRef = useRef({});
   const lastSavedFormRef = useRef(null);
   const formRef = useRef(null);
-
+  
+  // TODO: set id to params after draft creation
   const { isAuthenticated, isLoading } = useAuth0();
   const [{ template, palette, id }] = useQueryStates({
     template: parseAsString,
@@ -65,7 +66,6 @@ export const DetailsClient = () => {
     `invitations/${id}`,
     !!id,
   );
-console.log(data);
 
   const { mutate } = useMutateAuthTanstack("invitations/draft", "post", {
     onSuccess: (res) => {

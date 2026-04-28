@@ -40,6 +40,7 @@ const GALLERY_FALLBACKS = [
 
 export default function Classic({ viewport = "pc", palette, data }) {
   const { slug } = useParams();
+  // TODO: do public call to invitation by slug 
 
   const vars = paletteToVars(palette?.colors);
   const language = data?.languages?.[0] || "en";
