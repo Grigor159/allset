@@ -10,6 +10,7 @@ import {
   useMutateAuthTanstack,
 } from "@/hooks/useTanstack";
 import { queryClient } from "@/providers/queryProvider";
+import { useSearch } from "@/hooks/useSearch";
 import { buildPayload, pickInvitationFields } from "@/utils/formatters";
 import { detailsForm } from "@/utils/constants";
 import { Box, Stack } from "@chakra-ui/react";
@@ -31,6 +32,7 @@ import { error } from "@/components/ui/alerts";
 
 export const DetailsClient = () => {
   const router = useRouter();
+  const search = useSearch();
   const hiddenFieldsRef = useRef({});
   const lastSavedFormRef = useRef(null);
   const formRef = useRef(null);
@@ -63,6 +65,7 @@ export const DetailsClient = () => {
     `invitations/${id}`,
     !!id,
   );
+console.log(data);
 
   const { mutate } = useMutateAuthTanstack("invitations/draft", "post", {
     onSuccess: (res) => {
@@ -217,7 +220,7 @@ export const DetailsClient = () => {
 
   const submit = async (e) => {
     e.preventDefault();
-    router.push(`preview`);
+    router.push(`preview${search}`);
   };
 
   return (

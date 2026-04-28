@@ -140,3 +140,28 @@ export const fitScale = (containerWidth, viewport) => {
   if (!containerWidth) return 1;
   return Math.min(1, containerWidth / designWidth(viewport));
 };
+
+export const formatEventDate = (iso) => {
+  if (!iso) return "14.08.2026";
+  try {
+    const d = new Date(iso);
+    if (Number.isNaN(+d)) return iso;
+    const dd = String(d.getDate()).padStart(2, "0");
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    return `${dd}.${mm}.${d.getFullYear()}`;
+  } catch {
+    return iso;
+  }
+};
+
+export const diffParts = (iso) => {
+  if (!iso) return { days: 123, hours: 16, min: 45, sec: 58 };
+  const target = new Date(iso).getTime();
+  if (Number.isNaN(target)) return { days: 123, hours: 16, min: 45, sec: 58 };
+  const diff = Math.max(0, target - Date.now());
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff / 3600000) % 24);
+  const min = Math.floor((diff / 60000) % 60);
+  const sec = Math.floor((diff / 1000) % 60);
+  return { days, hours, min, sec };
+};

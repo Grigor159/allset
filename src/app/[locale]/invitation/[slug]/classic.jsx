@@ -1,5 +1,13 @@
 "use client";
 
+import { useParams } from "next/navigation";
+import {
+  // designWidth,
+  diffParts,
+  formatEventDate,
+  paletteToVars,
+} from "@/utils/formatters";
+import { pickLang } from "@/utils/helpers";
 import {
   Box,
   Button,
@@ -10,7 +18,6 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { designWidth, paletteToVars } from "@/utils/formatters";
 
 const SCRIPT_FONT_URL =
   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Dancing+Script:wght@500;600;700&display=swap";
@@ -28,58 +35,28 @@ const GALLERY_FALLBACKS = [
   "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=600&q=70",
 ];
 
-const pickLang = (obj, lang = "en") =>
-  obj?.[lang] || obj?.en || obj?.hy || obj?.ru || "";
+// const scriptFont = `"Dancing Script", "Great Vibes", cursive`;
+// const serifFont = `"Cormorant Garamond", "Playfair Display", Georgia, serif`;
 
-const formatDate = (iso) => {
-  if (!iso) return "14.08.2026";
-  try {
-    const d = new Date(iso);
-    if (Number.isNaN(+d)) return iso;
-    const dd = String(d.getDate()).padStart(2, "0");
-    const mm = String(d.getMonth() + 1).padStart(2, "0");
-    return `${dd}.${mm}.${d.getFullYear()}`;
-  } catch {
-    return iso;
-  }
-};
+export default function Classic({ viewport = "pc", palette, data }) {
+  const { slug } = useParams();
 
-const diffParts = (iso) => {
-  if (!iso) return { days: 123, hours: 16, min: 45, sec: 58 };
-  const target = new Date(iso).getTime();
-  if (Number.isNaN(target)) return { days: 123, hours: 16, min: 45, sec: 58 };
-  const diff = Math.max(0, target - Date.now());
-  const days = Math.floor(diff / 86400000);
-  const hours = Math.floor((diff / 3600000) % 24);
-  const min = Math.floor((diff / 60000) % 60);
-  const sec = Math.floor((diff / 1000) % 60);
-  return { days, hours, min, sec };
-};
-
-const scriptFont = `"Dancing Script", "Great Vibes", cursive`;
-const serifFont = `"Cormorant Garamond", "Playfair Display", Georgia, serif`;
-
-export default function Classic({ viewport = "pc", palette, data, template }) {
   const vars = paletteToVars(palette?.colors);
   const language = data?.languages?.[0] || "en";
 
   const title =
     pickLang(data?.title, language) ||
-    pickLang(template?.name, language) ||
+    pickLang(data?.name, language) ||
     "Henry & Mariam";
 
-  const eventDateText = formatDate(data?.eventDate);
+  const eventDateText = formatEventDate(data?.eventDate);
   const countdown = diffParts(data?.eventDate);
 
   const heroImage =
     data?.mainImages?.[0]?.url || data?.mainImages?.[0] || HERO_FALLBACK;
   const coupleImage =
     data?.mainImages?.[1]?.url || data?.mainImages?.[1] || COUPLE_FALLBACK;
-
-  const description =
-    pickLang(data?.description, language) ||
-    pickLang(template?.defaults?.description, language) ||
-    "We would be honored to have you join us as we celebrate the beginning of our new life together. Your presence will make our special day even more meaningful.";
+  const description = pickLang(data?.description, language) || "";
 
   const timeline = data?.timeline?.length
     ? data.timeline
@@ -90,36 +67,29 @@ export default function Classic({ viewport = "pc", palette, data, template }) {
         { time: "17:30", venueName: "ARRIVAL AT RECEPTION VENUE" },
       ];
 
-  const dressCodeDesc =
-    pickLang(data?.dressCode?.description, language) ||
-    pickLang(template?.defaults?.dressCodeDescription, language) ||
-    "Lorem ipsum dolor sit amet consectetur. Ut enim scelerisque consequat a justo diam adipiscing velit tincidunt.";
-  const dressCodeStyle = data?.dressCode?.style || "Modern Champagne";
-
-  const storyText =
-    pickLang(data?.ourStory?.text, language) ||
-    pickLang(template?.defaults?.ourStoryText, language) ||
-    "Our story is written with sincerity, family warmth, and true devotion.\nFrom the day we met, we felt something special — something that only grew stronger with every moment, every smile, every challenge.\nNow, with our families' blessings and love in our hearts, we are ready to start a new life together.";
+  const dressCodeDesc = pickLang(data?.dressCode?.description, language) || "";
+  const dressCodeStyle = data?.dressCode?.colorPaletteId || "";
+  const storyText = pickLang(data?.ourStory?.text, language) || "";
 
   const gallery = data?.ourStory?.photoUrls?.length
-    ? data.ourStory.photoUrls.slice(0, 4)
+    ? data.ourStory.photoUrls
     : GALLERY_FALLBACKS;
 
   const contact = data?.connectWithUs || {};
-  const phone = contact.phone || "+374 99 112233";
-  const email = contact.email || "mariam1234@gmail.com";
+  const phone = contact.phone || "";
+  const email = contact.email || "";
 
-  const width = designWidth(viewport);
+  // const width = designWidth(viewport);
   const isMobile = viewport === "mobile";
 
   return (
     <Box
       data-viewport={viewport}
       style={vars}
-      w={`${width}px`}
+      // w={`${width}px`}
       bg="white"
       color="#111"
-      fontFamily={serifFont}
+      // fontFamily={serifFont}
       overflow="hidden"
     >
       {/* Inject fonts once per preview tree */}
@@ -144,7 +114,7 @@ export default function Classic({ viewport = "pc", palette, data, template }) {
           textAlign="center"
         >
           <Text
-            fontFamily={scriptFont}
+            // fontFamily={scriptFont}
             fontSize={isMobile ? "54px" : "84px"}
             lineHeight="1"
             fontWeight="500"
@@ -152,7 +122,7 @@ export default function Classic({ viewport = "pc", palette, data, template }) {
             {title}
           </Text>
           <Text
-            fontFamily={serifFont}
+            // fontFamily={serifFont}
             fontSize={isMobile ? "26px" : "36px"}
             letterSpacing="0.05em"
           >
@@ -229,7 +199,7 @@ export default function Classic({ viewport = "pc", palette, data, template }) {
       >
         <VStack align="flex-start" gap="20px" flex="1">
           <Text
-            fontFamily={serifFont}
+            // fontFamily={serifFont}
             fontWeight="600"
             fontSize={isMobile ? "22px" : "28px"}
             letterSpacing="0.04em"
@@ -307,7 +277,7 @@ export default function Classic({ viewport = "pc", palette, data, template }) {
           gap="24px"
         >
           <Text
-            fontFamily={serifFont}
+            // fontFamily={serifFont}
             fontSize={isMobile ? "20px" : "26px"}
             letterSpacing="0.08em"
             textAlign="center"
@@ -375,7 +345,7 @@ export default function Classic({ viewport = "pc", palette, data, template }) {
         textAlign="center"
       >
         <Text
-          fontFamily={serifFont}
+          // fontFamily={serifFont}
           fontSize={isMobile ? "20px" : "26px"}
           letterSpacing="0.12em"
           fontWeight="600"
@@ -449,7 +419,7 @@ export default function Classic({ viewport = "pc", palette, data, template }) {
               transform="translateY(-50%)"
               fontSize="180px"
               color="var(--c-primary)"
-              fontFamily={serifFont}
+              // fontFamily={serifFont}
               opacity="0.85"
               lineHeight="1"
             >
@@ -462,7 +432,7 @@ export default function Classic({ viewport = "pc", palette, data, template }) {
               transform="translateY(-50%)"
               fontSize="180px"
               color="var(--c-primary)"
-              fontFamily={serifFont}
+              // fontFamily={serifFont}
               opacity="0.85"
               lineHeight="1"
             >
@@ -479,7 +449,7 @@ export default function Classic({ viewport = "pc", palette, data, template }) {
           Go to look at the photos
         </Text>
         <Text
-          fontFamily={serifFont}
+          // fontFamily={serifFont}
           fontSize={isMobile ? "22px" : "28px"}
           letterSpacing="0.12em"
           fontWeight="600"
@@ -520,7 +490,7 @@ export default function Classic({ viewport = "pc", palette, data, template }) {
       >
         <VStack gap="20px" textAlign="center">
           <Text
-            fontFamily={serifFont}
+            // fontFamily={serifFont}
             fontSize={isMobile ? "20px" : "26px"}
             letterSpacing="0.12em"
             fontWeight="600"
@@ -591,7 +561,7 @@ export default function Classic({ viewport = "pc", palette, data, template }) {
 const CountdownCell = ({ value, label, isMobile }) => (
   <HStack px={isMobile ? "10px" : "18px"} align="baseline" gap="6px">
     <Text
-      fontFamily={serifFont}
+      // fontFamily={serifFont}
       fontSize={isMobile ? "36px" : "52px"}
       fontWeight="600"
       color="var(--c-primary)"

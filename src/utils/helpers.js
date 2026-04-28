@@ -209,3 +209,7 @@ export const filterInvitations = (data = [], name = "") => {
     return match;
   });
 };
+
+// view
+export const pickLang = (obj, lang = "en") =>
+  obj?.[lang] || obj?.en || obj?.hy || obj?.ru || "";

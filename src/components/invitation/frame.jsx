@@ -4,14 +4,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { designWidth, fitScale } from "@/utils/formatters";
 import { Renderer } from "./renderer";
 
-export const Frame = ({
-  viewport = "pc",
-  palette,
-  data,
-  template,
-  height,
-  maxHeight,
-}) => {
+export const Frame = ({ viewport = "pc", palette, height, maxHeight }) => {
   const outerRef = useRef(null);
   const innerRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -43,7 +36,7 @@ export const Frame = ({
     const ro = new ResizeObserver(measure);
     ro.observe(inner);
     return () => ro.disconnect();
-  }, [scale, viewport, data, palette, template]);
+  }, [scale, viewport, palette]);
 
   const offsetX = Math.max(0, (containerWidth - dWidth * scale) / 2);
 
@@ -79,13 +72,7 @@ export const Frame = ({
             left: 0,
           }}
         >
-          <Renderer
-            id={template.id}
-            viewport={viewport}
-            palette={palette}
-            data={data}
-            template={template}
-          />
+          <Renderer viewport={viewport} palette={palette} />
         </div>
       </div>
     </div>

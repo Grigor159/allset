@@ -2,24 +2,21 @@
 
 import { useQueryState } from "nuqs";
 import { Box, Flex, VStack } from "@chakra-ui/react";
-import { useGetTanstack, useGetAuthTanstack } from "@/hooks/useTanstack";
+import { useGetTanstack } from "@/hooks/useTanstack";
 import { Animate } from "@/components/ui/animate";
 import { MidText } from "@/components/build/typography/midText";
 import { ViewportToggle } from "@/components/build/viewportToggle";
-import { Frame } from "@/components/view/frame";
+import { Frame } from "@/components/invitation/frame";
 import { DEFAULT_VIEWPORT } from "@/utils/constants";
 
 export const PreviewClient = () => {
   const [template] = useQueryState("template");
   const [paletteId] = useQueryState("palette");
-  const [id] = useQueryState("id");
   const [device] = useQueryState("device", { defaultValue: DEFAULT_VIEWPORT });
 
   const { data: templates } = useGetTanstack("templates");
-  const { data: draft } = useGetAuthTanstack(`invitations/${id}`, !!id);
 
-  const selectedTemplate =
-    templates?.find((t) => t.id === template) || null;
+  const selectedTemplate = templates?.find((t) => t.id === template) || null;
   const selectedPalette =
     selectedTemplate?.palettes?.find((p) => p.id === paletteId) ||
     selectedTemplate?.palettes?.[0] ||
@@ -42,13 +39,7 @@ export const PreviewClient = () => {
         </Flex>
 
         <Box w="100%" h="fit-content">
-          <Frame
-            viewport={device}
-            template={selectedTemplate}
-            palette={selectedPalette}
-            data={draft}
-            maxHeight="80vh"
-          />
+          <Frame viewport={device} palette={selectedPalette} maxHeight="80vh" />
         </Box>
       </VStack>
     </Animate>

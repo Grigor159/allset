@@ -23,7 +23,12 @@ export const Footer = () => {
   const t = useTranslations();
   const pathname = usePathname();
 
-  if (pathname?.includes("build") || pathname?.includes("auth")) return;
+  if (
+    pathname?.includes("/build") ||
+    pathname?.includes("/auth") ||
+    pathname?.includes("/invitation")
+  )
+    return;
 
   return (
     <Box bg="#FFFFFF">

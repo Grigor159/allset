@@ -1,15 +1,15 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { parseAsString, useQueryStates } from "nuqs";
 import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { useSearch } from "@/hooks/useSearch";
 import { useTranslations } from "next-intl";
+import { useAuth0 } from "@auth0/auth0-react";
 import { getNextRoute } from "../../utils/helpers";
 import { isContinueDisabled } from "../../utils/checkers";
 import { Button } from "@chakra-ui/react";
 import { next } from "@/assets/svgs";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect, useState } from "react";
 
 export const Continue = () => {
   const [{ template, palette, accept }] = useQueryStates({

@@ -21,6 +21,8 @@ import { Hamburger } from "./hamburger";
 export const Header = () => {
   const pathname = usePathname();
 
+  if (pathname?.includes("/invitation")) return;
+
   const [scrolled, setScrolled] = useState(false);
 
   const isPublic = pathname === `/` || pathname === `/about-us`;
