@@ -36,7 +36,7 @@ export const DetailsClient = () => {
   const hiddenFieldsRef = useRef({});
   const lastSavedFormRef = useRef(null);
   const formRef = useRef(null);
-  
+
   // TODO: set id to params after draft creation
   const { isAuthenticated, isLoading } = useAuth0();
   const [{ template, palette, id }] = useQueryStates({
@@ -70,6 +70,24 @@ export const DetailsClient = () => {
   const { mutate } = useMutateAuthTanstack("invitations/draft", "post", {
     onSuccess: (res) => {
       const draftId = res?.id;
+      const urlExtension = res?.urlExtension;
+
+      // setForm((prev) => {
+      //   const updated = {
+      //     ...prev,
+      //     ...(draftId && { id: draftId }),
+      //     ...(urlExtension && { urlExtension }),
+      //   };
+
+      //   lastSavedFormRef.current = JSON.stringify(updated);
+
+      //   return updated;
+      // });
+
+      if (urlExtension) {
+        setUrlExtension(urlExtension);
+      }
+
       if (draftId) {
         setForm((prev) => {
           if (prev.id === draftId) return prev;
@@ -92,6 +110,7 @@ export const DetailsClient = () => {
   formRef.current = form;
 
   const [agenda, setAgenda] = useState([]);
+  const [urlExtension, setUrlExtension] = useState("");
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -156,6 +175,7 @@ export const DetailsClient = () => {
       return updated;
     });
   };
+
   const handleChange = (e) => {
     setForm((prev) => ({
       ...prev,
@@ -252,8 +272,8 @@ export const DetailsClient = () => {
             <TitleCreator
               name="title"
               value={form.title}
+              urlExtension={urlExtension}
               onChange={handleLngChange}
-              setForm={setForm}
               required={true}
               languages={form.languages}
             />

@@ -15,15 +15,6 @@ export function truncateText(text, maxLength, suffix = "...") {
   return text.slice(0, maxLength) + suffix;
 }
 
-export const cleanUrlExtension = (str) => {
-  if (!str) return "";
-  return str
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, "-")
-    .replace(/[^a-z0-9\\-]/g, "");
-};
-
 export function formatDate(date, format = "DD-MM-YYYY") {
   if (!date) return "";
 

@@ -5,7 +5,6 @@ import { useTranslations } from "next-intl";
 import { Field, Flex, HStack, Icon, Stack, Text } from "@chakra-ui/react";
 import { BASE_URL } from "@/lib/api/config";
 import { Label } from "@/components/build/typography/label";
-import { cleanUrlExtension } from "../../utils/formatters";
 import { copied, copy } from "@/assets/svgs";
 import { Tooltip } from "../ui/tooltip";
 import { Input } from "../ui/input";
@@ -14,8 +13,8 @@ import { error, info, success } from "../ui/alerts";
 export const TitleCreator = ({
   name,
   value,
+  urlExtension,
   onChange,
-  setForm,
   required,
   languages,
 }) => {
@@ -23,19 +22,12 @@ export const TitleCreator = ({
 
   const [isCopied, setIsCopied] = useState(false);
 
-  const fullUrl = BASE_URL + (value?.["en"] ?? "");
+  const fullUrl = BASE_URL + (urlExtension ?? "");
 
   const handleInputChange = (e, lng) => {
     const val = e.target.value;
 
     onChange(name, lng, val);
-
-    if (lng === "en" && setForm) {
-      setForm((prev) => ({
-        ...prev,
-        urlExtension: cleanUrlExtension(val),
-      }));
-    }
 
     lng == "en" && setIsCopied(false);
   };
@@ -77,15 +69,6 @@ export const TitleCreator = ({
           placeholder={t("invitation_placeholder")}
         />
       </Field.Root>
-
-      {/* <Flex borderRadius={"4px"} p="12px" bg="#F9FAFB">
-        <Text textStyle="sm" color={"#6B7280"}>
-          {t("invitation_preview")} {BASE_URL}
-        </Text>
-        <Text textStyle="sm" color={"#E85A6B"}>
-          {cleanUrlExtension(value?.["en"]) ?? ""}
-        </Text>
-      </Flex> */}
 
       <Tooltip
         // ids={{ trigger: id }}

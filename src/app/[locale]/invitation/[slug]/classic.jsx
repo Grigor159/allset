@@ -18,6 +18,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import { useGetTanstack } from "@/hooks/useTanstack";
 
 const SCRIPT_FONT_URL =
   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Dancing+Script:wght@500;600;700&display=swap";
@@ -40,7 +41,9 @@ const GALLERY_FALLBACKS = [
 
 export default function Classic({ viewport = "pc", palette, data }) {
   const { slug } = useParams();
-  // TODO: do public call to invitation by slug 
+  // TODO: do public call to invitation by slug
+  const { data: invitationData } = useGetTanstack(`invitations/url/${slug}`);
+  // console.log(invitationData);
 
   const vars = paletteToVars(palette?.colors);
   const language = data?.languages?.[0] || "en";

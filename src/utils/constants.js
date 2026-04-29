@@ -158,7 +158,7 @@ export const detailsForm = {
     en: "",
     ru: ""
   },
-  urlExtension: "",
+  // urlExtension: "",
   eventDate: "",
   description: {
     hy: "",
