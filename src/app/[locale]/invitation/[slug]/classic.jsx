@@ -43,7 +43,7 @@ export default function Classic({ viewport = "pc", palette, data }) {
   const { slug } = useParams();
   // TODO: do public call to invitation by slug
   const { data: invitationData } = useGetTanstack(`invitations/url/${slug}`);
-  // console.log(invitationData);
+  console.log(invitationData);
 
   const vars = paletteToVars(palette?.colors);
   const language = data?.languages?.[0] || "en";

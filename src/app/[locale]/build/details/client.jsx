@@ -130,6 +130,10 @@ export const DetailsClient = () => {
   useEffect(() => {
     if (!invitationData) return;
     setForm(pickInvitationFields(invitationData));
+
+    if (invitationData?.urlExtension) {
+      setUrlExtension(invitationData.urlExtension);
+    }
   }, [invitationData]);
 
   useEffect(() => {
