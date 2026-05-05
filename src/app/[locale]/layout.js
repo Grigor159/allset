@@ -1,4 +1,5 @@
 import { getLocale, getMessages } from "next-intl/server";
+import { montserrat, sosbanff } from '../../assets/fonts'
 import { AuthProvider } from "@/providers/authProvider";
 import { QueryProvider } from "@/providers/queryProvider";
 import { ChakraUIProvider } from "@/providers/chakraProvider";
@@ -7,7 +8,6 @@ import { NextIntlClientProvider } from "next-intl";
 import { Header } from "@/components/ui/header";
 import { ScrollToTop } from "@/components/ui/scrollToTop";
 import { Footer } from "@/components/public/footer";
-import { fonts } from '../../assets/fonts'
 import "../index.css";
 
 export default async function RootLayout({ children }) {
@@ -52,7 +52,8 @@ export default async function RootLayout({ children }) {
         <meta property="fb:app_id" content="" />
       </head>
       <body
-        className={fonts.variable}
+        // className={fonts.variable}
+        className={`${montserrat.variable} ${sosbanff.variable}`}
         data-locale={locale}
         style={{ backgroundColor: "#f9fafb" }}
       >

@@ -1,6 +1,6 @@
 import localFont from 'next/font/local'
 
-export const fonts = localFont({
+export const montserrat = localFont({
     src: [
         { path: './Montserratarm-Light.otf', weight: '300', style: 'normal' },
         { path: './Montserratarm-Regular.otf', weight: '400', style: 'normal' },
@@ -14,3 +14,9 @@ export const fonts = localFont({
     variable: '--font-montserrat',
     display: 'swap',
 })
+
+export const sosbanff = localFont({
+    src: "./SOSBANFF_U.ttf",
+    variable: "--font-sosbanff",
+    display: "swap",
+});

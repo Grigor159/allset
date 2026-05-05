@@ -423,3 +423,15 @@ export const DESIGN_WIDTH = {
   laptop: 1024,
   mobile: 375,
 };
+
+import fallbackBg1 from "@/assets/imgs/invitations/classic/fallback_bg_1.jpg";
+import fallbackBg2 from "@/assets/imgs/invitations/classic/fallback_bg_2.jpg";
+import fallbackBg3 from "@/assets/imgs/invitations/classic/fallback_bg_3.jpg";
+import fallbackBg4 from "@/assets/imgs/invitations/classic/fallback_bg_4.jpg";
+
+export const GALLERY_FALLBACKS = [
+  fallbackBg1.src,
+  fallbackBg2.src,
+  fallbackBg3.src,
+  fallbackBg4.src,
+];
