@@ -47,8 +47,6 @@ const GALLERY_FALLBACKS = [
 // const serifFont = `"Cormorant Garamond", "Playfair Display", Georgia, serif`;
 
 export default function Classic({ viewport = "pc", palette, data }) {
- console.log(data);
- 
   const t = useTranslations();
   const language = useLocale();
 
@@ -57,7 +55,6 @@ export default function Classic({ viewport = "pc", palette, data }) {
     `invitations/url/${slug}`,
     !data && !!slug,
   );
-  // console.log(invitationData); //
 
   const finalData = data ?? invitationData;
   const locales = finalData?.languages;
@@ -84,7 +81,7 @@ export default function Classic({ viewport = "pc", palette, data }) {
       ];
   const dressCodeDesc =
     pickLang(finalData?.dressCode?.description, language) ||
-    "Lorem ipsum dolor sit amet consectetur. Ut enim scelerisque consequat a justo diam adipiscing velit tincidunt.";
+    t("dresscode_desc");
   const dressCodeName =
     finalData?.dressCode?.colorPaletteId || palette?.name?.[language]; // needs checking
   const dressCodeAbout = "" || palette?.description?.[language]; // needs checking
@@ -226,10 +223,12 @@ export default function Classic({ viewport = "pc", palette, data }) {
             lineHeight="50px"
             textTransform="uppercase"
             color="#FFFFFF"
-            dangerouslySetInnerHTML={{
-              __html: t("classic_timing").replace(/\n/g, "<br />"),
-            }}
-          />
+            // dangerouslySetInnerHTML={{
+            //   __html: t("classic_timing").replace(/\n/g, "<br />"),
+            // }}
+          >
+            {t("classic_timing")}
+          </Text>
           <Text
             fontFamily={"Mulish"}
             fontWeight="400"
@@ -312,10 +311,12 @@ export default function Classic({ viewport = "pc", palette, data }) {
             lineHeight="48px"
             textAlign="center"
             textTransform="uppercase"
-            dangerouslySetInnerHTML={{
-              __html: t("classic_join").replace(/\n/g, "<br />"),
-            }}
-          />
+            // dangerouslySetInnerHTML={{
+            //   __html: t("classic_join").replace(/\n/g, "<br />"),
+            // }}
+          >
+            {t("classic_join")}
+          </Text>
           <VStack gap="37px">
             <VStack gap="16px" minW={isMobile ? "100%" : "442px"}>
               <Input
@@ -444,21 +445,7 @@ export default function Classic({ viewport = "pc", palette, data }) {
               </Text>
             )}
           </VStack>
-          <Text
-            fontFamily={"Mulish"}
-            fontSize="16px"
-            fontWeight="400"
-            lineHeight={"22px"}
-            color="#FFFFFF"
-            // maxW="720px"
-          >
-            Lorem ipsum dolor sit amet consectetur. Molestie suada sollicitudin
-            suspendisse congue condimentum. Egestas at aliquam pharetra tempus
-            et. Morbi tincidunt viverra nunc felis sollicitudin pretium. Lacus
-            arcu purus sed diam. Varius laoreet quis pellentesque et justo at.
-            Cursus cursus bibendum lacus pellentesque leo ullamcorper libero
-            suspendisse in.
-          </Text>
+
         </Stack>
       </VStack>
 
@@ -532,7 +519,7 @@ export default function Classic({ viewport = "pc", palette, data }) {
             ? { href: finalData.albumLink, target: "_blank" }
             : {})}
         >
-          {t("classic_open")}
+          {t("classic_view")}
         </Button>
       </VStack>
 
@@ -565,12 +552,9 @@ export default function Classic({ viewport = "pc", palette, data }) {
             color="#323232"
             whiteSpace="pre-line"
             // dangerouslySetInnerHTML={{
-            //   __html: t("classic_story_desc").replace(/\n/g, "<br />"),
+            //   __html: storyText.replace(/\n/g, "<br />"),
             // }}
-            dangerouslySetInnerHTML={{
-              __html: storyText.replace(/\n/g, "<br />"),
-            }}
-          />
+          >{storyText}</Text>
         </VStack>
       </Box>
 
@@ -611,6 +595,7 @@ export default function Classic({ viewport = "pc", palette, data }) {
           fontSize="30px"
           lineHeight="24px"
           fontWeight="800"
+          textTransform={"uppercase"}
         >
           {t("classic_contact")}
         </Text>
