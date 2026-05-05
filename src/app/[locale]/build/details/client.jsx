@@ -66,6 +66,7 @@ export const DetailsClient = () => {
     `invitations/${id}`,
     !!id,
   );
+console.log(data);
 
   const { mutate } = useMutateAuthTanstack("invitations/draft", "post", {
     onSuccess: (res) => {
