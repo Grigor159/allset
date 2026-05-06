@@ -221,16 +221,6 @@ export const DetailsClient = () => {
       ...prev,
       timeline: newTimeline,
     }));
-
-    // const updated = {
-    //   ...formRef.current,
-    //   timeline: newTimeline,
-    // };
-
-    // formRef.current = updated;
-    // setForm(updated);
-
-    // handleSmartBlur();
   };
 
   // const handleSmartBlur = () => {
