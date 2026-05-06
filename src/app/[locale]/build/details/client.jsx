@@ -221,7 +221,41 @@ export const DetailsClient = () => {
       ...prev,
       timeline: newTimeline,
     }));
+
+    // const updated = {
+    //   ...formRef.current,
+    //   timeline: newTimeline,
+    // };
+
+    // formRef.current = updated;
+    // setForm(updated);
+
+    // handleSmartBlur();
   };
+
+  // const handleSmartBlur = () => {
+  //   if (invitationData?.status === "ACTIVE") return;
+
+  //   const current = formRef.current;
+
+  //   const isTitleFilled = current.languages?.some((lang) =>
+  //     current.title?.[lang]?.trim(),
+  //   );
+
+  //   if (!isTitleFilled) return;
+
+  //   const currentDataString = JSON.stringify(current);
+
+  //   if (lastSavedFormRef.current !== currentDataString) {
+  //     // const payload = {
+  //     //   ...current,
+  //     //   timeline: current.timeline?.map(({ venueKey, ...rest }) => rest),
+  //     // };
+  //     // mutate(buildPayload(payload));
+  //     mutate(buildPayload(current));
+  //     lastSavedFormRef.current = currentDataString;
+  //   }
+  // };
 
   const handleSmartBlur = () => {
     if (invitationData?.status === "ACTIVE") return;
@@ -234,10 +268,20 @@ export const DetailsClient = () => {
 
     if (!isTitleFilled) return;
 
-    const currentDataString = JSON.stringify(current);
+    const sanitized = {
+      ...current,
+      timeline: current.timeline?.map((item) => ({
+        venueKey: item.venueKey,
+        venueName: item.venueName,
+        time: item.time,
+        venueLocation: item.venueLocation,
+      })),
+    };
+
+    const currentDataString = JSON.stringify(sanitized);
 
     if (lastSavedFormRef.current !== currentDataString) {
-      mutate(buildPayload(current));
+      mutate(buildPayload(sanitized));
       lastSavedFormRef.current = currentDataString;
     }
   };
@@ -246,6 +290,7 @@ export const DetailsClient = () => {
     e.preventDefault();
     router.push(`preview${search}`);
   };
+
 
   return (
     <Box pt={{ base: "32px", md: "48px" }} pb="22px">

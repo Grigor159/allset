@@ -38,7 +38,7 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  if (pathname?.includes("/invitation")) return;
+  if (pathname?.includes("/invitation/")) return;
 
   return (
     <Box

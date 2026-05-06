@@ -88,12 +88,15 @@ export const Timeline = ({
               <Checkbox.Root
                 key={venueKey}
                 checked={isChecked}
+                // onCheckedChange={(e) =>
+                //   handleCheckboxChange(
+                //     venueKey,
+                //     e.checked === true,
+                //     venueName[language] || venueName.en,
+                //   )
+                // }
                 onCheckedChange={(e) =>
-                  handleCheckboxChange(
-                    venueKey,
-                    e.checked === true,
-                    venueName[language] || venueName.en,
-                  )
+                  handleCheckboxChange(venueKey, e.checked === true, venueName)
                 }
                 w="100%"
                 justifyContent="space-between"
