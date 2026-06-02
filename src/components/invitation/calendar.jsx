@@ -20,20 +20,24 @@ export const Calendar = ({ value }) => {
     <Box bg="white" padding="55px">
       <DayPicker
         mode="single"
+        // navLayout="none"
         selected={selectedDate}
         month={selectedDate}
         locale={DATE_LOCALES[language]}
         showOutsideDays
         disabled
+        hideNavigation
         modifiersStyles={{
           selected: {
             backgroundColor: "var(--c-accent)",
-            // color: "white",
             borderRadius: "100%",
-            border: "none !important",
+            border: "none",
+            outline: "none",
           },
-          // caption: { color: "var(--c-primary)" },
-          // day: { color: "var(--c-primary)" },
+          today: {
+            color: "red",
+            fontWeight: "bold",
+          },
         }}
       />
     </Box>

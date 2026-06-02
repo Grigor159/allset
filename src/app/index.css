@@ -55,11 +55,6 @@ textarea {
   font-size: 16px;
 }
 
-/* calendar customization */
-.rdp-root {
-  --rdp-accent-color: #004143 !important;
-}
-
 /* slide customization */
 .swiper {
   width: 100% !important;
@@ -107,42 +102,20 @@ textarea {
   padding: 0 15px !important;
 }
 
-/* Day-picker */
-.rdp-nav {
-  display: none !important;
-}
-
-.rdp-caption_label {
-  font-size: 24px !important;
-  font-weight: 700 !important;
-  color: var(--c-primary) !important;
+/* calendar customization */
+.rdp-root {
+  --rdp-accent-color: transparent !important;
 }
 
 .rdp-weekday {
   font-size: 20px !important;
-  color: var(--c-primary) !important;
   text-transform: capitalize !important;
 }
 
-.rdp-month {
-  color: var(--c-primary);
-}
-
 .rdp-day {
-  color: var(--c-primary) !important;
   font-size: 20px !important;
   font-weight: 500 !important;
   border: none !important;
-}
-
-.rdp-selected .rdp-day_button {
-  background: var(--c-accent) !important;
-  color: var(--c-primary) !important;
-  border: none !important;
-  box-shadow: none !important;
-  border-radius: 999px !important;
-  font-size: 20px !important;
-  font-weight: 500 !important;
 }
 
 .rdp-month_caption {

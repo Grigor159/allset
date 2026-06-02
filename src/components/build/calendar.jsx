@@ -91,21 +91,6 @@ export const Calendar = ({ name, value, onChange, required, disabled }) => {
             top="5px"
             right="5px"
           />
-          {/* <Button
-              onClick={() => setOpen(false)}
-              // variant="outline"
-              position="absolute"
-              top="5px"
-              right="5px"
-              //
-              fontWeight="400"
-              fontSize="14px"
-              borderRadius="8px"
-              color="white"
-            >
-              X
-            </Button> */}
-
           <Dialog.Body>
             <DayPicker
               locale={DATE_LOCALES[language]}
@@ -120,15 +105,19 @@ export const Calendar = ({ name, value, onChange, required, disabled }) => {
               endMonth={new Date(currentYear + 1, 11)}
               disabled={{ before: today }}
               onSelect={handleSelect}
-              // modifiersClassNames={{
-              //   selected: "selected",
-              // }}
               modifiersStyles={{
                 selected: {
                   backgroundColor: "#004143",
                   color: "white",
                   borderRadius: "100%",
                 },
+                today: {
+                  color: "red",
+                  fontWeight: "bold"
+                },
+              }}
+              classNames={{
+                chevron: "fill-blue-500 stroke-red-500",
               }}
             />
           </Dialog.Body>
