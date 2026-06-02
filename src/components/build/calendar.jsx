@@ -1,7 +1,7 @@
 "use client";
 
+import { useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { useEffect, useRef, useState } from "react";
 import { Dialog, Icon, Input, InputGroup, CloseButton } from "@chakra-ui/react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";

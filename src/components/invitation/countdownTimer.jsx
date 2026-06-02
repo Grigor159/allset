@@ -68,13 +68,13 @@ export function CountdownTimer({ template, eventDate, isMobile }) {
         <Countdown
           template={template}
           value={String(countdown.min).padStart(2, "0")}
-          label="min"
+          label="minutes"
           isMobile={isMobile}
         />
         <Countdown
           template={template}
           value={String(countdown.sec).padStart(2, "0")}
-          label="sec"
+          label="seconds"
           isMobile={isMobile}
         />
       </HStack>
@@ -98,13 +98,13 @@ export function CountdownTimer({ template, eventDate, isMobile }) {
       <Countdown
         template={template}
         value={String(countdown.min).padStart(2, "0")}
-        label="min"
+        label="minutes"
         isMobile={isMobile}
       />
       <Countdown
         template={template}
         value={String(countdown.sec).padStart(2, "0")}
-        label="sec"
+        label="seconds"
         isMobile={isMobile}
       />
     </HStack>

@@ -33,6 +33,8 @@ import {
   bottle,
   bottomPin,
   heart,
+  heartsLeft,
+  heartsRight,
   leftBrace,
   map,
   rightBrace,
@@ -59,6 +61,7 @@ import timingBg from "@/assets/imgs/invitations/rustic/timing_bg.png";
 import timingImg from "@/assets/imgs/invitations/rustic/timing_img.png";
 import dresscodeBg from "@/assets/imgs/invitations/rustic/dresscode_bg.png";
 import dresscodeImg from "@/assets/imgs/invitations/rustic/dresscode_img.png";
+import dresscodePin from "@/assets/imgs/invitations/rustic/dresscode_pin.png";
 import storyBg from "@/assets/imgs/invitations/rustic/story_bg.png";
 import story1 from "@/assets/imgs/invitations/rustic/story_1.png";
 import screp2 from "@/assets/imgs/invitations/rustic/screp_2.png";
@@ -202,8 +205,8 @@ export default function Rustic({ viewport = "pc", palette, data }) {
 
     mutate({ ...form, status: "DECLINED" });
   };
-  console.log(data);
-  console.log(vars);
+  // console.log(data);
+  // console.log(vars);
 
   return (
     <Box
@@ -571,19 +574,25 @@ export default function Rustic({ viewport = "pc", palette, data }) {
       </Center>
 
       {/* ————— RSVP ————— */}
-      <Rsvp
-        isMobile={isMobile}
-        color="var(--c-primary)"
-        data={data?.rsvp}
-        guestCount={guestCount}
-        form={form}
-        setForm={setForm}
-        guests={guests}
-        handleChange={handleChange}
-        handleGuestCountChange={handleGuestCountChange}
-        handleConfirm={handleConfirm}
-        handleDecline={handleDecline}
-      />
+      <Container maxW="1440px" px={{ base: "24px", md: "80px" }}>
+        <Flex align={"center"} justify="center" gap="60px">
+          <Icon color="var(--c-accent)">{heartsLeft.icon}</Icon>
+          <Rsvp
+            isMobile={isMobile}
+            color="var(--c-primary)"
+            data={data?.rsvp}
+            guestCount={guestCount}
+            form={form}
+            setForm={setForm}
+            guests={guests}
+            handleChange={handleChange}
+            handleGuestCountChange={handleGuestCountChange}
+            handleConfirm={handleConfirm}
+            handleDecline={handleDecline}
+          />
+          <Icon color="var(--c-accent)">{heartsRight.icon}</Icon>
+        </Flex>
+      </Container>
 
       {/* ————— DRESS CODE ————— */}
       <Center>
@@ -596,14 +605,15 @@ export default function Rustic({ viewport = "pc", palette, data }) {
           bgImage={`url(${dresscodeBg.src})`}
           bgSize="contain"
           bgPos="center"
+          position={"relative"}
         >
           <Stack gap="32px" px="102px" position={"relative"}>
             <Image
               src={dresscodeImg.src}
-              alt="moments"
+              alt="dresscode img"
               position={"absolute"}
-              right="-300px"
-              top="150px"
+              right="-280px"
+              top="155px"
               boxSize={"423px"}
             />
             <Text
@@ -668,6 +678,15 @@ export default function Rustic({ viewport = "pc", palette, data }) {
               )}
             </VStack>
           </Stack>
+
+          <Image
+            src={dresscodePin.src}
+            alt="pin"
+            position={"absolute"}
+            top="-34px"
+            right="0"
+            boxSize={"197px"}
+          />
         </VStack>
       </Center>
 
@@ -875,14 +894,14 @@ export default function Rustic({ viewport = "pc", palette, data }) {
               left="40px"
             />
           </Box>
-           <Image
-              src={storyFlower.src}
-              boxSize="144px"
-              alt="story flower"
-              position="absolute"
-              bottom="-70px"
-              right="90px"
-            />
+          <Image
+            src={storyFlower.src}
+            boxSize="144px"
+            alt="story flower"
+            position="absolute"
+            bottom="-70px"
+            right="90px"
+          />
         </Box>
       </Flex>
       {/* </Container> */}
