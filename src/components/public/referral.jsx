@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { storage } from "@/lib/browser/storage";
 import { useMutateAuthTanstack } from "@/hooks/useTanstack";
@@ -12,6 +12,8 @@ import failed from "@/assets/imgs/failed.png";
 export const Referral = () => {
   const t = useTranslations();
   const referral = storage.get("ALLSET_REFERRAL");
+  const hasMutated = useRef(false);
+
   const { isAuthenticated } = useAuth0();
 
   const [dialog, setDialog] = useState({ img: "", message: "" });
@@ -31,7 +33,8 @@ export const Referral = () => {
   });
 
   useEffect(() => {
-    if (referral && isAuthenticated) {
+    if (referral && isAuthenticated && !hasMutated.current) {
+      hasMutated.current = true;
       mutate({ referralCode: referral });
     }
   }, [isAuthenticated]);
@@ -52,7 +55,7 @@ export const Referral = () => {
                 textAlign={"center"}
                 w="full"
               >
-                <Image src={dialog?.img} alt="img" w="80px" />
+                <Image src={dialog?.img} alt="img" boxSize="80px" />
               </Stack>
             </Dialog.Header>
 
