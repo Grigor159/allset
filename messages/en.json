@@ -107,6 +107,7 @@
     "promocode": "Promocode",
     "promocode_text": "Insert your promo code for a discount.",
     "promocode_placeholder": "Apply promocode",
+    "promocode_active": "Active promocodes",
     "payment_method": "Payment method",
     "payment_method_text": "Choose Payment method.",
     "apply": "Apply",

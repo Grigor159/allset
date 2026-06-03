@@ -7,7 +7,7 @@ import { error } from "@/components/ui/alerts";
 import { Animate } from "@/components/ui/animate";
 import { TitleDemo } from "@/components/build/titleDemo";
 import { ConfirmDate } from "@/components/build/confirmDate";
-import { Promocode } from "@/components/auth/profile/promocode";
+import { Promocode } from "@/components/build/promocode";
 import { Payment } from "@/components/build/payment";
 import { Pay } from "@/components/build/pay";
 import { Success } from "@/components/build/success";

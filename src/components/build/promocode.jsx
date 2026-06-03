@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { useMutateAuthTanstack } from "../../../hooks/useTanstack";
+import { useMutateAuthTanstack } from "@/hooks/useTanstack";
 import {
   Button,
   DataList,
@@ -14,18 +14,23 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import { isNotEmptyState } from "@/utils/checkers";
 import { Label } from "@/components/build/typography/label";
 import { error, success } from "@/components/ui/alerts";
 import { getMaxDiscountPromocode } from "@/utils/helpers";
 import { formatPrice } from "@/utils/formatters";
-import { isNotEmptyArray } from "@/utils/checkers";
 
 export const Promocode = ({ code }) => {
   const t = useTranslations();
   const maxPromocode = getMaxDiscountPromocode(code)?.code;
 
-  const [promocode, setPromocode] = useState([]);
-  const [discount, setDiscount] = useState("");
+  const [promocode, setPromocode] = useState("");
+  const [data, setData] = useState({
+    discount: "",
+    basePrice: "",
+    discountAmount: "",
+    finalPrice: "",
+  });
 
   useEffect(() => {
     maxPromocode && setPromocode(maxPromocode);
@@ -37,8 +42,14 @@ export const Promocode = ({ code }) => {
     "post",
     {
       onSuccess: (res) => {
-        setDiscount(res?.discountValue);
-        success(`Promocode applied! Discount is ${res?.discountValue}%`);
+        const { promoCode, ...prices } = res;
+
+        setData({
+          discount: promoCode.discountValue,
+          ...prices,
+        });
+
+        success(`Promocode applied! Discount is ${promoCode.discountValue}%`);
       },
       onError: (err) =>
         error(err?.response?.data?.error || "Invalid promocode"),
@@ -50,7 +61,13 @@ export const Promocode = ({ code }) => {
 
     if (!promocode) return;
 
-    discount && setDiscount("");
+    isNotEmptyState(data) &&
+      setData({
+        discount: "",
+        basePrice: "",
+        discountAmount: "",
+        finalPrice: "",
+      });
 
     mutate({ code: promocode });
   };
@@ -77,7 +94,7 @@ export const Promocode = ({ code }) => {
         <Flex w="100%" gap="16px">
           <InputGroup
             endElement={
-              discount &&
+              isNotEmptyState(data) &&
               !isPending && (
                 <Text
                   fontSize={"14px"}
@@ -85,7 +102,7 @@ export const Promocode = ({ code }) => {
                   lineHeight={"24px"}
                   color={"#D80027"}
                 >
-                  {discount}% OFF
+                  {data?.discount}% OFF
                 </Text>
               )
             }
@@ -119,31 +136,59 @@ export const Promocode = ({ code }) => {
             {t("apply")}
           </Button>
         </Flex>
-
-        {isNotEmptyArray(code) && (
+        {isNotEmptyState(data) && !isPending && (
           <DataList.Root w="100%" orientation="horizontal" gap="8px">
-            <DataList.Item alignItems="flex-start">
+            <DataList.Item>
               <DataList.ItemLabel
                 color={"#4B5563"}
                 fontSize={"14px"}
                 lineHeight={"20px"}
                 fontWeight={"400"}
               >
-                {t("promocode_active")}
+                {t("original_price")}
               </DataList.ItemLabel>
-              <DataList.ItemValue justifyContent="flex-end">
-                <Flex direction="column" align="flex-end" gap="4px">
-                  {code.map((promo) => (
-                    <Text
-                      key={promo.code}
-                      fontSize={"14px"}
-                      fontWeight={"700"}
-                      color={"#E38D83"}
-                    >
-                      {promo.code} - {promo.discountValue}%
-                    </Text>
-                  ))}
-                </Flex>
+              <DataList.ItemValue
+                as="s"
+                fontSize={"14px"}
+                lineHeight={"20px"}
+                justifyContent={"flex-end"}
+              >
+                {formatPrice(data?.basePrice,t)}
+              </DataList.ItemValue>
+            </DataList.Item>
+            <DataList.Item>
+              <DataList.ItemLabel
+                color={"#4B5563"}
+                fontSize={"14px"}
+                lineHeight={"20px"}
+                fontWeight={"400"}
+              >
+                {t("discount")} ({data?.discount}%):
+              </DataList.ItemLabel>
+              <DataList.ItemValue
+                fontSize={"14px"}
+                lineHeight={"20px"}
+                justifyContent={"flex-end"}
+              >
+                -{formatPrice(data?.discountAmount,t)}
+              </DataList.ItemValue>
+            </DataList.Item>
+            <Separator />
+            <DataList.Item w="100%">
+              <DataList.ItemLabel
+                fontSize={"14px"}
+                fontWeight={"700"}
+                lineHeight={"20px"}
+              >
+                {t("final_price")}
+              </DataList.ItemLabel>
+              <DataList.ItemValue
+                fontSize={"14px"}
+                fontWeight={"700"}
+                lineHeight={"20px"}
+                justifyContent={"flex-end"}
+              >
+                {formatPrice(data?.finalPrice,t)}
               </DataList.ItemValue>
             </DataList.Item>
           </DataList.Root>

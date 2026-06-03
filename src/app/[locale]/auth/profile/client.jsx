@@ -12,8 +12,8 @@ import { Animate } from "@/components/ui/animate";
 
 export const ProfileClient = () => {
   const { isLoading, data } = useGetAuthTanstack("user");
-  // TODO: if !referralCode dont show Referal
-
+console.log(data?.appliedPromoCodes)
+  
   return (
     <Animate>
       <Stack gap="16px">

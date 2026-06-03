@@ -107,6 +107,7 @@
     "promocode": "Промокод",
     "promocode_text": "Введите промокод для получения скидки.",
     "promocode_placeholder": "Применить промокод",
+    "promocode_active": "Активные промокоды",
     "payment_method": "Способ оплаты",
     "payment_method_text": "Выберите удобный способ оплаты.",
     "apply": "Применить",
