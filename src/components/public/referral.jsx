@@ -12,43 +12,32 @@ import failed from "@/assets/imgs/failed.png";
 export const Referral = () => {
   const t = useTranslations();
   const referral = storage.get("ALLSET_REFERRAL");
-
   const { isAuthenticated } = useAuth0();
 
-  if (!isAuthenticated && !referral) return;
-
-  const [dialog, setDialog] = useState({
-    img: "",
-    message: "",
-  });
+  const [dialog, setDialog] = useState({ img: "", message: "" });
 
   const { mutate } = useMutateAuthTanstack("user/referral", "post", {
     onSuccess: () => {
       storage.remove("ALLSET_REFERRAL");
-      setDialog({
-        img: success.src,
-        message: t("referral_message"),
-      });
+      setDialog({ img: success.src, message: t("referral_message") });
     },
     onError: (err) => {
       const message = err?.response?.data?.message || "Referral error!";
       if (message === "You cannot use your own referral code.") {
         storage.remove("ALLSET_REFERRAL");
       }
-      setDialog({
-        img: failed.src,
-        message: message,
-      });
+      setDialog({ img: failed.src, message });
     },
   });
 
   useEffect(() => {
-    if (referral) {
+    if (referral && isAuthenticated) {
       mutate({ referralCode: referral });
     }
-  }, []);
+  }, [isAuthenticated]);
 
-  if (!dialog.img) return;
+  if (!isAuthenticated && !referral) return null;
+  if (!dialog.img) return null;
 
   return (
     <Dialog.Root defaultOpen placement="center" motionPreset="slide-in-bottom">
