@@ -12,7 +12,6 @@ import { Animate } from "@/components/ui/animate";
 
 export const ProfileClient = () => {
   const { isLoading, data } = useGetAuthTanstack("user");
-console.log(data?.appliedPromoCodes)
   
   return (
     <Animate>

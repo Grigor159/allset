@@ -10,14 +10,12 @@ import {
   Flex,
   Input,
   InputGroup,
-  Separator,
   Stack,
   Text,
 } from "@chakra-ui/react";
 import { Label } from "@/components/build/typography/label";
 import { error, success } from "@/components/ui/alerts";
 import { getMaxDiscountPromocode } from "@/utils/helpers";
-import { formatPrice } from "@/utils/formatters";
 import { isNotEmptyArray } from "@/utils/checkers";
 
 export const Promocode = ({ code }) => {
