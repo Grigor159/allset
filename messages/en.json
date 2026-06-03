@@ -293,6 +293,7 @@
     "date_birth": "Date of birth",
     "search": "Search",
     "referral": "Referral code",
+    "referral_message": "Welcome to AllSet! You’ve unlocked 10% off all invitations through your friend’s referral.",
     "referral_text": "Invite a friend with a 10% off promo code and get 10% off your next invitation.",
     "privacyPolicy_title": "Privacy Policy – AllSet",
     "privacyPolicy_lastUpdated": "Last Updated: March 20",
@@ -435,5 +436,5 @@
     "rustic_journey": "Our journey to forever has already begun…",
     "rustic_couple": "Our couple",
     "rustic_happy": "So, we are happy",
-    "dear_guest":"Dear Guest"
+    "dear_guest": "Dear Guest"
 }

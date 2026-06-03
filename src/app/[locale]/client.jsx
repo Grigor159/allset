@@ -3,6 +3,7 @@
 import React from "react";
 import { useGetTanstack } from "@/hooks/useTanstack";
 import { Box } from "@chakra-ui/react";
+import { Referral } from "@/components/public/referral";
 import { Animate } from "@/components/ui/animate";
 import { Planning } from "@/components/public/planning";
 import { Choose } from "@/components/public/choose";
@@ -20,6 +21,7 @@ export const HomeClient = () => {
 
   return (
     <Box bg="#f6f6f7">
+      <Referral />
       <Animate>
         <Planning />
       </Animate>
