@@ -25,9 +25,7 @@ export const Referral = () => {
     },
     onError: (err) => {
       const message = err?.response?.data?.message || "Referral error!";
-      if (message === "You cannot use your own referral code.") {
-        storage.remove("ALLSET_REFERRAL");
-      }
+      storage.remove("ALLSET_REFERRAL");
       setDialog({ img: failed.src, message });
     },
   });
