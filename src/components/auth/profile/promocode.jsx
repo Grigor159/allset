@@ -29,7 +29,6 @@ export const Promocode = ({ code }) => {
     maxPromocode && setPromocode(maxPromocode);
   }, [maxPromocode]);
 
-  // const { mutate, isPending } = useMutateAuthTanstack("promocode", "post", {
   const { mutate, isPending } = useMutateAuthTanstack(
     "promo-codes/apply",
     "post",

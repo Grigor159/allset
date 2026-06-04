@@ -6,7 +6,7 @@ import { Flex, Stack } from "@chakra-ui/react";
 import { Me } from "@/components/auth/profile/me";
 import { Info } from "@/components/auth/profile/info";
 import { Promocode } from "@/components/auth/profile/promocode";
-import { Referal } from "@/components/auth/profile/referal";
+import { Referral } from "@/components/auth/profile/referral";
 import { Opt } from "@/components/auth/profile/opt";
 import { Animate } from "@/components/ui/animate";
 
@@ -22,7 +22,7 @@ export const ProfileClient = () => {
           <Stack w="100%" gap="16px">
             <Promocode code={data?.appliedPromoCodes} />
             <Opt />
-            <Referal code={data?.referralCode} />
+            <Referral code={data?.referralCode} />
           </Stack>
         </Flex>
       </Stack>

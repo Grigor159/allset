@@ -63,7 +63,7 @@ export const ConfirmClient = () => {
           </Animate>
         </Stack>
         <Animate>
-          <Promocode />
+          <Promocode data={data?.pricing}/>
         </Animate>
         <Animate>
           <Payment legal={legal} payment={payment} setQuery={setQuery} />

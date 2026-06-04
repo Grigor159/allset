@@ -7,7 +7,7 @@ import { Button, Heading, Icon, Stack, Text } from "@chakra-ui/react";
 import { distribute } from "@/services/distribution";
 import { share } from "@/assets/svgs";
 
-export const Referal = ({ code }) => {
+export const Referral = ({ code }) => {
   const t = useTranslations();
   const language = useLocale();
 
