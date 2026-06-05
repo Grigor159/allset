@@ -221,18 +221,27 @@ import { Payment } from "@/components/build/payment";
 import { Pay } from "@/components/build/pay";
 import { Success } from "@/components/build/success";
 import { Failed } from "@/components/build/failed";
-import { BASE_API, BASE_URL } from "@/lib/api/config";
+import { BASE_URL } from "@/lib/api/config";
 
 export const ConfirmClient = () => {
   const language = useLocale();
-  const [{ status, payment, id, legal }, setQuery] = useQueryStates({
-    id: parseAsString,
-    status: parseAsString,
-    payment: parseAsString,
-    legal: parseAsString,
-  });
+  const [{ template, palette, status, payment, id, legal }, setQuery] =
+    useQueryStates({
+      template: parseAsString,
+      palette: parseAsString,
+      status: parseAsString,
+      payment: parseAsString,
+      id: parseAsString,
+      legal: parseAsString,
+    });
 
   const { data } = useGetAuthTanstack(`invitations/${id}`, !!id);
+
+  const origin =
+    typeof window !== "undefined" ? window.location.origin + "/" : BASE_URL;
+
+  const successUrl = `${origin}${language}/build/confirm?template=${template}&palette=${palette}&id=${id}&legal=true&payment=${payment}&status=success`;
+  const failUrl = `${origin}${language}/build/confirm?template=${template}&palette=${palette}&id=${id}&legal=true&payment=${payment}&status=failed`;
 
   const { mutate } = useMutateAuthTanstack("payments/idram/initiate", "post", {
     onSuccess: (result) => {
@@ -255,8 +264,8 @@ export const ConfirmClient = () => {
         EDP_DESCRIPTION: edpDescription,
         EDP_AMOUNT: edpAmount,
         EDP_BILL_NO: edpBillNo,
-        EDP_SUCCESS_URL: `${BASE_URL}${language}/payment/success?id=${id}&status=success&payment=idram`,
-        EDP_FAIL_URL: `${BASE_URL}${language}/payment/failed?id=${id}&status=failed&payment=idram`,
+        EDP_SUCCESS_URL: successUrl,
+        EDP_FAIL_URL: failUrl,
       };
 
       Object.entries(fields).forEach(([name, value]) => {
@@ -280,8 +289,8 @@ export const ConfirmClient = () => {
     if (payment === "idram") {
       mutate({
         invitationId: id,
-        successUrl: `${BASE_URL}${language}/payment/success?id=${id}&status=success&payment=idram`,
-        failUrl: `${BASE_URL}${language}/payment/failed?id=${id}&status=failed&payment=idram`,
+        successUrl: successUrl,
+        failUrl: failUrl,
       });
       return;
     }
@@ -322,6 +331,18 @@ export const ConfirmClient = () => {
           <Pay onSubmit={submit} />
         </Animate>
       </Stack>
+      <Success
+        open={status === "success"}
+        setQuery={setQuery}
+        language={data?.languages[0]}
+        urlExtension={data?.urlExtension}
+        price={data?.finalPrice}
+      />
+      <Failed
+        open={status === "failed"}
+        setQuery={setQuery}
+        price={data?.finalPrice}
+      />
     </Box>
   );
 };
