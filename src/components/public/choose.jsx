@@ -73,10 +73,9 @@ export const Choose = () => {
             <Stack gap={{ base: "24px", lg: "34px" }}>
               <For each={choose}>
                 {({ id, title, description }) => (
-                  <Animate>
+                  <Animate key={id}>
                     <Stack
                       as="ul"
-                      key={id}
                       gap={{ base: "16px", md: "6px" }}
                       alignItems={{ base: "center", md: "unset" }}
                     >

@@ -11,7 +11,6 @@ import {
   Stack,
   Text,
   useMediaQuery,
-  VStack,
 } from "@chakra-ui/react";
 import { SubText } from "@/components/build/typography/subText";
 import {

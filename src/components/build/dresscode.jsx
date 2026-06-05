@@ -108,7 +108,7 @@ export const Dresscode = ({
                   >
                     <HStack gap={"8px"} pb="12px">
                       {item.colors.map((color, index) => (
-                        <VStack key={color} spacing={1}>
+                        <VStack key={index} spacing={1}>
                           <Box
                             w="34px"
                             h="34px"

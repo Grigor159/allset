@@ -7,6 +7,12 @@ export default function middleware(req) {
     const url = req.nextUrl;
     const { pathname } = url;
 
+    //
+    // if (pathname.startsWith('/payment')) {
+    //     return NextResponse.next();
+    // }
+    //
+
     const nextLocale = req.cookies.get('NEXT_LOCALE')?.value;
 
     if (!localesRegex.test(pathname) && !nextLocale) {
