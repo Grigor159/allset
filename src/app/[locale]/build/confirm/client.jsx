@@ -208,6 +208,7 @@
 
 "use client";
 
+import { useLocale } from "next-intl";
 import { parseAsString, useQueryStates } from "nuqs";
 import { useGetAuthTanstack, useMutateAuthTanstack } from "@/hooks/useTanstack";
 import { Box, Stack } from "@chakra-ui/react";
@@ -221,7 +222,6 @@ import { Pay } from "@/components/build/pay";
 import { Success } from "@/components/build/success";
 import { Failed } from "@/components/build/failed";
 import { BASE_API, BASE_URL } from "@/lib/api/config";
-import { useLocale } from "next-intl";
 
 export const ConfirmClient = () => {
   const language = useLocale();
@@ -268,7 +268,7 @@ export const ConfirmClient = () => {
       });
 
       document.body.appendChild(form);
-      // form.submit();
+      form.submit();
     },
     onError: (err) => {
       error(err?.response?.data?.message);
