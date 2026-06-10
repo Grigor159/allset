@@ -237,11 +237,11 @@ export const ConfirmClient = () => {
 
   const { data } = useGetAuthTanstack(`invitations/${id}`, !!id);
 
-  const origin =
-    typeof window !== "undefined" ? window.location.origin + "/" : BASE_URL;
+  // const origin =
+  //   typeof window !== "undefined" ? window.location.origin + "/" : BASE_URL;
 
-  const successUrl = `${origin}${language}/build/confirm?template=${template}&palette=${palette}&id=${id}&legal=true&payment=${payment}&status=success`;
-  const failUrl = `${origin}${language}/build/confirm?template=${template}&palette=${palette}&id=${id}&legal=true&payment=${payment}&status=failed`;
+  // const successUrl = `${origin}${language}/build/confirm?template=${template}&palette=${palette}&id=${id}&legal=true&payment=${payment}&status=success`;
+  // const failUrl = `${origin}${language}/build/confirm?template=${template}&palette=${palette}&id=${id}&legal=true&payment=${payment}&status=failed`;
 
   const { mutate } = useMutateAuthTanstack("payments/idram/initiate", "post", {
     onSuccess: (result) => {
@@ -264,8 +264,8 @@ export const ConfirmClient = () => {
         EDP_DESCRIPTION: edpDescription,
         EDP_AMOUNT: edpAmount,
         EDP_BILL_NO: edpBillNo,
-        EDP_SUCCESS_URL: successUrl,
-        EDP_FAIL_URL: failUrl,
+        // EDP_SUCCESS_URL: successUrl,
+        // EDP_FAIL_URL: failUrl,
       };
 
       Object.entries(fields).forEach(([name, value]) => {
@@ -289,8 +289,8 @@ export const ConfirmClient = () => {
     if (payment === "idram") {
       mutate({
         invitationId: id,
-        successUrl: successUrl,
-        failUrl: failUrl,
+        // successUrl: successUrl,
+        // failUrl: failUrl,
       });
       return;
     }

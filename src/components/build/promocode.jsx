@@ -11,7 +11,6 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { isNotEmptyState } from "@/utils/checkers";
 import { Label } from "@/components/build/typography/label";
 import { formatPrice } from "@/utils/formatters";
 
@@ -59,7 +58,7 @@ export const Promocode = ({ data }) => {
             />
           </InputGroup>
         </Flex>
-        {isNotEmptyState(data) && (
+        {data && (
           <DataList.Root w="100%" orientation="horizontal" gap="8px">
             <DataList.Item>
               <DataList.ItemLabel
