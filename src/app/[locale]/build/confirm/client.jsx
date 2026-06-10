@@ -291,7 +291,7 @@ export const ConfirmClient = () => {
       return;
     }
   };
-
+  // TODO: here we need remove cookie & setQuery status to null
   return (
     <Box pt={{ base: "32px", md: "48px" }} pb={{ base: "22px", md: "40px" }}>
       <Stack
