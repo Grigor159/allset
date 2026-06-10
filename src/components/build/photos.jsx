@@ -12,6 +12,8 @@ export const Photos = ({ name, value, onChange, count, required }) => {
   const t = useTranslations();
 
   const handleFileSelect = (files) => {
+    console.log("Uploaded main photos:", files);
+
     onChange({
       target: {
         name,

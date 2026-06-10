@@ -35,6 +35,7 @@ export const Story = ({
   };
 
   const handleFileSelect = (files) => {
+      console.log("Uploaded story photos:", files);
     photoUrlsChange({
       target: {
         name,
