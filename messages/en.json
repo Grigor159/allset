@@ -111,6 +111,7 @@
     "payment_method": "Payment method",
     "payment_method_text": "Choose Payment method.",
     "apply": "Apply",
+    "agree": "Please agree terms and policy",
     "original_price": "Original Price",
     "discount": "Discount",
     "final_price": "Final Price",
@@ -436,5 +437,7 @@
     "rustic_journey": "Our journey to forever has already begun…",
     "rustic_couple": "Our couple",
     "rustic_happy": "So, we are happy",
-    "dear_guest": "Dear Guest"
+    "dear_guest": "Dear Guest",
+    "processing": "Processing",
+    "processing_description": "Please wait..."
 }

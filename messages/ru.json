@@ -111,6 +111,7 @@
     "payment_method": "Способ оплаты",
     "payment_method_text": "Выберите удобный способ оплаты.",
     "apply": "Применить",
+    "agree": "Пожалуйста, примите условия и политику",
     "original_price": "Исходная Цена",
     "discount": "Скидка",
     "final_price": "Итого",
@@ -436,5 +437,7 @@
     "rustic_journey": "Наше путешествие длиною в жизнь уже началось",
     "rustic_couple": "Наша пара",
     "rustic_happy": "Итак, мы счастливы",
-    "dear_guest": "Уважаемый гость"
+    "dear_guest": "Уважаемый гость",
+    "processing": "Обработка",
+    "processing_description": "Пожалуйста, подождите..."
 }

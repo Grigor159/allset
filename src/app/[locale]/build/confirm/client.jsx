@@ -208,8 +208,8 @@
 
 "use client";
 
-import { useLocale } from "next-intl";
 import { parseAsString, useQueryStates } from "nuqs";
+import { useRouter } from "@/i18n/routing";
 import { useGetAuthTanstack, useMutateAuthTanstack } from "@/hooks/useTanstack";
 import { Box, Stack } from "@chakra-ui/react";
 import { error } from "@/components/ui/alerts";
@@ -221,10 +221,11 @@ import { Payment } from "@/components/build/payment";
 import { Pay } from "@/components/build/pay";
 import { Success } from "@/components/build/success";
 import { Failed } from "@/components/build/failed";
-import { BASE_URL } from "@/lib/api/config";
+import { cookie } from "@/lib/browser/cookie";
 
 export const ConfirmClient = () => {
-  const language = useLocale();
+  const router = useRouter();
+
   const [{ template, palette, status, payment, id, legal }, setQuery] =
     useQueryStates({
       template: parseAsString,
@@ -236,12 +237,6 @@ export const ConfirmClient = () => {
     });
 
   const { data } = useGetAuthTanstack(`invitations/${id}`, !!id);
-
-  // const origin =
-  //   typeof window !== "undefined" ? window.location.origin + "/" : BASE_URL;
-
-  // const successUrl = `${origin}${language}/build/confirm?template=${template}&palette=${palette}&id=${id}&legal=true&payment=${payment}&status=success`;
-  // const failUrl = `${origin}${language}/build/confirm?template=${template}&palette=${palette}&id=${id}&legal=true&payment=${payment}&status=failed`;
 
   const { mutate } = useMutateAuthTanstack("payments/idram/initiate", "post", {
     onSuccess: (result) => {
@@ -287,14 +282,14 @@ export const ConfirmClient = () => {
   const submit = (e) => {
     e.preventDefault();
     if (payment === "idram") {
-      mutate({
-        invitationId: id,
-        // successUrl: successUrl,
-        // failUrl: failUrl,
-      });
+      cookie.set(
+        "redirect",
+        `?template=${template}&palette=${palette}&id=${id}&legal=true&payment=${payment}`,
+      );
+      mutate({ invitationId: id });
+      // router.push("/build/module");
       return;
     }
-    setQuery({ status: "failed" });
   };
 
   return (

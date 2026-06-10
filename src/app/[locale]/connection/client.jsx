@@ -20,7 +20,7 @@ export const ConnectionClient = () => {
 
   return (
     <Box h="100dvh">
-      <Center alignItems="center" justify="center" h="100%">
+      <Center h="100%">
         <Spinner size="xl" color="#004143" />
       </Center>
     </Box>

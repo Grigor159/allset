@@ -24,10 +24,10 @@ export const Pay = () => {
         positioning={{ placement: "top" }}
         content={
           !payment
-            ? "Choose paymant method"
+            ? t("payment_method_text")
             : !legal
-              ? "Please agree terms and policy"
-              : "Pay"
+              ? t("agree")
+              : t("pay")
         }
       >
         <Button

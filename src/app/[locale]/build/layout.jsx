@@ -19,13 +19,12 @@ export default function Layout({ children }) {
       bgRepeat="no-repeat"
     >
       <TopPart />
-      <Container
-        maxW="1440px"
-        px={{ base: "24px", md: "40px" }}
-      >
+      <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
         {children}
       </Container>
-      {!pathname?.includes("confirm") && <BottomPart />}
+      {!pathname?.includes("confirm") && !pathname?.includes("module") && (
+        <BottomPart />
+      )}
     </Box>
   );
 }
