@@ -25,15 +25,19 @@ export const ModuleClient = () => {
       try {
         const token = await getAccessTokenSilently();
 
-      //  const res= await apiClient.get("payments/last-summary", {
-      //     headers: {
-      //       Authorization: `Bearer ${token}`,
-      //     },
-      //   });
-      //   console.log(res);
-        
+        await apiClient.get("payments/last-summary", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setQuery({ status: "success" });
         router.push(`/build/confirm${redirect}?status=success`);
+        //  const res= await apiClient.get("payments/last-summary", {
+        //     headers: {
+        //       Authorization: `Bearer ${token}`,
+        //     },
+        //   });
+        //   console.log(res);
       } catch (err) {
         setQuery({ status: "failed" });
         router.push(`/build/confirm${redirect}?status=failed`);
