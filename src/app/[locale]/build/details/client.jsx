@@ -224,77 +224,158 @@ export const DetailsClient = () => {
     }));
   };
 
+  // V1 - with mac OS bug
+  // const processMainImages = async (current) => {
+  //   let processedForm = { ...current };
+
+  //   if (!Array.isArray(current.mainImages)) {
+  //     return processedForm;
+  //   }
+
+  //   const isFileArray =
+  //     current.mainImages.length > 0 && current.mainImages[0] instanceof File;
+
+  //   if (!isFileArray || !current.id) {
+  //     return processedForm;
+  //   }
+
+  //   const urls = await InvitationStorageService.uploadMany(
+  //     current.mainImages,
+  //     current.id,
+  //   );
+
+  //   processedForm.mainImages = urls;
+
+  //   setForm((prev) => ({
+  //     ...prev,
+  //     mainImages: urls,
+  //   }));
+
+  //   return processedForm;
+  // };
+
+  // V2
   const processMainImages = async (current) => {
-    let processedForm = { ...current };
+    if (!Array.isArray(current.mainImages)) return current;
 
-    if (!Array.isArray(current.mainImages)) {
-      return processedForm;
-    }
-
-    const isFileArray =
-      current.mainImages.length > 0 && current.mainImages[0] instanceof File;
-
-    if (!isFileArray || !current.id) {
-      return processedForm;
-    }
+    const hasFiles = current.mainImages.some((f) => f instanceof File);
+    if (!hasFiles || !current.id) return current;
 
     const urls = await InvitationStorageService.uploadMany(
-      current.mainImages,
+      current.mainImages.filter((f) => f instanceof File),
       current.id,
     );
 
-    processedForm.mainImages = urls;
-
-    setForm((prev) => ({
-      ...prev,
-      mainImages: urls,
-    }));
-
-    return processedForm;
+    return {
+      ...current,
+      mainImages: [
+        ...current.mainImages.filter((x) => typeof x === "string"),
+        ...urls,
+      ],
+    };
   };
 
+  // V1 - with mac OS bug
+  // const processStoryImages = async (current) => {
+  //   let processedForm = { ...current };
+
+  //   const photoUrls = current.ourStory?.photoUrls;
+
+  //   if (!Array.isArray(photoUrls) || !current.id) {
+  //     return processedForm;
+  //   }
+
+  //   const existingUrls = photoUrls.filter((img) => typeof img === "string");
+  //   const newFiles = photoUrls.filter((img) => img instanceof File);
+
+  //   if (newFiles.length === 0) {
+  //     return processedForm;
+  //   }
+
+  //   const uploadedUrls = await InvitationStorageService.uploadMany(
+  //     newFiles,
+  //     current.id,
+  //   );
+
+  //   const mergedUrls = [...existingUrls, ...uploadedUrls];
+
+  //   processedForm = {
+  //     ...processedForm,
+  //     ourStory: {
+  //       ...processedForm.ourStory,
+  //       photoUrls: mergedUrls,
+  //     },
+  //   };
+
+  //   setForm((prev) => ({
+  //     ...prev,
+  //     ourStory: {
+  //       ...prev.ourStory,
+  //       photoUrls: mergedUrls,
+  //     },
+  //   }));
+
+  //   return processedForm;
+  // };
+
+  // V2
   const processStoryImages = async (current) => {
-    let processedForm = { ...current };
-
     const photoUrls = current.ourStory?.photoUrls;
+    if (!Array.isArray(photoUrls) || !current.id) return current;
 
-    if (!Array.isArray(photoUrls) || !current.id) {
-      return processedForm;
-    }
+    const existing = photoUrls.filter((x) => typeof x === "string");
+    const files = photoUrls.filter((x) => x instanceof File);
 
-    const existingUrls = photoUrls.filter((img) => typeof img === "string");
-    const newFiles = photoUrls.filter((img) => img instanceof File);
+    if (!files.length) return current;
 
-    if (newFiles.length === 0) {
-      return processedForm;
-    }
-
-    const uploadedUrls = await InvitationStorageService.uploadMany(
-      newFiles,
+    const uploaded = await InvitationStorageService.uploadMany(
+      files,
       current.id,
     );
 
-    const mergedUrls = [...existingUrls, ...uploadedUrls];
-
-    processedForm = {
-      ...processedForm,
+    return {
+      ...current,
       ourStory: {
-        ...processedForm.ourStory,
-        photoUrls: mergedUrls,
+        ...current.ourStory,
+        photoUrls: [...existing, ...uploaded],
       },
     };
-
-    setForm((prev) => ({
-      ...prev,
-      ourStory: {
-        ...prev.ourStory,
-        photoUrls: mergedUrls,
-      },
-    }));
-
-    return processedForm;
   };
 
+  // V1 - with mac OS bug
+  // const handleSmartBlur = async () => {
+  //   if (invitationData?.status === "ACTIVE") return;
+
+  //   const current = formRef.current;
+
+  //   const isTitleFilled = current.languages?.some((lang) =>
+  //     current.title?.[lang]?.trim(),
+  //   );
+
+  //   if (!isTitleFilled) return;
+
+  //   let processedForm = await processMainImages(current);
+  //   processedForm = await processStoryImages(processedForm);
+
+  //   const sanitized = {
+  //     ...processedForm,
+  //     timeline: processedForm.timeline?.map((item) => ({
+  //       venueKey: item.venueKey,
+  //       venueName: item.venueName,
+  //       time: item.time,
+  //       venueLocation: item.venueLocation,
+  //     })),
+  //   };
+
+  //   const currentDataString = JSON.stringify(sanitized);
+
+  //   if (lastSavedFormRef.current !== currentDataString) {
+  //     mutate(buildPayload(sanitized));
+  //     lastSavedFormRef.current = currentDataString;
+  //   }
+  // };
+
+  // V2
   const handleSmartBlur = async () => {
     if (invitationData?.status === "ACTIVE") return;
 
@@ -306,12 +387,12 @@ export const DetailsClient = () => {
 
     if (!isTitleFilled) return;
 
-    let processedForm = await processMainImages(current);
-    processedForm = await processStoryImages(processedForm);
+    let processed = await processMainImages(current);
+    processed = await processStoryImages(processed);
 
     const sanitized = {
-      ...processedForm,
-      timeline: processedForm.timeline?.map((item) => ({
+      ...processed,
+      timeline: processed.timeline?.map((item) => ({
         venueKey: item.venueKey,
         venueName: item.venueName,
         time: item.time,
@@ -319,10 +400,12 @@ export const DetailsClient = () => {
       })),
     };
 
-    const currentDataString = JSON.stringify(sanitized);
+    const clean = JSON.parse(JSON.stringify(sanitized));
+
+    const currentDataString = JSON.stringify(clean);
 
     if (lastSavedFormRef.current !== currentDataString) {
-      mutate(buildPayload(sanitized));
+      mutate(buildPayload(clean));
       lastSavedFormRef.current = currentDataString;
     }
   };
