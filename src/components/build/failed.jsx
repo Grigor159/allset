@@ -92,7 +92,7 @@ export const Failed = ({ open, setQuery, price }) => {
                     {t("failed_insufficient")}
                   </Text>
                   <Text color={"#004143"} fontWeight={500}>
-                    {price ?? `20.000 ${t("currency")}`}
+                    {`${price ?? "20.000"} ${t("currency")}`}
                   </Text>
                 </Stack>
               </Flex>

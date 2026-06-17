@@ -326,18 +326,24 @@ export const ConfirmClient = () => {
           <Pay onSubmit={submit} />
         </Animate>
       </Stack>
-      <Success
-        open={status === "success"}
-        setQuery={setQuery}
-        language={data?.languages[0]}
-        urlExtension={data?.urlExtension}
-        price={data?.finalPrice}
-      />
-      <Failed
-        open={status === "failed"}
-        setQuery={setQuery}
-        price={data?.finalPrice}
-      />
+      {data && (
+        <Success
+          open={status === "success"}
+          setQuery={setQuery}
+          data={data}
+          // language={data?.languages[0]}
+          // id={data?.id}
+          // urlExtension={data?.urlExtension}
+          // price={data?.pricing?.finalPrice}
+        />
+      )}
+      {data && (
+        <Failed
+          open={status === "failed"}
+          setQuery={setQuery}
+          price={data?.pricing?.finalPrice}
+        />
+      )}
     </Box>
   );
 };

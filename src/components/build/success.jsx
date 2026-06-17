@@ -21,13 +21,13 @@ import { share } from "@/assets/svgs";
 import { error, info, success } from "../ui/alerts";
 import { BASE_URL } from "@/lib/api/config";
 
-export const Success = ({ open, setQuery, language, urlExtension, price }) => {
+export const Success = ({ open, setQuery, data }) => {
   const t = useTranslations();
   const router = useRouter();
 
   const [isCopied, setIsCopied] = useState(false);
 
-  const fullUrl = `${BASE_URL}${language}/invitation/${urlExtension}`;
+  const fullUrl = `${BASE_URL}${data.languages[0]}/invitation/${data.urlExtension}`;
 
   const handleClose = async () => {
     await setQuery({ status: null });
@@ -90,7 +90,7 @@ export const Success = ({ open, setQuery, language, urlExtension, price }) => {
                 lineHeight={"24px"}
               >
                 {t("success_desc_1")}
-                {price ?? `20.000 ${t("currency")}`}
+                {`${data?.pricing?.finalPrice ?? "20.000"} ${t("currency")}`}{" "}
                 {t("success_desc_1_2")}
                 <br />
                 {t("success_desc_2")}
@@ -110,10 +110,10 @@ export const Success = ({ open, setQuery, language, urlExtension, price }) => {
 
                 <Stack align={"flex-end"}>
                   <Text color={"#004143"} fontWeight={500}>
-                    #INV-2025-4821
+                    {data.id}
                   </Text>
                   <Text color={"#004143"} fontWeight={500}>
-                    {price ?? `20.000 ${t("currency")}`}
+                    {`${data?.pricing?.finalPrice ?? "20.000"} ${t("currency")}`}{" "}
                   </Text>
                 </Stack>
               </Flex>
