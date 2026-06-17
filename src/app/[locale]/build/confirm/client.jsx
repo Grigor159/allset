@@ -292,6 +292,11 @@ export const ConfirmClient = () => {
     }
   };
   // TODO: here we need remove cookie & setQuery status to null
+
+  if (!data) {
+    return null;
+  }
+
   return (
     <Box pt={{ base: "32px", md: "48px" }} pb={{ base: "22px", md: "40px" }}>
       <Stack
@@ -326,24 +331,16 @@ export const ConfirmClient = () => {
           <Pay onSubmit={submit} />
         </Animate>
       </Stack>
-      {data && (
-        <Success
-          open={status === "success"}
-          setQuery={setQuery}
-          data={data}
-          // language={data?.languages[0]}
-          // id={data?.id}
-          // urlExtension={data?.urlExtension}
-          // price={data?.pricing?.finalPrice}
-        />
-      )}
-      {data && (
-        <Failed
-          open={status === "failed"}
-          setQuery={setQuery}
-          price={data?.pricing?.finalPrice}
-        />
-      )}
+      <Success
+        open={status === "success"}
+        data={data}
+        setQuery={setQuery}
+      />
+      <Failed
+        open={status === "failed"}
+        setQuery={setQuery}
+        price={data?.pricing?.finalPrice}
+      />
     </Box>
   );
 };

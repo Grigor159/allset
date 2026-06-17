@@ -21,7 +21,7 @@ import { share } from "@/assets/svgs";
 import { error, info, success } from "../ui/alerts";
 import { BASE_URL } from "@/lib/api/config";
 
-export const Success = ({ open, setQuery, data }) => {
+export const Success = ({ open, data, setQuery }) => {
   const t = useTranslations();
   const router = useRouter();
 
