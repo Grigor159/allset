@@ -209,7 +209,6 @@
 "use client";
 
 import { parseAsString, useQueryStates } from "nuqs";
-import { useRouter } from "@/i18n/routing";
 import { useGetAuthTanstack, useMutateAuthTanstack } from "@/hooks/useTanstack";
 import { Box, Stack } from "@chakra-ui/react";
 import { error } from "@/components/ui/alerts";
@@ -224,19 +223,17 @@ import { Failed } from "@/components/build/failed";
 import { cookie } from "@/lib/browser/cookie";
 
 export const ConfirmClient = () => {
-  const router = useRouter();
-
   const [{ template, palette, status, payment, id, legal }, setQuery] =
     useQueryStates({
-      template: parseAsString,
-      palette: parseAsString,
-      status: parseAsString,
-      payment: parseAsString,
-      id: parseAsString,
-      legal: parseAsString,
+      template: parseAsString.withDefault(null),
+      palette: parseAsString.withDefault(null),
+      id: parseAsString.withDefault(null),
+      payment: parseAsString.withDefault(null),
+      legal: parseAsString.withDefault(null),
+      status: parseAsString.withDefault(null),
     });
 
-  const { data } = useGetAuthTanstack(`invitations/${id}`, !!id);
+  const { isLoading, data } = useGetAuthTanstack(`invitations/${id}`, !!id);
 
   const { mutate } = useMutateAuthTanstack("payments/idram/initiate", "post", {
     onSuccess: (result) => {
@@ -294,6 +291,10 @@ export const ConfirmClient = () => {
 
   // TODO: here we need remove cookie & setQuery status to null
 
+  if (!id || isLoading) {
+    return <Box pt="40px">Loading...</Box>;
+  }
+
   return (
     <Box pt={{ base: "32px", md: "48px" }} pb={{ base: "22px", md: "40px" }}>
       <Stack
@@ -328,11 +329,7 @@ export const ConfirmClient = () => {
           <Pay onSubmit={submit} />
         </Animate>
       </Stack>
-      <Success
-        open={status === "success"}
-        data={data}
-        setQuery={setQuery}
-      />
+      <Success open={status === "success"} data={data} setQuery={setQuery} />
       <Failed
         open={status === "failed"}
         setQuery={setQuery}
