@@ -23,10 +23,18 @@ export const StoryUpload = ({ value = [], onFileSelect, onDeleteUrl }) => {
     }
   }, [value]);
 
+  // V1 - with mac OS bug
+  // useEffect(() => {
+  //   if (newFiles.length === 0) return;
+  //   onFileSelect([...urlImages, ...newFiles]);
+  // }, [newFiles]);
+
+  // V2
   useEffect(() => {
-    if (newFiles.length === 0) return;
-    onFileSelect([...urlImages, ...newFiles]);
-  }, [newFiles]);
+    if (!newFiles.length) return;
+
+    onFileSelect([...value.filter((v) => typeof v === "string"), ...newFiles]);
+  }, [newFiles, value]);
 
   const hasContent = urlImages.length > 0 || newFiles.length > 0;
 

@@ -255,24 +255,39 @@ export const DetailsClient = () => {
   // };
 
   // V2
+  const isFile = (f) =>
+    f &&
+    typeof f === "object" &&
+    typeof f.name === "string" &&
+    typeof f.size === "number";
+
   const processMainImages = async (current) => {
-    if (!Array.isArray(current.mainImages)) return current;
+    if (!Array.isArray(current.mainImages) || !current.id) {
+      return current;
+    }
 
-    const hasFiles = current.mainImages.some((f) => f instanceof File);
-    if (!hasFiles || !current.id) return current;
+    const existing = current.mainImages.filter(
+      (item) => typeof item === "string",
+    );
+    const files = current.mainImages.filter(isFile);
 
-    const urls = await InvitationStorageService.uploadMany(
-      current.mainImages.filter((f) => f instanceof File),
+    if (!files.length) {
+      return current;
+    }
+
+    const uploaded = await InvitationStorageService.uploadMany(
+      files,
       current.id,
     );
 
-    return {
+    const updated = {
       ...current,
-      mainImages: [
-        ...current.mainImages.filter((x) => typeof x === "string"),
-        ...urls,
-      ],
+      mainImages: [...existing, ...uploaded],
     };
+
+    setForm(updated);
+
+    return updated;
   };
 
   // V1 - with mac OS bug
@@ -321,25 +336,34 @@ export const DetailsClient = () => {
   // V2
   const processStoryImages = async (current) => {
     const photoUrls = current.ourStory?.photoUrls;
-    if (!Array.isArray(photoUrls) || !current.id) return current;
 
-    const existing = photoUrls.filter((x) => typeof x === "string");
-    const files = photoUrls.filter((x) => x instanceof File);
+    if (!Array.isArray(photoUrls) || !current.id) {
+      return current;
+    }
 
-    if (!files.length) return current;
+    const existing = photoUrls.filter((item) => typeof item === "string");
+    const files = photoUrls.filter(isFile);
+
+    if (!files.length) {
+      return current;
+    }
 
     const uploaded = await InvitationStorageService.uploadMany(
       files,
       current.id,
     );
 
-    return {
+    const updated = {
       ...current,
       ourStory: {
         ...current.ourStory,
         photoUrls: [...existing, ...uploaded],
       },
     };
+
+    setForm(updated);
+
+    return updated;
   };
 
   // V1 - with mac OS bug
