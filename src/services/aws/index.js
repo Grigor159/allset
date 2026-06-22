@@ -10,35 +10,39 @@ import { s3Client, region, bucket } from "@/lib/aws";
 
 export const InvitationStorageService = {
     async upload(file, invitationId) {
-        if (!(file instanceof Blob)) {
-            console.error("Invalid upload input:", file);
-            throw new Error("Upload expects Blob/File");
-        }
+        try {
+            console.log("[1] upload entered");
 
-        // const key = `invitations/${invitationId}/${Date.now()}-${file.name}`;
-        // const arrayBuffer = await file.arrayBuffer();
-        // const body = new Uint8Array(arrayBuffer);
+            console.log("[2] instanceof Blob", file instanceof Blob);
 
-        const key = `invitations/${invitationId}/${Date.now()}-${file.name}`;
-        console.log("[AWS] key", key);
-        const arrayBuffer = await file.arrayBuffer();
-        console.log("[AWS] buffer size", arrayBuffer.byteLength);
+            console.log("[3] before key");
+            const key = `invitations/${invitationId}/${Date.now()}-${file.name}`;
 
-        await s3Client.send(
-            new PutObjectCommand({
+            console.log("[4] before arrayBuffer");
+            const arrayBuffer = await file.arrayBuffer();
+            console.log("[5] after arrayBuffer", arrayBuffer.byteLength);
+
+            console.log("[6] before PutObjectCommand");
+            const command = new PutObjectCommand({
                 Bucket: bucket,
                 Key: key,
-                // Body: body,
                 Body: new Uint8Array(arrayBuffer),
                 ContentType: file.type,
-            })
-        );
-        console.log("[AWS] upload success", key);
+            });
+            console.log("[7] after PutObjectCommand");
 
-        return {
-            key,
-            url: `https://${bucket}.s3.${region}.amazonaws.com/${key}`,
-        };
+            console.log("[8] before send");
+            await s3Client.send(command);
+            console.log("[9] after send");
+
+            return {
+                key,
+                url: `https://${bucket}.s3.${region}.amazonaws.com/${key}`,
+            };
+        } catch (e) {
+            console.error("[UPLOAD ERROR]", e);
+            throw e;
+        }
     },
 
     async uploadMany(files, invitationId) {
