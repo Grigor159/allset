@@ -1,12 +1,14 @@
 // import { cache } from "react";
 
+import { BASE_API } from "../api/config";
+
 export const pickLang = (obj, lang = "en") =>
   obj?.[lang] || obj?.en || obj?.hy || obj?.ru || "";
 
 export async function getInvitationData(slug) {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_RELEASE}invitations/url/${slug}`,
+      `${BASE_API}invitations/url/${slug}`,
       { next: { revalidate: 60 } },
     );
     if (!res.ok) return null;
