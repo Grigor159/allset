@@ -224,141 +224,126 @@ export const DetailsClient = () => {
     }));
   };
 
-  // V1 - with mac OS bug
-  // const processMainImages = async (current) => {
-  //   let processedForm = { ...current };
+  // V2 - without imgs logic inside
+  const handleSmartBlur = async () => {
+    if (invitationData?.status === "ACTIVE") return;
 
-  //   if (!Array.isArray(current.mainImages)) {
-  //     return processedForm;
-  //   }
+    const current = formRef.current;
 
-  //   const isFileArray =
-  //     current.mainImages.length > 0 && current.mainImages[0] instanceof File;
-
-  //   if (!isFileArray || !current.id) {
-  //     return processedForm;
-  //   }
-
-  //   const urls = await InvitationStorageService.uploadMany(
-  //     current.mainImages,
-  //     current.id,
-  //   );
-
-  //   processedForm.mainImages = urls;
-
-  //   setForm((prev) => ({
-  //     ...prev,
-  //     mainImages: urls,
-  //   }));
-
-  //   return processedForm;
-  // };
-
-  // V2
-  const uploadLockRef = useRef(false);
-  // const isFile = (f) =>
-  //   f &&
-  //   typeof f === "object" &&
-  //   typeof f.name === "string" &&
-  //   typeof f.size === "number";
-  const isFile = (f) => f instanceof File || f instanceof Blob;
-
-  const processMainImages = async (current) => {
-    if (uploadLockRef.current) return current;
-
-    if (!Array.isArray(current.mainImages) || !current.id) {
-      return current;
-    }
-
-    const existing = current.mainImages.filter(
-      (item) => typeof item === "string",
+    const isTitleFilled = current.languages?.some((lang) =>
+      current.title?.[lang]?.trim(),
     );
 
-    const files = current.mainImages.filter(isFile);
+    if (!isTitleFilled) return;
 
-    if (!files.length) {
-      return current;
-    }
+    const sanitized = {
+      ...current,
+      timeline: (current.timeline ?? []).map((item) => ({
+        venueKey: item.venueKey,
+        venueName: item.venueName,
+        time: item.time,
+        venueLocation: item.venueLocation,
+      })),
+      // timeline: current.timeline?.map((item) => ({
+      //   venueKey: item.venueKey,
+      //   venueName: item.venueName,
+      //   time: item.time,
+      //   venueLocation: item.venueLocation,
+      // })),
+    };
 
-    uploadLockRef.current = true;
+    const clean = JSON.parse(JSON.stringify(sanitized));
 
-    try {
-      const uploaded = await InvitationStorageService.uploadMany(
-        files,
-        current.id,
-      );
+    const currentDataString = JSON.stringify(clean);
 
-      const updated = {
-        ...current,
-        // IMPORTANT: replace ALL files immediately so blur won't re-trigger uploads
-        mainImages: [...existing, ...uploaded],
-      };
-
-      setForm(updated);
-
-      return updated;
-    } finally {
-      uploadLockRef.current = false;
+    if (lastSavedFormRef.current !== currentDataString) {
+      mutate(buildPayload(clean));
+      lastSavedFormRef.current = currentDataString;
     }
   };
 
-  // V1 - with mac OS bug
-  // const processStoryImages = async (current) => {
-  //   let processedForm = { ...current };
+  // * Photos imgs upload and delete logic
+  const uploadMainImages = async (current) => {
+    const imgUrls = current.mainImages;
 
-  //   const photoUrls = current.ourStory?.photoUrls;
+    if (!Array.isArray(imgUrls) || !current.id) return current;
 
-  //   if (!Array.isArray(photoUrls) || !current.id) {
-  //     return processedForm;
-  //   }
+    const existing = imgUrls.filter((i) => typeof i === "string");
+    const files = imgUrls.filter(isFile);
 
-  //   const existingUrls = photoUrls.filter((img) => typeof img === "string");
-  //   const newFiles = photoUrls.filter((img) => img instanceof File);
+    if (!files.length) return current;
 
-  //   if (newFiles.length === 0) {
-  //     return processedForm;
-  //   }
+    const uploaded = await InvitationStorageService.uploadMany(
+      files,
+      current.id,
+    );
 
-  //   const uploadedUrls = await InvitationStorageService.uploadMany(
-  //     newFiles,
-  //     current.id,
-  //   );
+    return {
+      ...current,
+      mainImages: [...existing, ...uploaded],
+    };
+  };
 
-  //   const mergedUrls = [...existingUrls, ...uploadedUrls];
+  const handlePhotoFiles = async (files) => {
+    if (!files?.length) return;
 
-  //   processedForm = {
-  //     ...processedForm,
-  //     ourStory: {
-  //       ...processedForm.ourStory,
-  //       photoUrls: mergedUrls,
-  //     },
-  //   };
+    const current = formRef.current;
+    const normalizedFiles = Array.from(files).filter(isFile);
 
-  //   setForm((prev) => ({
-  //     ...prev,
-  //     ourStory: {
-  //       ...prev.ourStory,
-  //       photoUrls: mergedUrls,
-  //     },
-  //   }));
+    // if (!normalizedFiles.length) {
+    //   return;
+    // }
 
-  //   return processedForm;
-  // };
+    const updated = {
+      ...current,
+      mainImages: [
+        ...(current.mainImages ?? []).filter((i) => typeof i === "string"),
+        ...normalizedFiles,
+      ],
+    };
 
-  // V2
-  const processStoryImages = async (current) => {
+    setForm(updated);
+    formRef.current = updated;
+
+    try {
+      const uploaded = await uploadMainImages(updated);
+
+      if (!uploaded) return;
+
+      formRef.current = uploaded;
+      setForm(uploaded);
+    } catch (e) {
+      throw e;
+    }
+  };
+
+  const handleDeletePhoto = (url) => {
+    const current = formRef.current;
+
+    const updated = {
+      ...current,
+      mainImages: (current.mainImages ?? []).filter((img) =>
+        typeof img === "string" ? img !== url : img.url !== url,
+      ),
+    };
+
+    formRef.current = updated;
+    setForm(updated);
+  };
+  //
+
+  // * Story imgs upload and delete logic
+  const isFile = (f) => f instanceof File || f instanceof Blob;
+
+  const uploadStoryImages = async (current) => {
     const photoUrls = current.ourStory?.photoUrls;
 
-    if (!Array.isArray(photoUrls) || !current.id) {
-      return current;
-    }
+    if (!Array.isArray(photoUrls) || !current.id) return current;
 
-    const existing = photoUrls.filter((item) => typeof item === "string");
+    const existing = photoUrls.filter((i) => typeof i === "string");
     const files = photoUrls.filter(isFile);
 
-    if (!files.length) {
-      return current;
-    }
+    if (!files.length) return current;
 
     const uploaded = await InvitationStorageService.uploadMany(
       files,
@@ -374,185 +359,59 @@ export const DetailsClient = () => {
     };
 
     setForm(updated);
-
     return updated;
   };
 
-  // V1 - with mac OS bug
-  // const handleSmartBlur = async () => {
-  //   if (invitationData?.status === "ACTIVE") return;
-
-  //   const current = formRef.current;
-
-  //   const isTitleFilled = current.languages?.some((lang) =>
-  //     current.title?.[lang]?.trim(),
-  //   );
-
-  //   if (!isTitleFilled) return;
-
-  //   let processedForm = await processMainImages(current);
-  //   processedForm = await processStoryImages(processedForm);
-
-  //   const sanitized = {
-  //     ...processedForm,
-  //     timeline: processedForm.timeline?.map((item) => ({
-  //       venueKey: item.venueKey,
-  //       venueName: item.venueName,
-  //       time: item.time,
-  //       venueLocation: item.venueLocation,
-  //     })),
-  //   };
-
-  //   const currentDataString = JSON.stringify(sanitized);
-
-  //   if (lastSavedFormRef.current !== currentDataString) {
-  //     mutate(buildPayload(sanitized));
-  //     lastSavedFormRef.current = currentDataString;
-  //   }
-  // };
-
-  // V2
-  const handleSmartBlur = async () => {
-    if (invitationData?.status === "ACTIVE") return;
+  const handleStoryFiles = async (files) => {
+    if (!files?.length) return;
 
     const current = formRef.current;
 
-    const isTitleFilled = current.languages?.some((lang) =>
-      current.title?.[lang]?.trim(),
-    );
+    const normalized = Array.from(files).filter(isFile);
 
-    if (!isTitleFilled) return;
-
-    const processed = await processStoryImages(current);
-
-    const sanitized = {
-      ...processed,
-      timeline: processed.timeline?.map((item) => ({
-        venueKey: item.venueKey,
-        venueName: item.venueName,
-        time: item.time,
-        venueLocation: item.venueLocation,
-      })),
-    };
-
-    const clean = JSON.parse(JSON.stringify(sanitized));
-
-    const currentDataString = JSON.stringify(clean);
-
-    if (lastSavedFormRef.current !== currentDataString) {
-      mutate(buildPayload(clean));
-      lastSavedFormRef.current = currentDataString;
-    }
-  };
-
-  //
-  const uploadMainImages = async (current) => {
-    console.log("[uploadMainImages] start");
-
-    if (!Array.isArray(current.mainImages)) {
-      console.log("[uploadMainImages] mainImages not array");
-      return current;
-    }
-
-    if (!current.id) {
-      console.log("[uploadMainImages] missing invitation id");
-      return current;
-    }
-
-    const existing = current.mainImages.filter((i) => typeof i === "string"); // ! bug
-    console.warn("UPDATED-2", existing);
-
-    const files = current.mainImages.filter(isFile);
-
-    console.log("[uploadMainImages] existing", existing.length);
-    console.log("[uploadMainImages] files", files);
-
-    if (!files.length) {
-      console.log("[uploadMainImages] nothing to upload");
-      return current;
-    }
-
-    const uploaded = await InvitationStorageService.uploadMany(
-      files,
-      current.id,
-    );
-
-    console.log("[uploadMainImages] uploaded urls", uploaded);
-
-    // const updated = {
-    //   ...current,
-    //   mainImages: [...existing, ...uploaded],
-    // }; // V1
-
-    // return updated; // V1
-    return {
-      ...current,
-      mainImages: [...existing, ...uploaded],
-    }; // V2
-  };
-
-  const handlePhotoFiles = async (files) => {
-    console.log("[Photos] handlePhotoFiles", files);
-
-    if (!files?.length) {
-      console.log("[Photos] no files");
-      return;
-    }
-
-    const current = formRef.current;
-
-    console.log("[Photos] invitation id", current?.id);
-    console.log("[Photos] current form", current);
-
-    const normalizedFiles = Array.from(files).filter(isFile);
-
-    console.log("[Photos] normalized", normalizedFiles);
-
-    if (!normalizedFiles.length) {
-      console.log("[Photos] no valid File objects");
-      return;
-    }
     const updated = {
       ...current,
-      // mainImages: normalizedFiles, // V1
-      mainImages: [
-        ...(current.mainImages ?? []).filter((i) => typeof i === "string"),
-        ...normalizedFiles, // V2  // ! bug
-      ],
+      ourStory: {
+        ...current.ourStory,
+        photoUrls: [
+          ...(current.ourStory?.photoUrls ?? []).filter(
+            (i) => typeof i === "string",
+          ),
+          ...normalized,
+        ],
+      },
     };
-    console.warn("UPDATED-1", updated);
 
     setForm(updated);
     formRef.current = updated;
 
     try {
-      const uploaded = await uploadMainImages(updated);
-
-      console.log("[Photos] uploaded result", uploaded);
-
-      if (!uploaded) return;
+      const uploaded = await uploadStoryImages(updated);
 
       formRef.current = uploaded;
       setForm(uploaded);
     } catch (e) {
-      console.error("[Photos] uploadMainImages failed", e);
+      console.error(e);
     }
   };
 
-  const handleDeletePhoto = (url) => {
+  const handleDeleteStory = (url) => {
     const current = formRef.current;
 
     const updated = {
       ...current,
-      // mainImages: (current.mainImages ?? []).filter((img) => img !== url), // V1
-      mainImages: (current.mainImages ?? []).filter((img) =>
-        typeof img === "string" ? img !== url : img.url !== url,
-      ), // V2
+      ourStory: {
+        ...current.ourStory,
+        photoUrls: (current.ourStory?.photoUrls ?? []).filter((img) =>
+          typeof img === "string" ? img !== url : img.url !== url,
+        ),
+      },
     };
 
-    formRef.current = updated;
     setForm(updated);
+    formRef.current = updated;
   };
+  //
 
   const submit = async (e) => {
     e.preventDefault();
@@ -698,7 +557,10 @@ export const DetailsClient = () => {
               name="ourStory"
               value={form.ourStory}
               onChange={handleLngChange}
-              photoUrlsChange={handleChange}
+              // photoUrlsChange={handleChange}
+              // onDelete={handleDeletePhoto}
+              onFileSelect={handleStoryFiles}
+              onDelete={handleDeleteStory}
               hide={handleHide}
               required={false}
               languages={form.languages}

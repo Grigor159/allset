@@ -15,7 +15,8 @@ export const Story = ({
   name,
   value,
   onChange,
-  photoUrlsChange,
+  onFileSelect,
+  onDelete,
   hide,
   required,
   languages,
@@ -35,16 +36,7 @@ export const Story = ({
   };
 
   const handleFileSelect = (files) => {
-      console.log("Uploaded story photos:", files);
-    photoUrlsChange({
-      target: {
-        name,
-        value: {
-          ...value,
-          photoUrls: files,
-        },
-      },
-    });
+    onFileSelect?.(files);
   };
 
   const handleDeleteUrl = async (url) => {
@@ -57,16 +49,7 @@ export const Story = ({
         console.error("AWS delete failed:", err);
       }
     }
-
-    photoUrlsChange({
-      target: {
-        name,
-        value: {
-          ...value,
-          photoUrls: (value?.photoUrls ?? []).filter((img) => img !== url),
-        },
-      },
-    });
+    onDelete?.(url);
   };
 
   return (

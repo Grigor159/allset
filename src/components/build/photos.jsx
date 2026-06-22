@@ -116,17 +116,9 @@ export const Photos = ({
   required,
 }) => {
   const t = useTranslations();
+
   const handleFileSelect = (files) => {
     const normalized = Array.isArray(files) ? files : [];
-
-    // onChange({
-    //   target: {
-    //     name,
-    //     value: normalized,
-    //   },
-    // });
-
-    // 🔥 trigger AWS upload in parent
     onFileSelect?.(normalized);
   };
 
@@ -140,13 +132,6 @@ export const Photos = ({
         console.error("AWS delete failed:", err);
       }
     }
-
-    // onChange({
-    //   target: {
-    //     name,
-    //     value: (value ?? []).filter((img) => img !== url),
-    //   },
-    // });
     onDelete?.(url);
   };
 

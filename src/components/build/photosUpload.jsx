@@ -150,7 +150,6 @@ export const PhotosUpload = ({ value = [], onFileSelect, onDeleteUrl }) => {
     [value],
   );
 
-  // reset internal file state ONLY when parent no longer has Files
   useEffect(() => {
     const hasUnuploadedFiles = value.some((img) => img instanceof File);
 
@@ -159,7 +158,6 @@ export const PhotosUpload = ({ value = [], onFileSelect, onDeleteUrl }) => {
     }
   }, [value, newFiles.length, fileUpload]);
 
-  // IMPORTANT: prevent repeated merge loop
   useEffect(() => {
     if (!newFiles.length) return;
 
@@ -168,7 +166,6 @@ export const PhotosUpload = ({ value = [], onFileSelect, onDeleteUrl }) => {
     const merged = [...onlyStrings, ...newFiles];
 
     onFileSelect(merged);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newFiles]);
 
   const hasContent = urlImages.length > 0 || newFiles.length > 0;
@@ -200,6 +197,7 @@ export const PhotosUpload = ({ value = [], onFileSelect, onDeleteUrl }) => {
             display="flex"
             alignItems="center"
             justifyContent="center"
+            cursor={"pointer"}
             onClick={() => onDeleteUrl(url)}
           >
             {remove.icon}

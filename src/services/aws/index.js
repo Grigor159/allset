@@ -11,36 +11,19 @@ import { s3Client, region, bucket } from "@/lib/aws";
 export const InvitationStorageService = {
     async upload(file, invitationId) {
         try {
-            console.log("[1] upload entered");
-
-            console.log("[2] instanceof Blob", file instanceof Blob);
-
-            console.log("[3] before key");
             const key = `invitations/${invitationId}/${Date.now()}-${file.name}`;
-
-            console.log("[4] before arrayBuffer");
             const arrayBuffer = await file.arrayBuffer();
-            console.log("[5] after arrayBuffer", arrayBuffer.byteLength);
 
-            console.log("[6] before PutObjectCommand");
             const command = new PutObjectCommand({
                 Bucket: bucket,
                 Key: key,
                 Body: new Uint8Array(arrayBuffer),
                 ContentType: file.type,
             });
-            console.log("[7] after PutObjectCommand");
 
             try {
-                console.log("[8] before send");
-
                 const result = await s3Client.send(command);
-
-                console.log("[9] after send", result);
             } catch (err) {
-                console.error("[AWS SEND ERROR]");
-                console.error(err);
-                console.error(JSON.stringify(err, null, 2));
                 throw err;
             }
             return {
@@ -59,23 +42,11 @@ export const InvitationStorageService = {
             count: files?.length,
         });
 
-        // if (!files?.length || !invitationId) return [];
-        if (!files?.length) {
-            console.log("[AWS] no files");
-            return [];
-        }
-
-        if (!invitationId) {
-            console.log("[AWS] missing invitation id");
-            return [];
-        }
+        if (!files?.length || !invitationId) return [];
 
         const uploaded = await Promise.all(
             files.map((file) => this.upload(file, invitationId)),
         );
-
-        console.log("[AWS] uploadMany finished", uploaded);
-
 
         return uploaded.map((img) => img.url);
     },
