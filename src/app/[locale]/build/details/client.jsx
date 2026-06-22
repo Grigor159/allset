@@ -255,6 +255,7 @@ export const DetailsClient = () => {
   // };
 
   // V2
+  const uploadLockRef = useRef(false);
   const isFile = (f) =>
     f &&
     typeof f === "object" &&
@@ -262,6 +263,8 @@ export const DetailsClient = () => {
     typeof f.size === "number";
 
   const processMainImages = async (current) => {
+    if (uploadLockRef.current) return current;
+
     if (!Array.isArray(current.mainImages) || !current.id) {
       return current;
     }
@@ -269,25 +272,33 @@ export const DetailsClient = () => {
     const existing = current.mainImages.filter(
       (item) => typeof item === "string",
     );
+
     const files = current.mainImages.filter(isFile);
 
     if (!files.length) {
       return current;
     }
 
-    const uploaded = await InvitationStorageService.uploadMany(
-      files,
-      current.id,
-    );
+    uploadLockRef.current = true;
 
-    const updated = {
-      ...current,
-      mainImages: [...existing, ...uploaded],
-    };
+    try {
+      const uploaded = await InvitationStorageService.uploadMany(
+        files,
+        current.id,
+      );
 
-    setForm(updated);
+      const updated = {
+        ...current,
+        // IMPORTANT: replace ALL files immediately so blur won't re-trigger uploads
+        mainImages: [...existing, ...uploaded],
+      };
 
-    return updated;
+      setForm(updated);
+
+      return updated;
+    } finally {
+      uploadLockRef.current = false;
+    }
   };
 
   // V1 - with mac OS bug
@@ -411,8 +422,7 @@ export const DetailsClient = () => {
 
     if (!isTitleFilled) return;
 
-    let processed = await processMainImages(current);
-    processed = await processStoryImages(processed);
+    const processed = await processStoryImages(current);
 
     const sanitized = {
       ...processed,
@@ -432,6 +442,50 @@ export const DetailsClient = () => {
       mutate(buildPayload(clean));
       lastSavedFormRef.current = currentDataString;
     }
+  };
+
+  //
+  const uploadMainImages = async (current) => {
+    if (!Array.isArray(current.mainImages) || !current.id) return current;
+
+    const existing = current.mainImages.filter((i) => typeof i === "string");
+    const files = current.mainImages.filter(isFile);
+
+    if (!files.length) return current;
+
+    const uploaded = await InvitationStorageService.uploadMany(
+      files,
+      current.id,
+    );
+
+    const updated = {
+      ...current,
+      mainImages: [...existing, ...uploaded],
+    };
+
+    setForm(updated);
+
+    return updated;
+  };
+
+  const handlePhotoFiles = async (files) => {
+    if (!files?.length) return;
+
+    const current = formRef.current;
+
+    const updated = {
+      ...current,
+      mainImages: files,
+    };
+
+    setForm(updated);
+    formRef.current = updated;
+
+    // 🔥 upload immediately when files change
+    const uploaded = await uploadMainImages(updated);
+
+    formRef.current = uploaded;
+    setForm(uploaded);
   };
 
   const submit = async (e) => {
@@ -508,6 +562,7 @@ export const DetailsClient = () => {
               // }
               value={form.mainImages}
               onChange={handleChange}
+              onFileSelect={handlePhotoFiles}
               count={
                 data?.mainImageMaxCount ??
                 invitationData?.template?.mainImageMaxCount

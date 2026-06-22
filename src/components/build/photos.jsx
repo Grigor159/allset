@@ -108,16 +108,28 @@ import { PhotosUpload } from "@/components/build/photosUpload";
 import { extractKeyFromUrl } from "@/utils/formatters";
 import { InvitationStorageService } from "@/services/aws";
 
-export const Photos = ({ name, value = [], onChange, count, required }) => {
+export const Photos = ({
+  name,
+  value = [],
+  onChange,
+  onFileSelect,
+  count,
+  required,
+}) => {
   const t = useTranslations();
 
   const handleFileSelect = (files) => {
+    const normalized = Array.isArray(files) ? files : [];
+
     onChange({
       target: {
         name,
-        value: Array.isArray(files) ? files : [],
+        value: normalized,
       },
     });
+
+    // 🔥 trigger AWS upload in parent
+    onFileSelect?.(normalized);
   };
 
   const handleDeleteUrl = async (url) => {
