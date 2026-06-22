@@ -256,11 +256,12 @@ export const DetailsClient = () => {
 
   // V2
   const uploadLockRef = useRef(false);
-  const isFile = (f) =>
-    f &&
-    typeof f === "object" &&
-    typeof f.name === "string" &&
-    typeof f.size === "number";
+  // const isFile = (f) =>
+  //   f &&
+  //   typeof f === "object" &&
+  //   typeof f.name === "string" &&
+  //   typeof f.size === "number";
+  const isFile = (f) => f instanceof File || f instanceof Blob;
 
   const processMainImages = async (current) => {
     if (uploadLockRef.current) return current;
@@ -473,19 +474,36 @@ export const DetailsClient = () => {
 
     const current = formRef.current;
 
+    const normalizedFiles = Array.from(files).filter(isFile);
+
+    if (!normalizedFiles.length) return;
+
     const updated = {
       ...current,
-      mainImages: files,
+      mainImages: normalizedFiles,
     };
 
     setForm(updated);
     formRef.current = updated;
 
-    // 🔥 upload immediately when files change
     const uploaded = await uploadMainImages(updated);
+
+    if (!uploaded) return;
 
     formRef.current = uploaded;
     setForm(uploaded);
+  };
+
+  const handleDeletePhoto = (url) => {
+    const current = formRef.current;
+
+    const updated = {
+      ...current,
+      mainImages: (current.mainImages ?? []).filter((img) => img !== url),
+    };
+
+    formRef.current = updated;
+    setForm(updated);
   };
 
   const submit = async (e) => {
@@ -553,7 +571,7 @@ export const DetailsClient = () => {
 
           <Animate>
             <Photos
-              name="mainImages"
+              // name="mainImages"
               // onChange={(name, files) =>
               //   setForm((prev) => ({
               //     ...prev,
@@ -561,8 +579,9 @@ export const DetailsClient = () => {
               //   }))
               // }
               value={form.mainImages}
-              onChange={handleChange}
+              // onChange={handleChange}
               onFileSelect={handlePhotoFiles}
+              onDelete={handleDeletePhoto}
               count={
                 data?.mainImageMaxCount ??
                 invitationData?.template?.mainImageMaxCount

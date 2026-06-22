@@ -107,26 +107,26 @@ import { Label } from "@/components/build/typography/label";
 import { PhotosUpload } from "@/components/build/photosUpload";
 import { extractKeyFromUrl } from "@/utils/formatters";
 import { InvitationStorageService } from "@/services/aws";
+import { useRef } from "react";
 
 export const Photos = ({
-  name,
   value = [],
-  onChange,
   onFileSelect,
+  onDelete,
   count,
   required,
 }) => {
   const t = useTranslations();
-
+  const deletedRef = useRef(new Set());
   const handleFileSelect = (files) => {
     const normalized = Array.isArray(files) ? files : [];
 
-    onChange({
-      target: {
-        name,
-        value: normalized,
-      },
-    });
+    // onChange({
+    //   target: {
+    //     name,
+    //     value: normalized,
+    //   },
+    // });
 
     // 🔥 trigger AWS upload in parent
     onFileSelect?.(normalized);
@@ -143,12 +143,13 @@ export const Photos = ({
       }
     }
 
-    onChange({
-      target: {
-        name,
-        value: (value ?? []).filter((img) => img !== url),
-      },
-    });
+    // onChange({
+    //   target: {
+    //     name,
+    //     value: (value ?? []).filter((img) => img !== url),
+    //   },
+    // });
+    onDelete?.(url);
   };
 
   return (
