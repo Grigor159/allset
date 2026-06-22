@@ -10,44 +10,30 @@ import { s3Client, region, bucket } from "@/lib/aws";
 
 export const InvitationStorageService = {
     async upload(file, invitationId) {
-        // if (!file) throw new Error("File is required");
-        // if (!invitationId) throw new Error("Invitation ID is required");
-
         if (!(file instanceof Blob)) {
             console.error("Invalid upload input:", file);
             throw new Error("Upload expects Blob/File");
         }
 
+        // const key = `invitations/${invitationId}/${Date.now()}-${file.name}`;
+        // const arrayBuffer = await file.arrayBuffer();
+        // const body = new Uint8Array(arrayBuffer);
+
         const key = `invitations/${invitationId}/${Date.now()}-${file.name}`;
+        console.log("[AWS] key", key);
         const arrayBuffer = await file.arrayBuffer();
-        const body = new Uint8Array(arrayBuffer);
-
-        // const upload = new Upload({
-        //     client: s3Client,
-        //     params: {
-        //         Bucket: bucket,
-        //         Key: key,
-        //         Body: file,
-        //         ContentType: file.type,
-        //     },
-        // });
-
-        // await upload.done();
-
-        // return {
-        //     key,
-        //     url: `https://${bucket}.s3.${region}.amazonaws.com/${key}`,
-        // };
+        console.log("[AWS] buffer size", arrayBuffer.byteLength);
 
         await s3Client.send(
             new PutObjectCommand({
                 Bucket: bucket,
                 Key: key,
-                // Body: file,
-                Body: body,
+                // Body: body,
+                Body: new Uint8Array(arrayBuffer),
                 ContentType: file.type,
             })
         );
+        console.log("[AWS] upload success", key);
 
         return {
             key,
@@ -56,11 +42,28 @@ export const InvitationStorageService = {
     },
 
     async uploadMany(files, invitationId) {
-        if (!files?.length || !invitationId) return [];
+        console.log("[AWS] uploadMany", {
+            invitationId,
+            count: files?.length,
+        });
+
+        // if (!files?.length || !invitationId) return [];
+        if (!files?.length) {
+            console.log("[AWS] no files");
+            return [];
+        }
+
+        if (!invitationId) {
+            console.log("[AWS] missing invitation id");
+            return [];
+        }
 
         const uploaded = await Promise.all(
             files.map((file) => this.upload(file, invitationId)),
         );
+
+        console.log("[AWS] uploadMany finished", uploaded);
+
 
         return uploaded.map((img) => img.url);
     },

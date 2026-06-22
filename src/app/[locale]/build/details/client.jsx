@@ -101,6 +101,7 @@ export const DetailsClient = () => {
   });
 
   formRef.current = form;
+  console.log("FORM ID", form?.id);
 
   const [agenda, setAgenda] = useState([]);
   const [urlExtension, setUrlExtension] = useState("");
@@ -447,17 +448,35 @@ export const DetailsClient = () => {
 
   //
   const uploadMainImages = async (current) => {
-    if (!Array.isArray(current.mainImages) || !current.id) return current;
+    console.log("[uploadMainImages] start");
+
+    if (!Array.isArray(current.mainImages)) {
+      console.log("[uploadMainImages] mainImages not array");
+      return current;
+    }
+
+    if (!current.id) {
+      console.log("[uploadMainImages] missing invitation id");
+      return current;
+    }
 
     const existing = current.mainImages.filter((i) => typeof i === "string");
     const files = current.mainImages.filter(isFile);
 
-    if (!files.length) return current;
+    console.log("[uploadMainImages] existing", existing.length);
+    console.log("[uploadMainImages] files", files);
+
+    if (!files.length) {
+      console.log("[uploadMainImages] nothing to upload");
+      return current;
+    }
 
     const uploaded = await InvitationStorageService.uploadMany(
       files,
       current.id,
     );
+
+    console.log("[uploadMainImages] uploaded urls", uploaded);
 
     // const updated = {
     //   ...current,
@@ -472,14 +491,26 @@ export const DetailsClient = () => {
   };
 
   const handlePhotoFiles = async (files) => {
-    if (!files?.length) return;
+    console.log("[Photos] handlePhotoFiles", files);
+
+    if (!files?.length) {
+      console.log("[Photos] no files");
+      return;
+    }
 
     const current = formRef.current;
 
+    console.log("[Photos] invitation id", current?.id);
+    console.log("[Photos] current form", current);
+
     const normalizedFiles = Array.from(files).filter(isFile);
 
-    if (!normalizedFiles.length) return;
+    console.log("[Photos] normalized", normalizedFiles);
 
+    if (!normalizedFiles.length) {
+      console.log("[Photos] no valid File objects");
+      return;
+    }
     const updated = {
       ...current,
       // mainImages: normalizedFiles, // V1
@@ -492,12 +523,18 @@ export const DetailsClient = () => {
     setForm(updated);
     formRef.current = updated;
 
-    const uploaded = await uploadMainImages(updated);
+    try {
+      const uploaded = await uploadMainImages(updated);
 
-    if (!uploaded) return;
+      console.log("[Photos] uploaded result", uploaded);
 
-    formRef.current = uploaded;
-    setForm(uploaded);
+      if (!uploaded) return;
+
+      formRef.current = uploaded;
+      setForm(uploaded);
+    } catch (e) {
+      console.error("[Photos] uploadMainImages failed", e);
+    }
   };
 
   const handleDeletePhoto = (url) => {
