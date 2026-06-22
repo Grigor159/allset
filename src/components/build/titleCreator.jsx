@@ -90,7 +90,14 @@ export const TitleCreator = ({
         >
           <HStack spacing="10px">
             <Icon>{copy.icon}</Icon>
-            <Text color="#0C6DE2" fontSize="14px" isTruncated>
+            <Text
+              color="#0C6DE2"
+              fontSize="14px"
+              maxW="100%"
+              whiteSpace="normal"
+              overflowWrap="anywhere"
+              wordBreak="break-word"
+            >
               {fullUrl}
             </Text>
           </HStack>
