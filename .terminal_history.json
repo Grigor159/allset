@@ -36,7 +36,27 @@
       "command": "npm run dev",
       "timestamp": 1782131544000,
       "cwd": "c:\\Users\\Grigor Safaryan\\Desktop\\allset"
+    },
+    {
+      "command": "git add .",
+      "timestamp": 1782131546704,
+      "cwd": "c:\\Users\\Grigor Safaryan\\Desktop\\allset"
+    },
+    {
+      "command": "git commit -m \"feat: story imgs\"",
+      "timestamp": 1782131607744,
+      "cwd": "c:\\Users\\Grigor Safaryan\\Desktop\\allset"
+    },
+    {
+      "command": "git push origin development",
+      "timestamp": 1782131615523,
+      "cwd": "c:\\Users\\Grigor Safaryan\\Desktop\\allset"
+    },
+    {
+      "command": "npm run dev",
+      "timestamp": 1782133912646,
+      "cwd": "c:\\Users\\Grigor Safaryan\\Desktop\\allset"
     }
   ],
-  "lastUpdated": 1782131544000
+  "lastUpdated": 1782133912646
 }
