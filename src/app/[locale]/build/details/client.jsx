@@ -101,7 +101,6 @@ export const DetailsClient = () => {
   });
 
   formRef.current = form;
-  console.log("FORM ID", form?.id);
 
   const [agenda, setAgenda] = useState([]);
   const [urlExtension, setUrlExtension] = useState("");
@@ -460,7 +459,9 @@ export const DetailsClient = () => {
       return current;
     }
 
-    const existing = current.mainImages.filter((i) => typeof i === "string");
+    const existing = current.mainImages.filter((i) => typeof i === "string"); // ! bug
+    console.warn("UPDATED-2", existing);
+
     const files = current.mainImages.filter(isFile);
 
     console.log("[uploadMainImages] existing", existing.length);
@@ -516,9 +517,10 @@ export const DetailsClient = () => {
       // mainImages: normalizedFiles, // V1
       mainImages: [
         ...(current.mainImages ?? []).filter((i) => typeof i === "string"),
-        ...normalizedFiles, // V2
+        ...normalizedFiles, // V2  // ! bug
       ],
     };
+    console.warn("UPDATED-1", updated);
 
     setForm(updated);
     formRef.current = updated;

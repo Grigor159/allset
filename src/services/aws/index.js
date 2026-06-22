@@ -31,10 +31,18 @@ export const InvitationStorageService = {
             });
             console.log("[7] after PutObjectCommand");
 
-            console.log("[8] before send");
-            await s3Client.send(command);
-            console.log("[9] after send");
+            try {
+                console.log("[8] before send");
 
+                const result = await s3Client.send(command);
+
+                console.log("[9] after send", result);
+            } catch (err) {
+                console.error("[AWS SEND ERROR]");
+                console.error(err);
+                console.error(JSON.stringify(err, null, 2));
+                throw err;
+            }
             return {
                 key,
                 url: `https://${bucket}.s3.${region}.amazonaws.com/${key}`,
