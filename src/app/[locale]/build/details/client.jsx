@@ -459,14 +459,16 @@ export const DetailsClient = () => {
       current.id,
     );
 
-    const updated = {
+    // const updated = {
+    //   ...current,
+    //   mainImages: [...existing, ...uploaded],
+    // }; // V1
+
+    // return updated; // V1
+    return {
       ...current,
       mainImages: [...existing, ...uploaded],
-    };
-
-    setForm(updated);
-
-    return updated;
+    }; // V2
   };
 
   const handlePhotoFiles = async (files) => {
@@ -480,7 +482,11 @@ export const DetailsClient = () => {
 
     const updated = {
       ...current,
-      mainImages: normalizedFiles,
+      // mainImages: normalizedFiles, // V1
+      mainImages: [
+        ...(current.mainImages ?? []).filter((i) => typeof i === "string"),
+        ...normalizedFiles, // V2
+      ],
     };
 
     setForm(updated);
@@ -499,7 +505,10 @@ export const DetailsClient = () => {
 
     const updated = {
       ...current,
-      mainImages: (current.mainImages ?? []).filter((img) => img !== url),
+      // mainImages: (current.mainImages ?? []).filter((img) => img !== url), // V1
+      mainImages: (current.mainImages ?? []).filter((img) =>
+        typeof img === "string" ? img !== url : img.url !== url,
+      ), // V2
     };
 
     formRef.current = updated;
