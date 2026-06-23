@@ -1,8 +1,8 @@
 import { getLocale, getTranslations } from "next-intl/server";
-import { getInvitationData } from "./server";
+import { getInvitationData, pickLang } from "@/lib/invitation";
 import { meta } from "@/lib/meta";
 import { InvitationClient } from "./client";
-import { notFound } from "next/navigation";
+// import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -23,7 +23,7 @@ export default async function Invitation({ params }) {
 
   const data = await getInvitationData(slug);
 
-  if (!data) notFound();
+  // if (!data) notFound();
 
   return <InvitationClient data={data} />;
 }
