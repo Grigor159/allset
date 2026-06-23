@@ -1,14 +1,12 @@
 "use client";
 
 import dynamic from "next/dynamic";
-// import NotFound from "../../not-found";
 
 const Modern = dynamic(() => import("./modern"));
 const Rustic = dynamic(() => import("./rustic"));
 const Classic = dynamic(() => import("./classic"));
 
 export const InvitationClient = ({ data }) => {
-  // if (!data) return <NotFound/>;
 
   const template = data?.templateId;
 
