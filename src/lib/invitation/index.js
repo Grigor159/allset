@@ -6,11 +6,6 @@ export const pickLang = (obj, lang = "en") =>
   obj?.[lang] || obj?.en || obj?.hy || obj?.ru || "";
 
 export async function getInvitationData(slug) {
-  console.log({
-    "slugFETCH": slug,
-    "baseapiFETCH": BASE_API,
-  });
-
   try {
     const res = await fetch(
       `${BASE_API}invitations/url/${slug}`,
