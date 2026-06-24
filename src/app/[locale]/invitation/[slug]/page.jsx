@@ -6,6 +6,10 @@ import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
+  console.log({
+    paramsMETA: params,
+    slugMETA: slug,
+  });
 
   const t = await getTranslations();
   const locale = await getLocale();
@@ -20,9 +24,12 @@ export async function generateMetadata({ params }) {
 
 export default async function Invitation({ params }) {
   const { slug } = await params;
+  console.log({
+    paramsINVITATION: params,
+    slugINVITATION: slug,
+  });
 
   const data = await getInvitationData(slug);
-
   if (!data) notFound();
 
   return <InvitationClient data={data} />;
