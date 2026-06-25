@@ -226,3 +226,13 @@ export function formatDateByLang(dateValue, locale) {
     dayName: format(date, "EEEE", { locale: loc }).toUpperCase(),
   };
 }
+
+export const formatTitle = (value) =>
+  value
+    .replace(/[^\p{L},]/gu, "") // only letters and commas
+    .replace(/,+/g, ",")        // collapse commas
+    .replace(/^,|,$/g, "")      // trim commas
+    .split(",")
+    .filter(Boolean)
+    .map(capitalize)
+    .join(",");

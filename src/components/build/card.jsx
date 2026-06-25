@@ -60,8 +60,9 @@ export const Card = ({ el }) => {
       // minH="602px"
       w={"100%"}
       minH={{ base: "500px", md: "602px" }}
-      border={"1px solid"}
-      borderColor={isSelected ? "#004143" : "transparent"}
+      // border={"1px solid"}
+      // borderColor={isSelected ? "#004143" : "transparent"}
+      boxShadow={isSelected && "0px 4px 10px 0px rgba(0, 65, 67, 0.1)"}
       borderRadius={"8px"}
       _hover={{
         cursor: "pointer",
@@ -76,7 +77,7 @@ export const Card = ({ el }) => {
       tabIndex={0}
       onClick={handleSelect}
       p={{ base: "16px", md: "24px" }}
-      transition="border-color 0.3s ease"
+      transition="box-shadow 0.3s ease"
     >
       <Box
         w="100%"
@@ -102,17 +103,18 @@ export const Card = ({ el }) => {
         <Stack>
           <Text
             fontSize={{ base: "18px", md: "20px" }}
-            fontWeight={isSelected ? 700 : 400}
+            fontWeight={400}
             lineHeight={"28px"}
             letterSpacing={0}
             color={isSelected ? "#0C4A4C" : "#004143"}
             transition="all 0.3s ease"
-            w={{ base: "fit-content", md: "165px" }}
+            w={{ base: "fit-content", md: "180px" }}
           >
             {t(name[language])}
           </Text>
 
           {isSelected && pricing?.discountAmount !== 0 && (
+            // {isSelected && (
             <Text
               textDecoration="line-through"
               fontSize={"12px"}
@@ -133,7 +135,10 @@ export const Card = ({ el }) => {
           textAlign="center"
           fontWeight={isSelected ? 700 : 400}
         >
-          {formatPrice(pricing?.finalPrice, t)}
+          {formatPrice(
+            isSelected ? pricing?.finalPrice : pricing?.basePrice,
+            t,
+          )}
         </Text>
       </Flex>
       <SubText
@@ -141,6 +146,7 @@ export const Card = ({ el }) => {
         color={isSelected ? "#004143" : "#4B5563"}
         text={description[language]}
         lineClamp={4}
+        height={"72px"}
       />
 
       <Flex gap="46px">

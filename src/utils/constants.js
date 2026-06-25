@@ -416,7 +416,7 @@ export const FALLBACK = ["#0D3B3A", "#7FA39B", "#C7D6CE", "#F1F4EF"];
 
 export const VIEWPORTS = ["pc", "laptop", "mobile"];
 
-export const DEFAULT_VIEWPORT = "pc";
+export const DEFAULT_VIEWPORT = "mobile";
 
 export const DESIGN_WIDTH = {
   pc: 1440,
@@ -451,7 +451,7 @@ export const MODERN_FALLBACKS = [
 ];
 
 export const GUEST_COUNT = [
-  { label: "-", value: "0" },
+  { label: "classic_no", value: "0" },
   { label: "1", value: "1" },
   { label: "2", value: "2" },
   { label: "3", value: "3" },

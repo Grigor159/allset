@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Text } from "@chakra-ui/react";
 
-export const SubText = ({ text, fs, color, minH,lineClamp }) => {
+export const SubText = ({ text, fs, color, minH, lineClamp, height }) => {
   const t = useTranslations();
 
   return (
@@ -14,7 +14,8 @@ export const SubText = ({ text, fs, color, minH,lineClamp }) => {
       minH={minH}
       lineHeight={"24px"}
       letterSpacing={0}
-      lineClamp={lineClamp}
+      noOfLines={lineClamp}
+      height={height ?? "unset"}
     >
       {t(text)}
     </Text>

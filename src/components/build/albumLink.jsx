@@ -8,7 +8,7 @@ import { InputUrl } from "../ui/inputUrl";
 export const AlbumLink = ({ name, value, onChange, hide, required }) => {
   const t = useTranslations();
 
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   const handleSwitchChange = (e) => {
     setChecked(e.checked);

@@ -85,7 +85,17 @@ export const Rsvp = ({
               <Select.HiddenSelect />
               <Select.Control>
                 <Select.Trigger>
-                  <Select.ValueText placeholder={t("classic_count")} />
+                  {(() => {
+                    const selected = guestCount.items.find(
+                      (i) => i.value === guests?.[0],
+                    );
+
+                    if (!selected) return t("classic_count");
+
+                    return selected.value === "0"
+                      ? t("classic_no")
+                      : t("classic_count") + " " + selected.label;
+                  })()}
                 </Select.Trigger>
                 <Select.IndicatorGroup>
                   <Select.Indicator />
@@ -96,7 +106,7 @@ export const Rsvp = ({
                   <Select.Content>
                     {guestCount.items.map(({ label, value }) => (
                       <Select.Item item={value} key={value}>
-                        {label}
+                        {value === "0" ? t("classic_no") : label}{" "}
                         <Select.ItemIndicator />
                       </Select.Item>
                     ))}
@@ -111,7 +121,7 @@ export const Rsvp = ({
                   <Input
                     key={idx}
                     value={el}
-                    placeholder={t("accompanying_name")}
+                    placeholder={t("accompanying_names")}
                     variant="outline"
                     h="52px"
                     bg="white"
