@@ -26,8 +26,8 @@ export const Rsvp = ({
   guests,
   handleChange,
   handleGuestCountChange,
-  handleConfirm,
-  handleDecline,
+  handleSecondaryGuestChange,
+  handleSubmit,
 }) => {
   const t = useTranslations();
 
@@ -160,7 +160,7 @@ export const Rsvp = ({
                   borderColor: color,
                 }}
                 transition="all 0.3s ease"
-                onClick={handleConfirm}
+                onClick={handleSubmit("CONFIRMED")}
               >
                 {t("classic_accept")}
               </Button>
@@ -178,7 +178,7 @@ export const Rsvp = ({
                   color: "white",
                   borderColor: "transparent",
                 }}
-                onClick={handleDecline}
+                  onClick={handleSubmit("DECLINED")}
               >
                 {t("classic_reject")}
               </Button>

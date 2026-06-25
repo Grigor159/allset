@@ -163,7 +163,7 @@ export const PlanningSlide = () => {
     const skeletons = Array.from({ length: 3 });
 
     return (
-      <Flex justify="space-between" gap="16px">
+      <Flex justify={"center"} gap="32px">
         <For each={skeletons}>
           {(_, index) => (
             <Skeleton key={index} w="286px" h="457px" borderRadius="25px" />

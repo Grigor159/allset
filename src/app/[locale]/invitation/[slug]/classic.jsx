@@ -140,26 +140,44 @@ export default function Classic({ viewport = "pc", palette, data }) {
     }));
   };
 
-  const handleConfirm = (e) => {
+  // const handleConfirm = (e) => {
+  //   e.preventDefault();
+
+  //   if (!form.mainGuest) return error(t("add_guest"));
+  //   if (!form.guestSide) return error(t("invitor"));
+
+  //   const hasEmptyGuest = form.secondaryGuests.some((guest) => !guest.trim());
+  //   if (hasEmptyGuest) return error(t("accompanying_name"));
+
+  //   mutate({ ...form, status: "CONFIRMED" });
+  // };
+
+  // const handleDecline = (e) => {
+  //   e.preventDefault();
+
+  //   if (!form.mainGuest) return error(t("add_guest"));
+  //   if (!form.guestSide) return error(t("invitor"));
+
+  //   mutate({ ...form, status: "DECLINED" });
+  // };
+
+  const handleSubmit = (status) => (e) => {
     e.preventDefault();
 
     if (!form.mainGuest) return error(t("add_guest"));
     if (!form.guestSide) return error(t("invitor"));
 
-    const hasEmptyGuest = form.secondaryGuests.some((guest) => !guest.trim());
-    if (hasEmptyGuest) return error(t("accompanying_name"));
+    if (status === "CONFIRMED") {
+      const hasEmptyGuest = form.secondaryGuests.some((g) => !g.trim());
+      if (hasEmptyGuest) return error(t("accompanying_name"));
+    }
 
-    mutate({ ...form, status: "CONFIRMED" });
+    mutate({
+      ...form,
+      status,
+    });
   };
 
-  const handleDecline = (e) => {
-    e.preventDefault();
-
-    if (!form.mainGuest) return error(t("add_guest"));
-    if (!form.guestSide) return error(t("invitor"));
-
-    mutate({ ...form, status: "DECLINED" });
-  };
   console.log(data);
   // console.log(vars);
 
@@ -354,8 +372,8 @@ export default function Classic({ viewport = "pc", palette, data }) {
         guests={guests}
         handleChange={handleChange}
         handleGuestCountChange={handleGuestCountChange}
-        handleConfirm={handleConfirm}
-        handleDecline={handleDecline}
+        handleSecondaryGuestChange={handleSecondaryGuestChange}
+        handleSubmit={handleSubmit}
       />
 
       {/* ————— DRESS CODE ————— */}
