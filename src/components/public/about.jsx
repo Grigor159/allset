@@ -15,7 +15,7 @@ export const About = () => {
           <Stack flex="1" gap="24px">
             <Title as="h1" fontSize="42px" text="about_title" color="#004143" />
             {/* <SubTitle text="plan_subtitle" /> */}
-            <Description text="plan_desc" textAlign="start" />
+            <Description text="about_desc" textAlign="start" />
           </Stack>
 
           <Image src={img.src} w="590px" h="242px" alt="about-img1"   borderRadius="5px"/>
