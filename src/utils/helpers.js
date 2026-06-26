@@ -180,6 +180,7 @@ export const getInvitationForm = (id) => ({
   guestSide: "",
   status: "",
   createdBy: "GUEST",
+  // notes add automaticly by model handler
 });
 
 export const filterGuestsByName = (data = [], name = "") => {

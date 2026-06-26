@@ -15,8 +15,11 @@ export const Description = ({ text, width, textAlign }) => {
       color={"#4B5563"}
       fontWeight={300}
       textAlign={textAlign ?? "center"}
-    >
-      {t(text)}
-    </Text>
+      dangerouslySetInnerHTML={{
+        __html: t(text).replace(/\n/g, "<br />"),
+      }}
+    />
+    //   {/* {t(text)}
+    // </Text> */}
   );
 };

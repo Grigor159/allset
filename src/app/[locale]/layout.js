@@ -8,6 +8,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { Header } from "@/components/ui/header";
 import { ScrollToTop } from "@/components/ui/scrollToTop";
 import { Footer } from "@/components/public/footer";
+import { GoogleAnalytics } from '@next/third-parties/google'
 import "../index.css";
 
 export default async function RootLayout({ children }) {
@@ -49,7 +50,7 @@ export default async function RootLayout({ children }) {
         <meta property="og:type" content="website" />
         {/* Twitter */}
         <meta name="twitter:creator" content="allset.am" />
-        <meta property="fb:app_id" content="" />
+        <meta property="fb:app_id" content="118506514674722" />
       </head>
       <body
         // className={fonts.variable}
@@ -72,6 +73,7 @@ export default async function RootLayout({ children }) {
           </QueryProvider>
         </AuthProvider>
       </body>
+      <GoogleAnalytics gaId="G-KDMTJKVHH9" />
     </html>
   );
 }

@@ -10,6 +10,7 @@ import {
   Portal,
   Select,
   Text,
+  Textarea,
   VStack,
 } from "@chakra-ui/react";
 import { Radio } from "../auth/invitations/guests/radio";
@@ -20,6 +21,7 @@ export const Rsvp = ({
   isMobile,
   color,
   data,
+  note,
   guestCount,
   form,
   setForm,
@@ -134,6 +136,17 @@ export const Rsvp = ({
               </For>
             )}
 
+            {note && (
+              <Textarea
+                name="notes"
+                placeholder={t("note")}
+                variant="outline"
+                bg="white"
+                color={color}
+                onChange={handleChange}
+              />
+            )}
+
             <Radio
               color={color}
               value={form.guestSide}
@@ -178,7 +191,7 @@ export const Rsvp = ({
                   color: "white",
                   borderColor: "transparent",
                 }}
-                  onClick={handleSubmit("DECLINED")}
+                onClick={handleSubmit("DECLINED")}
               >
                 {t("classic_reject")}
               </Button>

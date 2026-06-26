@@ -196,7 +196,7 @@ export default function Modern({ viewport = "pc", palette, data }) {
   const handleSubmit = (status) => (e) => {
     e.preventDefault();
 
-    if (!form.mainGuest) return error(t("add_guest"));
+    if (!form.mainGuest) return error(t("classic_type"));
     if (!form.guestSide) return error(t("invitor"));
 
     if (status === "CONFIRMED") {
@@ -543,6 +543,7 @@ export default function Modern({ viewport = "pc", palette, data }) {
             isMobile={isMobile}
             color="var(--c-secondary)" // needs checking
             data={data?.rsvp}
+            note={data?.template?.hasConfirmationNote}
             guestCount={guestCount}
             form={form}
             setForm={setForm}

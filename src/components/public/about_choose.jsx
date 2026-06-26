@@ -1,11 +1,13 @@
 "use client";
 
 import React from "react";
-import { Stack, Container, Flex, Box } from "@chakra-ui/react";
+import { Stack, Container, Flex, Image } from "@chakra-ui/react";
 import { Title } from "./typography/title";
 import { SubTitle } from "./typography/subTitle";
 import { Description } from "./typography/description";
 import bg from "@/assets/imgs/planning_bg.png";
+import img2 from "@/assets/imgs/about_img2.png";
+import img3 from "@/assets/imgs/about_img3.png";
 
 export const AboutChoose = () => {
   return (
@@ -18,22 +20,29 @@ export const AboutChoose = () => {
       backgroundColor="#f6f6f7"
     >
       <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
-        <Flex w="100%" justify={"space-between"} gap="110px">
+        <Flex w="100%" justify={"space-between"} align={"center"} gap="110px">
           <Stack flex="1" gap="24px">
-            <Title as="h1" text="plan_title_two" />
-            <SubTitle text="choose_desc_one" />
-            <Description text="choose_desc_two" textAlign="start" />
+            <Title as="h1" text="team" />
+            {/* <SubTitle text="choose_desc_one" /> */}
+            <Description text="team_desc" textAlign="start" />
           </Stack>
 
           <Flex flex="1" gap={"28px"}>
-            <Box w="281px" h="334px" bg="#D9D9D9" borderRadius="5px"></Box>
-            <Box
+            <Image
+              src={img2.src}
               w="281px"
               h="334px"
-              bg="#D9D9D9"
+              alt="about-img3"
+              borderRadius="5px"
+            />
+            <Image
+              src={img3.src}
+              w="281px"
+              h="334px"
+              alt="about-img3"
               borderRadius="5px"
               mt="146px"
-            ></Box>
+            />
           </Flex>
         </Flex>
       </Container>
