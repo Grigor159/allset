@@ -30,6 +30,7 @@ import { Venue } from "@/components/build/venue";
 import { Rsvp } from "@/components/build/rsvp";
 import { error } from "@/components/ui/alerts";
 import { InvitationStorageService } from "@/services/aws/index";
+import { isFile } from "@/utils/checkers";
 
 export const DetailsClient = () => {
   const router = useRouter();
@@ -44,6 +45,7 @@ export const DetailsClient = () => {
     palette: parseAsString,
     id: parseAsString,
   });
+  const [isUploading, setIsUploading] = useState(false);
 
   // clear drafts
   // const { mutate: mutateDelete } = useMutateAuthTanstack(
@@ -291,33 +293,28 @@ export const DetailsClient = () => {
   const handlePhotoFiles = async (files) => {
     if (!files?.length) return;
 
-    const current = formRef.current;
-    const normalizedFiles = Array.from(files).filter(isFile);
-
-    // if (!normalizedFiles.length) {
-    //   return;
-    // }
-
-    const updated = {
-      ...current,
-      mainImages: [
-        ...(current.mainImages ?? []).filter((i) => typeof i === "string"),
-        ...normalizedFiles,
-      ],
-    };
-
-    setForm(updated);
-    formRef.current = updated;
+    setIsUploading(true);
 
     try {
-      const uploaded = await uploadMainImages(updated);
+      const current = formRef.current;
+      const normalized = Array.from(files).filter(isFile);
+      const updated = {
+        ...current,
+        mainImages: [
+          ...(current.mainImages ?? []).filter((i) => typeof i === "string"),
+          ...normalized,
+        ],
+      };
 
-      if (!uploaded) return;
+      setForm(updated);
+      formRef.current = updated;
+
+      const uploaded = await uploadMainImages(updated);
 
       formRef.current = uploaded;
       setForm(uploaded);
-    } catch (e) {
-      throw e;
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -337,8 +334,6 @@ export const DetailsClient = () => {
   //
 
   // * Story imgs upload and delete logic
-  const isFile = (f) => f instanceof File || f instanceof Blob;
-
   const uploadStoryImages = async (current) => {
     const photoUrls = current.ourStory?.photoUrls;
 
@@ -369,33 +364,33 @@ export const DetailsClient = () => {
   const handleStoryFiles = async (files) => {
     if (!files?.length) return;
 
-    const current = formRef.current;
-
-    const normalized = Array.from(files).filter(isFile);
-
-    const updated = {
-      ...current,
-      ourStory: {
-        ...current.ourStory,
-        photoUrls: [
-          ...(current.ourStory?.photoUrls ?? []).filter(
-            (i) => typeof i === "string",
-          ),
-          ...normalized,
-        ],
-      },
-    };
-
-    setForm(updated);
-    formRef.current = updated;
+    setIsUploading(true);
 
     try {
+      const current = formRef.current;
+      const normalized = Array.from(files).filter(isFile);
+      const updated = {
+        ...current,
+        ourStory: {
+          ...current.ourStory,
+          photoUrls: [
+            ...(current.ourStory?.photoUrls ?? []).filter(
+              (i) => typeof i === "string",
+            ),
+            ...normalized,
+          ],
+        },
+      };
+
+      setForm(updated);
+      formRef.current = updated;
+
       const uploaded = await uploadStoryImages(updated);
 
       formRef.current = uploaded;
       setForm(uploaded);
-    } catch (e) {
-      console.error(e);
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -421,10 +416,16 @@ export const DetailsClient = () => {
     e.preventDefault();
     router.push(`preview${search}`);
   };
-  console.log(invitationData);
+  // console.log(invitationData);//
 
   return (
-    <Box pt={{ base: "32px", md: "48px" }} pb="22px">
+    <Box
+      pt={{ base: "32px", md: "48px" }}
+      pb="22px"
+      pointerEvents={isUploading ? "none" : "auto"}
+      filter={isUploading ? "blur(3px)" : "none"}
+      transition="filter .2s"
+    >
       {/* VStack */}
       <Stack
         gap={{ base: "16px", md: "24px" }}
@@ -494,6 +495,7 @@ export const DetailsClient = () => {
               // onChange={handleChange}
               onFileSelect={handlePhotoFiles}
               onDelete={handleDeletePhoto}
+              setIsUploading={setIsUploading}
               count={
                 data?.mainImageMaxCount ??
                 invitationData?.template?.mainImageMaxCount
@@ -566,6 +568,7 @@ export const DetailsClient = () => {
               // onDelete={handleDeletePhoto}
               onFileSelect={handleStoryFiles}
               onDelete={handleDeleteStory}
+              setIsUploading={setIsUploading}
               hide={handleHide}
               required={false}
               languages={form.languages}

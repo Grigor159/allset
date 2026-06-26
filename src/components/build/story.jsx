@@ -18,6 +18,7 @@ export const Story = ({
   onChange,
   onFileSelect,
   onDelete,
+  setIsUploading,
   hide,
   required,
   languages,
@@ -45,9 +46,10 @@ export const Story = ({
 
     if (key) {
       try {
+        setIsUploading(true)
         await InvitationStorageService.delete(key);
-      } catch (err) {
-        console.error("AWS delete failed:", err);
+      } finally {
+        setIsUploading(false);
       }
     }
     onDelete?.(url);
@@ -83,7 +85,7 @@ export const Story = ({
             value={value?.text}
             onChange={handleInputChange}
             placeholder={t("story_placeholder")}
-            // disabled={!checked}
+          // disabled={!checked}
           />
         )}
       </Field.Root>

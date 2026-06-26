@@ -113,6 +113,7 @@ export const Photos = ({
   value = [],
   onFileSelect,
   onDelete,
+  setIsUploading,
   count,
   required,
 }) => {
@@ -128,9 +129,10 @@ export const Photos = ({
 
     if (key) {
       try {
+        setIsUploading(true)
         await InvitationStorageService.delete(key);
-      } catch (err) {
-        console.error("AWS delete failed:", err);
+      } finally {
+        setIsUploading(false);
       }
     }
     onDelete?.(url);
