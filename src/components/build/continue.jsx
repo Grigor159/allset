@@ -10,12 +10,14 @@ import { getNextRoute } from "../../utils/helpers";
 import { isContinueDisabled } from "../../utils/checkers";
 import { Button } from "@chakra-ui/react";
 import { next } from "@/assets/svgs";
+import { queryClient } from "@/providers/queryProvider";
 
 export const Continue = () => {
-  const [{ template, palette }] = useQueryStates({
+  const [{ template, palette, id }] = useQueryStates({
     template: parseAsString,
     palette: parseAsString,
     legal: parseAsString,
+    id: parseAsString,
   });
   const [shouldNavigate, setShouldNavigate] = useState(false);
 
@@ -29,6 +31,8 @@ export const Continue = () => {
 
   const { path, name } = nextInfo;
   const { isAuthenticated, loginWithPopup, isLoading } = useAuth0();
+  const data = queryClient.getQueryData([`invitations/${id}`]);
+  const isActive = data?.status?.toLowerCase() === "active";
 
   const isCustomisationsPage = pathname?.includes(`/customisations`);
   const isDetailsPage = pathname?.includes(`/details`);
@@ -112,67 +116,72 @@ export const Continue = () => {
       transition="all 0.3s ease"
       disabled={disabled}
     >
-      {/* {hasMultipleWords(name) ? name : `Continue to ${name}`} */}
-      {/* {t("continue")} {t(name)} */}
-      {t("next")} {next.icon}
+      {isActive ? (
+        t("save")
+      ) : (
+        <>
+          {t("next")} {next.icon}
+        </>
+      )}
     </Button>
-  ) 
-  // : isConfirmPage ? (
-  //   <Button
-  //     // loading
-  //     type="submit"
-  //     form="confirm"
-  //     fontWeight="400"
-  //     lineHeight="24px"
-  //     bg="#004143"
-  //     w={{ base: "100%", md: "137px" }}
-  //     h="52px"
-  //     border="1px solid"
-  //     borderColor="white"
-  //     boxShadow="xl"
-  //     _hover={{
-  //       bg: "white",
-  //       color: "#004143",
-  //       borderColor: "#004143",
-  //       "& path": {
-  //         fill: "#004143",
-  //         transition: "all 0.3s ease",
-  //       },
-  //     }}
-  //     transition="all 0.3s ease"
-  //     disabled={disabled && !(legal == true || legal === "true")}
-  //   >
-  //     {t(name)}
-  //   </Button>
-  // ) 
-  : (
-    <Button
-      as={!disabled ? Link : "button"}
-      // to={!disabled ? path : undefined}
-      href={!disabled ? `${path}${search}` : undefined}
-      fontWeight="400"
-      lineHeight="24px"
-      bg="#004143"
-      w={{ base: "100%", md: "137px" }}
-      h="52px"
-      border="1px solid"
-      borderColor="white"
-      boxShadow="xl"
-      _hover={{
-        bg: "white",
-        color: "#004143",
-        borderColor: "#004143",
-        "& path": {
-          fill: "#004143",
-          transition: "all 0.3s ease",
-        },
-      }}
-      transition="all 0.3s ease"
-      disabled={disabled}
-    >
-      {t("next")} {next.icon}
-      {/* {t("continue")} {t(name)} */}
-    </Button>
+  ) : (
+    !isActive && (
+      // : isConfirmPage ? (
+      //   <Button
+      //     // loading
+      //     type="submit"
+      //     form="confirm"
+      //     fontWeight="400"
+      //     lineHeight="24px"
+      //     bg="#004143"
+      //     w={{ base: "100%", md: "137px" }}
+      //     h="52px"
+      //     border="1px solid"
+      //     borderColor="white"
+      //     boxShadow="xl"
+      //     _hover={{
+      //       bg: "white",
+      //       color: "#004143",
+      //       borderColor: "#004143",
+      //       "& path": {
+      //         fill: "#004143",
+      //         transition: "all 0.3s ease",
+      //       },
+      //     }}
+      //     transition="all 0.3s ease"
+      //     disabled={disabled && !(legal == true || legal === "true")}
+      //   >
+      //     {t(name)}
+      //   </Button>
+      // )
+      <Button
+        as={!disabled ? Link : "button"}
+        // to={!disabled ? path : undefined}
+        href={!disabled ? `${path}${search}` : undefined}
+        fontWeight="400"
+        lineHeight="24px"
+        bg="#004143"
+        w={{ base: "100%", md: "137px" }}
+        h="52px"
+        border="1px solid"
+        borderColor="white"
+        boxShadow="xl"
+        _hover={{
+          bg: "white",
+          color: "#004143",
+          borderColor: "#004143",
+          "& path": {
+            fill: "#004143",
+            transition: "all 0.3s ease",
+          },
+        }}
+        transition="all 0.3s ease"
+        disabled={disabled}
+      >
+        {t("next")} {next.icon}
+        {/* {t("continue")} {t(name)} */}
+      </Button>
+    )
   );
 };
 
