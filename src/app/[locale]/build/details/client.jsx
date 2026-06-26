@@ -67,7 +67,7 @@ export const DetailsClient = () => {
     !!id,
     0, // if we need not cache and stale data
   );
-  const status = invitationData?.status?.toLowerCase();
+  const status = invitationData?.status?.toLowerCase() || "draft";
   const endpoint = status === "draft" ? "invitations/draft" : "invitations";
 
   const { mutate } = useMutateAuthTanstack(endpoint, "post", {
@@ -421,7 +421,7 @@ export const DetailsClient = () => {
     e.preventDefault();
     router.push(`preview${search}`);
   };
-console.log(invitationData);
+  console.log(invitationData);
 
   return (
     <Box pt={{ base: "32px", md: "48px" }} pb="22px">

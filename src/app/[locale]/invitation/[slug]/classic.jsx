@@ -363,20 +363,22 @@ export default function Classic({ viewport = "pc", palette, data }) {
       </Flex>
 
       {/* ————— RSVP ————— */}
-      <Rsvp
-        isMobile={isMobile}
-        color="var(--c-secondary)"
-        data={data?.rsvp}
-        note={data?.template?.hasConfirmationNote}
-        guestCount={guestCount}
-        form={form}
-        setForm={setForm}
-        guests={guests}
-        handleChange={handleChange}
-        handleGuestCountChange={handleGuestCountChange}
-        handleSecondaryGuestChange={handleSecondaryGuestChange}
-        handleSubmit={handleSubmit}
-      />
+      {data?.confirmationEnabled && (
+        <Rsvp
+          isMobile={isMobile}
+          color="var(--c-secondary)"
+          data={data?.rsvp}
+          note={data?.template?.hasConfirmationNote}
+          guestCount={guestCount}
+          form={form}
+          setForm={setForm}
+          guests={guests}
+          handleChange={handleChange}
+          handleGuestCountChange={handleGuestCountChange}
+          handleSecondaryGuestChange={handleSecondaryGuestChange}
+          handleSubmit={handleSubmit}
+        />
+      )}
 
       {/* ————— DRESS CODE ————— */}
       <VStack

@@ -91,7 +91,6 @@ export default function Modern({ viewport = "pc", palette, data }) {
 
   const [form, setForm] = useState(getInvitationForm(id));
   const [guests, setGuests] = useState([`${t("classic_count")}`]);
-  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const initialSlide = Math.floor((data?.mainImages?.length || 0) / 2);
   const heroImage = data?.mainImages?.[0] || mainBg.src;
@@ -128,11 +127,6 @@ export default function Modern({ viewport = "pc", palette, data }) {
 
   // const width = designWidth(viewport);
   const isMobile = viewport === "mobile";
-
-  const openFullscreen = () => {
-    setIsFullscreen(true);
-    setTimeout(() => galleryRef.current?.fullScreen(), 50);
-  };
 
   // form
   const handleChange = (e) => {
@@ -527,44 +521,48 @@ export default function Modern({ viewport = "pc", palette, data }) {
             {timingRight.icon}
           </Icon>
         </Center>
+
         {/* ————— RSVP ————— */}
-        <Box position="relative">
-          <Icon
-            color="var(--c-accent)"
-            position="absolute"
-            left="10%"
-            bottom="10%"
-            // transform="translateY(-10%)"
-          >
-            {rsvpRight.icon}
-          </Icon>
-          <Rsvp
-            isModern={true}
-            isMobile={isMobile}
-            color="var(--c-secondary)" // needs checking
-            data={data?.rsvp}
-            note={data?.template?.hasConfirmationNote}
-            guestCount={guestCount}
-            form={form}
-            setForm={setForm}
-            guests={guests}
-            handleChange={handleChange}
-            handleGuestCountChange={handleGuestCountChange}
-            handleSecondaryGuestChange={handleSecondaryGuestChange}
-            handleSubmit={handleSubmit}
-          />
-          <Icon
-            color="var(--c-accent)"
-            position="absolute"
-            right="15%"
-            top="20%"
-            // transform="translateY(-10%)"
-          >
-            {rsvpLeft.icon}
-          </Icon>
-        </Box>
+        {data?.confirmationEnabled && (
+          <Box position="relative">
+            <Icon
+              color="var(--c-accent)"
+              position="absolute"
+              left="10%"
+              bottom="10%"
+              // transform="translateY(-10%)"
+            >
+              {rsvpRight.icon}
+            </Icon>
+            <Rsvp
+              isModern={true}
+              isMobile={isMobile}
+              color="var(--c-secondary)" // needs checking
+              data={data?.rsvp}
+              note={data?.template?.hasConfirmationNote}
+              guestCount={guestCount}
+              form={form}
+              setForm={setForm}
+              guests={guests}
+              handleChange={handleChange}
+              handleGuestCountChange={handleGuestCountChange}
+              handleSecondaryGuestChange={handleSecondaryGuestChange}
+              handleSubmit={handleSubmit}
+            />
+            <Icon
+              color="var(--c-accent)"
+              position="absolute"
+              right="15%"
+              top="20%"
+              // transform="translateY(-10%)"
+            >
+              {rsvpLeft.icon}
+            </Icon>
+          </Box>
+        )}
+
         {/* ————— DRESS CODE ————— */}
-        <Center position="relative">
+        <Center position="relative" mt={!data?.confirmationEnabled && "100px"}>
           <Icon
             color="var(--c-accent)"
             position="absolute"

@@ -592,29 +592,31 @@ export default function Rustic({ viewport = "pc", palette, data }) {
       </Center>
 
       {/* ————— RSVP ————— */}
-      <Container maxW="1440px" px={{ base: "24px", md: "80px" }}>
-        <Flex align={"center"} justify="center" gap="60px">
-          <Icon color="var(--c-accent)">{heartsLeft.icon}</Icon>
-          <Rsvp
-            isMobile={isMobile}
-            color="var(--c-primary)"
-            data={data?.rsvp}
-            note={data?.template?.hasConfirmationNote}
-            guestCount={guestCount}
-            form={form}
-            setForm={setForm}
-            guests={guests}
-            handleChange={handleChange}
-            handleGuestCountChange={handleGuestCountChange}
-            handleSecondaryGuestChange={handleSecondaryGuestChange}
-            handleSubmit={handleSubmit}
-          />
-          <Icon color="var(--c-accent)">{heartsRight.icon}</Icon>
-        </Flex>
-      </Container>
+      {data?.confirmationEnabled && (
+        <Container maxW="1440px" px={{ base: "24px", md: "80px" }}>
+          <Flex align={"center"} justify="center" gap="60px">
+            <Icon color="var(--c-accent)">{heartsLeft.icon}</Icon>
+            <Rsvp
+              isMobile={isMobile}
+              color="var(--c-primary)"
+              data={data?.rsvp}
+              note={data?.template?.hasConfirmationNote}
+              guestCount={guestCount}
+              form={form}
+              setForm={setForm}
+              guests={guests}
+              handleChange={handleChange}
+              handleGuestCountChange={handleGuestCountChange}
+              handleSecondaryGuestChange={handleSecondaryGuestChange}
+              handleSubmit={handleSubmit}
+            />
+            <Icon color="var(--c-accent)">{heartsRight.icon}</Icon>
+          </Flex>
+        </Container>
+      )}
 
       {/* ————— DRESS CODE ————— */}
-      <Center>
+      <Center mt={!data?.confirmationEnabled && "100px"}>
         <VStack
           maxW="736px"
           minH="775px"
