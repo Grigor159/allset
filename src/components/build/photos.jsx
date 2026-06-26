@@ -107,6 +107,7 @@ import { Label } from "@/components/build/typography/label";
 import { PhotosUpload } from "@/components/build/photosUpload";
 import { extractKeyFromUrl } from "@/utils/formatters";
 import { InvitationStorageService } from "@/services/aws";
+import { remainingImgsCount } from "@/utils/helpers";
 
 export const Photos = ({
   value = [],
@@ -155,7 +156,7 @@ export const Photos = ({
 
       <FileUpload.Root
         accept="image/*"
-        maxFiles={count}
+        maxFiles={remainingImgsCount(count, value)}
         as={Flex}
         gap="16px"
         flexDirection="row"

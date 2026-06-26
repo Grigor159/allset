@@ -223,3 +223,6 @@ export const filterInvitations = (data = [], name = "") => {
 // view
 export const pickLang = (obj, lang = "en") =>
   obj?.[lang] || obj?.en || obj?.hy || obj?.ru || "";
+
+//
+export const remainingImgsCount = (count, value) => Math.max(0, count - (value?.length || 0));

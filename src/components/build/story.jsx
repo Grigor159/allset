@@ -10,6 +10,7 @@ import { Switcher } from "@/components/build/switcher";
 import { TextArea } from "../ui/textarea";
 import { extractKeyFromUrl } from "@/utils/formatters";
 import { InvitationStorageService } from "@/services/aws";
+import { remainingImgsCount } from "@/utils/helpers";
 
 export const Story = ({
   name,
@@ -90,7 +91,7 @@ export const Story = ({
       {checked && (
         <FileUpload.Root
           accept="image/*"
-          maxFiles={count}
+          maxFiles={remainingImgsCount(count, value)}
           // disabled={!checked}
           as={Flex}
           gap="16px"

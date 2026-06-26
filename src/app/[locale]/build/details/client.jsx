@@ -421,6 +421,7 @@ export const DetailsClient = () => {
     e.preventDefault();
     router.push(`preview${search}`);
   };
+console.log(invitationData);
 
   return (
     <Box pt={{ base: "32px", md: "48px" }} pb="22px">
