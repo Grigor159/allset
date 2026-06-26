@@ -66,8 +66,10 @@ export const DetailsClient = () => {
     `invitations/${id}`,
     !!id,
   );
+  const status = invitationData?.status?.toLowerCase();
+  const endpoint = status === "draft" ? "invitations/draft" : "invitations";
 
-  const { mutate } = useMutateAuthTanstack("invitations/draft", "post", {
+  const { mutate } = useMutateAuthTanstack(endpoint, "post", {
     onSuccess: (res) => {
       const draftId = res?.id;
       const urlExtension = res?.urlExtension;
@@ -88,8 +90,9 @@ export const DetailsClient = () => {
           setQuery({ id: draftId });
         }
       }
-      queryClient.invalidateQueries({ queryKey: [`invitations/drafts`] });
-      // TODO: get urlExtension & invalidate invitations/urlExtension
+      queryClient.invalidateQueries({ queryKey: [`invitations/${status}`] });
+      queryClient.invalidateQueries({ queryKey: [`invitations/${id}`] });
+      // TODO: invalidate invitation
     },
     onError: (err) => error(err?.response?.data?.error || "Draft error!"),
   });
@@ -226,7 +229,7 @@ export const DetailsClient = () => {
 
   // V2 - without imgs logic inside
   const handleSmartBlur = async () => {
-    if (invitationData?.status === "ACTIVE") return;
+    // if (invitationData?.status === "ACTIVE") return;
 
     const current = formRef.current;
 
