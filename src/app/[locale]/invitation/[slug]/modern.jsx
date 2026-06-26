@@ -65,7 +65,6 @@ import "swiper/css/pagination";
 export default function Modern({ viewport = "pc", palette, data }) {
   const t = useTranslations();
   const language = useLocale();
-  const galleryRef = useRef(null);
 
   const { mutate } = useMutateAuthTanstack("confirmations/guest", "post", {
     onSuccess: () => {
@@ -98,15 +97,6 @@ export default function Modern({ viewport = "pc", palette, data }) {
   const storyImgTwo = data?.ourStory?.photoUrls?.[1] || story2.src;
   // TODO: if real invitation,dont show fallback images
   const slideImages = data?.mainImages || MODERN_FALLBACKS;
-
-  // const galleryItems = useMemo(
-  //   () =>
-  //     gallery.map((src) => {
-  //       return { original: src, thumbnail: src };
-  //     }),
-  //   [gallery],
-  // );
-  // console.log(galleryItems);
 
   const description =
     pickLang(data?.description, language) || t("classic_title");

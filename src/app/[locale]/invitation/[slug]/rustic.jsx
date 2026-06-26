@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useMemo } from "react";
+import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutateAuthTanstack } from "@/hooks/useTanstack";
 import {
@@ -50,11 +50,11 @@ import overlay2 from "@/assets/imgs/invitations/rustic/overlay2.png";
 import mainImagesBg from "@/assets/imgs/invitations/rustic/main_images_bg.png";
 import coupleBg from "@/assets/imgs/invitations/rustic/couple_bg.png";
 import img1 from "@/assets/imgs/invitations/rustic/img_1.png";
-import screp from "@/assets/imgs/invitations/rustic/screp.png";
 import img2 from "@/assets/imgs/invitations/rustic/img_2.png";
 import img3 from "@/assets/imgs/invitations/rustic/img_3.jpg";
-import dream from "@/assets/imgs/invitations/rustic/dream.png";
 import img4 from "@/assets/imgs/invitations/rustic/img_4.png";
+import screp from "@/assets/imgs/invitations/rustic/screp.png";
+import dream from "@/assets/imgs/invitations/rustic/dream.png";
 import galleryBg from "@/assets/imgs/invitations/rustic/gallery_bg.png";
 import moments from "@/assets/imgs/invitations/rustic/moments.png";
 import timingBg from "@/assets/imgs/invitations/rustic/timing_bg.png";
@@ -71,12 +71,11 @@ import storyFlowers from "@/assets/imgs/invitations/rustic/story_flowers.png";
 import story3 from "@/assets/imgs/invitations/rustic/story_3.png";
 import storyFlower from "@/assets/imgs/invitations/rustic/story_flower.png";
 // import storyBg from "@/assets/imgs/invitations/rustic/story_bg.jpg";
-import { GUEST_COUNT, CLASSIC_FALLBACKS, TIMELINE } from "@/utils/constants";
+import { GUEST_COUNT, TIMELINE } from "@/utils/constants";
 import { Link } from "@/i18n/routing";
 import { Radio } from "@/components/auth/invitations/guests/radio";
 import { isNotEmptyArray } from "@/utils/checkers";
 import { error, success } from "@/components/ui/alerts";
-import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/image-gallery.css";
 import { Rsvp } from "@/components/invitation/rsvp";
 import { Calendar } from "@/components/invitation/calendar";
@@ -84,7 +83,6 @@ import { Calendar } from "@/components/invitation/calendar";
 export default function Rustic({ viewport = "pc", palette, data }) {
   const t = useTranslations();
   const language = useLocale();
-  const galleryRef = useRef(null);
 
   const { mutate } = useMutateAuthTanstack("confirmations/guest", "post", {
     onSuccess: () => {
@@ -107,21 +105,16 @@ export default function Rustic({ viewport = "pc", palette, data }) {
 
   const [form, setForm] = useState(getInvitationForm(id));
   const [guests, setGuests] = useState([`${t("classic_count")}`]);
-  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const heroImage = data?.mainImages?.[0] || img.src;
-  const coupleImage = data?.mainImages?.[1] || null; //
-  const gallery = data?.ourStory?.photoUrls?.length
-    ? data.ourStory.photoUrls
-    : CLASSIC_FALLBACKS;
+  const coupleImage1 = data?.mainImages?.[1] || img1.src; //
+  const coupleImage2 = data?.mainImages?.[2] || img2.src; //
+  const coupleImage3 = data?.mainImages?.[3] || img3.src; //
+  const coupleImage4 = data?.mainImages?.[4] || img4.src; //
 
-  const galleryItems = useMemo(
-    () =>
-      gallery.map((src) => {
-        return { original: src, thumbnail: src };
-      }),
-    [gallery],
-  );
+  const storyImage1 = data?.ourStory?.photoUrls?.[0] || story1.src; //
+  const storyImage2 = data?.ourStory?.photoUrls?.[1] || story2.src; //
+  const storyImage3 = data?.ourStory?.photoUrls?.[2] || story3.src; //
 
   const description = pickLang(data?.description, language) || t("rustic_desc");
   const timeline = data?.timeline || TIMELINE;
@@ -141,11 +134,6 @@ export default function Rustic({ viewport = "pc", palette, data }) {
 
   // const width = designWidth(viewport);
   const isMobile = viewport === "mobile";
-
-  const openFullscreen = () => {
-    setIsFullscreen(true);
-    setTimeout(() => galleryRef.current?.fullScreen(), 50);
-  };
 
   // form
   const handleChange = (e) => {
@@ -244,7 +232,7 @@ export default function Rustic({ viewport = "pc", palette, data }) {
         <Flex justify={"space-between"} gap="120px">
           <Stack position="relative">
             <Image
-              src={img.src}
+              src={heroImage}
               alt="img"
               w="428px"
               h="427px"
@@ -415,7 +403,7 @@ export default function Rustic({ viewport = "pc", palette, data }) {
           <Box position="absolute" top="80px" left="103px" zIndex={1}>
             <Image
               position="relative"
-              src={img1.src}
+              src={coupleImage1}
               alt="img 1"
               maxW="318px"
               h="480px"
@@ -437,7 +425,7 @@ export default function Rustic({ viewport = "pc", palette, data }) {
             position="absolute"
             top="60px"
             right="153px"
-            src={img2.src}
+            src={coupleImage2}
             alt="img 2"
             maxW="368px"
             h="420px"
@@ -449,7 +437,7 @@ export default function Rustic({ viewport = "pc", palette, data }) {
           <Box position="absolute" bottom="-110px" left="200px" zIndex={1}>
             <Image
               position="relative"
-              src={img3.src}
+              src={coupleImage3}
               alt="img 3"
               w="263px"
               h="300px"
@@ -471,7 +459,7 @@ export default function Rustic({ viewport = "pc", palette, data }) {
             position="absolute"
             bottom="-50px"
             right="103px"
-            src={img4.src}
+            src={coupleImage4}
             alt="img 4"
             maxW="308px"
             h="307px"
@@ -840,7 +828,7 @@ export default function Rustic({ viewport = "pc", palette, data }) {
           <Box position="absolute" top="58px" left="118px" zIndex={1}>
             <Image
               position="relative"
-              src={story1.src}
+              src={storyImage1}
               alt="story 1"
               w="294px"
               h="210px"
@@ -861,7 +849,7 @@ export default function Rustic({ viewport = "pc", palette, data }) {
           <Box position="absolute" top="-12px" right="90px" zIndex={1}>
             <Image
               position="relative"
-              src={story2.src}
+              src={storyImage2}
               alt="story 2"
               w="263px"
               h="300px"
@@ -900,7 +888,7 @@ export default function Rustic({ viewport = "pc", palette, data }) {
           >
             <Image
               position="relative"
-              src={story3.src}
+              src={storyImage3}
               alt="story 3"
               w="263px"
               h="300px"
