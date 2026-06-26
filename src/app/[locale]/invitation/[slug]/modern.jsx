@@ -658,70 +658,74 @@ export default function Modern({ viewport = "pc", palette, data }) {
             {rsvpRight.icon}
           </Icon>
         </Center>
+
         {/* ————— WEDDING GALLERY ————— */}
-        <Center py="100px">
-          <Stack
-            bg="var(--c-accent)"
-            minW="748px"
-            w="fit-content"
-            align={"center"}
-            justify={"center"}
-            gap="16px"
-            borderRadius="220px"
-            position="relative"
-            py="32px"
-          >
-            <Icon
-              position="absolute"
-              top="50%"
-              right="10%"
-              transform="translateY(-50%)"
-              color="var(--c-primary)"
+        {data?.albumLink && (
+          <Center py="100px">
+            <Stack
+              bg="var(--c-accent)"
+              minW="748px"
+              w="fit-content"
+              align={"center"}
+              justify={"center"}
+              gap="16px"
+              borderRadius="220px"
+              position="relative"
+              py="32px"
             >
-              {weddingImg.icon}
-            </Icon>
-            <Text
-              fontSize={"12px"}
-              fontWeight={400}
-              lineHeight={"22px"}
-              color="#FFFFFF"
-            >
-              {t("classic_look")}
-            </Text>
-            <Text
-              w="560px"
-              textAlign={"center"}
-              fontSize={"34px"}
-              fontWeight={500}
-              lineHeight={"48px"}
-              color="#FFFFFF"
-            >
-              {t("classic_gallery")}
-            </Text>
-            <Button
-              variant={"plain"}
-              p="23px"
-              bg="#3E433C"
-              borderRadius={"100%"}
-              w="64px"
-              h="64px"
-              mt="20px"
-            >
-              <Icon>{view.icon}</Icon>
-            </Button>
-            <Text
-              fontSize="14px"
-              fontWeight="400"
-              lineHeight="22px"
-              color="#FFFFFF"
-              maxW="440px"
-              textAlign={"center"}
-              dangerouslySetInnerHTML={{
-                __html: t("classic_soon").replace(/\n/g, "<br />"),
-              }}
-            />
-          </Stack>
-        </Center>
+              <Icon
+                position="absolute"
+                top="50%"
+                right="10%"
+                transform="translateY(-50%)"
+                color="var(--c-primary)"
+              >
+                {weddingImg.icon}
+              </Icon>
+              <Text
+                fontSize={"12px"}
+                fontWeight={400}
+                lineHeight={"22px"}
+                color="#FFFFFF"
+              >
+                {t("classic_look")}
+              </Text>
+              <Text
+                w="560px"
+                textAlign={"center"}
+                fontSize={"34px"}
+                fontWeight={500}
+                lineHeight={"48px"}
+                color="#FFFFFF"
+              >
+                {t("classic_gallery")}
+              </Text>
+              <Button
+                variant={"plain"}
+                p="23px"
+                bg="#3E433C"
+                borderRadius={"100%"}
+                w="64px"
+                h="64px"
+                mt="20px"
+              >
+                <Icon>{view.icon}</Icon>
+              </Button>
+              <Text
+                fontSize="14px"
+                fontWeight="400"
+                lineHeight="22px"
+                color="#FFFFFF"
+                maxW="440px"
+                textAlign={"center"}
+                dangerouslySetInnerHTML={{
+                  __html: t("classic_soon").replace(/\n/g, "<br />"),
+                }}
+              />
+            </Stack>
+          </Center>
+        )}
+
         {/* // TODO: connect with gallery */}
         {/* ————— OUR LOVE STORY ————— */}
         <Center>

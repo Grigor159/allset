@@ -11,12 +11,8 @@ import {
   Button,
   createListCollection,
   Flex,
-  For,
   HStack,
   Icon,
-  Input,
-  Portal,
-  Select,
   Stack,
   Text,
   VStack,
@@ -29,8 +25,6 @@ import storyBg from "@/assets/imgs/invitations/classic/story_bg.jpg";
 import dresscodeBg from "@/assets/imgs/invitations/classic/dresscode_bg.jpg";
 import { GUEST_COUNT, CLASSIC_FALLBACKS, TIMELINE } from "@/utils/constants";
 import { Link } from "@/i18n/routing";
-import { Radio } from "@/components/auth/invitations/guests/radio";
-import { isNotEmptyArray } from "@/utils/checkers";
 import { error, success } from "@/components/ui/alerts";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/image-gallery.css";
@@ -62,6 +56,7 @@ export default function Classic({ viewport = "pc", palette, data }) {
   const [form, setForm] = useState(getInvitationForm(id));
   const [guests, setGuests] = useState([`${t("classic_count")}`]);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const heroImage = data?.mainImages?.[0] || mainBg.src;
   const coupleImage = data?.mainImages?.[1] || timingBg.src;
@@ -97,9 +92,13 @@ export default function Classic({ viewport = "pc", palette, data }) {
   // const width = designWidth(viewport);
   const isMobile = viewport === "mobile";
 
-  const openFullscreen = () => {
+  const openFullscreen = (index) => {
+    setSelectedIndex(index);
     setIsFullscreen(true);
-    setTimeout(() => galleryRef.current?.fullScreen(), 50);
+
+    setTimeout(() => {
+      galleryRef.current?.fullScreen();
+    }, 50);
   };
 
   // form
@@ -199,7 +198,8 @@ export default function Classic({ viewport = "pc", palette, data }) {
         w="100%"
         h={isMobile ? "520px" : "750px"}
         bgImage={`linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.45) 100%), url(${heroImage})`}
-        bgSize="cover"
+        bgSize="contain"
+        bgRepeat={"no-repeat"}
         bgPos="center"
       >
         <VStack
@@ -289,7 +289,7 @@ export default function Classic({ viewport = "pc", palette, data }) {
           >
             {t("classic_timing")}
           </Text>
-          <Text
+          {/* <Text
             fontWeight="400"
             fontSize={isMobile ? "13px" : "18px"}
             lineHeight="28px"
@@ -298,7 +298,7 @@ export default function Classic({ viewport = "pc", palette, data }) {
           >
             Lorem ipsum dolor sit amet consectetur. Ut enim scelerisque
             consequat a justo diam adipiscing velit tincidunt.
-          </Text>
+          </Text> */}
 
           <Stack gap="40px" minW={"361px"}>
             {timeline.map((item, i) => (
@@ -356,6 +356,7 @@ export default function Classic({ viewport = "pc", palette, data }) {
             overflow="hidden"
             bgImage={`url(${coupleImage})`}
             bgSize="cover"
+            bgRepeat={"no-repeat"}
             bgPos="center"
           />
         )}
@@ -451,82 +452,84 @@ export default function Classic({ viewport = "pc", palette, data }) {
         </Stack>
       </VStack>
 
-      {/* ————— GALLERY CALLOUT ————— */}
-      <VStack
-        py={isMobile ? "48px" : "100px"}
-        gap="24px"
-        textAlign="center"
-        position="relative"
-      >
-        {!isMobile && (
-          <>
-            <Icon
-              position="absolute"
-              left="261px"
-              top="50%"
-              transform="translateY(-50%)"
-              color="var(--c-secondary)"
-            >
-              {leftBrace.icon}
-            </Icon>
-            <Icon
-              position="absolute"
-              right="261px"
-              top="50%"
-              transform="translateY(-50%)"
-              color="var(--c-secondary)"
-            >
-              {rightBrace.icon}
-            </Icon>
-          </>
-        )}
-        <Text
-          fontSize="12px"
-          lineHeight="22px"
-          color="var(--c-secondary)"
-          textTransform="uppercase"
+      {/* ————— Wedding Gallery ————— */}
+      {data?.albumLink && (
+        <VStack
+          py={isMobile ? "48px" : "100px"}
+          gap="24px"
+          textAlign="center"
+          position="relative"
         >
-          {t("classic_look")}
-        </Text>
-        <Text
-          fontSize={isMobile ? "22px" : "34px"}
-          lineHeight="48px"
-          fontWeight="500"
-          color="var(--c-secondary)"
-        >
-          {t("classic_gallery")}
-        </Text>
-        <Text
-          fontSize="16px"
-          fontWeight="400"
-          color="var(--c-secondary)"
-          maxW="440px"
-          dangerouslySetInnerHTML={{
-            __html: t("classic_soon").replace(/\n/g, "<br />"),
-          }}
-        />
-        <Button
-          mt="8px"
-          px="40px"
-          h="40px"
-          fontSize="13px"
-          boxShadow="xl"
-          bg="var(--c-secondary)"
-          color="white"
-          _hover={{
-            bg: "transparent",
-            color: "var(--c-secondary)",
-            borderColor: "var(--c-secondary)",
-          }}
-          transition="all 0.3s ease"
-          as={data?.albumLink ? "a" : "button"}
-          {...(data?.albumLink
-            ? { href: data.albumLink, target: "_blank" }
-            : {})}
-        >
-          {t("classic_view")}
-        </Button>
-      </VStack>
+          {!isMobile && (
+            <>
+              <Icon
+                position="absolute"
+                left="261px"
+                top="50%"
+                transform="translateY(-50%)"
+                color="var(--c-secondary)"
+              >
+                {leftBrace.icon}
+              </Icon>
+              <Icon
+                position="absolute"
+                right="261px"
+                top="50%"
+                transform="translateY(-50%)"
+                color="var(--c-secondary)"
+              >
+                {rightBrace.icon}
+              </Icon>
+            </>
+          )}
+          <Text
+            fontSize="12px"
+            lineHeight="22px"
+            color="var(--c-secondary)"
+            textTransform="uppercase"
+          >
+            {t("classic_look")}
+          </Text>
+          <Text
+            fontSize={isMobile ? "22px" : "34px"}
+            lineHeight="48px"
+            fontWeight="500"
+            color="var(--c-secondary)"
+          >
+            {t("classic_gallery")}
+          </Text>
+          <Text
+            fontSize="16px"
+            fontWeight="400"
+            color="var(--c-secondary)"
+            maxW="440px"
+            dangerouslySetInnerHTML={{
+              __html: t("classic_soon").replace(/\n/g, "<br />"),
+            }}
+          />
+          <Button
+            mt="8px"
+            px="40px"
+            h="40px"
+            fontSize="13px"
+            boxShadow="xl"
+            bg="var(--c-secondary)"
+            color="white"
+            _hover={{
+              bg: "transparent",
+              color: "var(--c-secondary)",
+              borderColor: "var(--c-secondary)",
+            }}
+            transition="all 0.3s ease"
+            as={data?.albumLink ? "a" : "button"}
+            {...(data?.albumLink
+              ? { href: data.albumLink, target: "_blank" }
+              : {})}
+          >
+            {t("classic_view")}
+          </Button>
+        </VStack>
+      )}
 
       {/* ————— OUR LOVE STORY ————— */}
       <Box
@@ -586,7 +589,7 @@ export default function Classic({ viewport = "pc", palette, data }) {
               bgPos="center"
               filter={i === 1 || i === 3 ? "grayscale(100%)" : "none"}
               cursor="zoom-in"
-              onClick={openFullscreen}
+              onClick={() => openFullscreen(i)}
             />
           );
         })}
@@ -596,6 +599,8 @@ export default function Classic({ viewport = "pc", palette, data }) {
       {isFullscreen && (
         <Box position="fixed" inset="0" zIndex="9999">
           <ImageGallery
+            key={selectedIndex}
+            startIndex={selectedIndex}
             ref={galleryRef}
             items={galleryItems}
             showPlayButton={false}

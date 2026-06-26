@@ -710,80 +710,82 @@ export default function Rustic({ viewport = "pc", palette, data }) {
       </Center>
 
       {/* ————— WEDDING GALLERY ————— */}
-      <Center pt="60px">
-        <VStack
-          bgImage={`url(${galleryBg.src})`}
-          bgSize="contain"
-          bgPos="center"
-          bgRepeat="no-repeat"
-          minW="735px"
-          w="fit-content"
-          h="541px"
-          position={"relative"}
-          align={"center"}
-          justify={"center"}
-        >
-          <Image
-            src={moments.src}
-            alt="moments"
-            position={"absolute"}
-            left="-110px"
-            top="55px"
-          />
-          <Text
-            fontSize={"12px"}
-            fontWeight={400}
-            lineHeight={"22px"}
-            color="var(--c-primary)"
+      {data?.albumLink && (
+        <Center pt="60px">
+          <VStack
+            bgImage={`url(${galleryBg.src})`}
+            bgSize="contain"
+            bgPos="center"
+            bgRepeat="no-repeat"
+            minW="735px"
+            w="fit-content"
+            h="541px"
+            position={"relative"}
+            align={"center"}
+            justify={"center"}
           >
-            {t("classic_look")}
-          </Text>
-          <Text
-            w="560px"
-            textAlign={"center"}
-            fontSize={"34px"}
-            fontWeight={500}
-            lineHeight={"48px"}
-            color="var(--c-primary)"
-            textTransform="uppercase"
-          >
-            {t("classic_gallery")}
-          </Text>
-          <VStack>
-            <Button
-              variant={"plain"}
-              p="23px"
-              bg="#B7ADA0DE"
-              borderRadius={"100%"}
-              w="64px"
-              h="64px"
-              mt="20px"
-            >
-              <Icon>{view.icon}</Icon>
-            </Button>
+            <Image
+              src={moments.src}
+              alt="moments"
+              position={"absolute"}
+              left="-110px"
+              top="55px"
+            />
             <Text
               fontSize={"12px"}
               fontWeight={400}
               lineHeight={"22px"}
               color="var(--c-primary)"
-              mb="20px"
             >
-              {t("classic_view")}
+              {t("classic_look")}
             </Text>
+            <Text
+              w="560px"
+              textAlign={"center"}
+              fontSize={"34px"}
+              fontWeight={500}
+              lineHeight={"48px"}
+              color="var(--c-primary)"
+              textTransform="uppercase"
+            >
+              {t("classic_gallery")}
+            </Text>
+            <VStack>
+              <Button
+                variant={"plain"}
+                p="23px"
+                bg="#B7ADA0DE"
+                borderRadius={"100%"}
+                w="64px"
+                h="64px"
+                mt="20px"
+              >
+                <Icon>{view.icon}</Icon>
+              </Button>
+              <Text
+                fontSize={"12px"}
+                fontWeight={400}
+                lineHeight={"22px"}
+                color="var(--c-primary)"
+                mb="20px"
+              >
+                {t("classic_view")}
+              </Text>
+            </VStack>
+            <Text
+              fontSize="14px"
+              fontWeight="400"
+              lineHeight="22px"
+              color="var(--c-primary)"
+              maxW="440px"
+              textAlign={"center"}
+              dangerouslySetInnerHTML={{
+                __html: t("classic_soon").replace(/\n/g, "<br />"),
+              }}
+            />
           </VStack>
-          <Text
-            fontSize="14px"
-            fontWeight="400"
-            lineHeight="22px"
-            color="var(--c-primary)"
-            maxW="440px"
-            textAlign={"center"}
-            dangerouslySetInnerHTML={{
-              __html: t("classic_soon").replace(/\n/g, "<br />"),
-            }}
-          />
-        </VStack>
-      </Center>
+        </Center>
+      )}
 
       {/* // TODO: connect with gallery like classic */}
       {/* ————— OUR LOVE STORY ————— */}
