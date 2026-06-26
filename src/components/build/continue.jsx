@@ -115,6 +115,9 @@ export const Continue = () => {
       }}
       transition="all 0.3s ease"
       disabled={disabled}
+      onClick={() =>
+        queryClient.invalidateQueries({ queryKey: [`invitations/${id}`] })
+      }
     >
       {isActive ? (
         t("save")

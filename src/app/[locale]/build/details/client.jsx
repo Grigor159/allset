@@ -65,6 +65,7 @@ export const DetailsClient = () => {
   const { data: invitationData } = useGetAuthTanstack(
     `invitations/${id}`,
     !!id,
+    0, // if we need not cache and stale data
   );
   const status = invitationData?.status?.toLowerCase();
   const endpoint = status === "draft" ? "invitations/draft" : "invitations";
@@ -91,7 +92,7 @@ export const DetailsClient = () => {
         }
       }
       queryClient.invalidateQueries({ queryKey: [`invitations/${status}`] });
-      queryClient.invalidateQueries({ queryKey: [`invitations/${id}`] });
+      // queryClient.invalidateQueries({ queryKey: [`invitations/${id}`] });
       // TODO: invalidate invitation
     },
     onError: (err) => error(err?.response?.data?.error || "Draft error!"),

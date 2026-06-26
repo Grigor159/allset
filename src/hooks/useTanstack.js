@@ -4,7 +4,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { useAuth0 } from "@auth0/auth0-react";
 import apiClient from "@/lib/api";
 
-export const useGetTanstack = (name,enabled = true) => {
+export const useGetTanstack = (name, enabled = true) => {
     return useQuery({
         queryKey: [name],
         queryFn: async () => {
@@ -16,7 +16,7 @@ export const useGetTanstack = (name,enabled = true) => {
 };
 
 // TODO get token by getAccessTokenSilently,store in cookies and remove from here
-export const useGetAuthTanstack = (name, enabled) => {
+export const useGetAuthTanstack = (name, enabled, staleTime = 1000 * 60 * 2) => {
     const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
 
     return useQuery({
@@ -38,6 +38,7 @@ export const useGetAuthTanstack = (name, enabled) => {
         },
         // enabled: !isLoading && isAuthenticated, // V1
         enabled: !isLoading && isAuthenticated && enabled, // V2 (if in details client query has no id)
+        staleTime: staleTime
     });
 };
 
