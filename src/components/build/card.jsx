@@ -60,8 +60,6 @@ export const Card = ({ el }) => {
       // minH="602px"
       w={"100%"}
       minH={{ base: "500px", md: "602px" }}
-      // border={"1px solid"}
-      // borderColor={isSelected ? "#004143" : "transparent"}
       boxShadow={isSelected && "0px 4px 10px 0px rgba(0, 65, 67, 0.1)"}
       borderRadius={"8px"}
       _hover={{
@@ -71,20 +69,19 @@ export const Card = ({ el }) => {
         },
       }}
       _focus={{
-        borderColor: "#004143",
         outline: "none",
       }}
       tabIndex={0}
-      onClick={handleSelect}
       p={{ base: "16px", md: "24px" }}
       transition="box-shadow 0.3s ease"
+      onClick={handleSelect}
     >
       <Box
         w="100%"
         h="100%"
         overflow={"hidden"}
         borderRadius="8px"
-        border={{ base: "0px", md: "24px solid" }}
+        border={{ base: "0px",  md: isSelected ? "20px solid" : "24px solid", }}
         borderColor={{ base: "transparent", md: "#F1F1F1" }}
         background={"#F1F1F1"}
         transition="all 0.3s ease"
@@ -96,6 +93,7 @@ export const Card = ({ el }) => {
           src={templateImage}
           borderRadius="8px"
           transition="transform 0.3s ease"
+          transform={isSelected ? "scale(1.1)" : "scale(1)"}
         />
       </Box>
 
