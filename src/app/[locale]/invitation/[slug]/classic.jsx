@@ -61,9 +61,6 @@ export default function Classic({ viewport = "pc", palette, data }) {
   const vars = paletteToVars(
     palette?.colors ?? data?.template?.paletteKeyword?.colors,
   );
-  const title =
-    pickLang(data?.title, language) || (!isLive && "Henry & Mariam");
-  const eventDateText = formatEventDate(data?.eventDate);
 
   const [form, setForm] = useState(getInvitationForm(id));
   const [guests, setGuests] = useState([`${t("classic_count")}`]);
@@ -86,16 +83,17 @@ export default function Classic({ viewport = "pc", palette, data }) {
     [gallery],
   );
 
+  const title =
+    pickLang(data?.title, language) || (!isLive && "Henry & Mariam");
+  const eventDateText = formatEventDate(data?.eventDate);
   const description =
     pickLang(data?.description, language) || (!isLive && t("classic_title"));
-  const timeline = data?.timeline || TIMELINE;
+  const timeline = data?.timeline || (!isLive && TIMELINE);
   const dressCodeDesc =
     pickLang(data?.dressCode?.description, language) ||
     (!isLive && t("dresscode_desc"));
-
   const dressCodeColors =
     data?.dressCode?.colorPalette?.colors || (!isLive && FALLBACK);
-
   const dressCodeName =
     pickLang(data?.dressCode?.colorPalette?.name, language) ||
     palette?.name?.[language]; // needs checking after ||

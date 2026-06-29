@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef, useMemo } from "react";
+import { useState } from "react";
+import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutateAuthTanstack } from "@/hooks/useTanstack";
 import { formatDateByLang, paletteToVars } from "@/utils/formatters";
@@ -12,22 +13,16 @@ import {
   Center,
   createListCollection,
   Flex,
-  For,
   HStack,
   Icon,
-  Input,
-  Portal,
-  Select,
   Stack,
   Text,
   VStack,
   Link as ChakraLink,
   Image,
+  For,
 } from "@chakra-ui/react";
 import {
-  leftBrace,
-  map,
-  rightBrace,
   timingLeft,
   timingRight,
   rsvpLeft,
@@ -39,20 +34,20 @@ import {
 } from "@/assets/svgs";
 import { CountdownTimer } from "@/components/invitation/countdownTimer";
 import mainBg from "@/assets/imgs/invitations/modern/main_bg.png";
-import timingBg from "@/assets/imgs/invitations/classic/timing_bg.jpg";
 import borderBg from "@/assets/imgs/invitations/modern/border_bg.png";
 import sliderBg from "@/assets/imgs/invitations/modern/slider_bg.png";
 import story1 from "@/assets/imgs/invitations/modern/story_1.jpg";
 import story2 from "@/assets/imgs/invitations/modern/story_2.jpg";
 import story1Bg from "@/assets/imgs/invitations/modern/story_1_bg.png";
 import story2Bg from "@/assets/imgs/invitations/modern/story_2_bg.png";
-import dresscodeBg from "@/assets/imgs/invitations/classic/dresscode_bg.jpg";
-import { GUEST_COUNT, MODERN_FALLBACKS, TIMELINE } from "@/utils/constants";
+import {
+  GUEST_COUNT,
+  MODERN_FALLBACKS,
+  FALLBACK,
+  TIMELINE,
+} from "@/utils/constants";
 import { Link } from "@/i18n/routing";
-import { Radio } from "@/components/auth/invitations/guests/radio";
-import { isNotEmptyArray } from "@/utils/checkers";
 import { error, success } from "@/components/ui/alerts";
-import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/image-gallery.css";
 import { Rsvp } from "@/components/invitation/rsvp";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -63,8 +58,12 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
 export default function Modern({ viewport = "pc", palette, data }) {
+  const { slug } = useParams();
+
   const t = useTranslations();
   const language = useLocale();
+  const isLive = Boolean(slug);
+  const isMobile = viewport === "mobile";
 
   const { mutate } = useMutateAuthTanstack("confirmations/guest", "post", {
     onSuccess: () => {
@@ -81,7 +80,6 @@ export default function Modern({ viewport = "pc", palette, data }) {
   const vars = paletteToVars(
     palette?.colors ?? data?.template?.paletteKeyword?.colors,
   );
-  const title = pickLang(data?.title, language) || "Henry & Mariam";
 
   const { year, day, monthName, dayName } = formatDateByLang(
     data?.eventDate,
@@ -93,32 +91,37 @@ export default function Modern({ viewport = "pc", palette, data }) {
 
   const initialSlide = Math.floor((data?.mainImages?.length || 0) / 2);
   const heroImage = data?.mainImages?.[0] || mainBg.src;
-  const storyImgOne = data?.ourStory?.photoUrls?.[0] || story1.src;
-  const storyImgTwo = data?.ourStory?.photoUrls?.[1] || story2.src;
-  // TODO: if real invitation,dont show fallback images
-  const slideImages = data?.mainImages || MODERN_FALLBACKS;
+  const storyImgOne = data?.ourStory?.photoUrls?.[0] || (!isLive && story1.src);
+  const storyImgTwo = data?.ourStory?.photoUrls?.[1] || (!isLive && story2.src);
+  const slideImages = data?.mainImages || (!isLive && MODERN_FALLBACKS);
 
+  const title =
+    pickLang(data?.title, language) || (!isLive && "Henry & Mariam");
   const description =
-    pickLang(data?.description, language) || t("classic_title");
-  const timeline = data?.timeline || TIMELINE;
+    pickLang(data?.description, language) || (!isLive && t("classic_title"));
+  const timeline = data?.timeline || (!isLive && TIMELINE);
   const dressCodeDesc =
-    pickLang(data?.dressCode?.description, language) || t("dresscode_desc");
+    pickLang(data?.dressCode?.description, language) ||
+    (!isLive && t("dresscode_desc"));
+  const dressCodeColors =
+    data?.dressCode?.colorPalette?.colors || (!isLive && FALLBACK);
   const dressCodeName =
-    data?.dressCode?.colorPaletteId || palette?.name?.[language]; // needs checking
-  const dressCodeAbout = "" || palette?.description?.[language]; // needs checking
+    pickLang(data?.dressCode?.colorPalette?.name, language) ||
+    palette?.name?.[language]; // needs checking after ||
+  const dressCodeAbout =
+    pickLang(data?.dressCode?.colorPalette?.description, language) ||
+    pickLang(palette?.description, language); // needs checking after ||
   const storyText =
-    pickLang(data?.ourStory?.text, language) || t("classic_story_desc");
+    pickLang(data?.ourStory?.text, language) ||
+    (!isLive && t("classic_story_desc"));
   const contact = data?.connectWithUs || {};
-  const phone = contact.phone || "+374 99 XXXXXX";
-  const email = contact.email || "username@gmail.com";
+  const name = contact.name || (!isLive && "username");
+  const phone = contact.phone || (!isLive && "+374 99 XXXXXX");
+  const email = contact.email || (!isLive && "username@gmail.com");
   const guestCount = createListCollection({
     items: GUEST_COUNT,
   });
 
-  // const width = designWidth(viewport);
-  const isMobile = viewport === "mobile";
-
-  // form
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -156,27 +159,6 @@ export default function Modern({ viewport = "pc", palette, data }) {
     }));
   };
 
-  // const handleConfirm = (e) => {
-  //   e.preventDefault();
-
-  //   if (!form.mainGuest) return error(t("add_guest"));
-  //   if (!form.guestSide) return error(t("invitor"));
-
-  //   const hasEmptyGuest = form.secondaryGuests.some((guest) => !guest.trim());
-  //   if (hasEmptyGuest) return error(t("accompanying_name"));
-
-  //   mutate({ ...form, status: "CONFIRMED" });
-  // };
-
-  // const handleDecline = (e) => {
-  //   e.preventDefault();
-
-  //   if (!form.mainGuest) return error(t("add_guest"));
-  //   if (!form.guestSide) return error(t("invitor"));
-
-  //   mutate({ ...form, status: "DECLINED" });
-  // };
-
   const handleSubmit = (status) => (e) => {
     e.preventDefault();
 
@@ -195,7 +177,6 @@ export default function Modern({ viewport = "pc", palette, data }) {
   };
 
   console.log(data);
-  // console.log(vars);
 
   return (
     <Box
@@ -593,28 +574,22 @@ export default function Modern({ viewport = "pc", palette, data }) {
 
             <Stack gap={"32px"}>
               <VStack gap="20px">
-                <HStack gap="0">
-                  <Box
-                    w="32px"
-                    h="32px"
-                    borderRadius="50%"
-                    bg="var(--c-accent)"
-                  />
-                  <Box
-                    w="32px"
-                    h="32px"
-                    borderRadius="50%"
-                    bg="var(--c-secondary)"
-                    ml="-10px"
-                  />
-                  <Box
-                    w="32px"
-                    h="32px"
-                    borderRadius="50%"
-                    bg="var(--c-surface)"
-                    ml="-10px"
-                  />
-                </HStack>
+                {dressCodeColors && (
+                  <HStack gap="0">
+                    <For each={dressCodeColors}>
+                      {(item, index) => (
+                        <Box
+                          key={index}
+                          w="32px"
+                          h="32px"
+                          borderRadius="50%"
+                          ml="-10px"
+                          bg={item}
+                        />
+                      )}
+                    </For>
+                  </HStack>
+                )}
                 <Text
                   fontSize="18px"
                   lineHeight={"22px"}
@@ -799,6 +774,14 @@ export default function Modern({ viewport = "pc", palette, data }) {
             color="var(--c-primary)"
           >
             {t("classic_contact")}
+          </Text>
+          <Text
+            fontSize="18px"
+            lineHeight="24px"
+            fontWeight="400"
+            color="var(--c-primary)"
+          >
+            {name}
           </Text>
           <Text
             as="a"
