@@ -171,27 +171,6 @@ export default function Rustic({ viewport = "pc", palette, data }) {
     }));
   };
 
-  // const handleConfirm = (e) => {
-  //   e.preventDefault();
-
-  //   if (!form.mainGuest) return error(t("add_guest"));
-  //   if (!form.guestSide) return error(t("invitor"));
-
-  //   const hasEmptyGuest = form.secondaryGuests.some((guest) => !guest.trim());
-  //   if (hasEmptyGuest) return error(t("accompanying_name"));
-
-  //   mutate({ ...form, status: "CONFIRMED" });
-  // };
-
-  // const handleDecline = (e) => {
-  //   e.preventDefault();
-
-  //   if (!form.mainGuest) return error(t("add_guest"));
-  //   if (!form.guestSide) return error(t("invitor"));
-
-  //   mutate({ ...form, status: "DECLINED" });
-  // };
-
   const handleSubmit = (status) => (e) => {
     e.preventDefault();
 
@@ -210,7 +189,6 @@ export default function Rustic({ viewport = "pc", palette, data }) {
   };
 
   console.log(data);
-  // console.log(vars);
 
   return (
     <Box
@@ -398,74 +376,82 @@ export default function Rustic({ viewport = "pc", palette, data }) {
               {t("rustic_happy")}
             </Text>
           </Box>
-          <Box position="absolute" top="80px" left="103px" zIndex={1}>
+          {coupleImage1 && (
+            <Box position="absolute" top="80px" left="103px" zIndex={1}>
+              <Image
+                position="relative"
+                src={coupleImage1}
+                alt="img 1"
+                maxW="318px"
+                h="480px"
+                objectFit="cover"
+                bg="white"
+                p="12px"
+              />
+              <Image
+                src={screp.src}
+                h="63px"
+                alt="screp"
+                position="absolute"
+                top="-35px"
+                left="50%"
+                transform="translateX(-50%)"
+              />
+            </Box>
+          )}
+          {coupleImage2 && (
             <Image
-              position="relative"
-              src={coupleImage1}
-              alt="img 1"
-              maxW="318px"
-              h="480px"
+              position="absolute"
+              top="60px"
+              right="153px"
+              src={coupleImage2}
+              alt="img 2"
+              maxW="368px"
+              h="420px"
               objectFit="cover"
               bg="white"
-              p="12px"
+              p="20px 20px 72px 20px"
+              zIndex={1}
             />
+          )}
+          {coupleImage3 && (
+            <Box position="absolute" bottom="-110px" left="200px" zIndex={1}>
+              <Image
+                position="relative"
+                src={coupleImage3}
+                alt="img 3"
+                w="263px"
+                h="300px"
+                objectFit="cover"
+                bg="white"
+                p="17px 17px 53px 17px"
+                transform="rotate(-10deg)"
+              />
+              <Image
+                src={dream.src}
+                h="63px"
+                alt="dream"
+                position="absolute"
+                top="-10px"
+                left="-90px"
+              />
+            </Box>
+          )}
+          {coupleImage4 && (
             <Image
-              src={screp.src}
-              h="63px"
-              alt="screp"
               position="absolute"
-              top="-35px"
-              left="50%"
-              transform="translateX(-50%)"
-            />
-          </Box>
-          <Image
-            position="absolute"
-            top="60px"
-            right="153px"
-            src={coupleImage2}
-            alt="img 2"
-            maxW="368px"
-            h="420px"
-            objectFit="cover"
-            bg="white"
-            p="20px 20px 72px 20px"
-            zIndex={1}
-          />
-          <Box position="absolute" bottom="-110px" left="200px" zIndex={1}>
-            <Image
-              position="relative"
-              src={coupleImage3}
-              alt="img 3"
-              w="263px"
-              h="300px"
+              bottom="-50px"
+              right="103px"
+              src={coupleImage4}
+              alt="img 4"
+              maxW="308px"
+              h="307px"
               objectFit="cover"
               bg="white"
-              p="17px 17px 53px 17px"
-              transform="rotate(-10deg)"
+              p="29px 25px 29px 25px"
+              zIndex={1}
             />
-            <Image
-              src={dream.src}
-              h="63px"
-              alt="dream"
-              position="absolute"
-              top="-10px"
-              left="-90px"
-            />
-          </Box>
-          <Image
-            position="absolute"
-            bottom="-50px"
-            right="103px"
-            src={coupleImage4}
-            alt="img 4"
-            maxW="308px"
-            h="307px"
-            objectFit="cover"
-            bg="white"
-            p="29px 25px 29px 25px"
-            zIndex={1}
-          />
+          )}
         </VStack>
       </Container>
 
@@ -817,47 +803,51 @@ export default function Rustic({ viewport = "pc", palette, data }) {
           // alignItems="center"
           position="relative"
         >
-          <Box position="absolute" top="58px" left="118px" zIndex={1}>
-            <Image
-              position="relative"
-              src={storyImage1}
-              alt="story 1"
-              w="294px"
-              h="210px"
-              objectFit="cover"
-              bg="white"
-              p="8px"
-            />
-            <Image
-              src={screp2.src}
-              h="49px"
-              alt="screp 2"
-              position="absolute"
-              top="-25px"
-              left="50%"
-              transform="translateX(-50%)"
-            />
-          </Box>
-          <Box position="absolute" top="-12px" right="90px" zIndex={1}>
-            <Image
-              position="relative"
-              src={storyImage2}
-              alt="story 2"
-              w="263px"
-              h="300px"
-              objectFit="cover"
-              bg="white"
-              p="12px 12px 42px 12px"
-            />
-            <Image
-              src={always.src}
-              h="63px"
-              alt="always"
-              position="absolute"
-              top="-30px"
-              left="-105px"
-            />
-          </Box>
+          {storyImage1 && (
+            <Box position="absolute" top="58px" left="118px" zIndex={1}>
+              <Image
+                position="relative"
+                src={storyImage1}
+                alt="story 1"
+                w="294px"
+                h="210px"
+                objectFit="cover"
+                bg="white"
+                p="8px"
+              />
+              <Image
+                src={screp2.src}
+                h="49px"
+                alt="screp 2"
+                position="absolute"
+                top="-25px"
+                left="50%"
+                transform="translateX(-50%)"
+              />
+            </Box>
+          )}
+          {storyImage2 && (
+            <Box position="absolute" top="-12px" right="90px" zIndex={1}>
+              <Image
+                position="relative"
+                src={storyImage2}
+                alt="story 2"
+                w="263px"
+                h="300px"
+                objectFit="cover"
+                bg="white"
+                p="12px 12px 42px 12px"
+              />
+              <Image
+                src={always.src}
+                h="63px"
+                alt="always"
+                position="absolute"
+                top="-30px"
+                left="-105px"
+              />
+            </Box>
+          )}
 
           <Image
             position="absolute"
@@ -871,32 +861,34 @@ export default function Rustic({ viewport = "pc", palette, data }) {
             zIndex={1}
           />
 
-          <Box
-            position="absolute"
-            bottom="30px"
-            left="35%"
-            transform="translateX(-35%)"
-            zIndex={2}
-          >
-            <Image
-              position="relative"
-              src={storyImage3}
-              alt="story 3"
-              w="263px"
-              h="300px"
-              objectFit="cover"
-              bg="white"
-              p="12px 12px 42px 12px"
-            />
-            <Image
-              src={storyFlower.src}
-              boxSize="84px"
-              alt="story flower"
+          {storyImage3 && (
+            <Box
               position="absolute"
-              top="-40px"
-              left="40px"
-            />
-          </Box>
+              bottom="30px"
+              left="35%"
+              transform="translateX(-35%)"
+              zIndex={2}
+            >
+              <Image
+                position="relative"
+                src={storyImage3}
+                alt="story 3"
+                w="263px"
+                h="300px"
+                objectFit="cover"
+                bg="white"
+                p="12px 12px 42px 12px"
+              />
+              <Image
+                src={storyFlower.src}
+                boxSize="84px"
+                alt="story flower"
+                position="absolute"
+                top="-40px"
+                left="40px"
+              />
+            </Box>
+          )}
           <Image
             src={storyFlower.src}
             boxSize="144px"
@@ -929,7 +921,7 @@ export default function Rustic({ viewport = "pc", palette, data }) {
         >
           {t("classic_contact")}
         </Text>
-          <Text
+        <Text
           fontSize="24px"
           lineHeight="24px"
           fontWeight="800"
