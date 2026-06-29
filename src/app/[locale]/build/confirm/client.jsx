@@ -13,7 +13,7 @@ import { Pay } from "@/components/build/pay";
 import { Success } from "@/components/build/success";
 import { Failed } from "@/components/build/failed";
 import { cookie } from "@/lib/browser/cookie";
-import { paymentConfig } from "@/lib/pay/config";
+import { queryClient } from "@/providers/queryProvider";
 
 export const ConfirmClient = () => {
   const [{ template, palette, status, payment, id, legal }, setQuery] =
@@ -92,6 +92,9 @@ export const ConfirmClient = () => {
 
   const submit = (e) => {
     e.preventDefault();
+
+    queryClient.invalidateQueries({ queryKey: [`invitations/drafts`] });
+
     if (payment === "idram") {
       cookie.set(
         "redirect",
@@ -150,25 +153,3 @@ export const ConfirmClient = () => {
     </Box>
   );
 };
-
-// const config = paymentConfig[payment];
-
-// const { mutate } = useMutateAuthTanstack(config?.endpoint, "post", {
-//   onSuccess: config?.onSuccess,
-//   onError: (err) => {
-//     error(err?.response?.data?.message);
-//   },
-// });
-
-// const submit = (e) => {
-//   e.preventDefault();
-
-//   if (payment === "idram") {
-//     cookie.set(
-//       "redirect",
-//       `?template=${template}&palette=${palette}&id=${id}&legal=true&payment=${payment}`,
-//     );
-//   }
-
-//   mutate({ invitationId: id });
-// };

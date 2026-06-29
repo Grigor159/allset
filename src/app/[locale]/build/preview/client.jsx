@@ -25,13 +25,14 @@ export const PreviewClient = () => {
   return (
     <Animate>
       <VStack
-        pt={{ base: "32px", md: "48px" }}
+        // pt={{ base: "32px", md: "48px" }}
         w="100%"
         bg="white"
         borderRadius={"8px"}
         p={{ base: "16px", md: "24px" }}
         gap={{ base: "16px", md: "24px" }}
         mb="40px"
+        mt="48px"
       >
         <Flex w="100%" justify="space-between" align="center">
           <MidText text="template_preview" />
