@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutateAuthTanstack } from "@/hooks/useTanstack";
 import {
@@ -21,9 +22,6 @@ import {
   HStack,
   Icon,
   Image,
-  Input,
-  Portal,
-  Select,
   Stack,
   Text,
   VStack,
@@ -35,9 +33,6 @@ import {
   heart,
   heartsLeft,
   heartsRight,
-  leftBrace,
-  map,
-  rightBrace,
   topPin,
   view,
 } from "@/assets/svgs";
@@ -45,8 +40,6 @@ import { CountdownTimer } from "@/components/invitation/countdownTimer";
 import img from "@/assets/imgs/invitations/rustic/main_img.png";
 import loveBg from "@/assets/imgs/invitations/rustic/love_bg.png";
 import ring from "@/assets/imgs/invitations/rustic/ring.png";
-import overlay from "@/assets/imgs/invitations/rustic/overlay.png";
-import overlay2 from "@/assets/imgs/invitations/rustic/overlay2.png";
 import mainImagesBg from "@/assets/imgs/invitations/rustic/main_images_bg.png";
 import coupleBg from "@/assets/imgs/invitations/rustic/couple_bg.png";
 import img1 from "@/assets/imgs/invitations/rustic/img_1.png";
@@ -71,18 +64,20 @@ import storyFlowers from "@/assets/imgs/invitations/rustic/story_flowers.png";
 import story3 from "@/assets/imgs/invitations/rustic/story_3.png";
 import storyFlower from "@/assets/imgs/invitations/rustic/story_flower.png";
 // import storyBg from "@/assets/imgs/invitations/rustic/story_bg.jpg";
-import { GUEST_COUNT, TIMELINE } from "@/utils/constants";
+import { FALLBACK, GUEST_COUNT, TIMELINE } from "@/utils/constants";
 import { Link } from "@/i18n/routing";
-import { Radio } from "@/components/auth/invitations/guests/radio";
-import { isNotEmptyArray } from "@/utils/checkers";
 import { error, success } from "@/components/ui/alerts";
 import "react-image-gallery/styles/image-gallery.css";
 import { Rsvp } from "@/components/invitation/rsvp";
 import { Calendar } from "@/components/invitation/calendar";
 
 export default function Rustic({ viewport = "pc", palette, data }) {
+  const { slug } = useParams();
+
   const t = useTranslations();
   const language = useLocale();
+  const isLive = Boolean(slug);
+  const isMobile = viewport === "mobile";
 
   const { mutate } = useMutateAuthTanstack("confirmations/guest", "post", {
     onSuccess: () => {
@@ -100,42 +95,45 @@ export default function Rustic({ viewport = "pc", palette, data }) {
     palette?.colors ?? data?.template?.paletteKeyword?.colors,
   );
   // const title = pickLang(data?.title, language) || "Henry & Mariam";
+  // const eventDateText = formatEventDate(data?.eventDate);
   const { name1, name2 } = formatRusticTitle(data?.title, language);
-  const eventDateText = formatEventDate(data?.eventDate);
-
   const [form, setForm] = useState(getInvitationForm(id));
   const [guests, setGuests] = useState([`${t("classic_count")}`]);
 
-  const heroImage = data?.mainImages?.[0] || img.src;
-  const coupleImage1 = data?.mainImages?.[1] || img1.src; //
-  const coupleImage2 = data?.mainImages?.[2] || img2.src; //
-  const coupleImage3 = data?.mainImages?.[3] || img3.src; //
-  const coupleImage4 = data?.mainImages?.[4] || img4.src; //
+  const heroImage = data?.mainImages?.[0] || (!isLive && img.src);
+  const coupleImage1 = data?.mainImages?.[1] || (!isLive && img1.src);
+  const coupleImage2 = data?.mainImages?.[2] || (!isLive && img2.src);
+  const coupleImage3 = data?.mainImages?.[3] || (!isLive && img3.src);
+  const coupleImage4 = data?.mainImages?.[4] || (!isLive && img4.src);
+  const storyImage1 = data?.ourStory?.photoUrls?.[0] || (!isLive && story1.src);
+  const storyImage2 = data?.ourStory?.photoUrls?.[1] || (!isLive && story2.src);
+  const storyImage3 = data?.ourStory?.photoUrls?.[2] || (!isLive && story3.src);
 
-  const storyImage1 = data?.ourStory?.photoUrls?.[0] || story1.src; //
-  const storyImage2 = data?.ourStory?.photoUrls?.[1] || story2.src; //
-  const storyImage3 = data?.ourStory?.photoUrls?.[2] || story3.src; //
-
-  const description = pickLang(data?.description, language) || t("rustic_desc");
-  const timeline = data?.timeline || TIMELINE;
+  const description =
+    pickLang(data?.description, language) || (!isLive && t("classic_title"));
+  const timeline = data?.timeline || (!isLive && TIMELINE);
   const dressCodeDesc =
-    pickLang(data?.dressCode?.description, language) || t("dresscode_desc");
+    pickLang(data?.dressCode?.description, language) ||
+    (!isLive && t("dresscode_desc"));
+  const dressCodeColors =
+    data?.dressCode?.colorPalette?.colors || (!isLive && FALLBACK);
   const dressCodeName =
-    data?.dressCode?.colorPaletteId || palette?.name?.[language]; // needs checking
-  const dressCodeAbout = "" || palette?.description?.[language]; // needs checking
+    pickLang(data?.dressCode?.colorPalette?.name, language) ||
+    palette?.name?.[language]; // needs checking after ||
+  const dressCodeAbout =
+    pickLang(data?.dressCode?.colorPalette?.description, language) ||
+    pickLang(palette?.description, language); // needs checking after ||
   const storyText =
-    pickLang(data?.ourStory?.text, language) || t("classic_story_desc");
+    pickLang(data?.ourStory?.text, language) ||
+    (!isLive && t("classic_story_desc"));
   const contact = data?.connectWithUs || {};
-  const phone = contact.phone || "+374 99 XXXXXX";
-  const email = contact.email || "username@gmail.com";
+  const name = contact.name || (!isLive && "username");
+  const phone = contact.phone || (!isLive && "+374 99 XXXXXX");
+  const email = contact.email || (!isLive && "username@gmail.com");
   const guestCount = createListCollection({
     items: GUEST_COUNT,
   });
 
-  // const width = designWidth(viewport);
-  const isMobile = viewport === "mobile";
-
-  // form
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -645,28 +643,22 @@ export default function Rustic({ viewport = "pc", palette, data }) {
 
           <Stack gap={"32px"}>
             <VStack gap="20px">
-              <HStack gap="0">
-                <Box
-                  w="32px"
-                  h="32px"
-                  borderRadius="50%"
-                  bg="var(--c-accent)"
-                />
-                <Box
-                  w="32px"
-                  h="32px"
-                  borderRadius="50%"
-                  bg="var(--c-secondary)"
-                  ml="-10px"
-                />
-                <Box
-                  w="32px"
-                  h="32px"
-                  borderRadius="50%"
-                  bg="var(--c-surface)"
-                  ml="-10px"
-                />
-              </HStack>
+              {dressCodeColors && (
+                <HStack gap="0">
+                  <For each={dressCodeColors}>
+                    {(item, index) => (
+                      <Box
+                        key={index}
+                        w="32px"
+                        h="32px"
+                        borderRadius="50%"
+                        ml="-10px"
+                        bg={item}
+                      />
+                    )}
+                  </For>
+                </HStack>
+              )}
               <Text
                 fontSize="18px"
                 lineHeight={"22px"}
@@ -936,6 +928,15 @@ export default function Rustic({ viewport = "pc", palette, data }) {
           color="var(--c-primary)"
         >
           {t("classic_contact")}
+        </Text>
+          <Text
+          fontSize="24px"
+          lineHeight="24px"
+          fontWeight="800"
+          textTransform={"uppercase"}
+          color="var(--c-primary)"
+        >
+          {name}
         </Text>
         <Text
           as="a"

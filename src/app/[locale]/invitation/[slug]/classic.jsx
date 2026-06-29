@@ -411,20 +411,22 @@ export default function Classic({ viewport = "pc", palette, data }) {
 
         <Stack gap={"32px"}>
           <VStack gap="20px">
-            <HStack gap="0">
-              <For each={dressCodeColors}>
-                {(item, index) => (
-                  <Box
-                    key={index}
-                    w="32px"
-                    h="32px"
-                    borderRadius="50%"
-                    ml="-10px"
-                    bg={item}
-                  />
-                )}
-              </For>
-            </HStack>
+            {dressCodeColors && (
+              <HStack gap="0">
+                <For each={dressCodeColors}>
+                  {(item, index) => (
+                    <Box
+                      key={index}
+                      w="32px"
+                      h="32px"
+                      borderRadius="50%"
+                      ml="-10px"
+                      bg={item}
+                    />
+                  )}
+                </For>
+              </HStack>
+            )}
             <Text
               fontSize="18px"
               lineHeight={"22px"}
