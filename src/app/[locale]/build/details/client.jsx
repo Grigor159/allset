@@ -67,7 +67,7 @@ export const DetailsClient = () => {
   const { data: invitationData } = useGetAuthTanstack(
     `invitations/${id}`,
     !!id,
-    0, // if we need not cache and stale data
+    0, // for a staled data
   );
   const status = invitationData?.status?.toLowerCase() || "draft";
   const endpoint = status === "draft" ? "invitations/draft" : "invitations";
@@ -420,17 +420,22 @@ export const DetailsClient = () => {
 
   return (
     <Box
+      position="relative"
       pt={{ base: "32px", md: "48px" }}
       pb="22px"
-      pointerEvents={isUploading ? "none" : "auto"}
-      filter={isUploading ? "blur(3px)" : "none"}
-      transition="filter .2s"
     >
+      {!isUploading && (
+        <Box position="absolute" inset={0} zIndex={10} bg="transparent" />
+      )}
+
       {/* VStack */}
       <Stack
         gap={{ base: "16px", md: "24px" }}
         w={{ base: "100%", lg: "748px" }}
         mx="auto"
+        //
+        filter={!isUploading ? "blur(2px)" : "none"}
+        transition="filter .2s"
       >
         <Stack
           id="details"
