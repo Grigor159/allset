@@ -4,7 +4,13 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { designWidth, fitScale } from "@/utils/formatters";
 import { Renderer } from "./renderer";
 
-export const Frame = ({ viewport = "pc", palette, height, maxHeight }) => {
+export const Frame = ({
+  viewport = "pc",
+  palette,
+  height,
+  maxHeight,
+  live,
+}) => {
   const outerRef = useRef(null);
   const innerRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -74,7 +80,7 @@ export const Frame = ({ viewport = "pc", palette, height, maxHeight }) => {
             left: 0,
           }}
         >
-          <Renderer viewport={viewport} palette={palette} />
+          <Renderer viewport={viewport} palette={palette} live={live}/>
         </div>
       </div>
     </div>

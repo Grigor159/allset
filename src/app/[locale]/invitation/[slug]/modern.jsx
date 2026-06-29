@@ -57,12 +57,12 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
-export default function Modern({ viewport = "pc", palette, data }) {
+export default function Modern({ viewport = "pc", palette, data, live }) {
   const { slug } = useParams();
 
   const t = useTranslations();
   const language = useLocale();
-  const isLive = Boolean(slug);
+  const isLive = Boolean(slug) || live;
   const isMobile = viewport === "mobile";
 
   const { mutate } = useMutateAuthTanstack("confirmations/guest", "post", {
@@ -443,7 +443,7 @@ export default function Modern({ viewport = "pc", palette, data }) {
               {t("classic_timing")}
             </Text>
             <Stack gap="40px" align={"center"} justify={"center"}>
-              {timeline.map((item, i) => (
+              {timeline?.map((item, i) => (
                 <Flex
                   key={i}
                   justify={"space-between"}

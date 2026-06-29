@@ -37,13 +37,13 @@ import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/image-gallery.css";
 import { Rsvp } from "@/components/invitation/rsvp";
 
-export default function Classic({ viewport = "pc", palette, data }) {
+export default function Classic({ viewport = "pc", palette, data,live }) {
   const { slug } = useParams();
-
   const t = useTranslations();
   const language = useLocale();
   const galleryRef = useRef(null);
-  const isLive = Boolean(slug);
+  // TODO : change logic for isLive, send from renderer props for preview as it is live
+  const isLive = Boolean(slug) || live;
   const isMobile = viewport === "mobile";
 
   const { mutate } = useMutateAuthTanstack("confirmations/guest", "post", {
@@ -297,7 +297,7 @@ export default function Classic({ viewport = "pc", palette, data }) {
           </Text> */}
 
           <Stack gap="40px" minW={"361px"}>
-            {timeline.map((item, i) => (
+            {timeline?.map((item, i) => (
               <Flex
                 key={i}
                 justify={"space-between"}

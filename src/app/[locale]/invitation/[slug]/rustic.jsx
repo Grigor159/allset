@@ -4,11 +4,7 @@ import { useState } from "react";
 import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutateAuthTanstack } from "@/hooks/useTanstack";
-import {
-  formatEventDate,
-  formatRusticTitle,
-  paletteToVars,
-} from "@/utils/formatters";
+import { formatRusticTitle, paletteToVars } from "@/utils/formatters";
 import { Language } from "@/components/invitation/language";
 import { getInvitationForm, pickLang } from "@/utils/helpers";
 import {
@@ -63,7 +59,6 @@ import always from "@/assets/imgs/invitations/rustic/always.png";
 import storyFlowers from "@/assets/imgs/invitations/rustic/story_flowers.png";
 import story3 from "@/assets/imgs/invitations/rustic/story_3.png";
 import storyFlower from "@/assets/imgs/invitations/rustic/story_flower.png";
-// import storyBg from "@/assets/imgs/invitations/rustic/story_bg.jpg";
 import { FALLBACK, GUEST_COUNT, TIMELINE } from "@/utils/constants";
 import { Link } from "@/i18n/routing";
 import { error, success } from "@/components/ui/alerts";
@@ -71,12 +66,12 @@ import "react-image-gallery/styles/image-gallery.css";
 import { Rsvp } from "@/components/invitation/rsvp";
 import { Calendar } from "@/components/invitation/calendar";
 
-export default function Rustic({ viewport = "pc", palette, data }) {
+export default function Rustic({ viewport = "pc", palette, data, live }) {
   const { slug } = useParams();
 
   const t = useTranslations();
   const language = useLocale();
-  const isLive = Boolean(slug);
+  const isLive = Boolean(slug) || live;
   const isMobile = viewport === "mobile";
 
   const { mutate } = useMutateAuthTanstack("confirmations/guest", "post", {
@@ -521,7 +516,7 @@ export default function Rustic({ viewport = "pc", palette, data }) {
               {t("classic_timing")}
             </Text>
             <Stack gap="40px">
-              {timeline.map((item, i) => (
+              {timeline?.map((item, i) => (
                 <Flex
                   key={i}
                   justify={"space-between"}

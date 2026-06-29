@@ -32,7 +32,7 @@
 //       //   setForm();
 //       //   router.push(`/payment`);
 //       // }
-//       setQuery({ status: payment === "visa" ? "failed" : "success" });
+//       setQuery({ status: payment === "arca" ? "failed" : "success" });
 //     } catch (err) {
 //       error(`Error - ${err}`);
 //     }
@@ -221,6 +221,7 @@ import { Pay } from "@/components/build/pay";
 import { Success } from "@/components/build/success";
 import { Failed } from "@/components/build/failed";
 import { cookie } from "@/lib/browser/cookie";
+import { paymentConfig } from "@/lib/pay/config";
 
 export const ConfirmClient = () => {
   const [{ template, palette, status, payment, id, legal }, setQuery] =
@@ -235,42 +236,10 @@ export const ConfirmClient = () => {
 
   const { isLoading, data } = useGetAuthTanstack(`invitations/${id}`, !!id);
 
-  const { mutate } = useMutateAuthTanstack("payments/idram/initiate", "post", {
-    onSuccess: (result) => {
-      const {
-        actionUrl,
-        edpLanguage,
-        edpRecAccount,
-        edpDescription,
-        edpAmount,
-        edpBillNo,
-      } = result;
+  const config = paymentConfig[payment];
 
-      const form = document.createElement("form");
-      form.method = "POST";
-      form.action = actionUrl;
-
-      const fields = {
-        EDP_LANGUAGE: edpLanguage,
-        EDP_REC_ACCOUNT: edpRecAccount,
-        EDP_DESCRIPTION: edpDescription,
-        EDP_AMOUNT: edpAmount,
-        EDP_BILL_NO: edpBillNo,
-        // EDP_SUCCESS_URL: successUrl,
-        // EDP_FAIL_URL: failUrl,
-      };
-
-      Object.entries(fields).forEach(([name, value]) => {
-        const input = document.createElement("input");
-        input.type = "hidden";
-        input.name = name;
-        input.value = value;
-        form.appendChild(input);
-      });
-
-      document.body.appendChild(form);
-      form.submit();
-    },
+  const { mutate } = useMutateAuthTanstack(config.endpoint, "post", {
+    onSuccess: config.onSuccess,
     onError: (err) => {
       error(err?.response?.data?.message);
     },
@@ -278,18 +247,16 @@ export const ConfirmClient = () => {
 
   const submit = (e) => {
     e.preventDefault();
+
     if (payment === "idram") {
       cookie.set(
         "redirect",
         `?template=${template}&palette=${palette}&id=${id}&legal=true&payment=${payment}`,
       );
-      mutate({ invitationId: id });
-      // router.push("/build/module");
-      return;
     }
-  };
 
-  // TODO: here we need remove cookie & setQuery status to null
+    mutate({ invitationId: id });
+  };
 
   if (!id || isLoading) {
     return <Box pt="40px">Loading...</Box>;
@@ -338,3 +305,78 @@ export const ConfirmClient = () => {
     </Box>
   );
 };
+
+// const { mutate: idramMutate } = useMutateAuthTanstack(
+//   "payments/idram/initiate",
+//   "post",
+//   {
+//     onSuccess: (result) => {
+//       const {
+//         actionUrl,
+//         edpLanguage,
+//         edpRecAccount,
+//         edpDescription,
+//         edpAmount,
+//         edpBillNo,
+//       } = result;
+
+//       const form = document.createElement("form");
+//       form.method = "POST";
+//       form.action = actionUrl;
+
+//       const fields = {
+//         EDP_LANGUAGE: edpLanguage,
+//         EDP_REC_ACCOUNT: edpRecAccount,
+//         EDP_DESCRIPTION: edpDescription,
+//         EDP_AMOUNT: edpAmount,
+//         EDP_BILL_NO: edpBillNo,
+//         // EDP_SUCCESS_URL: successUrl,
+//         // EDP_FAIL_URL: failUrl,
+//       };
+
+//       Object.entries(fields).forEach(([name, value]) => {
+//         const input = document.createElement("input");
+//         input.type = "hidden";
+//         input.name = name;
+//         input.value = value;
+//         form.appendChild(input);
+//       });
+
+//       document.body.appendChild(form);
+//       form.submit();
+//     },
+//     onError: (err) => {
+//       error(err?.response?.data?.message);
+//     },
+//   },
+// );
+
+// const { mutate: arcaMutate } = useMutateAuthTanstack(
+//   "payments/arca/initiate",
+//   "post",
+//   {
+//     onSuccess: (result) => {
+//       const { formUrl, orderId } = result;
+
+//       if (orderId && formUrl) {
+//         window.location.href = formUrl;
+//       }
+//     },
+//     onError: (err) => {
+//       error(err?.response?.data?.message);
+//     },
+//   },
+// );
+
+// const submit = (e) => {
+//   e.preventDefault();
+//   if (payment === "idram") {
+//     cookie.set(
+//       "redirect",
+//       `?template=${template}&palette=${palette}&id=${id}&legal=true&payment=${payment}`,
+//     );
+//     return idramMutate({ invitationId: id });
+//   }
+
+//   return arcaMutate({ invitationId: id });
+// };
