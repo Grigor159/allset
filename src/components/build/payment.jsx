@@ -63,7 +63,7 @@ export const Payment = ({ legal, payment, setQuery }) => {
                   br="4px"
                   p="16px"
                 >
-                  {value == "arca" && (
+                  {value == "visa" && (
                     <Text
                       fontSize={{ base: "14px", md: "16px" }}
                       color={"#4B5563"}
@@ -75,7 +75,7 @@ export const Payment = ({ legal, payment, setQuery }) => {
                   <Image
                     src={src.src}
                     alt="img"
-                    w={value === "arca" ? "63px" : "100%"}
+                    w={value === "visa" ? "63px" : "100%"}
                   />
                 </Flex>
               </RadioGroup.Item>

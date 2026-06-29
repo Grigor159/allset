@@ -231,13 +231,13 @@ export const INVITATION_FIELDS = [
   "templateId",
 ];
 
-import arca from "@/assets/imgs/arca.png";
+import visa from "@/assets/imgs/visa.png";
 import idram from "@/assets/imgs/idram.png";
 
 export const paymentMethods = [
   {
-    value: "arca",
-    src: arca,
+    value: "visa",
+    src: visa,
   },
   {
     value: "idram",

@@ -35,7 +35,7 @@ export const paymentConfig = {
       form.submit();
     },
   },
-  arca: {
+  visa: {
     endpoint: "payments/arca/initiate",
     onSuccess: ({ formUrl }) => {
       if (formUrl) {
