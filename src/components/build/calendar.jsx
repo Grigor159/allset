@@ -1,6 +1,6 @@
 "use client";
 // TODO: 1916 issue
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Dialog, Icon, Input, InputGroup, CloseButton } from "@chakra-ui/react";
 import { DayPicker } from "react-day-picker";
@@ -18,20 +18,25 @@ export const Calendar = ({ name, value, onChange, required, disabled }) => {
 
   const [open, setOpen] = useState(false);
 
-  const selected = value
-    ? (() => {
-        const [year, month, day] = value.split("-").map(Number);
-        return new Date(year, month - 1, day);
-      })()
-    : null;
+  const selected = useMemo(() => {
+    if (!value) return undefined;
+
+    const [year, month, day] = value.split("-").map(Number);
+
+    return new Date(Date.UTC(year, month - 1, day));
+  }, [value]);
 
   const handleSelect = (date) => {
     if (!date) return;
 
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
     onChange?.({
       target: {
         name,
-        value: formatDate(date, "YYYY-MM-DD"),
+        value: `${year}-${month}-${day}`,
       },
     });
 
@@ -113,7 +118,7 @@ export const Calendar = ({ name, value, onChange, required, disabled }) => {
                 },
                 today: {
                   color: "red",
-                  fontWeight: "bold"
+                  fontWeight: "bold",
                 },
               }}
               classNames={{
@@ -126,3 +131,19 @@ export const Calendar = ({ name, value, onChange, required, disabled }) => {
     </Dialog.Root>
   );
 };
+
+// V1 - with default 1916 issue
+// const selected = value
+//   ? (() => {
+//       const [year, month, day] = value.split("-").map(Number);
+//       return new Date(year, month - 1, day);
+//     })()
+//   : null;
+
+// V2 - default fixed,but new slected is broken
+// const selected = value
+//   ? (() => {
+//       const parts = value.split("-").map(Number);
+//       return new Date(parts[2], parts[1] - 1, parts[0]);
+//     })()
+//   : undefined;
