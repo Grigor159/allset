@@ -424,7 +424,7 @@ export const DetailsClient = () => {
       pt={{ base: "32px", md: "48px" }}
       pb="22px"
     >
-      {!isUploading && (
+      {isUploading && (
         <Box position="absolute" inset={0} zIndex={10} bg="transparent" />
       )}
 
@@ -434,7 +434,7 @@ export const DetailsClient = () => {
         w={{ base: "100%", lg: "748px" }}
         mx="auto"
         //
-        filter={!isUploading ? "blur(2px)" : "none"}
+        filter={isUploading ? "blur(2px)" : "none"}
         transition="filter .2s"
       >
         <Stack
