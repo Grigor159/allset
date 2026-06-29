@@ -7,7 +7,6 @@ const Rustic = dynamic(() => import("./rustic"));
 const Classic = dynamic(() => import("./classic"));
 
 export const InvitationClient = ({ data }) => {
-
   const template = data?.templateId;
 
   if (template === "template.classic.elegance") return <Classic data={data} />;

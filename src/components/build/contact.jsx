@@ -65,7 +65,9 @@ export const Contact = ({ name, value, onChange, hide, required }) => {
               name="phone"
               value={value?.phone ?? ""}
               onChange={handleNestedChange}
-              placeholder={t("phone")}
+              placeholder={
+                t("phone") + " " + (value?.email ? t("not_required") : "")
+              }
               required={!value?.email}
               // disabled={!checked}
             />
@@ -73,7 +75,9 @@ export const Contact = ({ name, value, onChange, hide, required }) => {
               name="email"
               value={value?.email ?? ""}
               onChange={handleNestedChange}
-              placeholder={t("email")}
+              placeholder={
+                t("email") + " " + (value?.phone ? t("not_required") : "")
+              }
               required={!value?.phone}
               // disabled={!checked}
             />

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useMemo } from "react";
+import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutateAuthTanstack } from "@/hooks/useTanstack";
 import { formatEventDate, paletteToVars } from "@/utils/formatters";
@@ -11,6 +12,7 @@ import {
   Button,
   createListCollection,
   Flex,
+  For,
   HStack,
   Icon,
   Stack,
@@ -23,7 +25,12 @@ import mainBg from "@/assets/imgs/invitations/classic/main_bg.png";
 import timingBg from "@/assets/imgs/invitations/classic/timing_bg.jpg";
 import storyBg from "@/assets/imgs/invitations/classic/story_bg.jpg";
 import dresscodeBg from "@/assets/imgs/invitations/classic/dresscode_bg.jpg";
-import { GUEST_COUNT, CLASSIC_FALLBACKS, TIMELINE } from "@/utils/constants";
+import {
+  GUEST_COUNT,
+  CLASSIC_FALLBACKS,
+  FALLBACK,
+  TIMELINE,
+} from "@/utils/constants";
 import { Link } from "@/i18n/routing";
 import { error, success } from "@/components/ui/alerts";
 import ImageGallery from "react-image-gallery";
@@ -31,9 +38,13 @@ import "react-image-gallery/styles/image-gallery.css";
 import { Rsvp } from "@/components/invitation/rsvp";
 
 export default function Classic({ viewport = "pc", palette, data }) {
+  const { slug } = useParams();
+
   const t = useTranslations();
   const language = useLocale();
   const galleryRef = useRef(null);
+  const isLive = Boolean(slug);
+  const isMobile = viewport === "mobile";
 
   const { mutate } = useMutateAuthTanstack("confirmations/guest", "post", {
     onSuccess: () => {
@@ -50,7 +61,8 @@ export default function Classic({ viewport = "pc", palette, data }) {
   const vars = paletteToVars(
     palette?.colors ?? data?.template?.paletteKeyword?.colors,
   );
-  const title = pickLang(data?.title, language) || "Henry & Mariam";
+  const title =
+    pickLang(data?.title, language) || (!isLive && "Henry & Mariam");
   const eventDateText = formatEventDate(data?.eventDate);
 
   const [form, setForm] = useState(getInvitationForm(id));
@@ -58,11 +70,13 @@ export default function Classic({ viewport = "pc", palette, data }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const heroImage = data?.mainImages?.[0] || mainBg.src;
-  const coupleImage = data?.mainImages?.[1] || timingBg.src;
+  const heroImage = data?.mainImages?.[0] || (!isLive && mainBg.src);
+  const coupleImage = data?.mainImages?.[1] || (!isLive && timingBg.src);
   const gallery = data?.ourStory?.photoUrls?.length
     ? data.ourStory.photoUrls
-    : CLASSIC_FALLBACKS;
+    : !isLive
+      ? CLASSIC_FALLBACKS
+      : [];
 
   const galleryItems = useMemo(
     () =>
@@ -73,24 +87,31 @@ export default function Classic({ viewport = "pc", palette, data }) {
   );
 
   const description =
-    pickLang(data?.description, language) || t("classic_title");
+    pickLang(data?.description, language) || (!isLive && t("classic_title"));
   const timeline = data?.timeline || TIMELINE;
   const dressCodeDesc =
-    pickLang(data?.dressCode?.description, language) || t("dresscode_desc");
+    pickLang(data?.dressCode?.description, language) ||
+    (!isLive && t("dresscode_desc"));
+
+  const dressCodeColors =
+    data?.dressCode?.colorPalette?.colors || (!isLive && FALLBACK);
+
   const dressCodeName =
-    data?.dressCode?.colorPaletteId || palette?.name?.[language]; // needs checking
-  const dressCodeAbout = "" || palette?.description?.[language]; // needs checking
+    pickLang(data?.dressCode?.colorPalette?.name, language) ||
+    palette?.name?.[language]; // needs checking after ||
+  const dressCodeAbout =
+    pickLang(data?.dressCode?.colorPalette?.description, language) ||
+    pickLang(palette?.description, language); // needs checking after ||
   const storyText =
-    pickLang(data?.ourStory?.text, language) || t("classic_story_desc");
+    pickLang(data?.ourStory?.text, language) ||
+    (!isLive && t("classic_story_desc"));
   const contact = data?.connectWithUs || {};
-  const phone = contact.phone || "+374 99 XXXXXX";
-  const email = contact.email || "username@gmail.com";
+  const name = contact.name || (!isLive && "username");
+  const phone = contact.phone || (!isLive && "+374 99 XXXXXX");
+  const email = contact.email || (!isLive && "username@gmail.com");
   const guestCount = createListCollection({
     items: GUEST_COUNT,
   });
-
-  // const width = designWidth(viewport);
-  const isMobile = viewport === "mobile";
 
   const openFullscreen = (index) => {
     setSelectedIndex(index);
@@ -101,7 +122,6 @@ export default function Classic({ viewport = "pc", palette, data }) {
     }, 50);
   };
 
-  // form
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -139,27 +159,6 @@ export default function Classic({ viewport = "pc", palette, data }) {
     }));
   };
 
-  // const handleConfirm = (e) => {
-  //   e.preventDefault();
-
-  //   if (!form.mainGuest) return error(t("add_guest"));
-  //   if (!form.guestSide) return error(t("invitor"));
-
-  //   const hasEmptyGuest = form.secondaryGuests.some((guest) => !guest.trim());
-  //   if (hasEmptyGuest) return error(t("accompanying_name"));
-
-  //   mutate({ ...form, status: "CONFIRMED" });
-  // };
-
-  // const handleDecline = (e) => {
-  //   e.preventDefault();
-
-  //   if (!form.mainGuest) return error(t("add_guest"));
-  //   if (!form.guestSide) return error(t("invitor"));
-
-  //   mutate({ ...form, status: "DECLINED" });
-  // };
-
   const handleSubmit = (status) => (e) => {
     e.preventDefault();
 
@@ -178,7 +177,6 @@ export default function Classic({ viewport = "pc", palette, data }) {
   };
 
   console.log(data);
-  // console.log(vars);
 
   return (
     <Box
@@ -416,21 +414,18 @@ export default function Classic({ viewport = "pc", palette, data }) {
         <Stack gap={"32px"}>
           <VStack gap="20px">
             <HStack gap="0">
-              <Box w="32px" h="32px" borderRadius="50%" bg="var(--c-accent)" />
-              <Box
-                w="32px"
-                h="32px"
-                borderRadius="50%"
-                bg="var(--c-secondary)"
-                ml="-10px"
-              />
-              <Box
-                w="32px"
-                h="32px"
-                borderRadius="50%"
-                bg="var(--c-surface)"
-                ml="-10px"
-              />
+              <For each={dressCodeColors}>
+                {(item, index) => (
+                  <Box
+                    key={index}
+                    w="32px"
+                    h="32px"
+                    borderRadius="50%"
+                    ml="-10px"
+                    bg={item}
+                  />
+                )}
+              </For>
             </HStack>
             <Text
               fontSize="18px"
@@ -543,7 +538,7 @@ export default function Classic({ viewport = "pc", palette, data }) {
         bgSize="cover"
         bgRepeat={"no-repeat"}
         bgPos="center"
-        h="451px"
+        // h="451px"
       >
         <VStack gap="40px" textAlign="center">
           <Text
@@ -634,6 +629,14 @@ export default function Classic({ viewport = "pc", palette, data }) {
           {t("classic_contact")}
         </Text>
         <Text
+          fontSize="24px"
+          lineHeight="24px"
+          fontWeight="800"
+          color="var(--c-secondary)"
+        >
+          {name}
+        </Text>
+        <Text
           as="a"
           href={`tel:${phone}`}
           fontSize="24px"
@@ -657,3 +660,24 @@ export default function Classic({ viewport = "pc", palette, data }) {
     </Box>
   );
 }
+
+// const handleConfirm = (e) => {
+//   e.preventDefault();
+
+//   if (!form.mainGuest) return error(t("add_guest"));
+//   if (!form.guestSide) return error(t("invitor"));
+
+//   const hasEmptyGuest = form.secondaryGuests.some((guest) => !guest.trim());
+//   if (hasEmptyGuest) return error(t("accompanying_name"));
+
+//   mutate({ ...form, status: "CONFIRMED" });
+// };
+
+// const handleDecline = (e) => {
+//   e.preventDefault();
+
+//   if (!form.mainGuest) return error(t("add_guest"));
+//   if (!form.guestSide) return error(t("invitor"));
+
+//   mutate({ ...form, status: "DECLINED" });
+// };
