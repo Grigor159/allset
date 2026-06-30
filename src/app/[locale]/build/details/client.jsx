@@ -443,7 +443,7 @@ export const DetailsClient = () => {
         w={{ base: "100%", lg: "748px" }}
         mx="auto"
         //
-        filter={isUploading ? "blur(2px)" : "none"}
+        // filter={isUploading ? "blur(2px)" : "none"}
         transition="filter .2s"
       >
         <Stack
