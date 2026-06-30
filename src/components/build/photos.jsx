@@ -113,7 +113,7 @@ export const Photos = ({
   value = [],
   onFileSelect,
   onDelete,
-  // setIsUploading,
+  setIsUploading,
   count,
   required,
 }) => {
@@ -129,10 +129,10 @@ export const Photos = ({
 
     if (key) {
       try {
-        // setIsUploading(true)
+        setIsUploading(true)
         await InvitationStorageService.delete(key);
       } finally {
-        // setIsUploading(false);
+        setIsUploading(false);
       }
     }
     onDelete?.(url);

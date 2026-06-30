@@ -45,7 +45,7 @@ export const DetailsClient = () => {
     palette: parseAsString,
     id: parseAsString,
   });
-  // const [isUploading, setIsUploading] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
 
   // clear drafts
   // const { mutate: mutateDelete } = useMutateAuthTanstack(
@@ -293,8 +293,6 @@ export const DetailsClient = () => {
   const handlePhotoFiles = async (files) => {
     if (!files?.length) return;
 
-    // setIsUploading(true);
-
     const current = formRef.current;
     const normalized = Array.from(files).filter(isFile);
     const updated = {
@@ -308,16 +306,18 @@ export const DetailsClient = () => {
     setForm(updated);
     formRef.current = updated;
 
+    setIsUploading(true);
+
     try {
       const uploaded = await uploadMainImages(updated);
 
       formRef.current = uploaded;
       setForm(uploaded);
-    } catch(e){
-      console.lg(e)
+    } finally {
+      setIsUploading(false);
     }
-    // finally {
-    //   setIsUploading(false);
+    // catch(e){
+    //   console.log(e)
     // }
   };
 
@@ -367,7 +367,6 @@ export const DetailsClient = () => {
   const handleStoryFiles = async (files) => {
     if (!files?.length) return;
 
-    // setIsUploading(true);
 
     const current = formRef.current;
     const normalized = Array.from(files).filter(isFile);
@@ -387,16 +386,18 @@ export const DetailsClient = () => {
     setForm(updated);
     formRef.current = updated;
 
+    setIsUploading(true);
+
     try {
       const uploaded = await uploadStoryImages(updated);
 
       formRef.current = uploaded;
       setForm(uploaded);
-    } catch (e) {
-      console.log(e)
+    } finally {
+      setIsUploading(false);
     }
-    // finally {
-    //   setIsUploading(false);
+    // catch (e) {
+    //   console.log(e)
     // }
   };
 
@@ -429,13 +430,13 @@ export const DetailsClient = () => {
       position="relative"
       pt={{ base: "32px", md: "48px" }}
       pb="22px"
-      // pointerEvents={isUploading ? "none" : "auto"}
-      // filter={isUploading ? "blur(3px)" : "none"}
+      pointerEvents={isUploading ? "none" : "auto"}
+      filter={isUploading ? "blur(3px)" : "none"}
       transition="filter .2s"
     >
-      {/* {isUploading && (
+      {isUploading && (
         <Box position="absolute" inset={0} zIndex={10} bg="transparent" />
-      )} */}
+      )}
 
       {/* VStack */}
       <Stack
@@ -509,7 +510,7 @@ export const DetailsClient = () => {
               // onChange={handleChange}
               onFileSelect={handlePhotoFiles}
               onDelete={handleDeletePhoto}
-              // setIsUploading={setIsUploading}
+              setIsUploading={setIsUploading}
               count={
                 data?.mainImageMaxCount ??
                 invitationData?.template?.mainImageMaxCount
@@ -582,7 +583,7 @@ export const DetailsClient = () => {
               // onDelete={handleDeletePhoto}
               onFileSelect={handleStoryFiles}
               onDelete={handleDeleteStory}
-              // setIsUploading={setIsUploading}
+              setIsUploading={setIsUploading}
               hide={handleHide}
               required={false}
               languages={form.languages}

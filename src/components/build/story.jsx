@@ -18,7 +18,7 @@ export const Story = ({
   onChange,
   onFileSelect,
   onDelete,
-  // setIsUploading,
+  setIsUploading,
   hide,
   required,
   languages,
@@ -46,10 +46,10 @@ export const Story = ({
 
     if (key) {
       try {
-        // setIsUploading(true)
+        setIsUploading(true)
         await InvitationStorageService.delete(key);
       } finally {
-        // setIsUploading(false);
+        setIsUploading(false);
       }
     }
     onDelete?.(url);
