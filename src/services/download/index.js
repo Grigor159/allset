@@ -4,55 +4,55 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 export async function downloadTableList(printRef) {
-    const element = printRef.current;
-    if (!element) return;
+  const element = printRef.current;
+  if (!element) return;
 
-    const originalOverflow = element.style.overflow;
-    const originalHeight = element.style.height;
+  const originalOverflow = element.style.overflow;
+  const originalHeight = element.style.height;
 
-    element.style.overflow = "visible";
-    element.style.height = "auto";
+  element.style.overflow = "visible";
+  element.style.height = "auto";
 
-    await new Promise((r) => setTimeout(r, 300));
+  await new Promise((r) => setTimeout(r, 300));
 
-    const canvas = await html2canvas(element, {
-        scale: 2,
-        useCORS: true,
-        scrollY: -window.scrollY,
-        windowWidth: element.scrollWidth,
-        windowHeight: element.scrollHeight,
-    });
+  const canvas = await html2canvas(element, {
+    scale: 2,
+    useCORS: true,
+    scrollY: -window.scrollY,
+    windowWidth: element.scrollWidth,
+    windowHeight: element.scrollHeight,
+  });
 
-    element.style.overflow = originalOverflow;
-    element.style.height = originalHeight;
+  element.style.overflow = originalOverflow;
+  element.style.height = originalHeight;
 
-    const imgData = canvas.toDataURL("image/png");
+  const imgData = canvas.toDataURL("image/png");
 
-    const pdf = new jsPDF({
-        orientation: "landscape",
-        unit: "px",
-        format: "a4",
-    });
+  const pdf = new jsPDF({
+    orientation: "landscape",
+    unit: "px",
+    format: "a4",
+  });
 
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const pageHeight = pdf.internal.pageSize.getHeight();
 
-    const imgWidth = pageWidth;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  const imgWidth = pageWidth;
+  const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-    let position = 0;
+  let position = 0;
 
-    if (imgHeight < pageHeight) {
-        pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-    } else {
-        while (position < imgHeight) {
-            pdf.addImage(imgData, "PNG", 0, -position, imgWidth, imgHeight);
-            position += pageHeight;
-            if (position < imgHeight) pdf.addPage();
-        }
+  if (imgHeight < pageHeight) {
+    pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+  } else {
+    while (position < imgHeight) {
+      pdf.addImage(imgData, "PNG", 0, -position, imgWidth, imgHeight);
+      position += pageHeight;
+      if (position < imgHeight) pdf.addPage();
     }
+  }
 
-    pdf.save("table-list.pdf");
+  pdf.save("table-list.pdf");
 }
 
 import { format } from "date-fns";
@@ -64,13 +64,19 @@ export const downloadGuestList = (data, t) => {
   const headers = [
     t("guest_name"),
     t("accompanying_name"),
-    t("accompanying_names"),
     t("note"),
     t("group_count"),
     t("guest_group"),
     t("table_number"),
     t("status"),
   ];
+
+  const cellStyle = {
+    alignment: {
+      vertical: "top",
+      wrapText: true,
+    },
+  };
 
   const headerRow = headers.map((header) => ({
     v: header,
@@ -82,6 +88,12 @@ export const downloadGuestList = (data, t) => {
 
   const rows = data.map((item) => {
     const secondaryCount = item.secondaryGuests?.length || 0;
+
+    const accompanyingCell =
+      secondaryCount > 0
+        ? `${secondaryCount} ${t("guest")}\n${item.secondaryGuests.join("\n")}`
+        : `0 ${t("guest")}`;
+
     const statusText =
       item.status === "CONFIRMED"
         ? t(item.status.toLowerCase()) +
@@ -92,22 +104,32 @@ export const downloadGuestList = (data, t) => {
       item.status === "CONFIRMED"
         ? {
             // fill: { fgColor: { rgb: "26a036" } },
-            font: { color: { rgb: "2E8D3B" } },     
+            font: { color: { rgb: "2E8D3B" } },
           }
         : {
             // fill: { fgColor: { rgb: "ff552e" } },
-            font: { color: { rgb: "CF2B2B" } },    
+            font: { color: { rgb: "CF2B2B" } },
           };
 
     return [
-      { v: item.mainGuest || "-" },
-      { v: secondaryCount },
-      { v: item.secondaryGuests?.join(", ") || "-" },
-      { v: item.notes || "-" },
-      { v: secondaryCount + 1 },
-      { v: item.guestSide ? t(item.guestSide.toLowerCase()) : "-" },
-      { v: item.tableNumber || "-" },
-      { v: statusText, s: statusStyle },
+      { v: item.mainGuest || "-", s: cellStyle },
+      {
+        v: accompanyingCell,
+        s: {
+          alignment: {
+            wrapText: true,
+            vertical: "top",
+          },
+        },
+      },
+      { v: item.notes || "-", s: cellStyle },
+      { v: secondaryCount + 1, s: cellStyle },
+      {
+        v: item.guestSide ? t(item.guestSide.toLowerCase()) : "-",
+        s: cellStyle,
+      },
+      { v: item.tableNumber || "-", s: cellStyle },
+      { v: statusText, s: statusStyle, s: cellStyle },
     ];
   });
 
@@ -173,7 +195,6 @@ export const downloadGuestList = (data, t) => {
 //   // Download file
 //   XLSX.writeFile(workbook, "AllSet_Guest_List.xlsx");
 // };
-
 
 // export const downloadGuestList = (data, t) => {
 //   if (!data || !data.length) return;

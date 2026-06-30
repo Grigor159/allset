@@ -18,7 +18,7 @@ export const TopPart = () => {
       <Stack gap="16px" align={"center"}>
         {/* <Image w="64px" h="64px" src={content?.img?.src} objectFit={"contain"}/> */}
         <Title text={content?.title} />
-        <SubTitle text={content?.text} />
+        {content?.text && <SubTitle text={content?.text} />}
       </Stack>
     </Center>
   );

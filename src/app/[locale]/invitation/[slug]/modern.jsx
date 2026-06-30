@@ -153,9 +153,9 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
         count === 0
           ? []
           : Array.from(
-              { length: count },
-              (_, i) => prev.secondaryGuests[i] ?? "",
-            ),
+            { length: count },
+            (_, i) => prev.secondaryGuests[i] ?? "",
+          ),
     }));
   };
 
@@ -186,7 +186,7 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
       bg="#F3F3F3"
       color="#111"
       overflow="hidden"
-      // position={"relative"}
+    // position={"relative"}
     >
       {locales && <Language locales={locales} />}
 
@@ -436,9 +436,9 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
               lineHeight="24px"
               textTransform="uppercase"
               color="var(--c-primary)"
-              // dangerouslySetInnerHTML={{
-              //   __html: t("classic_timing").replace(/\n/g, "<br />"),
-              // }}
+            // dangerouslySetInnerHTML={{
+            //   __html: t("classic_timing").replace(/\n/g, "<br />"),
+            // }}
             >
               {t("classic_timing")}
             </Text>
@@ -467,7 +467,7 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
                     >
                       {pickLang(item.venueName, language) || item.venueName}
                     </Text>
-                    <ChakraLink
+                    {item.venueLocation && <ChakraLink
                       as={Link}
                       href={item.venueLocation}
                       target="_blank"
@@ -476,7 +476,7 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
                       textDecoration="underline"
                     >
                       {t("classic_map")}
-                    </ChakraLink>
+                    </ChakraLink>}
                   </VStack>
                 </Flex>
               ))}
@@ -501,7 +501,7 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
               position="absolute"
               left="10%"
               bottom="10%"
-              // transform="translateY(-10%)"
+            // transform="translateY(-10%)"
             >
               {rsvpRight.icon}
             </Icon>
@@ -525,7 +525,7 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
               position="absolute"
               right="15%"
               top="20%"
-              // transform="translateY(-10%)"
+            // transform="translateY(-10%)"
             >
               {rsvpLeft.icon}
             </Icon>
@@ -539,7 +539,7 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
             position="absolute"
             left="15%"
             top="20%"
-            // transform="translateY(-10%)"
+          // transform="translateY(-10%)"
           >
             {rsvpLeft.icon}
           </Icon>
@@ -616,7 +616,7 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
             position="absolute"
             right="10%"
             bottom="10%"
-            // transform="translateY(-10%)"
+          // transform="translateY(-10%)"
           >
             {rsvpRight.icon}
           </Icon>

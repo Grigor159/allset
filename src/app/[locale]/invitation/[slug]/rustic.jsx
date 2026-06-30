@@ -160,9 +160,9 @@ export default function Rustic({ viewport = "pc", palette, data, live }) {
         count === 0
           ? []
           : Array.from(
-              { length: count },
-              (_, i) => prev.secondaryGuests[i] ?? "",
-            ),
+            { length: count },
+            (_, i) => prev.secondaryGuests[i] ?? "",
+          ),
     }));
   };
 
@@ -194,7 +194,7 @@ export default function Rustic({ viewport = "pc", palette, data, live }) {
       color="#111"
       overflow="hidden"
       pt="75px"
-      // position={"relative"}
+    // position={"relative"}
     >
       {locales && <Language locales={locales} />}
 
@@ -509,9 +509,9 @@ export default function Rustic({ viewport = "pc", palette, data, live }) {
               lineHeight="24px"
               textTransform="uppercase"
               color="var(--c-primary)"
-              // dangerouslySetInnerHTML={{
-              //   __html: t("classic_timing").replace(/\n/g, "<br />"),
-              // }}
+            // dangerouslySetInnerHTML={{
+            //   __html: t("classic_timing").replace(/\n/g, "<br />"),
+            // }}
             >
               {t("classic_timing")}
             </Text>
@@ -540,7 +540,7 @@ export default function Rustic({ viewport = "pc", palette, data, live }) {
                     >
                       {pickLang(item.venueName, language) || item.venueName}
                     </Text>
-                    <ChakraLink
+                    {item.venueLocation && <ChakraLink
                       as={Link}
                       href={item.venueLocation}
                       target="_blank"
@@ -549,7 +549,7 @@ export default function Rustic({ viewport = "pc", palette, data, live }) {
                       textDecoration="underline"
                     >
                       {t("classic_map")}
-                    </ChakraLink>
+                    </ChakraLink>}
                   </VStack>
                 </Flex>
               ))}
@@ -778,9 +778,9 @@ export default function Rustic({ viewport = "pc", palette, data, live }) {
             color="var(--c-primary)"
             whiteSpace="pre-line"
             fontWeight="400"
-            // dangerouslySetInnerHTML={{
-            //   __html: storyText.replace(/\n/g, "<br />"),
-            // }}
+          // dangerouslySetInnerHTML={{
+          //   __html: storyText.replace(/\n/g, "<br />"),
+          // }}
           >
             {storyText}
           </Text>

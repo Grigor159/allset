@@ -421,7 +421,15 @@ export const DetailsClient = () => {
 
   const submit = async (e) => {
     e.preventDefault();
-    router.push(`preview${search}`);
+    await Promise.all([
+      queryClient.refetchQueries({
+        queryKey: [`invitations/${id}`],
+      }),
+      queryClient.refetchQueries({
+        queryKey: ["invitations/active"],
+      }),
+    ]);
+    router.push(`/auth/invitations`);
   };
   // console.log(invitationData);//
 

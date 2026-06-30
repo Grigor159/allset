@@ -37,7 +37,7 @@ import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/image-gallery.css";
 import { Rsvp } from "@/components/invitation/rsvp";
 
-export default function Classic({ viewport = "pc", palette, data,live }) {
+export default function Classic({ viewport = "pc", palette, data, live }) {
   const { slug } = useParams();
   const t = useTranslations();
   const language = useLocale();
@@ -151,9 +151,9 @@ export default function Classic({ viewport = "pc", palette, data,live }) {
         count === 0
           ? []
           : Array.from(
-              { length: count },
-              (_, i) => prev.secondaryGuests[i] ?? "",
-            ),
+            { length: count },
+            (_, i) => prev.secondaryGuests[i] ?? "",
+          ),
     }));
   };
 
@@ -184,7 +184,7 @@ export default function Classic({ viewport = "pc", palette, data,live }) {
       bg="#F6F5F4"
       color="#111"
       overflow="hidden"
-      // position={"relative"}
+    // position={"relative"}
     >
       {locales && <Language locales={locales} />}
 
@@ -279,9 +279,9 @@ export default function Classic({ viewport = "pc", palette, data,live }) {
             lineHeight="50px"
             textTransform="uppercase"
             color="#FFFFFF"
-            // dangerouslySetInnerHTML={{
-            //   __html: t("classic_timing").replace(/\n/g, "<br />"),
-            // }}
+          // dangerouslySetInnerHTML={{
+          //   __html: t("classic_timing").replace(/\n/g, "<br />"),
+          // }}
           >
             {t("classic_timing")}
           </Text>
@@ -322,7 +322,7 @@ export default function Classic({ viewport = "pc", palette, data,live }) {
                     {pickLang(item.venueName, language) || item.venueName}
                   </Text>
                 </VStack>
-                <Button
+                {item.venueLocation && <Button
                   as={Link}
                   href={item.venueLocation}
                   target="_blank"
@@ -335,7 +335,7 @@ export default function Classic({ viewport = "pc", palette, data,live }) {
                   h="44px"
                 >
                   <Icon>{map.icon}</Icon> {t("classic_map")}
-                </Button>
+                </Button>}
               </Flex>
             ))}
           </Stack>
@@ -538,7 +538,7 @@ export default function Classic({ viewport = "pc", palette, data,live }) {
         bgSize="cover"
         bgRepeat={"no-repeat"}
         bgPos="center"
-        // h="451px"
+      // h="451px"
       >
         <VStack gap="40px" textAlign="center">
           <Text
@@ -556,9 +556,9 @@ export default function Classic({ viewport = "pc", palette, data,live }) {
             color="var(--c-secondary)"
             whiteSpace="pre-line"
             fontWeight="400"
-            // dangerouslySetInnerHTML={{
-            //   __html: storyText.replace(/\n/g, "<br />"),
-            // }}
+          // dangerouslySetInnerHTML={{
+          //   __html: storyText.replace(/\n/g, "<br />"),
+          // }}
           >
             {storyText}
           </Text>
