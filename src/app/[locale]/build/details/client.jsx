@@ -450,7 +450,12 @@ export const DetailsClient = () => {
         queryKey: ["invitations/active"],
       }),
     ]);
-    router.push(`/auth/invitations`);
+
+    if (status === "active") {
+      router.push(`/auth/invitations`);
+    } else {
+      router.push(`preview${search}`);
+    }
   };
   // console.log(invitationData);//
 
