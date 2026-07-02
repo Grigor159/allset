@@ -18,7 +18,8 @@ export const Story = ({
   onChange,
   onFileSelect,
   onDelete,
-  setIsUploading,
+  onLoadingStart,
+  onLoadingEnd,
   hide,
   required,
   languages,
@@ -46,10 +47,10 @@ export const Story = ({
 
     if (key) {
       try {
-        setIsUploading(true)
+        onLoadingStart?.();
         await InvitationStorageService.delete(key);
       } finally {
-        setIsUploading(false);
+        onLoadingEnd?.();
       }
     }
     onDelete?.(url);
@@ -85,7 +86,7 @@ export const Story = ({
             value={value?.text}
             onChange={handleInputChange}
             placeholder={t("story_placeholder")}
-          // disabled={!checked}
+            // disabled={!checked}
           />
         )}
       </Field.Root>

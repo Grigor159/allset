@@ -173,7 +173,7 @@ export const Success = ({ open, data, setQuery }) => {
               </ChakraLink>
             </Dialog.Footer>
             <Dialog.CloseTrigger asChild>
-              <CloseButton size="sm" />
+              <CloseButton size="sm" onClick={handleClose} />
             </Dialog.CloseTrigger>
           </Dialog.Content>
         </Dialog.Positioner>

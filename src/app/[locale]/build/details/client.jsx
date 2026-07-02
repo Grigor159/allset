@@ -37,7 +37,24 @@ export const DetailsClient = () => {
   const search = useSearch();
   const hiddenFieldsRef = useRef({});
   const lastSavedFormRef = useRef(null);
+  const containerRef = useRef(null);
   const formRef = useRef(null);
+
+  const showOverlay = () => {
+    if (!containerRef.current) return;
+
+    containerRef.current.style.filter = "blur(3px)";
+    containerRef.current.style.pointerEvents = "none";
+  };
+
+  const hideOverlay = () => {
+    if (!containerRef.current) return;
+
+    // setTimeout(() => {
+    containerRef.current.style.filter = "";
+    containerRef.current.style.pointerEvents = "";
+    // }, 1000);
+  };
 
   const { isAuthenticated, isLoading } = useAuth0();
   const [{ template, palette, id }, setQuery] = useQueryStates({
@@ -45,7 +62,6 @@ export const DetailsClient = () => {
     palette: parseAsString,
     id: parseAsString,
   });
-  const [isUploading, setIsUploading] = useState(false);
 
   // clear drafts
   // const { mutate: mutateDelete } = useMutateAuthTanstack(
@@ -306,7 +322,10 @@ export const DetailsClient = () => {
     setForm(updated);
     formRef.current = updated;
 
-    setIsUploading(true);
+    // containerRef.current.classList.add("uploading");
+    showOverlay();
+    // containerRef.current.style.filter = "blur(3px)";
+    // containerRef.current.style.pointerEvents = "none";
 
     try {
       const uploaded = await uploadMainImages(updated);
@@ -314,11 +333,11 @@ export const DetailsClient = () => {
       formRef.current = uploaded;
       setForm(uploaded);
     } finally {
-      setIsUploading(false);
+      // containerRef.current.classList.remove("uploading");
+      hideOverlay();
+      // containerRef.current.style.filter = "";
+      // containerRef.current.style.pointerEvents = "";
     }
-    // catch(e){
-    //   console.log(e)
-    // }
   };
 
   const handleDeletePhoto = (url) => {
@@ -367,7 +386,6 @@ export const DetailsClient = () => {
   const handleStoryFiles = async (files) => {
     if (!files?.length) return;
 
-
     const current = formRef.current;
     const normalized = Array.from(files).filter(isFile);
     const updated = {
@@ -386,7 +404,10 @@ export const DetailsClient = () => {
     setForm(updated);
     formRef.current = updated;
 
-    setIsUploading(true);
+    // containerRef.current.classList.add("uploading");
+    showOverlay();
+    // containerRef.current.style.filter = "blur(3px)";
+    // containerRef.current.style.pointerEvents = "none";
 
     try {
       const uploaded = await uploadStoryImages(updated);
@@ -394,11 +415,11 @@ export const DetailsClient = () => {
       formRef.current = uploaded;
       setForm(uploaded);
     } finally {
-      setIsUploading(false);
+      // containerRef.current.classList.remove("uploading");
+      hideOverlay();
+      // containerRef.current.style.filter = "";
+      // containerRef.current.style.pointerEvents = "";
     }
-    // catch (e) {
-    //   console.log(e)
-    // }
   };
 
   const handleDeleteStory = (url) => {
@@ -435,24 +456,23 @@ export const DetailsClient = () => {
 
   return (
     <Box
+      ref={containerRef}
       position="relative"
       pt={{ base: "32px", md: "48px" }}
       pb="22px"
-      pointerEvents={isUploading ? "none" : "auto"}
-      filter={isUploading ? "blur(3px)" : "none"}
+      // pointerEvents={"none"}
+      // filter={"blur(3px)"}
       transition="filter .2s"
     >
-      {isUploading && (
+      {/* {isUploading && (
         <Box position="absolute" inset={0} zIndex={10} bg="transparent" />
-      )}
+      )} */}
 
       {/* VStack */}
       <Stack
         gap={{ base: "16px", md: "24px" }}
         w={{ base: "100%", lg: "748px" }}
         mx="auto"
-        //
-        // filter={isUploading ? "blur(2px)" : "none"}
         transition="filter .2s"
       >
         <Stack
@@ -518,7 +538,8 @@ export const DetailsClient = () => {
               // onChange={handleChange}
               onFileSelect={handlePhotoFiles}
               onDelete={handleDeletePhoto}
-              setIsUploading={setIsUploading}
+              onLoadingStart={showOverlay}
+              onLoadingEnd={hideOverlay}
               count={
                 data?.mainImageMaxCount ??
                 invitationData?.template?.mainImageMaxCount
@@ -591,7 +612,8 @@ export const DetailsClient = () => {
               // onDelete={handleDeletePhoto}
               onFileSelect={handleStoryFiles}
               onDelete={handleDeleteStory}
-              setIsUploading={setIsUploading}
+              onLoadingStart={showOverlay}
+              onLoadingEnd={hideOverlay}
               hide={handleHide}
               required={false}
               languages={form.languages}
