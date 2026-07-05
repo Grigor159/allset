@@ -5,7 +5,7 @@ import { diffParts } from "@/utils/formatters";
 import { Countdown } from "@/components/invitation/countdown";
 import { HStack, Separator } from "@chakra-ui/react";
 
-export function CountdownTimer({ template, eventDate, isMobile }) {
+export function CountdownTimer({ template, eventDate, r }) {
   const [countdown, setCountdown] = useState(() => diffParts(eventDate));
 
   useEffect(() => {
@@ -18,33 +18,34 @@ export function CountdownTimer({ template, eventDate, isMobile }) {
 
   if (template === "template.modern.romance") {
     return (
-      <HStack gap={isMobile ? "16px" : "32px"}>
+      <HStack gap={r("16px", "32px")}>
+      {/* <HStack gap={isMobile ? "16px" : "32px"}> */}
         <Countdown
           template={template}
           value={countdown.days}
           label="days"
-          isMobile={isMobile}
+          r={r}
         />
         <Separator orientation="vertical" h="30px" />
         <Countdown
           template={template}
           value={String(countdown.hours).padStart(2, "0")}
           label="hours"
-          isMobile={isMobile}
+          r={r}
         />
         <Separator orientation="vertical" h="30px" />
         <Countdown
           template={template}
           value={String(countdown.min).padStart(2, "0")}
           label="minutes"
-          isMobile={isMobile}
+          r={r}
         />
         <Separator orientation="vertical" h="30px" />
         <Countdown
           template={template}
           value={String(countdown.sec).padStart(2, "0")}
           label="seconds"
-          isMobile={isMobile}
+          r={r}
         />
       </HStack>
     );
@@ -52,60 +53,60 @@ export function CountdownTimer({ template, eventDate, isMobile }) {
 
   if (template === "template.classic.elegance") {
     return (
-      <HStack gap={isMobile ? "16px" : "48px"}>
+      <HStack gap={r("16px", "48px")}>
         <Countdown
           template={template}
           value={countdown.days}
           label="days"
-          isMobile={isMobile}
+          r={r}
         />
         <Countdown
           template={template}
           value={String(countdown.hours).padStart(2, "0")}
           label="hours"
-          isMobile={isMobile}
+          r={r}
         />
         <Countdown
           template={template}
           value={String(countdown.min).padStart(2, "0")}
           label="minutes"
-          isMobile={isMobile}
+          r={r}
         />
         <Countdown
           template={template}
           value={String(countdown.sec).padStart(2, "0")}
           label="seconds"
-          isMobile={isMobile}
+          r={r}
         />
       </HStack>
     );
   }
 
   return (
-    <HStack gap={isMobile ? "16px" : "40px"}>
+    <HStack gap={r("16px", "40px")}>
       <Countdown
         template={template}
         value={countdown.days}
         label="days"
-        isMobile={isMobile}
+        r={r}
       />
       <Countdown
         template={template}
         value={String(countdown.hours).padStart(2, "0")}
         label="hours"
-        isMobile={isMobile}
+        r={r}
       />
       <Countdown
         template={template}
         value={String(countdown.min).padStart(2, "0")}
         label="minutes"
-        isMobile={isMobile}
+        r={r}
       />
       <Countdown
         template={template}
         value={String(countdown.sec).padStart(2, "0")}
         label="seconds"
-        isMobile={isMobile}
+        r={r}
       />
     </HStack>
   );

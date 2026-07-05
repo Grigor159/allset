@@ -21,6 +21,7 @@ import {
   Link as ChakraLink,
   Image,
   For,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import {
   timingLeft,
@@ -62,8 +63,24 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
 
   const t = useTranslations();
   const language = useLocale();
+  // adaptive
   const isLive = Boolean(slug) || live;
-  const isMobile = viewport === "mobile";
+  // TODO: if live is undefiend but isLive is true its invitation page 
+  console.log(live);
+  console.log(isLive);
+  // const isMobile = viewport === "mobile" || viewport === "laptop";
+  const isRealMobile = useBreakpointValue({ base: true, lg: false });
+  const isMobile = isLive
+    ? Boolean(isRealMobile)
+    : viewport === "mobile" || viewport === "laptop";
+  const r = (base, lg) => (isMobile ? base : lg);
+  const swiperPadding = r("40px 0", "100px 0");
+  const slideWidth = r("283px", "448px");
+  const slideHeight = r("350px", "556px");
+  // const swiperPadding = useBreakpointValue({ base: "40px 0", lg: "100px 0" });
+  // const slideWidth = useBreakpointValue({ base: "283px", lg: "448px" });
+  // const slideHeight = useBreakpointValue({ base: "350px", lg: "556px" });
+  //
 
   const { mutate } = useMutateAuthTanstack("confirmations/guest", "post", {
     onSuccess: () => {
@@ -194,7 +211,7 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
       <Box
         position="relative"
         w="100%"
-        h={isMobile ? "520px" : "750px"}
+        h={r("565px", "650px")}
         // bgImage={`linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.45) 100%), url(${heroImage})`}
         bgImage={`linear-gradient(180deg, rgba(0,0,0,0.05) 50%, #F3F3F3 99.43%), url(${heroImage})`}
         bgSize="cover"
@@ -202,19 +219,20 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
       >
         <VStack
           position="absolute"
-          bottom={isMobile ? "40px" : "50px"}
+          bottom={r("40px", "50px")}
           left="0"
           right="0"
-          gap={isMobile ? "8px" : "114px"}
+          gap={r("8px", "114px")}
           // color="white"
           textAlign="center"
         >
           <Text
             fontFamily="var(--font-allegrou)"
             // fontFamily={sosBanff.style.fontFamily}
-            fontSize={isMobile ? "54px" : "103px"}
+            fontSize={r("54px", "123px")}
             lineHeight="24px"
             fontWeight="400"
+            color="#323232"
           >
             {title}
           </Text>
@@ -225,24 +243,26 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
       <Flex gap="12px" align="baseline" justify="center" py="100px">
         <Text
           textAlign="center"
-          fontSize={isMobile ? "18px" : "24px"}
+          fontSize={r("18px", "24px")}
           lineHeight="24px"
           fontWeight="600"
-          minW="177px"
+          minW={r("142px", "177px")}
           border="2px solid"
-          borderBottomColor="var(--c-primary)"
-          borderTopColor="var(--c-primary)"
+          borderBottomColor="#323232"
+          borderTopColor="#323232"
           borderLeftColor="transparent"
           borderRightColor="transparent"
           py="12px"
+          color="#323232" // TODO: add this for every text
         >
           {dayName}
         </Text>
         <Stack gap="12px" align={"center"}>
           <Text
-            fontSize={isMobile ? "26px" : "50px"}
+            fontSize={r("42px", "50px")}
             lineHeight="24px"
             fontWeight="1000"
+            color="var(--c-accent)"
           >
             {day}
           </Text>
@@ -252,13 +272,13 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
         </Stack>
         <Text
           textAlign="center"
-          fontSize={isMobile ? "18px" : "24px"}
+          fontSize={r("18px", "24px")}
           lineHeight="24px"
           fontWeight="600"
-          minW="177px"
+          minW={r("142px", "177px")}
           border="2px solid"
-          borderBottomColor="var(--c-primary)"
-          borderTopColor="var(--c-primary)"
+          borderBottomColor="#323232"
+          borderTopColor="#323232"
           borderLeftColor="transparent"
           borderRightColor="transparent"
           py="12px"
@@ -268,7 +288,7 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
       </Flex>
 
       {/* ————— MAIN ————— */}
-      <Box position="relative" minH="1931px" w="100%">
+      <Box position="relative" minH={r("1017px", "1931px")} w="100%">
         <Box
           position="absolute"
           inset="0"
@@ -290,21 +310,24 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
           // position={"relative"}
           align={"center"}
           justify={"center"}
-          minH="1931px"
+          minH={r("1017px", "1931px")}
           h="100%"
+          pt="100px"
         >
           <Stack
             position={"relative"}
             w="100%"
             align={"center"}
             justify={"center"}
-            gap="60px"
+            gap={r("32px", "60px")}
           >
             <Icon
               color="var(--c-accent)"
               position="absolute"
               left="12%"
               top="0%"
+              w={r("108px", "34px")}
+              h={r("77px", "252px")}
             >
               {guestLeft.icon}
             </Icon>
@@ -313,13 +336,15 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
               position="absolute"
               right="12%"
               top="0%"
+              w={r("108px", "34px")}
+              h={r("77px", "252px")}
             >
               {guestRight.icon}
             </Icon>
             <Text
               fontFamily="var(--font-allegrou)"
               fontWeight="400"
-              fontSize={isMobile ? "100px" : "123px"}
+              fontSize={r("64px", "123px")}
               lineHeight="1.1"
               color="#F3F3F3"
             >
@@ -328,7 +353,8 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
             <Text
               // maxW="942px"
               textAlign="center"
-              fontSize={isMobile ? "15px" : "20px"}
+              // fontSize={isMobile ? "15px" : "20px"}
+              fontSize={r("14px", "20px")}
               lineHeight="28px"
               fontWeight="400"
               color="#F3F3F3"
@@ -337,23 +363,24 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
               {description}
             </Text>
             <Text
+              textAlign="center"
               fontWeight="500"
-              fontSize={isMobile ? "15px" : "20px"}
+              fontSize={r("14px", "20px")}
               lineHeight={"28px"}
               color="#F3F3F3"
             >
               {t("classic_journey")}
             </Text>
             {/* ————— COUNTDOWN ————— */}
-            <VStack gap={isMobile ? "24px" : "100px"}>
-              {data?.countDown !== false && (
-                <CountdownTimer
-                  template={data?.templateId}
-                  eventDate={data?.eventDate}
-                  isMobile={isMobile}
-                />
-              )}
-            </VStack>
+            {/* <VStack gap={isMobile ? "24px" : "100px"}> */}
+            {data?.countDown !== false && (
+              <CountdownTimer
+                template={data?.templateId}
+                eventDate={data?.eventDate}
+                r={r}
+              />
+            )}
+            {/* </VStack> */}
             <Text
               fontWeight="500"
               fontSize={isMobile ? "15px" : "20px"}
@@ -366,7 +393,7 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
 
           <Box w="100%" display="flex" justifyContent="center">
             <Swiper
-              style={{ padding: "100px 0" }}
+              style={{ padding: swiperPadding }}
               effect={"coverflow"}
               slidesPerView={"auto"}
               centeredSlides={true}
@@ -387,17 +414,17 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
             >
               {slideImages?.map((el, index) => {
                 return (
-                  <SwiperSlide key={index} style={{ width: "448px" }}>
+                  <SwiperSlide key={index} style={{ width: slideWidth }}>
                     <Stack
                       cursor={"pointer"}
-                      w={"448px"}
-                      h={{ base: "268px", sm: "556px" }}
+                      w={slideWidth}
+                      h={slideHeight}
                       alignItems={"center"}
                     >
                       <Image
                         src={el}
-                        w={{ base: "168px", sm: "448px" }}
-                        h={{ base: "268px", sm: "556px" }}
+                        w={slideWidth}
+                        h={slideHeight}
                         objectFit="cover"
                         transition="all 0.3s ease"
                         borderRadius={"10px"}
