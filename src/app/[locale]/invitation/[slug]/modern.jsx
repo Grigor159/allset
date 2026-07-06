@@ -58,29 +58,29 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
-export default function Modern({ viewport = "pc", palette, data, live }) {
+export default function Modern({
+  viewport = "pc",
+  palette,
+  template,
+  data,
+  live,
+}) {
   const { slug } = useParams();
 
   const t = useTranslations();
   const language = useLocale();
-  // adaptive
   const isLive = Boolean(slug) || live;
-  // TODO: if live is undefiend but isLive is true its invitation page
-  console.log(live);
-  console.log(isLive);
-  // const isMobile = viewport === "mobile" || viewport === "laptop";
   const isRealMobile = useBreakpointValue({ base: true, lg: false });
-  const isMobile = isLive
-    ? Boolean(isRealMobile)
-    : viewport === "mobile" || viewport === "laptop";
+  // const isMobile = isLive
+  //   ? Boolean(isRealMobile)
+  //   : viewport === "mobile" || viewport === "laptop";
+  const isMobile =
+    Boolean(isRealMobile) || viewport === "mobile" || viewport === "laptop";
+  // const isMobile = viewport === "mobile" || viewport === "laptop";
   const r = (base, lg) => (isMobile ? base : lg);
   const swiperPadding = r("40px 0", "100px 0");
   const slideWidth = r("283px", "448px");
   const slideHeight = r("350px", "556px");
-  // const swiperPadding = useBreakpointValue({ base: "40px 0", lg: "100px 0" });
-  // const slideWidth = useBreakpointValue({ base: "283px", lg: "448px" });
-  // const slideHeight = useBreakpointValue({ base: "350px", lg: "556px" });
-  //
 
   const { mutate } = useMutateAuthTanstack("confirmations/guest", "post", {
     onSuccess: () => {
@@ -380,7 +380,7 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
             {/* <VStack gap={isMobile ? "24px" : "100px"}> */}
             {data?.countDown !== false && (
               <CountdownTimer
-                template={data?.templateId}
+                template={data?.templateId || template}
                 eventDate={data?.eventDate}
                 r={r}
               />

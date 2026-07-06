@@ -21,9 +21,10 @@ export const Renderer = ({ viewport, palette, live }) => {
     );
   }
 
+  // TODO: add template in other invitations
   if (template === "template.modern.romance") {
     return (
-      <Modern viewport={viewport} palette={palette} data={data} live={live} />
+      <Modern viewport={viewport} template={template} palette={palette} data={data} live={live} />
     );
   }
 

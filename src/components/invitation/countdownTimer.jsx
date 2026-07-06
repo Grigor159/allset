@@ -7,6 +7,7 @@ import { HStack, Separator } from "@chakra-ui/react";
 
 export function CountdownTimer({ template, eventDate, r }) {
   const [countdown, setCountdown] = useState(() => diffParts(eventDate));
+console.log(template);
 
   useEffect(() => {
     const interval = setInterval(

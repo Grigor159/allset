@@ -10,7 +10,6 @@ import {
   Image,
   Stack,
   Text,
-  useMediaQuery,
 } from "@chakra-ui/react";
 import { SubText } from "@/components/build/typography/subText";
 import {
@@ -41,7 +40,6 @@ export const Card = ({ el }) => {
     template: parseAsString,
     palette: parseAsString,
   });
-  const [isMobile] = useMediaQuery("(max-width: 767px)");
 
   const isSelected = template == id;
 
