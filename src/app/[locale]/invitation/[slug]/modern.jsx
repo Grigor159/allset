@@ -60,8 +60,8 @@ import "swiper/css/pagination";
 
 export default function Modern({
   viewport = "pc",
-  palette,
   template,
+  palette,
   data,
   live,
 }) {
@@ -375,7 +375,7 @@ export default function Modern({
               color="#F3F3F3"
             >
               {t("classic_journey")}
-            </Text>
+            </Text> // TODO: style outsrory imgs adaptive
             {/* ————— COUNTDOWN ————— */}
             {/* <VStack gap={isMobile ? "24px" : "100px"}> */}
             {data?.countDown !== false && (

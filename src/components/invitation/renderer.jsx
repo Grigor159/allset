@@ -17,7 +17,7 @@ export const Renderer = ({ viewport, palette, live }) => {
 
   if (template === "template.classic.elegance") {
     return (
-      <Classic viewport={viewport} palette={palette} data={data} live={live} />
+      <Classic viewport={viewport} template={template} palette={palette} data={data} live={live} />
     );
   }
 
@@ -29,6 +29,6 @@ export const Renderer = ({ viewport, palette, live }) => {
   }
 
   return (
-    <Rustic viewport={viewport} palette={palette} data={data} live={live} />
+    <Rustic viewport={viewport} template={template} palette={palette} data={data} live={live} />
   );
 };
