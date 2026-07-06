@@ -240,7 +240,12 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
       </Box>
 
       {/* ————— DATE ————— */}
-      <Flex gap="12px" align="baseline" justify="center" py="100px">
+      <Flex
+        gap="12px"
+        align="baseline"
+        justify="center"
+        py={r("50px", "100px")}
+      >
         <Text
           textAlign="center"
           fontSize={r("18px", "24px")}
@@ -302,8 +307,8 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
             maskPosition: "center",
             // WebkitMaskSize: "contain",
             // maskSize: "contain",
-            WebkitMaskSize: "100% 100%",
-            maskSize: "100% 100%",
+            WebkitMaskSize: !isMobile && "100% 100%",
+            maskSize: !isMobile && "100% 100%",
           }}
         />
         <VStack
@@ -312,7 +317,7 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
           justify={"center"}
           minH={r("1017px", "1931px")}
           h="100%"
-          pt="100px"
+          pt={r("0", "100px")}
         >
           <Stack
             position={"relative"}
@@ -324,8 +329,8 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
             <Icon
               color="var(--c-accent)"
               position="absolute"
-              left="12%"
-              top="0%"
+              left={r("3%", "8%")}
+              top="20%"
               w={r("34px", "108px")}
               h={r("77px", "252px")}
             >
@@ -334,8 +339,8 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
             <Icon
               color="var(--c-accent)"
               position="absolute"
-              right="12%"
-              top="0%"
+              right={r("3%", "8%")}
+              top="20%"
               w={r("34px", "108px")}
               h={r("77px", "252px")}
             >
@@ -383,7 +388,7 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
             {/* </VStack> */}
             <Text
               fontWeight="500"
-              fontSize={isMobile ? "15px" : "20px"}
+              fontSize={r("14px", "20px")}
               lineHeight={"28px"}
               color="#F3F3F3"
             >
@@ -451,23 +456,30 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
             color="var(--c-accent)"
             position="absolute"
             left="5%"
-            top="30%"
+            // top="50%"
+            top={r("80%", "50%")}
             transform="translateY(-30%)"
+            w={r("55px", "243px")}
+            h={r("77px", "340px")}
           >
             {timingLeft.icon}
           </Icon>
-          <VStack gap="60px" px="160px" align={"center"} justify={"center"}>
+          <VStack
+            gap={r("40px", "60px")}
+            px="160px"
+            align={"center"}
+            justify={"center"}
+          >
             <Text
               fontWeight="800"
-              fontSize={isMobile ? "22px" : "34px"}
+              fontSize={r("24px", "34px")}
               lineHeight="24px"
               textTransform="uppercase"
-              // color="var(--c-primary)"
               color="#323232"
             >
               {t("classic_timing")}
             </Text>
-            <Stack gap="40px" align={"center"} justify={"center"}>
+            <Stack gap={r("24px", "40px")} align={"center"} justify={"center"}>
               {timeline?.map((item, i) => (
                 <Flex
                   key={i}
@@ -475,9 +487,9 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
                   align={"center"}
                   gap="20px"
                 >
-                  <VStack gap="24px" minW="160px">
+                  <VStack gap={r("16px", "24px")} minW="160px">
                     <Text
-                      fontSize={isMobile ? "20px" : "34px"}
+                      fontSize={r("24px", "34px")}
                       fontWeight="800"
                       lineHeight={"24px"}
                       color="#323232"
@@ -490,6 +502,7 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
                       lineHeight={"24px"}
                       textTransform="uppercase"
                       color="#323232"
+                      textAlign="center"
                     >
                       {pickLang(item.venueName, language) || item.venueName}
                     </Text>
@@ -514,13 +527,15 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
             color="var(--c-accent)"
             position="absolute"
             right="5%"
-            top="10%"
+            // top="10%"
+            top={r("40%", "10%")}
             transform="translateY(-10%)"
+            w={r("55px", "243px")}
+            h={r("77px", "340px")}
           >
             {timingRight.icon}
           </Icon>
         </Center>
-
         {/* ————— RSVP ————— */}
         {data?.confirmationEnabled && (
           <Box position="relative">
@@ -558,7 +573,6 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
             </Icon>
           </Box>
         )}
-
         {/* ————— DRESS CODE ————— */}
         <Center
           position="relative"
@@ -569,21 +583,21 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
             color="var(--c-accent)"
             position="absolute"
             left="15%"
-            top="20%"
-            // transform="translateY(-10%)"
+            // top="20%"
+            top={r("-20%", "20%")}
           >
             {rsvpLeft.icon}
           </Icon>
           <Stack gap="32px">
             <Stack
-              gap="32px"
-              px="102px"
+              gap={r("16px", "32px")}
+              px={r("0px", "102px")}
               position={"relative"}
               align={"center"}
               justify={"center"}
             >
               <Text
-                fontSize={isMobile ? "20px" : "34px"}
+                fontSize={r("24px", "34px")}
                 lineHeight="24px"
                 fontWeight="800"
                 color="#323232"
@@ -595,7 +609,7 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
               <Text
                 w="70%"
                 textAlign={"center"}
-                fontSize={isMobile ? "13px" : "18px"}
+                fontSize={r("14px", "18px")}
                 lineHeight="28px"
                 color="var(--c-secondary)"
               >
@@ -611,11 +625,12 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
                       {(item, index) => (
                         <Box
                           key={index}
-                          w="32px"
-                          h="32px"
+                          w="58px"
+                          h="58px"
                           borderRadius="50%"
-                          ml="-10px"
+                          ml="-16px"
                           bg={item}
+                          border="1px solid #ffffff"
                         />
                       )}
                     </For>
@@ -642,28 +657,29 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
               </VStack>
             </Stack>
           </Stack>
-          <Icon
-            color="var(--c-accent)"
-            position="absolute"
-            right="10%"
-            bottom="10%"
-            // transform="translateY(-10%)"
-          >
-            {rsvpRight.icon}
-          </Icon>
+          {!isMobile && (
+            <Icon
+              color="var(--c-accent)"
+              position="absolute"
+              right="10%"
+              bottom="10%"
+              // transform="translateY(-10%)"
+            >
+              {rsvpRight.icon}
+            </Icon>
+          )}
         </Center>
-
         {/* ————— WEDDING GALLERY ————— */}
         {data?.albumLink && (
           <Center p="50px 0 50px 0">
             <Stack
               bg="var(--c-accent)"
-              minW="748px"
+              minW={r("100%", "748px")}
               w="fit-content"
               align={"center"}
               justify={"center"}
-              gap="16px"
-              borderRadius="220px"
+              gap={r("12px", "16px")}
+              borderRadius={r("0", "220px")}
               position="relative"
               py="32px"
             >
@@ -687,7 +703,7 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
               <Text
                 w="560px"
                 textAlign={"center"}
-                fontSize={"34px"}
+                fontSize={r("24px", "34px")}
                 fontWeight={500}
                 lineHeight={"48px"}
                 color="#FFFFFF"
@@ -701,7 +717,8 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
                 borderRadius={"100%"}
                 w="64px"
                 h="64px"
-                mt="20px"
+                my="20px"
+                boxShadow="0px 4px 4px 0px #00000040 inset"
               >
                 <Icon>{view.icon}</Icon>
               </Button>
@@ -719,7 +736,6 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
             </Stack>
           </Center>
         )}
-
         {/* ————— OUR LOVE STORY ————— */}
         <Center pt="50px">
           <Flex w="90%" justify={"space-between"} align={"center"}>
@@ -743,11 +759,11 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
                 }}
               />
             )}
-            <VStack gap="40px">
+            <VStack gap={r("16px", "40px")}>
               <Text
                 textAlign="center"
                 color="#323232"
-                fontSize={isMobile ? "20px" : "34px"}
+                fontSize={r("24px", "34px")}
                 lineHeight="48px"
                 fontWeight="800"
               >
@@ -759,7 +775,7 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
                 textAlign="center"
                 fontSize={isMobile ? "15px" : "18px"}
                 lineHeight="28px"
-                color="#323232"
+                color="var(--c-secondary)"
                 whiteSpace="pre-line"
                 fontWeight="400"
               >
@@ -789,7 +805,6 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
             )}
           </Flex>
         </Center>
-
         {/* ————— CONTACT ————— */}
         <Stack
           // bg="var(--c-primary)"
@@ -799,10 +814,10 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
           pb="78px"
           align={"center"}
           justify={"center"}
-          gap="32px"
+          gap={r("24px", "32px")}
         >
           <Text
-            fontSize="34px"
+            fontSize={r("24px", "34px")}
             lineHeight="24px"
             fontWeight="800"
             textTransform={"uppercase"}
@@ -814,7 +829,7 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
             fontSize="18px"
             lineHeight="24px"
             fontWeight="400"
-            color="#323232"
+            color="var(--c-secondary)"
           >
             {name}
           </Text>
@@ -824,7 +839,7 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
             fontSize="18px"
             lineHeight="24px"
             fontWeight="400"
-            color="#323232"
+            color="var(--c-secondary)"
           >
             {phone}
           </Text>
@@ -834,7 +849,7 @@ export default function Modern({ viewport = "pc", palette, data, live }) {
             fontSize="18px"
             lineHeight="24px"
             fontWeight="400"
-            color="#323232"
+            color="var(--c-secondary)"
           >
             {email}
           </Text>
