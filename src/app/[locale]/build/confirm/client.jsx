@@ -2,7 +2,7 @@
 
 import { parseAsString, useQueryStates } from "nuqs";
 import { useGetAuthTanstack, useMutateAuthTanstack } from "@/hooks/useTanstack";
-import { Box, Stack } from "@chakra-ui/react";
+import { Box, Spinner, Stack } from "@chakra-ui/react";
 import { error } from "@/components/ui/alerts";
 import { Animate } from "@/components/ui/animate";
 import { TitleDemo } from "@/components/build/titleDemo";
@@ -107,7 +107,7 @@ export const ConfirmClient = () => {
   };
 
   if (!id || isLoading) {
-    return <Box pt="40px">Loading...</Box>;
+    return <Box pt="40px"><Spinner size="xl" color="#004143" /></Box>;
   }
 
   return (
