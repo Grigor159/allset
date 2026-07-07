@@ -71,11 +71,11 @@ export default function Modern({
   const language = useLocale();
   const isLive = Boolean(slug) || live;
   const isRealMobile = useBreakpointValue({ base: true, lg: false });
-  // const isMobile = isLive
-  //   ? Boolean(isRealMobile)
-  //   : viewport === "mobile" || viewport === "laptop";
-  const isMobile =
-    Boolean(isRealMobile) || viewport === "mobile" || viewport === "laptop";
+  const isMobile = isLive
+    ? Boolean(isRealMobile)
+    : viewport === "mobile" || viewport === "laptop";
+  // const isMobile =
+  //   Boolean(isRealMobile) || viewport === "mobile" || viewport === "laptop";
   // const isMobile = viewport === "mobile" || viewport === "laptop";
   const r = (base, lg) => (isMobile ? base : lg);
   const swiperPadding = r("40px 0", "100px 0");
@@ -230,7 +230,7 @@ export default function Modern({
             fontFamily="var(--font-allegrou)"
             // fontFamily={sosBanff.style.fontFamily}
             fontSize={r("54px", "123px")}
-            lineHeight="24px"
+            lineHeight="40px"
             fontWeight="400"
             color="#323232"
           >
@@ -375,7 +375,7 @@ export default function Modern({
               color="#F3F3F3"
             >
               {t("classic_journey")}
-            </Text> // TODO: style outsrory imgs adaptive
+            </Text>
             {/* ————— COUNTDOWN ————— */}
             {/* <VStack gap={isMobile ? "24px" : "100px"}> */}
             {data?.countDown !== false && (
