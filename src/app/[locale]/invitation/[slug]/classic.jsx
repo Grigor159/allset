@@ -276,92 +276,94 @@ export default function Classic({
       </VStack>
 
       {/* ————— TIMING ————— */}
-      <Flex
-        bg="var(--c-secondary)"
-        color="white"
-        direction={isMobile ? "column" : "row"}
-        align={isMobile ? "stretch" : "center"}
-        gap={"64px"}
-        flexDirection={r("column-reverse", "row")}
-      >
-        <VStack
-          align={r("center", "flex-start")}
-          gap="40px"
-          flex="1"
-          p={r("0 24px 64px 24px", "0 0 0 160px")}
+      {data?.timeline && (
+        <Flex
+          bg="var(--c-secondary)"
+          color="white"
+          direction={isMobile ? "column" : "row"}
+          align={isMobile ? "stretch" : "center"}
+          gap={"64px"}
+          flexDirection={r("column-reverse", "row")}
         >
-          <Text
-            fontWeight="800"
-            fontSize={r("24px", "34px")}
-            lineHeight={r("24px", "50px")}
-            textTransform="uppercase"
-            color="#FFFFFF"
+          <VStack
+            align={r("center", "flex-start")}
+            gap="40px"
+            flex="1"
+            p={r("0 24px 64px 24px", "0 0 0 160px")}
           >
-            {t("classic_timing")}
-          </Text>
+            <Text
+              fontWeight="800"
+              fontSize={r("24px", "34px")}
+              lineHeight={r("24px", "50px")}
+              textTransform="uppercase"
+              color="#FFFFFF"
+            >
+              {t("classic_timing")}
+            </Text>
 
-          <Stack gap={r("32px", "40px")} minW={"361px"}>
-            {timeline?.map((item, i) => (
-              <Flex
-                key={i}
-                justify={"space-between"}
-                align={"center"}
-                gap="24px"
-                flexDirection={r("column", "row")}
-              >
-                <VStack
-                  align={r("center", "flex-start")}
-                  gap={r("16px", "24px")}
-                  minW="160px"
+            <Stack gap={r("32px", "40px")} minW={"361px"}>
+              {timeline?.map((item, i) => (
+                <Flex
+                  key={i}
+                  justify={"space-between"}
+                  align={"center"}
+                  gap="24px"
+                  flexDirection={r("column", "row")}
                 >
-                  <Text
-                    fontSize={r("28px", "34px")}
-                    fontWeight="800"
-                    lineHeight={"24px"}
+                  <VStack
+                    align={r("center", "flex-start")}
+                    gap={r("16px", "24px")}
+                    minW="160px"
                   >
-                    {item.time}
-                  </Text>
-                  <Text
-                    fontSize={r("20px", "22px")}
-                    fontWeight="500"
-                    lineHeight={r("24px", "34px")}
-                    textTransform="uppercase"
-                    color="#FFFFFF"
-                  >
-                    {pickLang(item.venueName, language) || item.venueName}
-                  </Text>
-                </VStack>
-                {item.venueLocation && (
-                  <Button
-                    as={Link}
-                    href={item.venueLocation}
-                    target="_blank"
-                    color="#FFFFFF"
-                    fontSize="14px"
-                    bg="var(--c-primary)"
-                    borderRadius="10px"
-                    h="44px"
-                  >
-                    <Icon>{map.icon}</Icon> {t("classic_map")}
-                  </Button>
-                )}
-              </Flex>
-            ))}
-          </Stack>
-        </VStack>
+                    <Text
+                      fontSize={r("28px", "34px")}
+                      fontWeight="800"
+                      lineHeight={"24px"}
+                    >
+                      {item.time}
+                    </Text>
+                    <Text
+                      fontSize={r("20px", "22px")}
+                      fontWeight="500"
+                      lineHeight={r("24px", "34px")}
+                      textTransform="uppercase"
+                      color="#FFFFFF"
+                    >
+                      {pickLang(item.venueName, language) || item.venueName}
+                    </Text>
+                  </VStack>
+                  {item.venueLocation && (
+                    <Button
+                      as={Link}
+                      href={item.venueLocation}
+                      target="_blank"
+                      color="#FFFFFF"
+                      fontSize="14px"
+                      bg="var(--c-primary)"
+                      borderRadius="10px"
+                      h="44px"
+                    >
+                      <Icon>{map.icon}</Icon> {t("classic_map")}
+                    </Button>
+                  )}
+                </Flex>
+              ))}
+            </Stack>
+          </VStack>
 
-        <Box
-          flex="0 0 auto"
-          w={r("100%", "652px")}
-          h={r("236px", "972px")}
-          borderRadius={r("0px 0px 470px 470px", "470px 0 0 470px")}
-          overflow="hidden"
-          bgImage={`url(${coupleImage})`}
-          bgSize="cover"
-          bgRepeat={"no-repeat"}
-          bgPos="center"
-        />
-      </Flex>
+          <Box
+            flex="0 0 auto"
+            w={r("100%", "652px")}
+            h={r("236px", "972px")}
+            borderRadius={r("0px 0px 470px 470px", "470px 0 0 470px")}
+            overflow="hidden"
+            bgImage={`url(${coupleImage})`}
+            bgSize="cover"
+            bgRepeat={"no-repeat"}
+            bgPos="center"
+          />
+        </Flex>
+      )}
 
       {/* ————— RSVP ————— */}
       {data?.confirmationEnabled && (
@@ -382,81 +384,83 @@ export default function Classic({
       )}
 
       {/* ————— DRESS CODE ————— */}
-      <VStack
-        bg="var(--c-secondary)"
-        color="white"
-        py={"60px"}
-        px={r("24px", "131px")}
-        gap={r("32px", "60px")}
-        textAlign="center"
-        bgImage={`linear-gradient(var(--c-secondary)), url(${dresscodeBg.src})`}
-        bgSize="cover"
-        bgPos="center"
-        bgBlendMode={"overlay"}
-      >
-        <Stack gap={r("16px", "32px")}>
-          <Text
-            fontSize={r("24px", "34px")}
-            lineHeight="24px"
-            fontWeight="800"
-            color="#FFFFFF"
-            textTransform={"uppercase"}
-          >
-            {t("dresscode")}
-          </Text>
-          <Text
-            fontSize={r("14px", "18px")}
-            lineHeight="28px"
-            color="#FFFFFF"
-            maxW="720px"
-          >
-            {dressCodeDesc}
-          </Text>
-        </Stack>
-
-        <Stack gap={"32px"}>
-          <VStack
-            gap={r("32px", "20px")}
-            flexDirection={r("column-reverse", "column")}
-          >
-            {dressCodeColors && (
-              <HStack gap="0">
-                <For each={dressCodeColors}>
-                  {(item, index) => (
-                    <Box
-                      key={index}
-                      w="58px"
-                      h="58px"
-                      borderRadius="50%"
-                      ml="-16px"
-                      bg={item}
-                      border="1px solid #ffffff"
-                    />
-                  )}
-                </For>
-              </HStack>
-            )}
+      {data?.dressCode && (
+        <VStack
+          bg="var(--c-secondary)"
+          color="white"
+          py={"60px"}
+          px={r("24px", "131px")}
+          gap={r("32px", "60px")}
+          textAlign="center"
+          bgImage={`linear-gradient(var(--c-secondary)), url(${dresscodeBg.src})`}
+          bgSize="cover"
+          bgPos="center"
+          bgBlendMode={"overlay"}
+        >
+          <Stack gap={r("16px", "32px")}>
             <Text
-              fontSize="18px"
-              lineHeight={"22px"}
-              fontWeight="500"
+              fontSize={r("24px", "34px")}
+              lineHeight="24px"
+              fontWeight="800"
               color="#FFFFFF"
+              textTransform={"uppercase"}
             >
-              {dressCodeName}
+              {t("dresscode")}
             </Text>
-            {dressCodeAbout && (
+            <Text
+              fontSize={r("14px", "18px")}
+              lineHeight="28px"
+              color="#FFFFFF"
+              maxW="720px"
+            >
+              {dressCodeDesc}
+            </Text>
+          </Stack>
+
+          <Stack gap={"32px"}>
+            <VStack
+              gap={r("32px", "20px")}
+              flexDirection={r("column-reverse", "column")}
+            >
+              {dressCodeColors && (
+                <HStack gap="0">
+                  <For each={dressCodeColors}>
+                    {(item, index) => (
+                      <Box
+                        key={index}
+                        w="58px"
+                        h="58px"
+                        borderRadius="50%"
+                        ml="-16px"
+                        bg={item}
+                        border="1px solid #ffffff"
+                      />
+                    )}
+                  </For>
+                </HStack>
+              )}
               <Text
-                fontSize="16px"
-                fontWeight="400"
+                fontSize="18px"
                 lineHeight={"22px"}
+                fontWeight="500"
                 color="#FFFFFF"
               >
-                {dressCodeAbout}
+                {dressCodeName}
               </Text>
-            )}
-          </VStack>
-        </Stack>
-      </VStack>
+              {dressCodeAbout && (
+                <Text
+                  fontSize="16px"
+                  fontWeight="400"
+                  lineHeight={"22px"}
+                  color="#FFFFFF"
+                >
+                  {dressCodeAbout}
+                </Text>
+              )}
+            </VStack>
+          </Stack>
+        </VStack>
+      )}
 
       {/* ————— Wedding Gallery ————— */}
       {data?.albumLink && (
@@ -539,63 +543,67 @@ export default function Classic({
       )}
 
       {/* ————— OUR LOVE STORY ————— */}
-      <Box
-        position="relative"
-        w="100%"
-        py={r("64px", "112px")}
-        px={r("24px", "unset")}
-        bgImage={`linear-gradient(rgba(255,255,255,0.82), rgba(255,255,255,0.82)), url(${storyBg.src})`}
-        bgSize="cover"
-        bgRepeat={"no-repeat"}
-        bgPos="center"
-        // h="451px"
-      >
-        <VStack gap={r("16px", "40px")} textAlign="center">
-          <Text
-            color="var(--c-secondary)"
-            fontSize={r("24px", "34px")}
-            lineHeight={r("24px", "48px")}
-            fontWeight="500"
-          >
-            {t("classic_story")}
-          </Text>
-          <Text
-            maxW="877px"
-            fontSize={r("14px", "18px")}
-            lineHeight="28px"
-            color="var(--c-secondary)"
-            whiteSpace="pre-line"
-            fontWeight="400"
-          >
-            {storyText}
-          </Text>
-        </VStack>
-      </Box>
+      {data?.ourStory && (
+        <Box
+          position="relative"
+          w="100%"
+          py={r("64px", "112px")}
+          px={r("24px", "unset")}
+          bgImage={`linear-gradient(rgba(255,255,255,0.82), rgba(255,255,255,0.82)), url(${storyBg.src})`}
+          bgSize="cover"
+          bgRepeat={"no-repeat"}
+          bgPos="center"
+          // h="451px"
+        >
+          <VStack gap={r("16px", "40px")} textAlign="center">
+            <Text
+              color="var(--c-secondary)"
+              fontSize={r("24px", "34px")}
+              lineHeight={r("24px", "48px")}
+              fontWeight="500"
+            >
+              {t("classic_story")}
+            </Text>
+            <Text
+              maxW="877px"
+              fontSize={r("14px", "18px")}
+              lineHeight="28px"
+              color="var(--c-secondary)"
+              whiteSpace="pre-line"
+              fontWeight="400"
+            >
+              {storyText}
+            </Text>
+          </VStack>
+        </Box>
+      )}
 
       {/* ————— PHOTO STRIP ————— */}
-      <Flex
-        direction={r("column", "row")}
-        w="100%"
-        my={r("64px", "100px")}
-        px={r("24px", "65px")}
-        gap={r("15px", "10px")}
-        align="center"
-        justify={"center"}
-      >
-        {gallery.map((src, i) => (
-          <Box
-            key={i}
-            w={r("100%", "320px")}
-            h={r("240px", "320px")}
-            bgImage={`url(${src})`}
-            bgSize="cover"
-            bgPos="center"
-            filter={i === 1 || i === 3 ? "grayscale(100%)" : "none"}
-            cursor="zoom-in"
-            onClick={() => openFullscreen(i)}
-          />
-        ))}
-      </Flex>
+      {data?.ourStory && (
+        <Flex
+          direction={r("column", "row")}
+          w="100%"
+          my={r("64px", "100px")}
+          px={r("24px", "65px")}
+          gap={r("15px", "10px")}
+          align="center"
+          justify={"center"}
+        >
+          {gallery.map((src, i) => (
+            <Box
+              key={i}
+              w={r("100%", "320px")}
+              h={r("240px", "320px")}
+              bgImage={`url(${src})`}
+              bgSize="cover"
+              bgPos="center"
+              filter={i === 1 || i === 3 ? "grayscale(100%)" : "none"}
+              cursor="zoom-in"
+              onClick={() => openFullscreen(i)}
+            />
+          ))}
+        </Flex>
+      )}
 
       {/* Hidden fullscreen gallery */}
       {isFullscreen && (
@@ -615,58 +623,60 @@ export default function Classic({
       )}
 
       {/* ————— CONTACT ————— */}
-      <Flex
-        // bg="var(--c-primary)"
-        // color="white"
-        // py={isMobile ? "28px" : "40px"}
-        pb={r("56px", "100px")}
-        align={"center"}
-        justify={"center"}
-        gap={r("20px", "90px")}
-        direction={r("column", "row")}
-      >
-        <Text
-          fontSize={r("24px", "30px")}
-          lineHeight="24px"
-          fontWeight="800"
-          textTransform={"uppercase"}
-          color="var(--c-secondary)"
+      {data?.connectWithUs && (
+        <Flex
+          // bg="var(--c-primary)"
+          // color="white"
+          // py={isMobile ? "28px" : "40px"}
+          pb={r("56px", "100px")}
+          align={"center"}
+          justify={"center"}
+          gap={r("20px", "90px")}
+          direction={r("column", "row")}
         >
-          {t("classic_contact")}
-        </Text>
-        <Text
-          fontSize={r("16px", "24px")}
-          lineHeight="24px"
-          fontWeight={r("400", "800")}
-          color="var(--c-secondary)"
-        >
-          {name}
-        </Text>
-        {phone && (
           <Text
-            as="a"
-            href={`tel:${phone}`}
+            fontSize={r("24px", "30px")}
+            lineHeight="24px"
+            fontWeight="800"
+            textTransform={"uppercase"}
+            color="var(--c-secondary)"
+          >
+            {t("classic_contact")}
+          </Text>
+          <Text
             fontSize={r("16px", "24px")}
             lineHeight="24px"
             fontWeight={r("400", "800")}
             color="var(--c-secondary)"
           >
-            {phone}
+            {name}
           </Text>
-        )}
-        {email && (
-          <Text
-            as="a"
-            href={`mailto:${email}`}
-            fontSize={r("16px", "24px")}
-            lineHeight="24px"
-            fontWeight={r("400", "800")}
-            color="var(--c-secondary)"
-          >
-            {email}
-          </Text>
-        )}
-      </Flex>
+          {phone && (
+            <Text
+              as="a"
+              href={`tel:${phone}`}
+              fontSize={r("16px", "24px")}
+              lineHeight="24px"
+              fontWeight={r("400", "800")}
+              color="var(--c-secondary)"
+            >
+              {phone}
+            </Text>
+          )}
+          {email && (
+            <Text
+              as="a"
+              href={`mailto:${email}`}
+              fontSize={r("16px", "24px")}
+              lineHeight="24px"
+              fontWeight={r("400", "800")}
+              color="var(--c-secondary)"
+            >
+              {email}
+            </Text>
+          )}
+        </Flex>
+      )}
     </Box>
   );
 }

@@ -451,91 +451,98 @@ export default function Modern({
         bgRepeat="no-repeat"
       >
         {/* ————— TIMING ————— */}
-        <Center pt="90px" position="relative">
-          <Icon
-            color="var(--c-accent)"
-            position="absolute"
-            left="5%"
-            // top="50%"
-            top={r("80%", "50%")}
-            transform="translateY(-30%)"
-            w={r("55px", "243px")}
-            h={r("77px", "340px")}
-          >
-            {timingLeft.icon}
-          </Icon>
-          <VStack
-            gap={r("40px", "60px")}
-            px="160px"
-            align={"center"}
-            justify={"center"}
-          >
-            <Text
-              fontWeight="800"
-              fontSize={r("24px", "34px")}
-              lineHeight="24px"
-              textTransform="uppercase"
-              color="#323232"
+        {data?.timeline && (
+          <Center pt="90px" position="relative">
+            <Icon
+              color="var(--c-accent)"
+              position="absolute"
+              left="5%"
+              // top="50%"
+              top={r("80%", "50%")}
+              transform="translateY(-30%)"
+              w={r("55px", "243px")}
+              h={r("77px", "340px")}
             >
-              {t("classic_timing")}
-            </Text>
-            <Stack gap={r("24px", "40px")} align={"center"} justify={"center"}>
-              {timeline?.map((item, i) => (
-                <Flex
-                  key={i}
-                  justify={"space-between"}
-                  align={"center"}
-                  gap="20px"
-                >
-                  <VStack gap={r("16px", "24px")} minW="160px">
-                    <Text
-                      fontSize={r("24px", "34px")}
-                      fontWeight="800"
-                      lineHeight={"24px"}
-                      color="#323232"
-                    >
-                      {item.time}
-                    </Text>
-                    <Text
-                      fontSize={isMobile ? "15px" : "24px"}
-                      fontWeight="500"
-                      lineHeight={"24px"}
-                      textTransform="uppercase"
-                      color="#323232"
-                      textAlign="center"
-                    >
-                      {pickLang(item.venueName, language) || item.venueName}
-                    </Text>
-                    {item.venueLocation && (
-                      <ChakraLink
-                        as={Link}
-                        href={item.venueLocation}
-                        target="_blank"
-                        fontSize="14px"
-                        color="var(--c-secondary)"
-                        textDecoration="underline"
+              {timingLeft.icon}
+            </Icon>
+            <VStack
+              gap={r("40px", "60px")}
+              px="160px"
+              align={"center"}
+              justify={"center"}
+            >
+              <Text
+                fontWeight="800"
+                fontSize={r("24px", "34px")}
+                lineHeight="24px"
+                textTransform="uppercase"
+                color="#323232"
+              >
+                {t("classic_timing")}
+              </Text>
+              <Stack
+                gap={r("24px", "40px")}
+                align={"center"}
+                justify={"center"}
+              >
+                {timeline?.map((item, i) => (
+                  <Flex
+                    key={i}
+                    justify={"space-between"}
+                    align={"center"}
+                    gap="20px"
+                  >
+                    <VStack gap={r("16px", "24px")} minW="160px">
+                      <Text
+                        fontSize={r("24px", "34px")}
+                        fontWeight="800"
+                        lineHeight={"24px"}
+                        color="#323232"
                       >
-                        {t("classic_map")}
-                      </ChakraLink>
-                    )}
-                  </VStack>
-                </Flex>
-              ))}
-            </Stack>
-          </VStack>
-          <Icon
-            color="var(--c-accent)"
-            position="absolute"
-            right="5%"
-            // top="10%"
-            top={r("40%", "10%")}
-            transform="translateY(-10%)"
-            w={r("55px", "243px")}
-            h={r("77px", "340px")}
-          >
-            {timingRight.icon}
-          </Icon>
-        </Center>
+                        {item.time}
+                      </Text>
+                      <Text
+                        fontSize={isMobile ? "15px" : "24px"}
+                        fontWeight="500"
+                        lineHeight={"24px"}
+                        textTransform="uppercase"
+                        color="#323232"
+                        textAlign="center"
+                      >
+                        {pickLang(item.venueName, language) || item.venueName}
+                      </Text>
+                      {item.venueLocation && (
+                        <ChakraLink
+                          as={Link}
+                          href={item.venueLocation}
+                          target="_blank"
+                          fontSize="14px"
+                          color="var(--c-secondary)"
+                          textDecoration="underline"
+                        >
+                          {t("classic_map")}
+                        </ChakraLink>
+                      )}
+                    </VStack>
+                  </Flex>
+                ))}
+              </Stack>
+            </VStack>
+            <Icon
+              color="var(--c-accent)"
+              position="absolute"
+              right="5%"
+              // top="10%"
+              top={r("40%", "10%")}
+              transform="translateY(-10%)"
+              w={r("55px", "243px")}
+              h={r("77px", "340px")}
+            >
+              {timingRight.icon}
+            </Icon>
+          </Center>
+        )}
+
         {/* ————— RSVP ————— */}
         {data?.confirmationEnabled && (
           <Box position="relative">
@@ -573,102 +580,106 @@ export default function Modern({
             </Icon>
           </Box>
         )}
-        {/* ————— DRESS CODE ————— */}
-        <Center
-          position="relative"
-          mt={!data?.confirmationEnabled && "100px"}
-          pb="50px"
-        >
-          <Icon
-            color="var(--c-accent)"
-            position="absolute"
-            left="15%"
-            // top="20%"
-            top={r("-20%", "20%")}
-          >
-            {rsvpLeft.icon}
-          </Icon>
-          <Stack gap="32px">
-            <Stack
-              gap={r("16px", "32px")}
-              px={r("0px", "102px")}
-              position={"relative"}
-              align={"center"}
-              justify={"center"}
-            >
-              <Text
-                fontSize={r("24px", "34px")}
-                lineHeight="24px"
-                fontWeight="800"
-                color="#323232"
-                textTransform={"uppercase"}
-                textAlign={"center"}
-              >
-                {t("dresscode")}
-              </Text>
-              <Text
-                w="70%"
-                textAlign={"center"}
-                fontSize={r("14px", "18px")}
-                lineHeight="28px"
-                color="var(--c-secondary)"
-              >
-                {dressCodeDesc}
-              </Text>
-            </Stack>
 
-            <Stack gap={"32px"}>
-              <VStack gap="20px">
-                {dressCodeColors && (
-                  <HStack gap="0">
-                    <For each={dressCodeColors}>
-                      {(item, index) => (
-                        <Box
-                          key={index}
-                          w="58px"
-                          h="58px"
-                          borderRadius="50%"
-                          ml="-16px"
-                          bg={item}
-                          border="1px solid #ffffff"
-                        />
-                      )}
-                    </For>
-                  </HStack>
-                )}
-                <Text
-                  fontSize="18px"
-                  lineHeight={"22px"}
-                  fontWeight="500"
-                  color="var(--c-primary)"
-                >
-                  {dressCodeName}
-                </Text>
-                {dressCodeAbout && (
-                  <Text
-                    fontSize="16px"
-                    fontWeight="400"
-                    lineHeight={"22px"}
-                    color="var(--c-secondary)"
-                  >
-                    {dressCodeAbout}
-                  </Text>
-                )}
-              </VStack>
-            </Stack>
-          </Stack>
-          {!isMobile && (
+        {/* ————— DRESS CODE ————— */}
+        {data?.dressCode && (
+          <Center
+            position="relative"
+            mt={!data?.confirmationEnabled && "100px"}
+            pb="50px"
+          >
             <Icon
               color="var(--c-accent)"
               position="absolute"
-              right="10%"
-              bottom="10%"
-              // transform="translateY(-10%)"
+              left="15%"
+              // top="20%"
+              top={r("-20%", "20%")}
             >
-              {rsvpRight.icon}
+              {rsvpLeft.icon}
             </Icon>
-          )}
-        </Center>
+            <Stack gap="32px">
+              <Stack
+                gap={r("16px", "32px")}
+                px={r("0px", "102px")}
+                position={"relative"}
+                align={"center"}
+                justify={"center"}
+              >
+                <Text
+                  fontSize={r("24px", "34px")}
+                  lineHeight="24px"
+                  fontWeight="800"
+                  color="#323232"
+                  textTransform={"uppercase"}
+                  textAlign={"center"}
+                >
+                  {t("dresscode")}
+                </Text>
+                <Text
+                  w="70%"
+                  textAlign={"center"}
+                  fontSize={r("14px", "18px")}
+                  lineHeight="28px"
+                  color="var(--c-secondary)"
+                >
+                  {dressCodeDesc}
+                </Text>
+              </Stack>
+
+              <Stack gap={"32px"}>
+                <VStack gap="20px">
+                  {dressCodeColors && (
+                    <HStack gap="0">
+                      <For each={dressCodeColors}>
+                        {(item, index) => (
+                          <Box
+                            key={index}
+                            w="58px"
+                            h="58px"
+                            borderRadius="50%"
+                            ml="-16px"
+                            bg={item}
+                            border="1px solid #ffffff"
+                          />
+                        )}
+                      </For>
+                    </HStack>
+                  )}
+                  <Text
+                    fontSize="18px"
+                    lineHeight={"22px"}
+                    fontWeight="500"
+                    color="var(--c-primary)"
+                  >
+                    {dressCodeName}
+                  </Text>
+                  {dressCodeAbout && (
+                    <Text
+                      fontSize="16px"
+                      fontWeight="400"
+                      lineHeight={"22px"}
+                      color="var(--c-secondary)"
+                    >
+                      {dressCodeAbout}
+                    </Text>
+                  )}
+                </VStack>
+              </Stack>
+            </Stack>
+            {!isMobile && (
+              <Icon
+                color="var(--c-accent)"
+                position="absolute"
+                right="10%"
+                bottom="10%"
+                // transform="translateY(-10%)"
+              >
+                {rsvpRight.icon}
+              </Icon>
+            )}
+          </Center>
+        )}
+
         {/* ————— WEDDING GALLERY ————— */}
         {data?.albumLink && (
           <Center p="50px 0 50px 0">
@@ -736,128 +747,134 @@ export default function Modern({
             </Stack>
           </Center>
         )}
-        {/* ————— OUR LOVE STORY ————— */}
-        <Center pt="50px">
-          <Flex w="90%" justify={"space-between"} align={"center"}>
-            {storyImgOne && (
-              <Image
-                src={storyImgOne}
-                alt="story 1"
-                minW="260px"
-                maxW="260px"
-                h="260px"
-                objectFit="cover"
-                style={{
-                  WebkitMaskImage: `url(${story1Bg.src})`,
-                  WebkitMaskSize: "100% 100%",
-                  WebkitMaskRepeat: "no-repeat",
-                  WebkitMaskPosition: "center",
-                  maskImage: `url(${story1Bg.src})`,
-                  maskSize: "100% 100%",
-                  maskRepeat: "no-repeat",
-                  maskPosition: "center",
-                }}
-              />
-            )}
-            <VStack gap={r("16px", "40px")}>
-              <Text
-                textAlign="center"
-                color="#323232"
-                fontSize={r("24px", "34px")}
-                lineHeight="48px"
-                fontWeight="800"
-              >
-                {t("classic_story")}
-              </Text>
-              <Text
-                // maxW="877px"
-                // w="50%" //
-                textAlign="center"
-                fontSize={isMobile ? "15px" : "18px"}
-                lineHeight="28px"
-                color="var(--c-secondary)"
-                whiteSpace="pre-line"
-                fontWeight="400"
-              >
-                {storyText}
-              </Text>
-            </VStack>
-            {storyImgTwo && (
-              <Image
-                src={storyImgTwo}
-                alt="story 2"
-                minW="260px"
-                maxW="260px"
-                h="260px"
-                objectFit="cover"
-                style={{
-                  WebkitMaskImage: `url(${story2Bg.src})`,
-                  WebkitMaskSize: "100% 100%",
-                  WebkitMaskRepeat: "no-repeat",
-                  WebkitMaskPosition: "center",
 
-                  maskImage: `url(${story2Bg.src})`,
-                  maskSize: "100% 100%",
-                  maskRepeat: "no-repeat",
-                  maskPosition: "center",
-                }}
-              />
-            )}
-          </Flex>
-        </Center>
+        {/* ————— OUR LOVE STORY ————— */}
+        {data?.ourStory && (
+          <Center pt="50px">
+            <Flex w="90%" justify={"space-between"} align={"center"}>
+              {storyImgOne && (
+                <Image
+                  src={storyImgOne}
+                  alt="story 1"
+                  minW="260px"
+                  maxW="260px"
+                  h="260px"
+                  objectFit="cover"
+                  style={{
+                    WebkitMaskImage: `url(${story1Bg.src})`,
+                    WebkitMaskSize: "100% 100%",
+                    WebkitMaskRepeat: "no-repeat",
+                    WebkitMaskPosition: "center",
+                    maskImage: `url(${story1Bg.src})`,
+                    maskSize: "100% 100%",
+                    maskRepeat: "no-repeat",
+                    maskPosition: "center",
+                  }}
+                />
+              )}
+              <VStack gap={r("16px", "40px")}>
+                <Text
+                  textAlign="center"
+                  color="#323232"
+                  fontSize={r("24px", "34px")}
+                  lineHeight="48px"
+                  fontWeight="800"
+                >
+                  {t("classic_story")}
+                </Text>
+                <Text
+                  // maxW="877px"
+                  // w="50%" //
+                  textAlign="center"
+                  fontSize={isMobile ? "15px" : "18px"}
+                  lineHeight="28px"
+                  color="var(--c-secondary)"
+                  whiteSpace="pre-line"
+                  fontWeight="400"
+                >
+                  {storyText}
+                </Text>
+              </VStack>
+              {storyImgTwo && (
+                <Image
+                  src={storyImgTwo}
+                  alt="story 2"
+                  minW="260px"
+                  maxW="260px"
+                  h="260px"
+                  objectFit="cover"
+                  style={{
+                    WebkitMaskImage: `url(${story2Bg.src})`,
+                    WebkitMaskSize: "100% 100%",
+                    WebkitMaskRepeat: "no-repeat",
+                    WebkitMaskPosition: "center",
+
+                    maskImage: `url(${story2Bg.src})`,
+                    maskSize: "100% 100%",
+                    maskRepeat: "no-repeat",
+                    maskPosition: "center",
+                  }}
+                />
+              )}
+            </Flex>
+          </Center>
+        )}
+
         {/* ————— CONTACT ————— */}
-        <Stack
-          // bg="var(--c-primary)"
-          // color="white"
-          // py={isMobile ? "28px" : "40px"}
-          pt="78px"
-          pb="78px"
-          align={"center"}
-          justify={"center"}
-          gap={r("24px", "32px")}
-        >
-          <Text
-            fontSize={r("24px", "34px")}
-            lineHeight="24px"
-            fontWeight="800"
-            textTransform={"uppercase"}
-            color="#323232"
+        {data?.connectWithUs && (
+          <Stack
+            // bg="var(--c-primary)"
+            // color="white"
+            // py={isMobile ? "28px" : "40px"}
+            pt="78px"
+            pb="78px"
+            align={"center"}
+            justify={"center"}
+            gap={r("24px", "32px")}
           >
-            {t("classic_contact")}
-          </Text>
-          <Text
-            fontSize="18px"
-            lineHeight="24px"
-            fontWeight="400"
-            color="var(--c-secondary)"
-          >
-            {name}
-          </Text>
-          {phone && (
             <Text
-              as="a"
-              href={`tel:${phone}`}
+              fontSize={r("24px", "34px")}
+              lineHeight="24px"
+              fontWeight="800"
+              textTransform={"uppercase"}
+              color="#323232"
+            >
+              {t("classic_contact")}
+            </Text>
+            <Text
               fontSize="18px"
               lineHeight="24px"
               fontWeight="400"
               color="var(--c-secondary)"
             >
-              {phone}
+              {name}
             </Text>
-          )}
-          {email && (
-            <Text
-              as="a"
-              href={`mailto:${email}`}
-              fontSize="18px"
-              lineHeight="24px"
-              fontWeight="400"
-              color="var(--c-secondary)"
-            >
-              {email}
-            </Text>
-          )}
-        </Stack>
+            {phone && (
+              <Text
+                as="a"
+                href={`tel:${phone}`}
+                fontSize="18px"
+                lineHeight="24px"
+                fontWeight="400"
+                color="var(--c-secondary)"
+              >
+                {phone}
+              </Text>
+            )}
+            {email && (
+              <Text
+                as="a"
+                href={`mailto:${email}`}
+                fontSize="18px"
+                lineHeight="24px"
+                fontWeight="400"
+                color="var(--c-secondary)"
+              >
+                {email}
+              </Text>
+            )}
+          </Stack>
+        )}
       </Box>
     </Box>
   );

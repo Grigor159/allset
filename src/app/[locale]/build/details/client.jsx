@@ -31,7 +31,7 @@ import { Rsvp } from "@/components/build/rsvp";
 import { error } from "@/components/ui/alerts";
 import { InvitationStorageService } from "@/services/aws/index";
 import { isFile } from "@/utils/checkers";
-
+// TODO: by data keys pass checked props to controlled components
 export const DetailsClient = () => {
   const router = useRouter();
   const search = useSearch();
@@ -189,19 +189,42 @@ export const DetailsClient = () => {
     });
   }, [data]);
 
+  const getEmptyValue = (value) => {
+    if (Array.isArray(value)) return [];
+    if (typeof value === "boolean") return false;
+    if (value && typeof value === "object") return null;
+    return "";
+  };
+
+  // send null
   const handleHide = (key, hidden) => {
     setForm((prev) => {
       const updated = { ...prev };
       if (hidden) {
-        hiddenFieldsRef.current[key] = updated[key];
-        delete updated[key];
+        hiddenFieldsRef.current[key] = prev[key];
+        updated[key] = getEmptyValue(prev[key]);
       } else {
-        updated[key] = hiddenFieldsRef.current[key] || "";
+        updated[key] = hiddenFieldsRef.current[key] ?? "";
         delete hiddenFieldsRef.current[key];
       }
       return updated;
     });
   };
+
+  // send default state with empty values
+  // const handleHide = (key, hidden) => {
+  //   setForm((prev) => {
+  //     const updated = { ...prev };
+  //     if (hidden) {
+  //       hiddenFieldsRef.current[key] = prev[key];
+  //       updated[key] = detailsForm[key];
+  //     } else {
+  //       updated[key] = hiddenFieldsRef.current[key] ?? detailsForm[key];
+  //       delete hiddenFieldsRef.current[key];
+  //     }
+  //     return updated;
+  //   });
+  // };
 
   const handleChange = (e) => {
     setForm((prev) => ({
@@ -647,6 +670,21 @@ export const DetailsClient = () => {
     </Box>
   );
 };
+
+// old version
+// const handleHide = (key, hidden) => {
+//   setForm((prev) => {
+//     const updated = { ...prev };
+//     if (hidden) {
+//       hiddenFieldsRef.current[key] = updated[key];
+//       delete updated[key];
+//     } else {
+//       updated[key] = hiddenFieldsRef.current[key] || "";
+//       delete hiddenFieldsRef.current[key];
+//     }
+//     return updated;
+//   });
+// };
 
 // V1 - these two affect the draft call after the invitation/id call.
 // useEffect(() => {
