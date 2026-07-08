@@ -17,7 +17,7 @@ import { Radio } from "../auth/invitations/guests/radio";
 import { isNotEmptyArray } from "@/utils/checkers";
 
 export const Rsvp = ({
-  isMobile,
+  r,
   color,
   data,
   note,
@@ -31,26 +31,23 @@ export const Rsvp = ({
   handleSubmit,
 }) => {
   const t = useTranslations();
-
+  // TODO: add notes
   return (
     data !== false && (
-      <VStack py={isMobile ? "40px" : "100px"} gap="37px">
+      <VStack py={r("64px", "100px")} gap="37px">
         <Text
-          fontSize={isMobile ? "20px" : "34px"}
-          w="560px"
+          fontSize={r("24px", "34px")}
+          w={r("fit-content", "560px")}
           fontWeight={500}
-          lineHeight="48px"
+          lineHeight={r("36px", "48px")}
           textAlign="center"
           textTransform="uppercase"
           color="#323232"
-          // dangerouslySetInnerHTML={{
-          //   __html: t("classic_join").replace(/\n/g, "<br />"),
-          // }}
         >
           {t("classic_join")}
         </Text>
         <VStack gap="37px">
-          <VStack gap="16px" minW={isMobile ? "100%" : "492px"}>
+          <VStack gap="16px" w="100%" minW={"492px"}>
             <Input
               placeholder={t("classic_type")}
               h="52px"

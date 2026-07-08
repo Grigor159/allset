@@ -833,26 +833,30 @@ export default function Modern({
           >
             {name}
           </Text>
-          <Text
-            as="a"
-            href={`tel:${phone}`}
-            fontSize="18px"
-            lineHeight="24px"
-            fontWeight="400"
-            color="var(--c-secondary)"
-          >
-            {phone}
-          </Text>
-          <Text
-            as="a"
-            href={`mailto:${email}`}
-            fontSize="18px"
-            lineHeight="24px"
-            fontWeight="400"
-            color="var(--c-secondary)"
-          >
-            {email}
-          </Text>
+          {phone && (
+            <Text
+              as="a"
+              href={`tel:${phone}`}
+              fontSize="18px"
+              lineHeight="24px"
+              fontWeight="400"
+              color="var(--c-secondary)"
+            >
+              {phone}
+            </Text>
+          )}
+          {email && (
+            <Text
+              as="a"
+              href={`mailto:${email}`}
+              fontSize="18px"
+              lineHeight="24px"
+              fontWeight="400"
+              color="var(--c-secondary)"
+            >
+              {email}
+            </Text>
+          )}
         </Stack>
       </Box>
     </Box>

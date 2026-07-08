@@ -19,7 +19,7 @@ export function CountdownTimer({ template, eventDate, r }) {
   if (template === "template.modern.romance") {
     return (
       <HStack gap={r("16px", "32px")}>
-      {/* <HStack gap={isMobile ? "16px" : "32px"}> */}
+        {/* <HStack gap={isMobile ? "16px" : "32px"}> */}
         <Countdown
           template={template}
           value={countdown.days}
@@ -53,7 +53,7 @@ export function CountdownTimer({ template, eventDate, r }) {
 
   if (template === "template.classic.elegance") {
     return (
-      <HStack gap={r("16px", "48px")}>
+      <HStack gap={r("42px", "48px")} flexDirection={r("column", "row")}>
         <Countdown
           template={template}
           value={countdown.days}

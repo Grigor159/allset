@@ -35,7 +35,7 @@ export const Countdown = ({ template, value, label, r }) => {
     return (
       <HStack align="baseline" gap="8px">
         <Text
-          fontSize={r("136px", "50px")}
+          fontSize="50px"
           fontWeight="400"
           color="var(--c-primary)"
           lineHeight="28px"
@@ -43,7 +43,7 @@ export const Countdown = ({ template, value, label, r }) => {
           {value}
         </Text>
         <Text
-          fontSize={r("12px", "34px")}
+          fontSize="34px"
           fontWeight="400"
           color="var(--c-primary)"
           lineHeight="28px"
