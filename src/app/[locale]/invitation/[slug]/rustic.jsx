@@ -22,6 +22,7 @@ import {
   Text,
   VStack,
   Link as ChakraLink,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import {
   bottle,
@@ -78,7 +79,11 @@ export default function Rustic({
   const t = useTranslations();
   const language = useLocale();
   const isLive = Boolean(slug) || live;
-  const isMobile = viewport === "mobile";
+  const isRealMobile = useBreakpointValue({ base: true, lg: false });
+  const isMobile = isLive
+    ? Boolean(isRealMobile)
+    : viewport === "mobile" || viewport === "laptop";
+  const r = (base, lg) => (isMobile ? base : lg);
 
   const { mutate } = useMutateAuthTanstack("confirmations/guest", "post", {
     onSuccess: () => {
@@ -316,9 +321,9 @@ export default function Rustic({
               <Text color="var(--c-primary)">{t("rustic_journey")}</Text>
               {data?.countDown !== false && (
                 <CountdownTimer
-                  template={data?.templateId}
+                  template={data?.templateId || template}
                   eventDate={data?.eventDate}
-                  isMobile={isMobile}
+                  r={r}
                 />
               )}
             </VStack>

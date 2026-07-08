@@ -55,9 +55,6 @@ export default function Classic({
     ? Boolean(isRealMobile)
     : viewport === "mobile" || viewport === "laptop";
   const r = (base, lg) => (isMobile ? base : lg);
-  const swiperPadding = r("40px 0", "100px 0");
-  const slideWidth = r("283px", "448px");
-  const slideHeight = r("350px", "556px");
 
   const { mutate } = useMutateAuthTanstack("confirmations/guest", "post", {
     onSuccess: () => {
@@ -261,9 +258,8 @@ export default function Classic({
         <Stack gap="40px">
           {data?.countDown !== false && (
             <CountdownTimer
-              template={data?.templateId}
+              template={data?.templateId || template}
               eventDate={data?.eventDate}
-              isMobile={isMobile}
               r={r}
             />
           )}
