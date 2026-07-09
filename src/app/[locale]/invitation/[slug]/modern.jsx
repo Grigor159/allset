@@ -451,7 +451,7 @@ export default function Modern({
         bgRepeat="no-repeat"
       >
         {/* ————— TIMING ————— */}
-        {data?.timeline && (
+        {(!isLive || data?.timeline?.length > 0) && (
           <Center pt="90px" position="relative">
             <Icon
               color="var(--c-accent)"
@@ -544,7 +544,7 @@ export default function Modern({
         )}
 
         {/* ————— RSVP ————— */}
-        {data?.confirmationEnabled && (
+        {(!isLive || data?.confirmationEnabled) && (
           <Box position="relative">
             <Icon
               color="var(--c-accent)"
@@ -556,7 +556,7 @@ export default function Modern({
               {rsvpRight.icon}
             </Icon>
             <Rsvp
-              isMobile={isMobile}
+              r={r}
               color="var(--c-secondary)"
               data={data?.rsvp}
               note={data?.template?.hasConfirmationNote}
@@ -582,7 +582,7 @@ export default function Modern({
         )}
 
         {/* ————— DRESS CODE ————— */}
-        {data?.dressCode && (
+        {(!isLive || data?.dressCode) && (
           <Center
             position="relative"
             mt={!data?.confirmationEnabled && "100px"}
@@ -681,7 +681,7 @@ export default function Modern({
         )}
 
         {/* ————— WEDDING GALLERY ————— */}
-        {data?.albumLink && (
+        {(!isLive || data?.albumLink) && (
           <Center p="50px 0 50px 0">
             <Stack
               bg="var(--c-accent)"
@@ -749,7 +749,7 @@ export default function Modern({
         )}
 
         {/* ————— OUR LOVE STORY ————— */}
-        {data?.ourStory && (
+        {(!isLive || data?.ourStory) && (
           <Center pt="50px">
             <Flex w="90%" justify={"space-between"} align={"center"}>
               {storyImgOne && (
@@ -821,7 +821,7 @@ export default function Modern({
         )}
 
         {/* ————— CONTACT ————— */}
-        {data?.connectWithUs && (
+        {(!isLive || data?.connectWithUs) && (
           <Stack
             // bg="var(--c-primary)"
             // color="white"

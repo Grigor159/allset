@@ -276,7 +276,7 @@ export default function Classic({
       </VStack>
 
       {/* ————— TIMING ————— */}
-      {data?.timeline && (
+      {(!isLive || data?.timeline?.length > 0) && (
         <Flex
           bg="var(--c-secondary)"
           color="white"
@@ -366,7 +366,7 @@ export default function Classic({
       )}
 
       {/* ————— RSVP ————— */}
-      {data?.confirmationEnabled && (
+      {(!isLive || data?.confirmationEnabled) && (
         <Rsvp
           r={r}
           color="var(--c-secondary)"
@@ -384,7 +384,7 @@ export default function Classic({
       )}
 
       {/* ————— DRESS CODE ————— */}
-      {data?.dressCode && (
+      {(!isLive || data?.dressCode) && (
         <VStack
           bg="var(--c-secondary)"
           color="white"
@@ -463,7 +463,7 @@ export default function Classic({
       )}
 
       {/* ————— Wedding Gallery ————— */}
-      {data?.albumLink && (
+      {(!isLive || data?.albumLink) && (
         <VStack
           py={r("64px", "100px")}
           gap="24px"
@@ -543,7 +543,7 @@ export default function Classic({
       )}
 
       {/* ————— OUR LOVE STORY ————— */}
-      {data?.ourStory && (
+      {(!isLive || data?.ourStory) && (
         <Box
           position="relative"
           w="100%"
@@ -579,7 +579,7 @@ export default function Classic({
       )}
 
       {/* ————— PHOTO STRIP ————— */}
-      {data?.ourStory && (
+      {(!isLive || data?.ourStory) && (
         <Flex
           direction={r("column", "row")}
           w="100%"
@@ -623,7 +623,7 @@ export default function Classic({
       )}
 
       {/* ————— CONTACT ————— */}
-      {data?.connectWithUs && (
+      {(!isLive || data?.connectWithUs) && (
         <Flex
           // bg="var(--c-primary)"
           // color="white"

@@ -463,7 +463,7 @@ export default function Rustic({
 
       {/* ————— TIMING ————— */}
       {/* <Center pt="90px"> */}
-      {data?.timeline && (
+      {(!isLive || data?.timeline?.length > 0) && (
         <Center>
           <Box position="relative" minH="1164px" minW="1086px">
             <Box
@@ -574,12 +574,12 @@ export default function Rustic({
       )}
 
       {/* ————— RSVP ————— */}
-      {data?.confirmationEnabled && (
+      {(!isLive || data?.confirmationEnabled) && (
         <Container maxW="1440px" px={{ base: "24px", md: "80px" }}>
           <Flex align={"center"} justify="center" gap="60px">
             <Icon color="var(--c-accent)">{heartsLeft.icon}</Icon>
             <Rsvp
-              isMobile={isMobile}
+              r={r}
               color="var(--c-primary)"
               data={data?.rsvp}
               note={data?.template?.hasConfirmationNote}
@@ -598,7 +598,7 @@ export default function Rustic({
       )}
 
       {/* ————— DRESS CODE ————— */}
-      {data?.dressCode && (
+      {(!isLive || data?.dressCode) && (
         <Center mt={!data?.confirmationEnabled && "100px"}>
           <VStack
             maxW="736px"
@@ -690,7 +690,7 @@ export default function Rustic({
       )}
 
       {/* ————— WEDDING GALLERY ————— */}
-      {data?.albumLink && (
+      {(!isLive || data?.albumLink) && (
         <Center pt="60px">
           <VStack
             bgImage={`url(${galleryBg.src})`}
@@ -770,7 +770,7 @@ export default function Rustic({
       {/* // TODO: connect with gallery like classic */}
       {/* ————— OUR LOVE STORY ————— */}
       {/* <Container maxW="1440px" px={{ base: "24px", md: "80px" }}> */}
-      {data?.ourStory && (
+      {(!isLive || data?.ourStory) && (
         <Flex
           w="100%"
           justify={"space-between"}
@@ -916,7 +916,7 @@ export default function Rustic({
       {/* </Container> */}
 
       {/* ————— CONTACT ————— */}
-      {data?.connectWithUs && (
+      {(!isLive || data?.connectWithUs) && (
         <Flex
           // bg="var(--c-primary)"
           // color="white"
