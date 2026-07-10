@@ -49,12 +49,13 @@ import screp from "@/assets/imgs/invitations/rustic/screp.png";
 import dream from "@/assets/imgs/invitations/rustic/dream.png";
 import galleryBg from "@/assets/imgs/invitations/rustic/gallery_bg.png";
 import moments from "@/assets/imgs/invitations/rustic/moments.png";
-import timingBg from "@/assets/imgs/invitations/rustic/timing_bg.png";
+import timingBg from "@/assets/imgs/invitations/rustic/test.png";
 import timingImg from "@/assets/imgs/invitations/rustic/timing_img.png";
 import dresscodeBg from "@/assets/imgs/invitations/rustic/dresscode_bg.png";
 import dresscodeImg from "@/assets/imgs/invitations/rustic/dresscode_img.png";
 import dresscodePin from "@/assets/imgs/invitations/rustic/dresscode_pin.png";
 import storyBg from "@/assets/imgs/invitations/rustic/story_bg.png";
+import storyBgMobile from "@/assets/imgs/invitations/rustic/story_bg_mobile.png";
 import story1 from "@/assets/imgs/invitations/rustic/story_1.png";
 import screp2 from "@/assets/imgs/invitations/rustic/screp_2.png";
 import story2 from "@/assets/imgs/invitations/rustic/story_2.png";
@@ -495,24 +496,95 @@ export default function Rustic({
       {/* <Center pt="90px"> */}
       {(!isLive || data?.timeline?.length > 0) && (
         <Center>
-          {/* <Box position="relative" minH="1164px" minW="1086px"> */}
-          <Box position="relative">
+          <Stack
+            bgImage={`url(${timingBg.src})`}
+            bgSize="cover"
+            bgPosition="center"
+            bgRepeat="no-repeat"
+            minH={r("852px", "1164px")}
+            h="100%"
+            minW="1086px"
+            align={"center"}
+            justify={"center"}
+            gap={r("24px", "60px")}
+          >
+            <Text
+              fontWeight="800"
+              fontSize={r("20px", "34px")}
+              lineHeight="24px"
+              textTransform="uppercase"
+              color="var(--c-primary)"
+            >
+              {t("classic_timing")}
+            </Text>
+
+            <Stack gap={r("20px", "40px")} align={"center"}>
+              {timeline?.map((item, i) => (
+                <VStack
+                  key={i}
+                  align="center"
+                  gap={r("12px", "24px")}
+                  minW="160px"
+                >
+                  <Text
+                    fontSize={r("24px", "34px")}
+                    fontWeight="800"
+                    lineHeight={"24px"}
+                  >
+                    {item.time || "00:00"}
+                  </Text>
+
+                  <Text
+                    fontSize={r("18px", "24px")}
+                    fontWeight="500"
+                    lineHeight={"34px"}
+                    textTransform="uppercase"
+                    color="var(--c-primary)"
+                  >
+                    {pickLang(item.venueName, language) || item.venueName}
+                  </Text>
+
+                  {item.venueLocation && (
+                    <ChakraLink
+                      as={Link}
+                      href={item.venueLocation}
+                      target="_blank"
+                      fontSize="14px"
+                      color="var(--c-primary)"
+                      textDecoration="underline"
+                    >
+                      {t("classic_map")}
+                    </ChakraLink>
+                  )}
+                </VStack>
+              ))}
+            </Stack>
+          </Stack>
+
+          {/* <Box position="relative">
             <Box
               position="absolute"
               inset="0"
               bg="var(--c-secondary)"
               style={{
                 WebkitMaskImage: `url(${timingBg.src})`,
+
                 WebkitMaskRepeat: "no-repeat",
+
                 WebkitMaskPosition: "center",
+
                 WebkitMaskSize: "contain",
 
                 maskImage: `url(${timingBg.src})`,
+
                 maskRepeat: "no-repeat",
+
                 maskPosition: "center",
+
                 maskSize: "contain",
               }}
             />
+
             <Box
               position="absolute"
               inset="0"
@@ -523,12 +595,17 @@ export default function Rustic({
               mixBlendMode="multiply"
               opacity={0.9}
             />
+
             <VStack
               position={"relative"}
               // bgImage={`url(${timingBg.src})`}
+
               // bgSize="contain"
+
               // bgPos="center"
+
               // bgRepeat="no-repeat"
+
               minH={r("852px", "1164px")}
               h="100%"
               minW="1086px"
@@ -545,18 +622,23 @@ export default function Rustic({
                 top={r("-80px", "-170px")}
                 right={r("70px", "-170px")}
               />
+
               <Text
                 fontWeight="800"
                 fontSize={isMobile ? "22px" : "34px"}
                 lineHeight="24px"
                 textTransform="uppercase"
                 color="var(--c-primary)"
+
                 // dangerouslySetInnerHTML={{
+
                 //   __html: t("classic_timing").replace(/\n/g, "<br />"),
+
                 // }}
               >
                 {t("classic_timing")}
               </Text>
+
               <Stack gap={r("20px", "40px")}>
                 {timeline?.map((item, i) => (
                   <Flex
@@ -577,6 +659,7 @@ export default function Rustic({
                       >
                         {item.time || "00:00"}
                       </Text>
+
                       <Text
                         fontSize={isMobile ? "15px" : "22px"}
                         fontWeight="500"
@@ -586,6 +669,7 @@ export default function Rustic({
                       >
                         {pickLang(item.venueName, language) || item.venueName}
                       </Text>
+
                       {item.venueLocation && (
                         <ChakraLink
                           as={Link}
@@ -603,7 +687,7 @@ export default function Rustic({
                 ))}
               </Stack>
             </VStack>
-          </Box>
+          </Box> */}
         </Center>
       )}
 
@@ -635,14 +719,15 @@ export default function Rustic({
       {(!isLive || data?.dressCode) && (
         <Center mt={!data?.confirmationEnabled && "100px"}>
           <VStack
-            maxW="736px"
-            minH="775px"
-            gap={"60px"}
+            maxW={r("540px", "736px")}
+            minH={r("569px", "775px")}
+            gap={r("24px", "60px")}
             textAlign="center"
             justify={"center"}
             bgImage={`url(${dresscodeBg.src})`}
-            bgSize="contain"
+            bgSize="cover"
             bgPos="center"
+            bgRepeat={"no-repeat"}
             position={"relative"}
           >
             <Stack gap="32px" px="102px" position={"relative"}>
@@ -655,7 +740,7 @@ export default function Rustic({
                 boxSize={"423px"}
               />
               <Text
-                fontSize={isMobile ? "20px" : "34px"}
+                fontSize={r("20px", "34px")}
                 lineHeight="24px"
                 fontWeight="800"
                 color="var(--c-primary)"
@@ -664,7 +749,7 @@ export default function Rustic({
                 {t("dresscode")}
               </Text>
               <Text
-                fontSize={isMobile ? "13px" : "18px"}
+                fontSize={r("14px", "18px")}
                 lineHeight="28px"
                 color="#6F786C"
               >
@@ -673,18 +758,19 @@ export default function Rustic({
             </Stack>
 
             <Stack gap={"32px"}>
-              <VStack gap="20px">
+              <VStack gap={r("15px", "20px")}>
                 {dressCodeColors && (
                   <HStack gap="0">
                     <For each={dressCodeColors}>
                       {(item, index) => (
                         <Box
                           key={index}
-                          w="32px"
-                          h="32px"
+                          w="58px"
+                          h="58px"
                           borderRadius="50%"
-                          ml="-10px"
+                          ml="-16px"
                           bg={item}
+                          border="1px solid #ffffff"
                         />
                       )}
                     </For>
@@ -717,14 +803,14 @@ export default function Rustic({
               position={"absolute"}
               top="-34px"
               right="0"
-              boxSize={"197px"}
+              boxSize={r("97px", "197px")}
             />
           </VStack>
         </Center>
       )}
 
       {/* ————— WEDDING GALLERY ————— */}
-      {(!isLive || data?.albumLink) && (
+      {(!isLive || !data?.albumLink) && (
         <Center pt="60px">
           <VStack
             bgImage={`url(${galleryBg.src})`}
@@ -742,8 +828,9 @@ export default function Rustic({
               src={moments.src}
               alt="moments"
               position={"absolute"}
-              left="-110px"
-              top="55px"
+              top={r("-20px", "55px")}
+              left={r("150px", "-110px")}
+              boxSize={r("113px","198px")}
             />
             <Text
               fontSize={"12px"}
@@ -754,9 +841,9 @@ export default function Rustic({
               {t("classic_look")}
             </Text>
             <Text
-              w="560px"
+              w={r("350px", "560px")}
               textAlign={"center"}
-              fontSize={"34px"}
+              fontSize={r("24px", "34px")}
               fontWeight={500}
               lineHeight={"48px"}
               color="var(--c-primary)"
@@ -768,10 +855,10 @@ export default function Rustic({
               <Button
                 variant={"plain"}
                 p="23px"
-                bg="#B7ADA0DE"
+                bg="#B7ADA0"
                 borderRadius={"100%"}
-                w="64px"
-                h="64px"
+                w={r("91px", "64px")}
+                h={r("91px", "64px")}
                 mt="20px"
               >
                 <Icon>{view.icon}</Icon>
@@ -787,11 +874,11 @@ export default function Rustic({
               </Text>
             </VStack>
             <Text
-              fontSize="14px"
+              fontSize={r("12px", "14px")}
               fontWeight="400"
               lineHeight="22px"
               color="var(--c-primary)"
-              maxW="440px"
+              maxW={r("380px", "440px")}
               textAlign={"center"}
               dangerouslySetInnerHTML={{
                 __html: t("classic_soon").replace(/\n/g, "<br />"),
@@ -801,7 +888,6 @@ export default function Rustic({
         </Center>
       )}
 
-      {/* // TODO: connect with gallery like classic */}
       {/* ————— OUR LOVE STORY ————— */}
       {/* <Container maxW="1440px" px={{ base: "24px", md: "80px" }}> */}
       {(!isLive || data?.ourStory) && (
@@ -809,14 +895,14 @@ export default function Rustic({
           w="100%"
           justify={"space-between"}
           align={"center"}
-          pt="106px"
-          pb="50px"
-          pl="80px"
+          p={r("60px 30px 50px 30px", "106px 0 50px 80px")}
+          direction={r("column", "row")}
+          gap={r("60px", "0")}
         >
-          <Stack gap="40px">
+          <Stack gap={r("16px", "40px")} align={r("center", "unset")}>
             <Text
               color="var(--c-primary)"
-              fontSize={isMobile ? "20px" : "34px"}
+              fontSize={r("20px", "34px")}
               lineHeight="48px"
               fontWeight="500"
               textTransform="uppercase"
@@ -824,12 +910,13 @@ export default function Rustic({
               {t("classic_story")}
             </Text>
             <Text
-              maxW="877px"
-              fontSize={isMobile ? "15px" : "18px"}
+              maxW={r("100%", "877px")}
+              fontSize={r("14px", "18px")}
               lineHeight="28px"
               color="var(--c-primary)"
               whiteSpace="pre-line"
               fontWeight="400"
+              textAlign={r("center", "unset")}
               // dangerouslySetInnerHTML={{
               //   __html: storyText.replace(/\n/g, "<br />"),
               // }}
@@ -841,8 +928,8 @@ export default function Rustic({
           <Box
             w="100%"
             // maxW="830px"
-            minH="488px"
-            bgImage={`url(${storyBg.src})`}
+            minH={r("662px", "488px")}
+            bgImage={r(`url(${storyBgMobile.src})`, `url(${storyBg.src})`)}
             bgSize="cover"
             bgPosition="center"
             bgRepeat="no-repeat"
@@ -851,13 +938,19 @@ export default function Rustic({
             position="relative"
           >
             {storyImage1 && (
-              <Box position="absolute" top="58px" left="118px" zIndex={1}>
+              <Box
+                position="absolute"
+                top="58px"
+                left={r("unset", "118px")}
+                right={r("0", "unset")}
+                zIndex={1}
+              >
                 <Image
                   position="relative"
                   src={storyImage1}
                   alt="story 1"
-                  w="294px"
-                  h="210px"
+                  w={r("267px", "278px")}
+                  h={r("187px", "194px")}
                   objectFit="cover"
                   bg="white"
                   p="8px"
@@ -871,16 +964,33 @@ export default function Rustic({
                   left="50%"
                   transform="translateX(-50%)"
                 />
+
+                <Image
+                  position="absolute"
+                  top={r("80px", "30px")}
+                  right={r("150px", "100px")}
+                  src={storyFlowers.src}
+                  alt="story flowers"
+                  maxW={r("257px", "391px")}
+                  h={r("264px", "414px")}
+                  objectFit="cover"
+                  zIndex={1}
+                />
               </Box>
             )}
             {storyImage2 && (
-              <Box position="absolute" top="-12px" right="90px" zIndex={1}>
+              <Box
+                position="absolute"
+                top={r("580px", "-12px")}
+                right={r("-10px", "90px")}
+                zIndex={1}
+              >
                 <Image
                   position="relative"
                   src={storyImage2}
                   alt="story 2"
-                  w="263px"
-                  h="300px"
+                  w={r("224px", "194px")}
+                  h={r("224px", "194px")}
                   objectFit="cover"
                   bg="white"
                   p="12px 12px 42px 12px"
@@ -896,22 +1006,10 @@ export default function Rustic({
               </Box>
             )}
 
-            <Image
-              position="absolute"
-              left="-90px"
-              bottom="-60px"
-              src={storyFlowers.src}
-              alt="story flowers"
-              maxW="391px"
-              h="414px"
-              objectFit="cover"
-              zIndex={1}
-            />
-
             {storyImage3 && (
               <Box
                 position="absolute"
-                bottom="30px"
+                bottom={r("120px", "30px")}
                 left="35%"
                 transform="translateX(-35%)"
                 zIndex={2}
@@ -920,19 +1018,19 @@ export default function Rustic({
                   position="relative"
                   src={storyImage3}
                   alt="story 3"
-                  w="263px"
-                  h="300px"
+                  w={r("224px", "194px")}
+                  h={r("224px", "194px")}
                   objectFit="cover"
                   bg="white"
                   p="12px 12px 42px 12px"
                 />
                 <Image
                   src={storyFlower.src}
-                  boxSize="84px"
+                  boxSize={r("135px", "84px")}
                   alt="story flower"
                   position="absolute"
-                  top="-40px"
-                  left="40px"
+                  top={r("40px", "-40px")}
+                  left={r("170px", "40px")}
                 />
               </Box>
             )}
@@ -941,8 +1039,8 @@ export default function Rustic({
               boxSize="144px"
               alt="story flower"
               position="absolute"
-              bottom="-70px"
-              right="90px"
+              bottom={r("-150px", "-70px")}
+              right={r("160px", "90px")}
             />
           </Box>
         </Flex>
@@ -954,15 +1052,15 @@ export default function Rustic({
         <Flex
           // bg="var(--c-primary)"
           // color="white"
-          // py={isMobile ? "28px" : "40px"}
-          pt="48px"
-          pb="75px"
+          pt={r("210px", "120px")}
+          pb={r("90px", "75px")}
           align={"center"}
           justify={"center"}
-          gap="90px"
+          gap={r("20px", "90px")}
+          direction={r("column", "row")}
         >
           <Text
-            fontSize="30px"
+            fontSize={r("24px", "30px")}
             lineHeight="24px"
             fontWeight="800"
             textTransform={"uppercase"}
@@ -971,34 +1069,37 @@ export default function Rustic({
             {t("classic_contact")}
           </Text>
           <Text
-            fontSize="24px"
+            fontSize={r("16px", "24px")}
             lineHeight="24px"
-            fontWeight="800"
-            textTransform={"uppercase"}
+            fontWeight={r("400", "800")}
             color="var(--c-primary)"
           >
             {name}
           </Text>
-          <Text
-            as="a"
-            href={`tel:${phone}`}
-            fontSize="24px"
-            lineHeight="24px"
-            fontWeight="800"
-            color="var(--c-primary)"
-          >
-            {phone}
-          </Text>
-          <Text
-            as="a"
-            href={`mailto:${email}`}
-            fontSize="24px"
-            lineHeight="24px"
-            fontWeight="800"
-            color="var(--c-primary)"
-          >
-            {email}
-          </Text>
+          {phone && (
+            <Text
+              as="a"
+              href={`tel:${phone}`}
+              fontSize={r("16px", "24px")}
+              lineHeight="24px"
+              fontWeight={r("400", "800")}
+              color="var(--c-primary)"
+            >
+              {phone}
+            </Text>
+          )}
+          {email && (
+            <Text
+              as="a"
+              href={`mailto:${email}`}
+              fontSize={r("16px", "24px")}
+              lineHeight="24px"
+              fontWeight={r("400", "800")}
+              color="var(--c-primary)"
+            >
+              {email}
+            </Text>
+          )}
         </Flex>
       )}
     </Box>
