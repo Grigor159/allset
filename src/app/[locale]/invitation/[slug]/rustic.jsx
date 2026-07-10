@@ -38,7 +38,9 @@ import img from "@/assets/imgs/invitations/rustic/main_img.png";
 import loveBg from "@/assets/imgs/invitations/rustic/love_bg.png";
 import ring from "@/assets/imgs/invitations/rustic/ring.png";
 import mainImagesBg from "@/assets/imgs/invitations/rustic/main_images_bg.png";
+import mainImagesBgMobile from "@/assets/imgs/invitations/rustic/main_images_bg_mobile.png";
 import coupleBg from "@/assets/imgs/invitations/rustic/couple_bg.png";
+import coupleBgMobile from "@/assets/imgs/invitations/rustic/couple_bg_mobile.png";
 import img1 from "@/assets/imgs/invitations/rustic/img_1.png";
 import img2 from "@/assets/imgs/invitations/rustic/img_2.png";
 import img3 from "@/assets/imgs/invitations/rustic/img_3.jpg";
@@ -204,268 +206,297 @@ export default function Rustic({
       bg="#F6F5F4"
       color="#111"
       overflow="hidden"
-      pt="75px"
+      // pt="75px"
       // position={"relative"}
     >
       {locales && <Language locales={locales} />}
 
       {/* ————— HERO ————— */}
-      <Container maxW="1440px" px={{ base: "24px", md: "80px" }}>
-        <Flex justify={"space-between"} gap="120px">
-          <Stack position="relative">
-            <Image
-              src={heroImage}
-              alt="img"
-              w="428px"
-              h="427px"
-              borderRadius={"5px"}
-            />
+      <Flex
+        justify={"space-between"}
+        gap={"60px"}
+        p={r("0px", "75px 63px 85px 80px")}
+        flexDirection={r("column", "row")}
+      >
+        <Stack position="relative">
+          <Image
+            src={heroImage}
+            alt="img"
+            w={r("100%", "428px")}
+            h={r("525px", "427px")}
+            borderRadius={r("0px", "5px")}
+          />
 
-            <Image
-              position={"absolute"}
-              bottom={"-25px"}
-              right={"-80px"}
-              src={loveBg.src}
-              alt="img"
-              w="288px"
-              h="167px"
-              objectFit={"contain"}
-              borderRadius={"5px"}
-            />
-          </Stack>
+          <Image
+            position={"absolute"}
+            bottom={r("-35px", "-25px")}
+            left={r("50%", "auto")}
+            right={r("auto", "-80px")}
+            transform={r("translateX(-50%)", "none")}
+            src={loveBg.src}
+            alt="img"
+            w={r("220px", "288px")}
+            h={r("128px", "167px")}
+            objectFit={"contain"}
+            borderRadius={"5px"}
+          />
+        </Stack>
 
-          <VStack align={"start"} gap="80px">
-            <Flex
-              w="100%"
-              gap="70px"
-              justify={"space-between"}
-              align={"center"}
-            >
-              <Text
-                fontFamily="var(--font-shk)"
-                color="var(--c-primary)"
-                // fontFamily={sosBanff.style.fontFamily}
-                fontSize={isMobile ? "54px" : "64px"}
-                lineHeight="24px"
-                fontWeight="400"
-              >
-                {t("rustic_title")}
-              </Text>
-
-              <Box
-                bgColor="var(--c-accent)"
-                borderRadius={"100%"}
-                pb="25px"
-                pl="20px"
-                pr="20px"
-              >
-                <Icon mt={"-45px"}>{bottle.icon}</Icon>
-              </Box>
-            </Flex>
-            <Text
-              w="500px"
-              fontSize={isMobile ? "16px" : "20px"}
-              lineHeight="28px"
-              fontWeight="400"
-              color="var(--c-primary)"
-            >
-              {description}
-            </Text>
-
+        <VStack align={r("center", "start")} gap={r("32px", "80px")}>
+          <Flex
+            w="100%"
+            gap="70px"
+            justify={r("center", "space-between")}
+            align={"center"}
+          >
             <Text
               fontFamily="var(--font-shk)"
               color="var(--c-primary)"
-              fontSize={"74px"}
-              fontWeight={"400"}
-              lineHeight={"24px"}
+              // fontFamily={sosBanff.style.fontFamily}
+              fontSize={r("42px", "64px")}
+              lineHeight="50px"
+              fontWeight="400"
             >
-              {name1 + " + " + name2 + " = "} <Icon>{heart.icon}</Icon>
+              {t("rustic_title")}
             </Text>
-          </VStack>
-        </Flex>
-      </Container>
+
+            <Box
+              bgColor="var(--c-accent)"
+              borderRadius={"100%"}
+              pb="25px"
+              pl="20px"
+              pr="20px"
+              display={r("none", "block")}
+            >
+              <Icon mt={"-45px"}>{bottle.icon}</Icon>
+            </Box>
+          </Flex>
+          <Text
+            w={r("90%", "500px")}
+            fontSize={r("16px", "20px")}
+            lineHeight="28px"
+            fontWeight="400"
+            color="var(--c-primary)"
+            textAlign={r("center", "unset")}
+          >
+            {description}
+          </Text>
+
+          <Text
+            fontFamily="var(--font-shk)"
+            color="var(--c-primary)"
+            fontSize={r("36px", "74px")}
+            fontWeight={"400"}
+            lineHeight={"24px"}
+          >
+            {name1 + " + " + name2 + " = "}{" "}
+            <Icon w={r("35px", "fit-content")}>{heart.icon}</Icon>
+          </Text>
+        </VStack>
+      </Flex>
 
       {/* ————— COUNTDOWN ————— */}
       <Box
         bgColor="var(--c-accent)"
         position="relative"
         w="full"
-        h="263px"
+        h={r("229px", "263px")}
         overflow="visible"
-        mt="132px"
-        mb="187px"
+        mt={r("42px", "132px")}
+        mb={r("535px", "187px")}
+        //
+        // p={r("0 31px 0 20px", "0 70px 0 111px")}
+        p={r("0 31px 0 20px", "0 70px")}
       >
-        <Container
-          maxW="1440px"
-          px={{ base: "24px", md: "80px" }}
+        <Image
+          src={ring.src}
+          alt="ring"
+          position="absolute"
+          top={r("25px", "-40px")}
+          zIndex={1}
+        />
+
+        <Flex
           h="full"
-          overflow="visible"
-          position="relative"
+          align="center"
+          justify={"space-between"}
+          direction={r("column", "row")}
         >
-          <Image
-            src={ring.src}
-            alt="ring"
-            position="absolute"
-            top="-40px"
-            // left="0"
-            zIndex={1}
-          />
-
-          <Flex
-            h="full"
+          <VStack
+            gap={r("32px", "60px")}
             align="center"
-            justify="space-between"
-            gap={isMobile ? "24px" : "116px"}
+            p={r("42px 0 28px 0", "unset")}
           >
-            <VStack gap={isMobile ? "16px" : "60px"} align="center">
-              <Text color="var(--c-primary)">{t("rustic_journey")}</Text>
-              {data?.countDown !== false && (
-                <CountdownTimer
-                  template={data?.templateId || template}
-                  eventDate={data?.eventDate}
-                  r={r}
-                />
-              )}
-            </VStack>
+            <Text
+              color="var(--c-primary)"
+              w={r("40%", "fit-content")}
+              textAlign={r("center", "unset")}
+            >
+              {t("rustic_journey")}
+            </Text>
+            {data?.countDown !== false && (
+              <CountdownTimer
+                template={data?.templateId || template}
+                eventDate={data?.eventDate}
+                r={r}
+              />
+            )}
+          </VStack>
 
-            <VStack position="relative" alignSelf="center" flexShrink={0}>
-              <Icon color="var(--c-accent)" mb={"-35px"} zIndex={2}>
-                {topPin.icon}
-              </Icon>
-              {/* <Image src={overlay.src} alt="overlay" mb={"-35px"} zIndex={2} /> */}
-              <Calendar value={data?.eventDate} zIndex={1} />
-              <Icon color="var(--c-accent)" mt={"-35px"} zIndex={2}>
-                {bottomPin.icon}
-              </Icon>
-              {/* <Image src={overlay2.src} alt="overlay" mt={"-35px"} zIndex={2} /> */}
-            </VStack>
-          </Flex>
-        </Container>
+          <VStack position="relative" alignSelf="center" flexShrink={0}>
+            <Icon color="var(--c-accent)" mb={"-35px"} zIndex={2}>
+              {topPin.icon}
+            </Icon>
+            <Calendar value={data?.eventDate} zIndex={1} />
+            <Icon color="var(--c-accent)" mt={"-35px"} zIndex={2}>
+              {bottomPin.icon}
+            </Icon>
+          </VStack>
+        </Flex>
       </Box>
 
       {/* ————— MAIN IMAGES ————— */}
-      <Container pb="288px" maxW="1440px" px={{ base: "24px", md: "80px" }}>
-        <VStack
-          w="100%"
-          h="802px"
-          bgImage={`url(${mainImagesBg.src})`}
-          bgSize="cover"
-          bgPosition="center"
-          bgRepeat="no-repeat"
-          justifyContent="center"
-          alignItems="center"
+      {/* <Container pb="288px" maxW="1440px" px={{ base: "24px", md: "80px" }}> */}
+      <VStack
+        w="100%"
+        h={r("407px", "802px")}
+        bgImage={r(
+          `url(${mainImagesBgMobile.src})`,
+          `url(${mainImagesBg.src})`,
+        )}
+        bgSize="cover"
+        bgPosition="center"
+        bgRepeat="no-repeat"
+        justifyContent="center"
+        alignItems="center"
+        position="relative"
+        mb={r("127px", "288px")}
+      >
+        <Box
           position="relative"
+          // w="491px"
+          // h="282px"
+          w={r("165px", "491px")}
+          h={r("105px", "282px")}
+          zIndex={2}
         >
-          <Box position="relative" w="491px" h="282px" zIndex={2}>
-            <Box
-              w="100%"
-              h="100%"
-              bgImage={`url(${coupleBg.src})`}
-              bgSize="contain"
-              bgPosition="center"
-              bgRepeat="no-repeat"
+          <Box
+            // w={r("165px", "100%")}
+            // h={r("105px", "100%")}
+            w="100%"
+            h="100%"
+            bgImage={r(`url(${coupleBgMobile.src})`, `url(${coupleBg.src})`)}
+            bgSize="contain"
+            bgPosition="center"
+            bgRepeat="no-repeat"
+          />
+          <Text
+            position="absolute"
+            top="50%"
+            left="50%"
+            transform="translate(-50%, -50%)"
+            zIndex={3}
+            textAlign="center"
+            fontFamily="var(--font-shk)"
+            fontWeight="400"
+            fontSize={r("14px", "32px")}
+            lineHeight={r("22px", "42px")}
+          >
+            {t("rustic_couple")}
+            <br />
+            {t("rustic_happy")}
+          </Text>
+        </Box>
+        {coupleImage1 && (
+          <Box position="absolute" top="80px" left="103px" zIndex={1}>
+            <Image
+              position="relative"
+              src={coupleImage1}
+              alt="img 1"
+              maxW={r("163px", "294px")}
+              h={r("237px", "422px")}
+              objectFit="cover"
+              bg="white"
+              p="12px"
             />
-            <Text
+            <Image
+              src={screp.src}
+              h="63px"
+              alt="screp"
               position="absolute"
-              top="50%"
+              top="-35px"
               left="50%"
-              transform="translate(-50%, -50%)"
-              zIndex={3}
-              textAlign="center"
-              fontFamily="var(--font-shk)"
-              fontWeight="400"
-              fontSize="32px"
-              lineHeight="42px"
-            >
-              {t("rustic_couple")}
-              <br />
-              {t("rustic_happy")}
-            </Text>
+              transform="translateX(-50%)"
+            />
           </Box>
-          {coupleImage1 && (
-            <Box position="absolute" top="80px" left="103px" zIndex={1}>
-              <Image
-                position="relative"
-                src={coupleImage1}
-                alt="img 1"
-                maxW="318px"
-                h="480px"
-                objectFit="cover"
-                bg="white"
-                p="12px"
-              />
-              <Image
-                src={screp.src}
-                h="63px"
-                alt="screp"
-                position="absolute"
-                top="-35px"
-                left="50%"
-                transform="translateX(-50%)"
-              />
-            </Box>
-          )}
-          {coupleImage2 && (
+        )}
+        {coupleImage2 && (
+          <Image
+            position="absolute"
+            top="60px"
+            right="153px"
+            src={coupleImage2}
+            alt="img 2"
+            maxW={r("172px", "328px")}
+            h={r("172px", "328px")}
+            objectFit="cover"
+            bg="white"
+            p="20px 20px 72px 20px"
+            zIndex={1}
+          />
+        )}
+        {coupleImage3 && (
+          <Box
+            position="absolute"
+            bottom={r("-80px", "0px")}
+            left={r("115px", "200px")}
+            zIndex={1}
+          >
             <Image
-              position="absolute"
-              top="60px"
-              right="153px"
-              src={coupleImage2}
-              alt="img 2"
-              maxW="368px"
-              h="420px"
+              position="relative"
+              src={coupleImage3}
+              alt="img 3"
+              maxW={r("160px", "234px")}
+              h={r("160px", "234px")}
               objectFit="cover"
               bg="white"
-              p="20px 20px 72px 20px"
-              zIndex={1}
+              p="17px 17px 53px 17px"
+              transform="rotate(-10deg)"
             />
-          )}
-          {coupleImage3 && (
-            <Box position="absolute" bottom="-110px" left="200px" zIndex={1}>
-              <Image
-                position="relative"
-                src={coupleImage3}
-                alt="img 3"
-                w="263px"
-                h="300px"
-                objectFit="cover"
-                bg="white"
-                p="17px 17px 53px 17px"
-                transform="rotate(-10deg)"
-              />
-              <Image
-                src={dream.src}
-                h="63px"
-                alt="dream"
-                position="absolute"
-                top="-10px"
-                left="-90px"
-              />
-            </Box>
-          )}
-          {coupleImage4 && (
             <Image
+              src={dream.src}
+              h="63px"
+              alt="dream"
               position="absolute"
-              bottom="-50px"
-              right="103px"
-              src={coupleImage4}
-              alt="img 4"
-              maxW="308px"
-              h="307px"
-              objectFit="cover"
-              bg="white"
-              p="29px 25px 29px 25px"
-              zIndex={1}
+              top={r("-30px", "-10px")}
+              left={r("-10px", "-90px")}
             />
-          )}
-        </VStack>
-      </Container>
+          </Box>
+        )}
+        {coupleImage4 && (
+          <Image
+            position="absolute"
+            bottom="-50px"
+            right="103px"
+            src={coupleImage4}
+            alt="img 4"
+            maxW={r("154px", "259px")}
+            h={r("163px", "249px")}
+            objectFit="cover"
+            bg="white"
+            p="29px 25px 29px 25px"
+            zIndex={1}
+          />
+        )}
+      </VStack>
+      {/* </Container> */}
 
       {/* ————— TIMING ————— */}
       {/* <Center pt="90px"> */}
       {(!isLive || data?.timeline?.length > 0) && (
         <Center>
-          <Box position="relative" minH="1164px" minW="1086px">
+          {/* <Box position="relative" minH="1164px" minW="1086px"> */}
+          <Box position="relative">
             <Box
               position="absolute"
               inset="0"
@@ -498,11 +529,10 @@ export default function Rustic({
               // bgSize="contain"
               // bgPos="center"
               // bgRepeat="no-repeat"
-              minH="1164px"
+              minH={r("852px", "1164px")}
               h="100%"
               minW="1086px"
-              // w="fit-content"
-              gap="60px"
+              gap={r("24px", "60px")}
               px="160px"
               align={"center"}
               justify={"center"}
@@ -510,10 +540,10 @@ export default function Rustic({
               <Image
                 src={timingImg.src}
                 alt="timing"
-                w="391px"
+                w={r("163px", "391px")}
                 position={"absolute"}
-                top="-170px"
-                right="-170px"
+                top={r("-80px", "-170px")}
+                right={r("70px", "-170px")}
               />
               <Text
                 fontWeight="800"
@@ -527,7 +557,7 @@ export default function Rustic({
               >
                 {t("classic_timing")}
               </Text>
-              <Stack gap="40px">
+              <Stack gap={r("20px", "40px")}>
                 {timeline?.map((item, i) => (
                   <Flex
                     key={i}
@@ -535,7 +565,11 @@ export default function Rustic({
                     align={"center"}
                     gap="20px"
                   >
-                    <VStack align="flex-start" gap="24px" minW="160px">
+                    <VStack
+                      align="flex-start"
+                      gap={r("12px", "24px")}
+                      minW="160px"
+                    >
                       <Text
                         fontSize={isMobile ? "20px" : "34px"}
                         fontWeight="800"
