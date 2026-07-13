@@ -28,6 +28,9 @@ export const Story = ({
 }) => {
   const t = useTranslations();
 
+  const remainingCount = remainingImgsCount(count, value?.photoUrls ?? []);
+  const isLimitReached = remainingCount <= 0;
+
   const [checked, setChecked] = useState(enabled);
 
   useEffect(() => {
@@ -99,8 +102,8 @@ export const Story = ({
       {checked && (
         <FileUpload.Root
           accept="image/*"
-          maxFiles={remainingImgsCount(count, value)}
-          // disabled={!checked}
+          maxFiles={remainingCount}
+          disabled={isLimitReached}
           as={Flex}
           gap="16px"
           flexDirection="row"
@@ -111,20 +114,25 @@ export const Story = ({
             onFileSelect={handleFileSelect}
             onDeleteUrl={handleDeleteUrl}
           />
-          <FileUpload.HiddenInput />
-          <FileUpload.Dropzone
-            minW="163px"
-            maxW="163px"
-            minH="178px"
-            background="#F9FAFB"
-            cursor={!checked && "not-allowed"}
-          >
-            <Icon>{upload.icon}</Icon>
-            <FileUpload.DropzoneContent>
-              <Text textStyle="md">{t("or")}</Text>
-              <Text textStyle="md">{t("photos_rule")}</Text>
-            </FileUpload.DropzoneContent>
-          </FileUpload.Dropzone>
+
+          {!isLimitReached && (
+            <>
+              <FileUpload.HiddenInput />
+              <FileUpload.Dropzone
+                minW="163px"
+                maxW="163px"
+                minH="178px"
+                background="#F9FAFB"
+                cursor={!checked && "not-allowed"}
+              >
+                <Icon>{upload.icon}</Icon>
+                <FileUpload.DropzoneContent>
+                  <Text textStyle="md">{t("or")}</Text>
+                  <Text textStyle="md">{t("photos_rule")}</Text>
+                </FileUpload.DropzoneContent>
+              </FileUpload.Dropzone>
+            </>
+          )}
         </FileUpload.Root>
       )}
     </Stack>

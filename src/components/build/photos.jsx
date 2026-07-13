@@ -120,6 +120,9 @@ export const Photos = ({
 }) => {
   const t = useTranslations();
 
+  const remainingCount = remainingImgsCount(count, value);
+  const isLimitReached = remainingCount <= 0;
+
   const handleFileSelect = (files) => {
     const normalized = Array.isArray(files) ? files : [];
     onFileSelect?.(normalized);
@@ -159,7 +162,8 @@ export const Photos = ({
 
       <FileUpload.Root
         accept="image/*"
-        maxFiles={remainingImgsCount(count, value)}
+        maxFiles={remainingCount}
+        disabled={isLimitReached}
         as={Flex}
         gap="16px"
         flexDirection="row"
@@ -171,7 +175,7 @@ export const Photos = ({
           onDeleteUrl={handleDeleteUrl}
         />
 
-        <FileUpload.HiddenInput />
+        {/* <FileUpload.HiddenInput />
 
         <FileUpload.Dropzone
           minW="163px"
@@ -184,7 +188,24 @@ export const Photos = ({
             <Text textStyle="md">{t("or")}</Text>
             <Text textStyle="md">{t("photos_rule")}</Text>
           </FileUpload.DropzoneContent>
-        </FileUpload.Dropzone>
+        </FileUpload.Dropzone> */}
+        {!isLimitReached && (
+          <>
+            <FileUpload.HiddenInput />
+            <FileUpload.Dropzone
+              minW="163px"
+              maxW="163px"
+              minH="178px"
+              background="#F9FAFB"
+            >
+              <Icon>{upload.icon}</Icon>
+              <FileUpload.DropzoneContent>
+                <Text textStyle="md">{t("or")}</Text>
+                <Text textStyle="md">{t("photos_rule")}</Text>
+              </FileUpload.DropzoneContent>
+            </FileUpload.Dropzone>
+          </>
+        )}
       </FileUpload.Root>
     </Stack>
   );
