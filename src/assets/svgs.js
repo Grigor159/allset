@@ -100,7 +100,7 @@ export const checkedStep = {
 export const dots = {
     icon: (
         <svg width="42" height="1" viewBox="0 0 42 1" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line y1="0.5" x2="42" y2="0.5" stroke="#D0D0D0" stroke-dasharray="4 4" />
+            <line y1="0.5" x2="42" y2="0.5" stroke="#D0D0D0" strokeDasharray="4 4" />
         </svg>
     )
 }
@@ -108,7 +108,7 @@ export const dots = {
 export const dotsGreen = {
     icon: (
         <svg width="42" height="1" viewBox="0 0 42 1" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line y1="0.5" x2="42" y2="0.5" stroke="#004143" stroke-dasharray="4 4" />
+            <line y1="0.5" x2="42" y2="0.5" stroke="#004143" strokeDasharray="4 4" />
         </svg>
     )
 }

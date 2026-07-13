@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Checkbox, Field, Flex, Icon, Stack, Text } from "@chakra-ui/react";
 import { Label } from "@/components/build/typography/label";
 import { Switcher } from "@/components/build/switcher";
@@ -17,21 +17,30 @@ export const Timeline = ({
   name,
   value,
   hide,
+  enabled,
   onChange,
   required,
 }) => {
   const t = useTranslations();
   const language = useLocale();
 
-  const [disabled, setDisabled] = useState(true);
+  const [disabled, setDisabled] = useState(enabled);
+
+  useEffect(() => {
+    setDisabled(enabled);
+  }, [enabled]);
 
   const handleSwitchChange = (e) => {
     setDisabled(e.checked);
     hide(name, !e.checked);
   };
 
+  const timeline = Array.isArray(value) ? value : [];
+
   const getItem = (venueKey) =>
-    value?.find((item) => item.venueKey === venueKey);
+    timeline.find((item) => item.venueKey === venueKey);
+  // const getItem = (venueKey) =>
+  //   value?.find((item) => item.venueKey === venueKey);
 
   const handleCheckboxChange = (venueKey, isChecked, venueName) => {
     let newTimeline = [...value];

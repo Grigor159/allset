@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Field, FileUpload, Flex, Icon, Stack, Text } from "@chakra-ui/react";
 import { upload } from "../../assets/svgs";
@@ -24,10 +24,15 @@ export const Story = ({
   required,
   languages,
   count,
+  enabled,
 }) => {
   const t = useTranslations();
 
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(enabled);
+
+  useEffect(() => {
+    setChecked(enabled);
+  }, [enabled]);
 
   const handleSwitchChange = (e) => {
     setChecked(e.checked);

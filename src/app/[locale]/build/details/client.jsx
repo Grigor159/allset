@@ -30,7 +30,7 @@ import { Venue } from "@/components/build/venue";
 import { Rsvp } from "@/components/build/rsvp";
 import { error } from "@/components/ui/alerts";
 import { InvitationStorageService } from "@/services/aws/index";
-import { isFile } from "@/utils/checkers";
+import { isEmptyArray, isFile } from "@/utils/checkers";
 // TODO: by data keys pass checked props to controlled components
 export const DetailsClient = () => {
   const router = useRouter();
@@ -79,7 +79,8 @@ export const DetailsClient = () => {
   // }, []);
   //
 
-  const { data } = useGetTanstack(`templates/${template}`, !id);
+  // const { data } = useGetTanstack(`templates/${template}`, !id);
+  const { data } = useGetTanstack(`templates/${template}`, template);
   const { data: invitationData } = useGetAuthTanstack(
     `invitations/${id}`,
     !!id,
@@ -110,10 +111,16 @@ export const DetailsClient = () => {
         }
       }
       queryClient.invalidateQueries({ queryKey: [`invitations/${status}`] });
-      // queryClient.invalidateQueries({ queryKey: [`invitations/${id}`] });
-      // TODO: invalidate invitation
+
+      if (res.status === "ACTIVE") {
+        // queryClient.invalidateQueries({ queryKey: [`invitations/url/${id}`] });
+        queryClient.invalidateQueries({
+          queryKey: [`invitations/url/${res.urlExtension}`],
+        });
+      }
     },
-    onError: (err) => error(err?.response?.data?.error || "Draft error!"),
+    // onError: (err) => error(err?.response?.data?.error || "Draft error!"),
+    onError: (err) => console.log(err?.response?.data?.error || "Draft error!"),
   });
 
   const [form, setForm] = useState({
@@ -197,19 +204,36 @@ export const DetailsClient = () => {
   };
 
   // send null
-  const handleHide = (key, hidden) => {
+  const handleHide = (key, hidden, defaultValue = null) => {
     setForm((prev) => {
       const updated = { ...prev };
+
       if (hidden) {
         hiddenFieldsRef.current[key] = prev[key];
         updated[key] = getEmptyValue(prev[key]);
       } else {
-        updated[key] = hiddenFieldsRef.current[key] ?? "";
+        updated[key] =
+          hiddenFieldsRef.current[key] ?? defaultValue ?? detailsForm[key];
+
         delete hiddenFieldsRef.current[key];
       }
+
       return updated;
     });
   };
+  // const handleHide = (key, hidden) => {
+  //   setForm((prev) => {
+  //     const updated = { ...prev };
+  //     if (hidden) {
+  //       hiddenFieldsRef.current[key] = prev[key];
+  //       updated[key] = getEmptyValue(prev[key]);
+  //     } else {
+  //       updated[key] = hiddenFieldsRef.current[key] ?? "";
+  //       delete hiddenFieldsRef.current[key];
+  //     }
+  //     return updated;
+  //   });
+  // };
 
   // send default state with empty values
   // const handleHide = (key, hidden) => {
@@ -480,7 +504,8 @@ export const DetailsClient = () => {
       router.push(`preview${search}`);
     }
   };
-  // console.log(invitationData);//
+  console.log(form); //
+  console.log(data); //
 
   return (
     <Box
@@ -604,6 +629,7 @@ export const DetailsClient = () => {
               name="timeline"
               value={form.timeline}
               hide={handleHide}
+              enabled={isEmptyArray(form.timeline) ? false : true}
               onChange={handleTimelineChange}
               required={false}
             />
@@ -615,7 +641,19 @@ export const DetailsClient = () => {
               value={form.dressCode}
               onChange={handleLngChange}
               setForm={setForm} //
-              hide={handleHide}
+              // hide={handleHide}
+              hide={(key, hidden) =>
+                handleHide(
+                  key,
+                  hidden,
+                  data?.defaults?.dressCodeDescription
+                    ? {
+                        description: data.defaults.dressCodeDescription,
+                      }
+                    : detailsForm.dressCode,
+                )
+              }
+              enabled={form.dressCode ? true : false}
               required={false}
               languages={form.languages}
             />
@@ -627,6 +665,7 @@ export const DetailsClient = () => {
               value={form.albumLink}
               onChange={handleChange}
               hide={handleHide}
+              enabled={!!form.albumLink}
               required={false}
             />
           </Animate>
@@ -642,13 +681,26 @@ export const DetailsClient = () => {
               onDelete={handleDeleteStory}
               onLoadingStart={showOverlay}
               onLoadingEnd={hideOverlay}
-              hide={handleHide}
+              // hide={handleHide}
+              hide={(key, hidden) =>
+                handleHide(
+                  key,
+                  hidden,
+                  data?.defaults?.ourStoryText
+                    ? {
+                        text: data.defaults.ourStoryText,
+                        photoUrls: [],
+                      }
+                    : detailsForm.ourStory,
+                )
+              }
               required={false}
               languages={form.languages}
               count={
                 data?.albumImageMaxCount ??
                 invitationData?.template?.albumImageMaxCount
               }
+              enabled={form.ourStory ? true : false}
             />
           </Animate>
 
@@ -658,6 +710,7 @@ export const DetailsClient = () => {
               value={form.connectWithUs}
               onChange={handleChange}
               hide={handleHide}
+              enabled={form.connectWithUs ? true : false}
               required={false}
             />
           </Animate>

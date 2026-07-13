@@ -1,30 +1,55 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Field, Flex, HStack, Stack, Text } from "@chakra-ui/react";
 import { Label } from "@/components/build/typography/label";
 import { Switcher } from "@/components/build/switcher";
 import { InputSimple } from "../ui/inputSimple";
 
-export const Contact = ({ name, value, onChange, hide, required }) => {
+export const Contact = ({ name, value, onChange, hide, enabled, required }) => {
   const t = useTranslations();
 
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(enabled);
+
+  useEffect(() => {
+    setChecked(enabled);
+  }, [enabled]);
 
   const handleSwitchChange = (e) => {
     setChecked(e.checked);
+
+    // if (e.checked && (!value || typeof value !== "object")) {
+    //   onChange({
+    //     target: {
+    //       name,
+    //       value: {
+    //         name: "",
+    //         phone: "",
+    //         email: "",
+    //       },
+    //     },
+    //   });
+    // }
+
     hide(name, !e.checked);
   };
 
+  const fields = ["name", "phone", "email"];
+
   const handleNestedChange = (e) => {
+    const updatedValue = fields.reduce(
+      (acc, key) => ({
+        ...acc,
+        [key]: key === e.target.name ? e.target.value : (value?.[key] ?? ""),
+      }),
+      {},
+    );
+
     onChange({
       target: {
-        name: name,
-        value: {
-          ...value,
-          [e.target.name]: e.target.value,
-        },
+        name,
+        value: updatedValue,
       },
     });
   };

@@ -23,6 +23,7 @@ export const Dresscode = ({
   onChange,
   setForm,
   hide,
+  enabled,
   required,
   languages,
 }) => {
@@ -31,8 +32,12 @@ export const Dresscode = ({
 
   const { data } = useGetTanstack("color-palettes");
 
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(enabled);
   const [selected, setSelected] = useState(null);
+
+  useEffect(() => {
+    setChecked(enabled);
+  }, [enabled]);
 
   useEffect(() => {
     if (value?.colorPaletteId) {
