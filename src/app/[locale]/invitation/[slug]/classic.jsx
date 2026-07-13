@@ -184,8 +184,6 @@ export default function Classic({
     });
   };
 
-  console.log(data);
-
   return (
     <Box
       data-viewport={viewport}

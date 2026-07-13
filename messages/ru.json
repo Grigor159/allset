@@ -445,5 +445,6 @@
     "rustic_happy": "Итак, мы счастливы",
     "dear_guest": "Уважаемый гость",
     "processing": "Обработка",
-    "processing_description": "Пожалуйста, подождите..."
+    "processing_description": "Пожалуйста, подождите...",
+    "url_copy": "URL успешно скопирован."
 }

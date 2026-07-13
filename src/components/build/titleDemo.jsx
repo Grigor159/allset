@@ -9,7 +9,7 @@ import { copied, copy } from "../../assets/svgs";
 import { BASE_URL } from "@/lib/api/config";
 import { error, success } from "../ui/alerts";
 
-export const TitleDemo = ({urlExtension}) => {
+export const TitleDemo = ({ urlExtension }) => {
   const t = useTranslations();
   const language = useLocale();
 
@@ -23,7 +23,7 @@ export const TitleDemo = ({urlExtension}) => {
     try {
       await navigator.clipboard.writeText(fullUrl);
       setIsCopied(true);
-      success("URL copied successfully.");
+      success(t("url_copy"));
     } catch (err) {
       error("Failed to copy: ", err);
     }

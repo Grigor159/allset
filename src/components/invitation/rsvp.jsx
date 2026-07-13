@@ -38,6 +38,7 @@ export const Rsvp = ({
         py={r("64px", "100px")}
         gap="37px"
         px={{ base: "30px", md: "unset" }}
+        zIndex={2}
       >
         <Text
           fontSize={r("24px", "34px")}

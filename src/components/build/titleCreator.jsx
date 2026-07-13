@@ -50,7 +50,7 @@ export const TitleCreator = ({
     try {
       await navigator.clipboard.writeText(fullUrl);
       setIsCopied(true);
-      success("URL copied successfully.");
+      success(t("url_copy"));
     } catch (err) {
       error("Failed to copy: ", err);
     }

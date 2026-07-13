@@ -504,8 +504,6 @@ export const DetailsClient = () => {
       router.push(`preview${search}`);
     }
   };
-  console.log(form); //
-  console.log(data); //
 
   return (
     <Box

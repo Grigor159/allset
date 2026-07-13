@@ -193,8 +193,6 @@ export default function Modern({
     });
   };
 
-  console.log(data);
-
   return (
     <Box
       data-viewport={viewport}

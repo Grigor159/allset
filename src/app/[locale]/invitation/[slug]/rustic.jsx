@@ -693,9 +693,17 @@ export default function Rustic({
 
       {/* ————— RSVP ————— */}
       {(!isLive || data?.confirmationEnabled) && (
-        <Container maxW="1440px" px={{ base: "24px", md: "80px" }}>
+        <Container maxW="1440px" px={{ base: "0", md: "80px" }}>
           <Flex align={"center"} justify="center" gap="60px">
-            <Icon color="var(--c-accent)">{heartsLeft.icon}</Icon>
+            <Icon
+              position={r("absolute", "unset")}
+              top="0"
+              left="0"
+              zIndex={1}
+              color="var(--c-accent)"
+            >
+              {heartsLeft.icon}
+            </Icon>
             <Rsvp
               r={r}
               color="var(--c-primary)"
@@ -710,7 +718,9 @@ export default function Rustic({
               handleSecondaryGuestChange={handleSecondaryGuestChange}
               handleSubmit={handleSubmit}
             />
-            <Icon color="var(--c-accent)">{heartsRight.icon}</Icon>
+            <Icon display={r("none", "block")} color="var(--c-accent)">
+              {heartsRight.icon}
+            </Icon>
           </Flex>
         </Container>
       )}
@@ -830,7 +840,7 @@ export default function Rustic({
               position={"absolute"}
               top={r("-20px", "55px")}
               left={r("150px", "-110px")}
-              boxSize={r("113px","198px")}
+              boxSize={r("113px", "198px")}
             />
             <Text
               fontSize={"12px"}

@@ -445,5 +445,6 @@
     "rustic_happy": "So, we are happy",
     "dear_guest": "Dear Guest",
     "processing": "Processing",
-    "processing_description": "Please wait..."
+    "processing_description": "Please wait...",
+    "url_copy": "URL copied successfully."
 }
