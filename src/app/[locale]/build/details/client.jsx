@@ -28,10 +28,10 @@ import { Photos } from "@/components/build/photos";
 import { Expire } from "@/components/build/expire";
 import { Venue } from "@/components/build/venue";
 import { Rsvp } from "@/components/build/rsvp";
-import { error } from "@/components/ui/alerts";
+// import { error } from "@/components/ui/alerts";
 import { InvitationStorageService } from "@/services/aws/index";
 import { isEmptyArray, isFile } from "@/utils/checkers";
-// TODO: by data keys pass checked props to controlled components
+
 export const DetailsClient = () => {
   const router = useRouter();
   const search = useSearch();
@@ -293,17 +293,17 @@ export const DetailsClient = () => {
     }));
   };
 
-  // V2 - without imgs logic inside
+  // V2 - without imgs logic inside & allowed do call without title
   const handleSmartBlur = async () => {
     // if (invitationData?.status === "ACTIVE") return;
 
     const current = formRef.current;
 
-    const isTitleFilled = current.languages?.some((lang) =>
-      current.title?.[lang]?.trim(),
-    );
+    // const isTitleFilled = current.languages?.some((lang) =>
+    //   current.title?.[lang]?.trim(),
+    // );
 
-    if (!isTitleFilled) return;
+    // if (!isTitleFilled) return;
 
     const sanitized = {
       ...current,
