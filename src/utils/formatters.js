@@ -184,9 +184,9 @@ export const diffParts = (iso) => {
 // };
 
 export const formatRusticTitle = (title, lang) => {
-  if (!title?.[lang]?.trim()) return { name1: "", name2: "" };
+  if (!title?.[lang]?.trim()) return { name1: "Henry", name2: "Mariam" };
 
-  const [name1 = "", name2 = ""] = title[lang].trim().split(/\s+/);
+  const [name1 = "Henry", name2 = "Mariam"] = title[lang].trim().split(/\s+/);
   return {
     name1: capitalize(name1),
     name2: capitalize(name2),

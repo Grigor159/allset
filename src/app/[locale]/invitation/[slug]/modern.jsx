@@ -241,7 +241,7 @@ export default function Modern({
 
       {/* ————— DATE ————— */}
       <Flex
-        gap="12px"
+        gap={r("8px","12px")}
         align="baseline"
         justify="center"
         py={r("50px", "100px")}
@@ -325,6 +325,7 @@ export default function Modern({
             align={"center"}
             justify={"center"}
             gap={r("32px", "60px")}
+            px={r("30px", "0")}
           >
             <Icon
               color="var(--c-accent)"
@@ -352,6 +353,7 @@ export default function Modern({
               fontSize={r("64px", "123px")}
               lineHeight="1.1"
               color="#F3F3F3"
+              textAlign={"center"}
             >
               {t("dear_guest")}
             </Text>
@@ -363,7 +365,7 @@ export default function Modern({
               lineHeight="28px"
               fontWeight="400"
               color="#F3F3F3"
-              w="60%"
+              w={r("100%", "60%")}
             >
               {description}
             </Text>
@@ -391,6 +393,7 @@ export default function Modern({
               fontSize={r("14px", "20px")}
               lineHeight={"28px"}
               color="#F3F3F3"
+              textAlign="center"
             >
               {t("rustic_journey")}
             </Text>
@@ -546,15 +549,17 @@ export default function Modern({
         {/* ————— RSVP ————— */}
         {(!isLive || data?.confirmationEnabled) && (
           <Box position="relative">
-            <Icon
-              color="var(--c-accent)"
-              position="absolute"
-              left="10%"
-              bottom="10%"
-              // transform="translateY(-10%)"
-            >
-              {rsvpRight.icon}
-            </Icon>
+            {!isRealMobile && (
+              <Icon
+                color="var(--c-accent)"
+                position="absolute"
+                left="10%"
+                bottom="10%"
+                // transform="translateY(-10%)"
+              >
+                {rsvpRight.icon}
+              </Icon>
+            )}
             <Rsvp
               r={r}
               color="var(--c-secondary)"
@@ -587,6 +592,7 @@ export default function Modern({
             position="relative"
             mt={!data?.confirmationEnabled && "100px"}
             pb="50px"
+            px={r("30px", "0")}
           >
             <Icon
               color="var(--c-accent)"
@@ -659,6 +665,7 @@ export default function Modern({
                       fontWeight="400"
                       lineHeight={"22px"}
                       color="var(--c-secondary)"
+                      textAlign={"center"}
                     >
                       {dressCodeAbout}
                     </Text>
@@ -693,6 +700,7 @@ export default function Modern({
               borderRadius={r("0", "220px")}
               position="relative"
               py="32px"
+              px={r("30px", "0")}
             >
               <Icon
                 position="absolute"
@@ -712,7 +720,6 @@ export default function Modern({
                 {t("classic_look")}
               </Text>
               <Text
-                w="560px"
                 textAlign={"center"}
                 fontSize={r("24px", "34px")}
                 fontWeight={500}
@@ -750,74 +757,85 @@ export default function Modern({
 
         {/* ————— OUR LOVE STORY ————— */}
         {(!isLive || data?.ourStory) && (
-          <Center pt="50px">
-            <Flex w="90%" justify={"space-between"} align={"center"}>
-              {storyImgOne && (
-                <Image
-                  src={storyImgOne}
-                  alt="story 1"
-                  minW="260px"
-                  maxW="260px"
-                  h="260px"
-                  objectFit="cover"
-                  style={{
-                    WebkitMaskImage: `url(${story1Bg.src})`,
-                    WebkitMaskSize: "100% 100%",
-                    WebkitMaskRepeat: "no-repeat",
-                    WebkitMaskPosition: "center",
-                    maskImage: `url(${story1Bg.src})`,
-                    maskSize: "100% 100%",
-                    maskRepeat: "no-repeat",
-                    maskPosition: "center",
-                  }}
-                />
-              )}
-              <VStack gap={r("16px", "40px")}>
-                <Text
-                  textAlign="center"
-                  color="#323232"
-                  fontSize={r("24px", "34px")}
-                  lineHeight="48px"
-                  fontWeight="800"
-                >
-                  {t("classic_story")}
-                </Text>
-                <Text
-                  // maxW="877px"
-                  // w="50%" //
-                  textAlign="center"
-                  fontSize={isMobile ? "15px" : "18px"}
-                  lineHeight="28px"
-                  color="var(--c-secondary)"
-                  whiteSpace="pre-line"
-                  fontWeight="400"
-                >
-                  {storyText}
-                </Text>
-              </VStack>
-              {storyImgTwo && (
-                <Image
-                  src={storyImgTwo}
-                  alt="story 2"
-                  minW="260px"
-                  maxW="260px"
-                  h="260px"
-                  objectFit="cover"
-                  style={{
-                    WebkitMaskImage: `url(${story2Bg.src})`,
-                    WebkitMaskSize: "100% 100%",
-                    WebkitMaskRepeat: "no-repeat",
-                    WebkitMaskPosition: "center",
+          // <Center >
+          <Flex
+            w="90%"
+            justify={"space-between"}
+            align={"center"}
+            direction={r("column", "row")}
+            gap={r("40px", "0")}
+            margin="0 auto"
+            pt={r("10px", "50px")}
+          >
+            <VStack gap={r("16px", "40px")} order={r(1, 2)}>
+              <Text
+                textAlign="center"
+                color="#323232"
+                fontSize={r("24px", "34px")}
+                lineHeight="48px"
+                fontWeight="800"
+              >
+                {t("classic_story")}
+              </Text>
+              <Text
+                // maxW="877px"
+                // w="50%" //
+                textAlign="center"
+                fontSize={isMobile ? "15px" : "18px"}
+                lineHeight="28px"
+                color="var(--c-secondary)"
+                whiteSpace="pre-line"
+                fontWeight="400"
+              >
+                {storyText}
+              </Text>
+            </VStack>
+            {storyImgOne && (
+              <Image
+                // order={{ base: 2, md: 1 }}
+                order={r(2, 1)}
+                src={storyImgOne}
+                alt="story 1"
+                minW="260px"
+                maxW="260px"
+                h="260px"
+                objectFit="cover"
+                style={{
+                  WebkitMaskImage: `url(${story1Bg.src})`,
+                  WebkitMaskSize: "100% 100%",
+                  WebkitMaskRepeat: "no-repeat",
+                  WebkitMaskPosition: "center",
+                  maskImage: `url(${story1Bg.src})`,
+                  maskSize: "100% 100%",
+                  maskRepeat: "no-repeat",
+                  maskPosition: "center",
+                }}
+              />
+            )}
+            {storyImgTwo && (
+              <Image
+                order={r(1, 2)}
+                src={storyImgTwo}
+                alt="story 2"
+                minW="260px"
+                maxW="260px"
+                h="260px"
+                objectFit="cover"
+                style={{
+                  WebkitMaskImage: `url(${story2Bg.src})`,
+                  WebkitMaskSize: "100% 100%",
+                  WebkitMaskRepeat: "no-repeat",
+                  WebkitMaskPosition: "center",
 
-                    maskImage: `url(${story2Bg.src})`,
-                    maskSize: "100% 100%",
-                    maskRepeat: "no-repeat",
-                    maskPosition: "center",
-                  }}
-                />
-              )}
-            </Flex>
-          </Center>
+                  maskImage: `url(${story2Bg.src})`,
+                  maskSize: "100% 100%",
+                  maskRepeat: "no-repeat",
+                  maskPosition: "center",
+                }}
+              />
+            )}
+          </Flex>
+          // </Center>
         )}
 
         {/* ————— CONTACT ————— */}

@@ -31,10 +31,14 @@ export const Rsvp = ({
   handleSubmit,
 }) => {
   const t = useTranslations();
-  // TODO: add notes
+
   return (
     data !== false && (
-      <VStack py={r("64px", "100px")} gap="37px">
+      <VStack
+        py={r("64px", "100px")}
+        gap="37px"
+        px={{ base: "30px", md: "unset" }}
+      >
         <Text
           fontSize={r("24px", "34px")}
           w={r("fit-content", "560px")}
@@ -46,8 +50,8 @@ export const Rsvp = ({
         >
           {t("classic_join")}
         </Text>
-        <VStack gap="37px">
-          <VStack gap="16px" w="100%" minW={"492px"}>
+        <VStack gap="37px" w="100%">
+          <VStack gap="16px" w="100%" maxW={{ base: "100%", md: "492px" }}>
             <Input
               placeholder={t("classic_type")}
               h="52px"
@@ -155,10 +159,11 @@ export const Rsvp = ({
               w="100%"
               gap="12px"
               justify={"space-between"}
+              direction={r("column", "row")}
             >
               <Button
                 flex={1}
-                h="44px"
+                minH="44px"
                 fontSize="14px"
                 boxShadow="xl"
                 bg={color}
@@ -178,7 +183,7 @@ export const Rsvp = ({
                 variant="outline"
                 border="1px solid"
                 borderColor={color}
-                h="44px"
+                minH="44px"
                 fontSize="14px"
                 bg="transparent"
                 color={color}

@@ -34,9 +34,9 @@ export const AddAgenda = ({ setData, languages }) => {
 
   const handleAdd = () => {
     const enValue = values.en?.trim();
-    if (!enValue) {
-      return error("You need to add English");
-    }
+    // if (!enValue) {
+    //   return error("You need to add English");
+    // }
 
     const key = generateAgendaKey(enValue);
     const newAgenda = {
