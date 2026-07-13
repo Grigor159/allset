@@ -25,7 +25,19 @@ export const TitleCreator = ({
   const fullUrl = `${BASE_URL}${languages?.[0]}/invitation/${urlExtension ?? ""}`;
 
   const handleInputChange = (e, lng) => {
-    const val = e.target.value;
+    let val = e.target.value;
+    
+    // space to - automatically
+    // val = val
+    //   .replace(/\s+/g, "-")
+    //   .replace(/[^\p{L}\p{N}-]/gu, "")
+    //   .replace(/-+/g, "-");
+
+    // allow - symbol & numbers
+    // val = val.replace(/[^\p{L}\p{N}\s-]/gu, "").replace(/-+/g, "-");
+
+    // allow - symbol & space
+    val = val.replace(/[^\p{L}\s-]/gu, "").replace(/-+/g, "-");
 
     onChange(name, lng, val);
 

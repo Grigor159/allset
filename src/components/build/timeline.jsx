@@ -85,50 +85,52 @@ export const Timeline = ({
             const isChecked = !!item;
 
             return (
-              <Checkbox.Root
+              <Flex
                 key={venueKey}
-                checked={isChecked}
-                // onCheckedChange={(e) =>
-                //   handleCheckboxChange(
-                //     venueKey,
-                //     e.checked === true,
-                //     venueName[language] || venueName.en,
-                //   )
-                // }
-                onCheckedChange={(e) =>
-                  handleCheckboxChange(venueKey, e.checked === true, venueName)
-                }
                 w="100%"
                 justifyContent="space-between"
                 flexDirection={{ base: "column", md: "row" }}
                 alignItems={{ base: "flex-start", md: "unset" }}
-                cursor="pointer"
                 p="16px 0"
-                borderRadius="4px"
-                disabled={!disabled}
                 borderBottom="2px solid"
                 borderColor="#F9FAFB"
               >
                 <Flex align="center" gap="12px">
-                  <Checkbox.HiddenInput />
-                  <Checkbox.Control
-                    w={{ base: "16px", md: "24px" }}
-                    h={{ base: "16px", md: "24px" }}
-                    _checked={{ border: "none", bg: "transparent" }}
+                  <Checkbox.Root
+                    checked={isChecked}
+                    onCheckedChange={(e) =>
+                      handleCheckboxChange(
+                        venueKey,
+                        e.checked === true,
+                        venueName,
+                      )
+                    }
                   >
-                    {isChecked && <Icon>{checked.icon}</Icon>}
-                  </Checkbox.Control>
-                  <Checkbox.Label
-                    as={Flex}
-                    gap={"8px"}
-                    alignItems={"center"}
-                    fontSize={"14px"}
-                    fontWeight={"600"}
-                    lineHeight={"24px"}
+                    <Checkbox.HiddenInput />
+
+                    <Checkbox.Control
+                      w={{ base: "16px", md: "24px" }}
+                      h={{ base: "16px", md: "24px" }}
+                      _checked={{
+                        border: "none",
+                        bg: "transparent",
+                      }}
+                    >
+                      {isChecked && <Icon>{checked.icon}</Icon>}
+                    </Checkbox.Control>
+                  </Checkbox.Root>
+
+                  <Text
+                    fontSize="14px"
+                    fontWeight="600"
+                    lineHeight="24px"
+                    cursor="pointer"
+                    onClick={() =>
+                      handleCheckboxChange(venueKey, !isChecked, venueName)
+                    }
                   >
-                    {/* <Icon>{icon.icon}</Icon> */}
                     {venueName[language] || venueName.en}
-                  </Checkbox.Label>
+                  </Text>
                 </Flex>
 
                 <Flex gap="32px">
@@ -139,6 +141,7 @@ export const Timeline = ({
                     }
                     disabled={!isChecked}
                   />
+
                   <InputUrl
                     name="venueLocation"
                     value={item?.venueLocation}
@@ -149,7 +152,7 @@ export const Timeline = ({
                     disabled={!isChecked}
                   />
                 </Flex>
-              </Checkbox.Root>
+              </Flex>
             );
           })}
 
