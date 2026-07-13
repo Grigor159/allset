@@ -40,7 +40,11 @@ export const PreviewClient = () => {
         </Flex>
 
         <Box w="100%" h="fit-content">
-          <Frame viewport={device} palette={selectedPalette} maxHeight="80vh" live={true}/>
+          <Frame
+            viewport={device}
+            palette={selectedPalette}
+            maxHeight="80vh"
+          />
         </Box>
       </VStack>
     </Animate>

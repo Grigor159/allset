@@ -36,11 +36,7 @@ export const Preview = ({ palette }) => {
       </Flex>
 
       <Box position="relative" w="100%" h={{ base: "430px", md: "685px" }}>
-        <Frame
-          viewport={device}
-          palette={palette}
-          height="100%"
-        />
+        <Frame viewport={device} palette={palette} height="100%" />
 
         <ViewportToggle
           position="absolute"
