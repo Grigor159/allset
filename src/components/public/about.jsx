@@ -3,13 +3,12 @@
 import React from "react";
 import { Stack, Container, Flex, Image } from "@chakra-ui/react";
 import { Title } from "./typography/title";
-// import { SubTitle } from "./typography/subTitle";
 import { Description } from "./typography/description";
 import img from "@/assets/imgs/about_img1.png";
 
 export const About = () => {
   return (
-    <Stack py="80px" bg="#f6f6f7">
+    <Stack p={{ base: "16px 0 80px 0", xl: "80px 0" }} bg="#f6f6f7">
       <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
         <Flex
           w="100%"
@@ -21,10 +20,9 @@ export const About = () => {
           <Stack flex="1" gap="24px">
             <Title
               as="h1"
-              fontSize="42px"
-              lineHeight="48px"
-              text="about_title"
+              fontSize={{ base: "26px", md: "42px" }}
               color="#004143"
+              text="about_title"
             />
             {/* <SubTitle text="plan_subtitle" /> */}
             <Description text="about_desc" textAlign="start" />

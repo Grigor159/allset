@@ -27,7 +27,12 @@ export const AboutChoose = () => {
           direction={{ base: "column", xl: "row" }}
         >
           <Stack flex="1" gap="24px">
-            <Title as="h1" text="team" />
+            <Title
+              as="h2"
+              fontSize={{ base: "26px", md: "42px" }}
+              color="#004143"
+              text="team"
+            />
             {/* <SubTitle text="choose_desc_one" /> */}
             <Description text="team_desc" textAlign="start" />
           </Stack>
