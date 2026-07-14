@@ -8,7 +8,7 @@ import img from "@/assets/imgs/about_img1.png";
 
 export const About = () => {
   return (
-    <Stack p={{ base: "16px 0 80px 0", xl: "80px 0" }} bg="#f6f6f7">
+    <Stack p={{ base: "16px 0 80px 0", md: "80px 0" }} bg="#f6f6f7">
       <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
         <Flex
           w="100%"

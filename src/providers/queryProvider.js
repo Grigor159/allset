@@ -27,7 +27,7 @@ export function QueryProvider({ children }) {
             {children}
             {MODE === "development" && <ReactQueryDevtools initialIsOpen={false}
                 position="right"
-                buttonPosition="top-right" />}
+                buttonPosition="bottom-right" />}
         </QueryClientProvider>
     )
 }

@@ -38,7 +38,7 @@ export const Promocode = ({ code }) => {
         success(`Promocode applied! Discount is ${res?.discountValue}%`);
       },
       onError: (err) =>
-        error(err?.response?.data?.error || "Invalid promocode"),
+        error(err?.response?.data?.message || "Invalid promocode"),
     },
   );
 

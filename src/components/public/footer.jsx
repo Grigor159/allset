@@ -36,7 +36,7 @@ export const Footer = () => {
         {/* <Box> */}
         <Flex
           py={{ base: "32px", sm: "29px" }}
-          gap="64px"
+          gap="24px"
           flexDirection={{ base: "column", lg: "row" }}
         >
           <Stack gap={"24px"} align={{ base: "center", sm: "unset" }}>
@@ -86,6 +86,7 @@ export const Footer = () => {
                       fontWeight={isActive ? "500" : "400"}
                       borderRadius="0"
                       w="fit-content"
+                      textAlign={{ base: "center", sm: "unset" }}
                     >
                       {t(name)}
                     </ChakraLink>
@@ -111,6 +112,7 @@ export const Footer = () => {
                       fontWeight={isActive ? "500" : "400"}
                       borderRadius="0"
                       w="fit-content"
+                      textAlign={{ base: "center", sm: "unset" }}
                     >
                       {t(name)}
                     </ChakraLink>
