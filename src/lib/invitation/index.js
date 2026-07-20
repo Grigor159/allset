@@ -9,7 +9,9 @@ export async function getInvitationData(slug) {
   try {
     const res = await fetch(
       `${BASE_API}invitations/url/${slug}`,
-      { next: { revalidate: 60 } },
+      {
+        cache: "no-store",
+      }
     );
     if (!res.ok) return null;
     return res.json();
