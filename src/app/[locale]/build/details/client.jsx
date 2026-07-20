@@ -551,6 +551,7 @@ export const DetailsClient = () => {
               onChange={handleLngChange}
               required={true}
               languages={form.languages}
+              status={status}
             />
           </Animate>
 

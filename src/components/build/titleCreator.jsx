@@ -17,6 +17,7 @@ export const TitleCreator = ({
   onChange,
   required,
   languages,
+  status,
 }) => {
   const t = useTranslations();
 
@@ -26,7 +27,7 @@ export const TitleCreator = ({
 
   const handleInputChange = (e, lng) => {
     let val = e.target.value;
-    
+
     // space to - automatically
     // val = val
     //   .replace(/\s+/g, "-")
@@ -80,43 +81,45 @@ export const TitleCreator = ({
         />
       </Field.Root>
 
-      <Tooltip
-        // ids={{ trigger: id }}
-        positioning={{ placement: "top" }}
-        content={isCopied ? t("copied") : t("copy")}
-      >
-        <Flex
-          onClick={handleCopy}
-          w="100%"
-          justify="space-between"
-          align="center"
-          p="14px 16px"
-          bg="#F9FAFB"
-          border="1px solid"
-          borderColor={isCopied ? "#0C6DE2" : "transparent"}
-          borderRadius="4px"
-          transition="all 0.3s ease"
-          _focus={{ borderColor: "#0C6DE2" }}
-          _hover={{ "& p": { textDecoration: "underline" } }}
-          cursor="text"
+      {status === "active" && (
+        <Tooltip
+          // ids={{ trigger: id }}
+          positioning={{ placement: "top" }}
+          content={isCopied ? t("copied") : t("copy")}
         >
-          <HStack spacing="10px">
-            <Icon>{copy.icon}</Icon>
-            <Text
-              color="#0C6DE2"
-              fontSize="14px"
-              maxW="100%"
-              whiteSpace="normal"
-              overflowWrap="anywhere"
-              wordBreak="break-word"
-            >
-              {fullUrl}
-            </Text>
-          </HStack>
+          <Flex
+            onClick={handleCopy}
+            w="100%"
+            justify="space-between"
+            align="center"
+            p="14px 16px"
+            bg="#F9FAFB"
+            border="1px solid"
+            borderColor={isCopied ? "#0C6DE2" : "transparent"}
+            borderRadius="4px"
+            transition="all 0.3s ease"
+            _focus={{ borderColor: "#0C6DE2" }}
+            _hover={{ "& p": { textDecoration: "underline" } }}
+            cursor="text"
+          >
+            <HStack spacing="10px">
+              <Icon>{copy.icon}</Icon>
+              <Text
+                color="#0C6DE2"
+                fontSize="14px"
+                maxW="100%"
+                whiteSpace="normal"
+                overflowWrap="anywhere"
+                wordBreak="break-word"
+              >
+                {fullUrl}
+              </Text>
+            </HStack>
 
-          {isCopied && <Icon>{copied.icon}</Icon>}
-        </Flex>
-      </Tooltip>
+            {isCopied && <Icon>{copied.icon}</Icon>}
+          </Flex>
+        </Tooltip>
+      )}
     </Stack>
   );
 };
