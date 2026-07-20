@@ -20,7 +20,6 @@ export const Pay = () => {
   return (
     <Stack gap="16px">
       <Tooltip
-        // ids={{ trigger: id }}
         positioning={{ placement: "top" }}
         content={
           !payment
@@ -53,8 +52,6 @@ export const Pay = () => {
         fontWeight="400"
         lineHeight="24px"
         color="#004143"
-        // border={"1px solid"}
-        // borderColor={"#4B5563"}
         w="100%"
         h="52px"
       >

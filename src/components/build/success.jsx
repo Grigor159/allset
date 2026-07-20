@@ -49,7 +49,6 @@ export const Success = ({ open, data, setQuery }) => {
   return (
     <Dialog.Root
       open={open}
-      //   modal={false}
       onOpenChange={(e) => {
         if (!e.open) {
           handleClose();
@@ -154,7 +153,6 @@ export const Success = ({ open, data, setQuery }) => {
                 variant="outline"
                 border="1px solid"
                 borderColor="#004143"
-                // onClick={() => router.push("/auth/invitations")}
                 onClick={handleClose}
               >
                 {t("success_go")}

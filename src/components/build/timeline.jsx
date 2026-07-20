@@ -39,8 +39,6 @@ export const Timeline = ({
 
   const getItem = (venueKey) =>
     timeline.find((item) => item.venueKey === venueKey);
-  // const getItem = (venueKey) =>
-  //   value?.find((item) => item.venueKey === venueKey);
 
   const handleCheckboxChange = (venueKey, isChecked, venueName) => {
     let newTimeline = [...value];

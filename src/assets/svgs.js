@@ -203,29 +203,6 @@ export const upload = {
     ),
 };
 
-// export const url = {
-//     icon: (
-//         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-//             <g clipPath="url(#clip0_257_439)">
-//                 <g clipPath="url(#clip1_257_439)">
-//                     <path d="M10.856 13.1428C11.9645 14.7051 14.2971 14.4308 15.44 13.1428L17.7131 10.8571C18.9977 9.45366 19.0434 7.64109 17.7131 6.28566C16.4148 4.96337 14.44 4.96337 13.1417 6.28566L10.856 8.57137" stroke="#111827" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-//                     <path d="M13.1425 12.08C12.0339 10.5177 9.71391 10.712 8.57105 12L6.28533 14.2571C5.00076 15.6606 4.95505 17.5017 6.28533 18.8571C7.58362 20.1794 9.55848 20.1794 10.8568 18.8571L13.1425 16.5714" stroke="#111827" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-//                 </g>
-//                 <path d="M9.5 11.5001C10.47 12.8671 12.511 12.6271 13.511 11.5001L15.5 9.50007C16.624 8.27207 16.664 6.68607 15.5 5.50007C14.364 4.34307 12.636 4.34307 11.5 5.50007L9.5 7.50007" stroke="black" strokeLinecap="round" strokeLinejoin="round" />
-//                 <path d="M11.5002 10.5702C10.5302 9.20323 8.50016 9.37323 7.50016 10.5002L5.50016 12.4752C4.37616 13.7032 4.33616 15.3142 5.50016 16.5002C6.63616 17.6572 8.36416 17.6572 9.50016 16.5002L11.5002 14.5002" stroke="black" strokeLinecap="round" strokeLinejoin="round" />
-//             </g>
-//             <defs>
-//                 <clipPath id="clip0_257_439">
-//                     <rect width="24" height="24" fill="white" />
-//                 </clipPath>
-//                 <clipPath id="clip1_257_439">
-//                     <rect width="24" height="24" fill="white" />
-//                 </clipPath>
-//             </defs>
-//         </svg>
-//     )
-// }
-
 export const promo = {
     icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

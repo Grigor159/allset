@@ -25,7 +25,6 @@ export const Promo = ({ promo }) => {
       bgSize="cover"
       bgPosition="center"
       bgRepeat="no-repeat"
-      //   backgroundBlendMode={"overlay"}
       w="100%"
       h={{ base: "285px", md: "185px" }}
       align="center"
@@ -54,7 +53,6 @@ export const Promo = ({ promo }) => {
         h="100%"
         objectFit="contain"
         pr={{ base: 0, md: "40px" }}
-        // flexShrink={0}
       />
     </Flex>
   );

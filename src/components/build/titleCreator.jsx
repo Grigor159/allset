@@ -28,15 +28,6 @@ export const TitleCreator = ({
   const handleInputChange = (e, lng) => {
     let val = e.target.value;
 
-    // space to - automatically
-    // val = val
-    //   .replace(/\s+/g, "-")
-    //   .replace(/[^\p{L}\p{N}-]/gu, "")
-    //   .replace(/-+/g, "-");
-
-    // allow - symbol & numbers
-    // val = val.replace(/[^\p{L}\p{N}\s-]/gu, "").replace(/-+/g, "-");
-
     // allow - symbol & space
     val = val.replace(/[^\p{L}\s-]/gu, "").replace(/-+/g, "-");
 
@@ -83,7 +74,6 @@ export const TitleCreator = ({
 
       {status === "active" && (
         <Tooltip
-          // ids={{ trigger: id }}
           positioning={{ placement: "top" }}
           content={isCopied ? t("copied") : t("copy")}
         >

@@ -57,9 +57,6 @@ export const OAuth = ({ bg, noMenu = false }) => {
                 fontWeight={isActive ? "500" : "300"}
                 lineHeight="24px"
                 w="fit-content"
-                // w="100%"
-                // display="flex"
-                // justifyContent="center"
               >
                 {t(el)}
               </ChakraLink>

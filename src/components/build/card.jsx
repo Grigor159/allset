@@ -54,8 +54,6 @@ export const Card = ({ el }) => {
     <Stack
       bg="white"
       gap="16px"
-      // w="443px"
-      // minH="602px"
       w={"100%"}
       minH={{ base: "500px", md: "602px" }}
       boxShadow={isSelected && "0px 4px 10px 0px rgba(0, 65, 67, 0.1)"}
@@ -87,7 +85,6 @@ export const Card = ({ el }) => {
         <Image
           w="100%"
           h="292px"
-          // src={formatUrl(templateImage)}
           src={templateImage}
           borderRadius="8px"
           transition="transform 0.3s ease"

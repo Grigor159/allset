@@ -58,22 +58,3 @@ export const Navigation = ({ direction }) => {
     </Flex>
   );
 };
-
-// return (
-//   <ChakraLink
-//     key={path}
-//     href={`/${path}`}
-//     as={Link}
-//     borderBottom={"2px solid"}
-//     borderColor={isActive ? "#4B5563" : "transparent"}
-//     color={isActive ? "#004143" : "#4B5563"}
-//     fontSize={"16px"}
-//     fontWeight={isActive ? "500" : "300"}
-//     borderRadius="0"
-//     w="fit-content"
-//     outline={"none"}
-//     onClick={() => template && setQuery({ template: null })}
-//   >
-//     {t(name)}
-//   </ChakraLink>
-// );

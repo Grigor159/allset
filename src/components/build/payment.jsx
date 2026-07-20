@@ -88,7 +88,6 @@ export const Payment = ({ legal, payment, setQuery }) => {
         size="sm"
         checked={legal}
         onCheckedChange={(e) => setQuery({ legal: !!e.checked })}
-        // onCheckedChange={handleChange}
         alignItems="start"
       >
         <Checkbox.HiddenInput />

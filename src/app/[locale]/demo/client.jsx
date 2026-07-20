@@ -67,7 +67,6 @@ export const DemoClient = () => {
             textAlign={"center"}
             width={{ base: "297px", md: "643px" }}
             fontWeight={400}
-            // fontSize={"18px"}
             fontSize={{ base: "12px", md: "18px" }}
             lineHeight={"24px"}
             letterSpacing={"0px"}

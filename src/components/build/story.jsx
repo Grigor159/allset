@@ -94,7 +94,6 @@ export const Story = ({
             value={value?.text}
             onChange={handleInputChange}
             placeholder={t("story_placeholder")}
-            // disabled={!checked}
           />
         )}
       </Field.Root>

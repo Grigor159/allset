@@ -24,7 +24,6 @@ export const Input = ({ languages, name, value, onChange, placeholder }) => {
         onChange={(e) => onChange(e, lng)}
         placeholder={placeholder}
         required
-        // disabled={!lng}
         variant="subtle"
         borderRadius={"4px"}
         bg="#F9FAFB"

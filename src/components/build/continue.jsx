@@ -36,7 +36,6 @@ export const Continue = () => {
 
   const isCustomisationsPage = pathname?.includes(`/customisations`);
   const isDetailsPage = pathname?.includes(`/details`);
-  // const isConfirmPage = pathname?.includes(`/confirm`);
 
   const disabled = isContinueDisabled(pathname, {
     template,
@@ -89,11 +88,9 @@ export const Continue = () => {
       onClick={handleClick}
     >
       {t("next")} {next.icon}
-      {/* {t("continue")} {t(name)} */}
     </Button>
   ) : isDetailsPage ? (
     <Button
-      // loading
       type="submit"
       form="details"
       fontWeight="400"
@@ -126,37 +123,8 @@ export const Continue = () => {
     </Button>
   ) : (
     !isActive && (
-      // : isConfirmPage ? (
-      //   <Button
-      //     // loading
-      //     type="submit"
-      //     form="confirm"
-      //     fontWeight="400"
-      //     lineHeight="24px"
-      //     bg="#004143"
-      //     w={{ base: "100%", md: "137px" }}
-      //     h="52px"
-      //     border="1px solid"
-      //     borderColor="white"
-      //     boxShadow="xl"
-      //     _hover={{
-      //       bg: "white",
-      //       color: "#004143",
-      //       borderColor: "#004143",
-      //       "& path": {
-      //         fill: "#004143",
-      //         transition: "all 0.3s ease",
-      //       },
-      //     }}
-      //     transition="all 0.3s ease"
-      //     disabled={disabled && !(legal == true || legal === "true")}
-      //   >
-      //     {t(name)}
-      //   </Button>
-      // )
       <Button
         as={!disabled ? Link : "button"}
-        // to={!disabled ? path : undefined}
         href={!disabled ? `${path}${search}` : undefined}
         fontWeight="400"
         lineHeight="24px"
@@ -179,21 +147,7 @@ export const Continue = () => {
         disabled={disabled}
       >
         {t("next")} {next.icon}
-        {/* {t("continue")} {t(name)} */}
       </Button>
     )
   );
 };
-
-// V1 without side effects
-// const handleClick = async () => {
-//   try {
-//     if (!isAuthenticated) {
-//       await loginWithPopup();
-//     }
-
-//     router.push(`${path}${search}`);
-//   } catch (err) {
-//     return;
-//   }
-// };

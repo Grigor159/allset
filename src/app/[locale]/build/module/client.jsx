@@ -55,42 +55,6 @@ export const ModuleClient = () => {
     load();
   }, []);
 
-  // useEffect(() => {
-  //   const load = async () => {
-  //     try {
-  //       const token = await getAccessTokenSilently();
-
-  //       // await apiClient.get("payments/last-summary", {
-  //       //   headers: {
-  //       //     Authorization: `Bearer ${token}`,
-  //       //   },
-  //       // });
-  //       // setQuery({ status: "success" });
-  //       // router.push(`/build/confirm${redirect}?status=success`);
-  //       const { data } = await apiClient.get("payments/last-summary", {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
-  //       const status = data?.paymentStatus?.toLowerCase();
-  //       console.log(status);
-
-  //       if (status === "failed") {
-  //         router.push(`/build/confirm${redirect}&status=failed`);
-  //         // setQuery({ status: "failed" });
-  //       } else {
-  //         router.push(`/build/confirm${redirect}&status=success`);
-  //         // setQuery({ status: "success" });
-  //       }
-  //     } catch (err) {
-  //       // setQuery({ status: "failed" });
-  //       // router.push(`/build/confirm${redirect}?status=failed`);
-  //     }
-  //   };
-
-  //   load();
-  // }, []);
-
   return (
     <Box h="100dvh">
       <Center h="100%">

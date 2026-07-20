@@ -55,7 +55,6 @@ export const Card = ({ el }) => {
       queryKey: [`invitations/${id}`],
       refetchType: "all",
     });
-    // queryClient.removeQueries({ queryKey: [`invitations/${id}`] });
     router.push(
       `/build/details?template=${templateId}&palette=${colorPaletteId}&id=${id}`,
     );
@@ -64,7 +63,6 @@ export const Card = ({ el }) => {
   return (
     <Stack
       w="307px"
-      // h="550px"
       gap={"12px"}
       p="12px"
       bg="white"

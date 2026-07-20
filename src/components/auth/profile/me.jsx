@@ -9,7 +9,6 @@ import {
   Image,
   Flex,
   SkeletonCircle,
-  // SkeletonText,
   Skeleton,
 } from "@chakra-ui/react";
 import premium from "@/assets/imgs/premium.png";
@@ -32,7 +31,6 @@ export const Me = ({ isLoading, data }) => {
       )}
 
       {isLoading ? (
-        // <SkeletonText w="200px" height="7" noOfLines={2} />
         <Stack gap="6px" alignItems="center">
           <Skeleton h="26px" w="200px" />
           <Skeleton h="26px" w="200px" />

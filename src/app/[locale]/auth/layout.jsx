@@ -27,7 +27,6 @@ export default function Layout({ children }) {
       bgImage={{ base: getAuthBg(pathname) }}
       minW={"100%"}
       minH={"100%"}
-      // pt={"50px"}
       p={{ base: "32px 0 62px 0", md: "50px 0 50px 0" }}
       bgSize={getAuthBgSize(pathname)}
       bgPos={getAuthBgPos(pathname)}

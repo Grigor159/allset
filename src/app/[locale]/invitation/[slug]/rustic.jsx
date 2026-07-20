@@ -103,8 +103,6 @@ export default function Rustic({
   const vars = paletteToVars(
     palette?.colors ?? data?.template?.paletteKeyword?.colors,
   );
-  // const title = pickLang(data?.title, language) || "Henry & Mariam";
-  // const eventDateText = formatEventDate(data?.eventDate);
   const { name1, name2 } = formatRusticTitle(data?.title, language);
   const [form, setForm] = useState(getInvitationForm(id));
   const [guests, setGuests] = useState([`${t("classic_count")}`]);
@@ -203,12 +201,9 @@ export default function Rustic({
     <Box
       data-viewport={viewport}
       style={vars}
-      // w={`${width}px`}
       bg="#F6F5F4"
       color="#111"
       overflow="hidden"
-      // pt="75px"
-      // position={"relative"}
     >
       {locales && <Language locales={locales} />}
 
@@ -253,7 +248,6 @@ export default function Rustic({
             <Text
               fontFamily="var(--font-shk)"
               color="var(--c-primary)"
-              // fontFamily={sosBanff.style.fontFamily}
               fontSize={r("42px", "64px")}
               lineHeight="50px"
               fontWeight="400"
@@ -305,8 +299,6 @@ export default function Rustic({
         overflow="visible"
         mt={r("42px", "132px")}
         mb={r("535px", "187px")}
-        //
-        // p={r("0 31px 0 20px", "0 70px 0 111px")}
         p={r("0 31px 0 20px", "0 70px")}
       >
         <Image
@@ -375,15 +367,11 @@ export default function Rustic({
       >
         <Box
           position="relative"
-          // w="491px"
-          // h="282px"
           w={r("165px", "491px")}
           h={r("105px", "282px")}
           zIndex={2}
         >
           <Box
-            // w={r("165px", "100%")}
-            // h={r("105px", "100%")}
             w="100%"
             h="100%"
             bgImage={r(`url(${coupleBgMobile.src})`, `url(${coupleBg.src})`)}
@@ -490,10 +478,8 @@ export default function Rustic({
           />
         )}
       </VStack>
-      {/* </Container> */}
 
       {/* ————— TIMING ————— */}
-      {/* <Center pt="90px"> */}
       {(!isLive || data?.timeline?.length > 0) && (
         <Center>
           <Stack
@@ -560,134 +546,6 @@ export default function Rustic({
               ))}
             </Stack>
           </Stack>
-
-          {/* <Box position="relative">
-            <Box
-              position="absolute"
-              inset="0"
-              bg="var(--c-secondary)"
-              style={{
-                WebkitMaskImage: `url(${timingBg.src})`,
-
-                WebkitMaskRepeat: "no-repeat",
-
-                WebkitMaskPosition: "center",
-
-                WebkitMaskSize: "contain",
-
-                maskImage: `url(${timingBg.src})`,
-
-                maskRepeat: "no-repeat",
-
-                maskPosition: "center",
-
-                maskSize: "contain",
-              }}
-            />
-
-            <Box
-              position="absolute"
-              inset="0"
-              bgImage={`url(${timingBg.src})`}
-              bgSize="contain"
-              bgPosition="center"
-              bgRepeat="no-repeat"
-              mixBlendMode="multiply"
-              opacity={0.9}
-            />
-
-            <VStack
-              position={"relative"}
-              // bgImage={`url(${timingBg.src})`}
-
-              // bgSize="contain"
-
-              // bgPos="center"
-
-              // bgRepeat="no-repeat"
-
-              minH={r("852px", "1164px")}
-              h="100%"
-              minW="1086px"
-              gap={r("24px", "60px")}
-              px="160px"
-              align={"center"}
-              justify={"center"}
-            >
-              <Image
-                src={timingImg.src}
-                alt="timing"
-                w={r("163px", "391px")}
-                position={"absolute"}
-                top={r("-80px", "-170px")}
-                right={r("70px", "-170px")}
-              />
-
-              <Text
-                fontWeight="800"
-                fontSize={isMobile ? "22px" : "34px"}
-                lineHeight="24px"
-                textTransform="uppercase"
-                color="var(--c-primary)"
-
-                // dangerouslySetInnerHTML={{
-
-                //   __html: t("classic_timing").replace(/\n/g, "<br />"),
-
-                // }}
-              >
-                {t("classic_timing")}
-              </Text>
-
-              <Stack gap={r("20px", "40px")}>
-                {timeline?.map((item, i) => (
-                  <Flex
-                    key={i}
-                    justify={"space-between"}
-                    align={"center"}
-                    gap="20px"
-                  >
-                    <VStack
-                      align="flex-start"
-                      gap={r("12px", "24px")}
-                      minW="160px"
-                    >
-                      <Text
-                        fontSize={isMobile ? "20px" : "34px"}
-                        fontWeight="800"
-                        lineHeight={"24px"}
-                      >
-                        {item.time || "00:00"}
-                      </Text>
-
-                      <Text
-                        fontSize={isMobile ? "15px" : "22px"}
-                        fontWeight="500"
-                        lineHeight={"34px"}
-                        textTransform="uppercase"
-                        color="var(--c-primary)"
-                      >
-                        {pickLang(item.venueName, language) || item.venueName}
-                      </Text>
-
-                      {item.venueLocation && (
-                        <ChakraLink
-                          as={Link}
-                          href={item.venueLocation}
-                          target="_blank"
-                          fontSize="14px"
-                          color="var(--c-primary)"
-                          textDecoration="underline"
-                        >
-                          {t("classic_map")}
-                        </ChakraLink>
-                      )}
-                    </VStack>
-                  </Flex>
-                ))}
-              </Stack>
-            </VStack>
-          </Box> */}
         </Center>
       )}
 
@@ -927,9 +785,6 @@ export default function Rustic({
               whiteSpace="pre-line"
               fontWeight="400"
               textAlign={r("center", "unset")}
-              // dangerouslySetInnerHTML={{
-              //   __html: storyText.replace(/\n/g, "<br />"),
-              // }}
             >
               {storyText}
             </Text>
@@ -937,14 +792,11 @@ export default function Rustic({
 
           <Box
             w="100%"
-            // maxW="830px"
             minH={r("662px", "488px")}
             bgImage={r(`url(${storyBgMobile.src})`, `url(${storyBg.src})`)}
             bgSize="cover"
             bgPosition="center"
             bgRepeat="no-repeat"
-            // justifyContent="center"
-            // alignItems="center"
             position="relative"
           >
             {storyImage1 && (
@@ -1060,8 +912,6 @@ export default function Rustic({
       {/* ————— CONTACT ————— */}
       {(!isLive || data?.connectWithUs) && (
         <Flex
-          // bg="var(--c-primary)"
-          // color="white"
           pt={r("210px", "120px")}
           pb={r("90px", "75px")}
           align={"center"}

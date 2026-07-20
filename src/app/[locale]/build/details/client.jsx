@@ -28,7 +28,6 @@ import { Photos } from "@/components/build/photos";
 import { Expire } from "@/components/build/expire";
 import { Venue } from "@/components/build/venue";
 import { Rsvp } from "@/components/build/rsvp";
-// import { error } from "@/components/ui/alerts";
 import { InvitationStorageService } from "@/services/aws/index";
 import { isEmptyArray, isFile } from "@/utils/checkers";
 
@@ -50,10 +49,8 @@ export const DetailsClient = () => {
   const hideOverlay = () => {
     if (!containerRef.current) return;
 
-    // setTimeout(() => {
     containerRef.current.style.filter = "";
     containerRef.current.style.pointerEvents = "";
-    // }, 1000);
   };
 
   const { isAuthenticated, isLoading } = useAuth0();
@@ -63,21 +60,6 @@ export const DetailsClient = () => {
     id: parseAsString,
   });
 
-  // clear drafts
-  // const { mutate: mutateDelete } = useMutateAuthTanstack(
-  //   "invitations/drafts",
-  //   "delete",
-  //   {
-  //     onSuccess: () => {
-  //       success("Drafts deleted.");
-  //     },
-  //   },
-  // );
-
-  // useEffect(() => {
-  //   mutateDelete();
-  // }, []);
-  //
 
   // const { data } = useGetTanstack(`templates/${template}`, !id);
   const { data } = useGetTanstack(`templates/${template}`, template);
@@ -113,13 +95,11 @@ export const DetailsClient = () => {
       queryClient.invalidateQueries({ queryKey: [`invitations/${status}`] });
 
       if (res.status === "ACTIVE") {
-        // queryClient.invalidateQueries({ queryKey: [`invitations/url/${id}`] });
         queryClient.invalidateQueries({
           queryKey: [`invitations/url/${res.urlExtension}`],
         });
       }
     },
-    // onError: (err) => error(err?.response?.data?.error || "Draft error!"),
     onError: (err) => console.log(err?.response?.data?.error || "Draft error!"),
   });
 
@@ -295,15 +275,7 @@ export const DetailsClient = () => {
 
   // V2 - without imgs logic inside & allowed do call without title
   const handleSmartBlur = async () => {
-    // if (invitationData?.status === "ACTIVE") return;
-
     const current = formRef.current;
-
-    // const isTitleFilled = current.languages?.some((lang) =>
-    //   current.title?.[lang]?.trim(),
-    // );
-
-    // if (!isTitleFilled) return;
 
     const sanitized = {
       ...current,
@@ -313,12 +285,6 @@ export const DetailsClient = () => {
         time: item.time,
         venueLocation: item.venueLocation,
       })),
-      // timeline: current.timeline?.map((item) => ({
-      //   venueKey: item.venueKey,
-      //   venueName: item.venueName,
-      //   time: item.time,
-      //   venueLocation: item.venueLocation,
-      // })),
     };
 
     const clean = JSON.parse(JSON.stringify(sanitized));
@@ -331,7 +297,7 @@ export const DetailsClient = () => {
     }
   };
 
-  // * Photos imgs upload and delete logic
+  // Photos imgs upload and delete logic
   const uploadMainImages = async (current) => {
     const imgUrls = current.mainImages;
 
@@ -369,10 +335,7 @@ export const DetailsClient = () => {
     setForm(updated);
     formRef.current = updated;
 
-    // containerRef.current.classList.add("uploading");
     showOverlay();
-    // containerRef.current.style.filter = "blur(3px)";
-    // containerRef.current.style.pointerEvents = "none";
 
     try {
       const uploaded = await uploadMainImages(updated);
@@ -380,10 +343,7 @@ export const DetailsClient = () => {
       formRef.current = uploaded;
       setForm(uploaded);
     } finally {
-      // containerRef.current.classList.remove("uploading");
       hideOverlay();
-      // containerRef.current.style.filter = "";
-      // containerRef.current.style.pointerEvents = "";
     }
   };
 
@@ -402,7 +362,7 @@ export const DetailsClient = () => {
   };
   //
 
-  // * Story imgs upload and delete logic
+  // Story imgs upload and delete logic
   const uploadStoryImages = async (current) => {
     const photoUrls = current.ourStory?.photoUrls;
 
@@ -451,10 +411,7 @@ export const DetailsClient = () => {
     setForm(updated);
     formRef.current = updated;
 
-    // containerRef.current.classList.add("uploading");
     showOverlay();
-    // containerRef.current.style.filter = "blur(3px)";
-    // containerRef.current.style.pointerEvents = "none";
 
     try {
       const uploaded = await uploadStoryImages(updated);
@@ -462,10 +419,7 @@ export const DetailsClient = () => {
       formRef.current = uploaded;
       setForm(uploaded);
     } finally {
-      // containerRef.current.classList.remove("uploading");
       hideOverlay();
-      // containerRef.current.style.filter = "";
-      // containerRef.current.style.pointerEvents = "";
     }
   };
 
@@ -511,15 +465,9 @@ export const DetailsClient = () => {
       position="relative"
       pt={{ base: "32px", md: "48px" }}
       pb="22px"
-      // pointerEvents={"none"}
-      // filter={"blur(3px)"}
       transition="filter .2s"
     >
-      {/* {isUploading && (
-        <Box position="absolute" inset={0} zIndex={10} bg="transparent" />
-      )} */}
-
-      {/* VStack */}
+       {/* VStack */}
       <Stack
         gap={{ base: "16px", md: "24px" }}
         w={{ base: "100%", lg: "748px" }}
@@ -579,15 +527,7 @@ export const DetailsClient = () => {
 
           <Animate>
             <Photos
-              // name="mainImages"
-              // onChange={(name, files) =>
-              //   setForm((prev) => ({
-              //     ...prev,
-              //     [name]: Array.from(files ?? []),
-              //   }))
-              // }
               value={form.mainImages}
-              // onChange={handleChange}
               onFileSelect={handlePhotoFiles}
               onDelete={handleDeletePhoto}
               onLoadingStart={showOverlay}
@@ -639,8 +579,7 @@ export const DetailsClient = () => {
               name="dressCode"
               value={form.dressCode}
               onChange={handleLngChange}
-              setForm={setForm} //
-              // hide={handleHide}
+              setForm={setForm}
               hide={(key, hidden) =>
                 handleHide(
                   key,
@@ -674,13 +613,10 @@ export const DetailsClient = () => {
               name="ourStory"
               value={form.ourStory}
               onChange={handleLngChange}
-              // photoUrlsChange={handleChange}
-              // onDelete={handleDeletePhoto}
               onFileSelect={handleStoryFiles}
               onDelete={handleDeleteStory}
               onLoadingStart={showOverlay}
               onLoadingEnd={hideOverlay}
-              // hide={handleHide}
               hide={(key, hidden) =>
                 handleHide(
                   key,
@@ -722,153 +658,3 @@ export const DetailsClient = () => {
     </Box>
   );
 };
-
-// old version
-// const handleHide = (key, hidden) => {
-//   setForm((prev) => {
-//     const updated = { ...prev };
-//     if (hidden) {
-//       hiddenFieldsRef.current[key] = updated[key];
-//       delete updated[key];
-//     } else {
-//       updated[key] = hiddenFieldsRef.current[key] || "";
-//       delete hiddenFieldsRef.current[key];
-//     }
-//     return updated;
-//   });
-// };
-
-// V1 - these two affect the draft call after the invitation/id call.
-// useEffect(() => {
-//   if (!invitationData) return;
-//   setForm(pickInvitationFields(invitationData));
-
-//   if (invitationData?.urlExtension) {
-//     setUrlExtension(invitationData.urlExtension);
-//   }
-// }, [invitationData]);
-
-// useEffect(() => {
-//   if (!form.eventDate) return;
-//   handleSmartBlur();
-// }, [form.eventDate]);
-// blur with nested img upload logic (not needed)
-// const handleSmartBlur = async () => {
-//   if (invitationData?.status === "ACTIVE") return;
-
-//   const current = formRef.current;
-
-//   const isTitleFilled = current.languages?.some((lang) =>
-//     current.title?.[lang]?.trim(),
-//   );
-
-//   if (!isTitleFilled) return;
-
-//   //
-//   const processedForm = await processMainImages(current);
-//   //
-
-//   //
-//   // let processedForm = { ...current };
-
-//   // if (Array.isArray(current.mainImages)) {
-//   //   const isFileArray =
-//   //     current.mainImages.length > 0 && current.mainImages[0] instanceof File;
-
-//   //   if (isFileArray && current.id) {
-//   //     const urls = await uploadImages(current.mainImages, current.id);
-//   //     console.log(urls);
-
-//   //     processedForm.mainImages = urls;
-
-//   //     // also update UI state so next blur won't re-upload
-//   //     setForm((prev) => ({
-//   //       ...prev,
-//   //       mainImages: urls,
-//   //     }));
-//   //   }
-//   // }
-//   //
-
-//   const sanitized = {
-//     // ...current,
-//     ...processedForm,
-//     // timeline: current.timeline?.map((item) => ({
-//     timeline: processedForm.timeline?.map((item) => ({
-//       venueKey: item.venueKey,
-//       venueName: item.venueName,
-//       time: item.time,
-//       venueLocation: item.venueLocation,
-//     })),
-//   };
-
-//   const currentDataString = JSON.stringify(sanitized);
-
-//   if (lastSavedFormRef.current !== currentDataString) {
-//     mutate(buildPayload(sanitized));
-//     lastSavedFormRef.current = currentDataString;
-//   }
-// };
-
-// V2 --works, but not needed (it was added for draft call fix)
-// const handleSmartBlur = () => {
-//   setTimeout(async () => {
-//     if (invitationData?.status === "ACTIVE") return;
-
-//     const current = formRef.current;
-
-//     const isTitleFilled = current.languages?.some((lang) =>
-//       current.title?.[lang]?.trim(),
-//     );
-
-//     if (!isTitleFilled) return;
-
-//     const processedForm = await processMainImages(current);
-
-//     const sanitized = {
-//       ...processedForm,
-//       timeline: processedForm.timeline?.map((item) => ({
-//         venueKey: item.venueKey,
-//         venueName: item.venueName,
-//         time: item.time,
-//         venueLocation: item.venueLocation,
-//       })),
-//     };
-
-//     const currentDataString = JSON.stringify(sanitized);
-
-//     if (lastSavedFormRef.current !== currentDataString) {
-//       mutate(buildPayload(sanitized));
-//       lastSavedFormRef.current = currentDataString;
-//     }
-//   }, 0);
-// };
-
-// const handleSmartBlur = () => {
-//   if (invitationData?.status === "ACTIVE") return;
-
-//   const current = formRef.current;
-
-//   const isTitleFilled = current.languages?.some((lang) =>
-//     current.title?.[lang]?.trim(),
-//   );
-
-//   if (!isTitleFilled) return;
-
-//   const currentDataString = JSON.stringify(current);
-
-//   if (lastSavedFormRef.current !== currentDataString) {
-//     // const payload = {
-//     //   ...current,
-//     //   timeline: current.timeline?.map(({ venueKey, ...rest }) => rest),
-//     // };
-//     // mutate(buildPayload(payload));
-//     mutate(buildPayload(current));
-//     lastSavedFormRef.current = currentDataString;
-//   }
-// };
-
-// initial={{ opacity: 0, y: 40 }}
-// whileInView={{ opacity: 1, y: 0 }}
-// transition={{ duration: 0.5 }}
-// viewport={{ once: true, margin: "0px 0px -100px 0px" }}

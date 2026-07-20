@@ -1,13 +1,3 @@
-// export const getStorageCheck = () =>
-//     !sessionStorage.getItem("") &&
-//     localStorage.getItem("");
-
-// export const getAuthCheck = ({ isLoggedIn, token }) =>
-//     isLoggedIn && token && !getStorageCheck();
-
-// export const getViewCheck = ({ sidebar, userData }) =>
-//     isEmptyArray(sidebar) && isEmptyObject(userData);
-
 export function overflowCheck(props) {
   props
     ? (document.body.style.overflow = "hidden")
@@ -51,10 +41,6 @@ export const isEmptyState = (obj) =>
 
 export const isNotEmptyState = (obj) =>
   Object.values(obj).some((value) => value !== "" && value !== null);
-
-// export function isNotEmptyObject(obj) {
-//     return Object?.keys(obj)?.length > 0 || obj?.constructor !== Object;
-// }
 
 export const isFileSizeValid = (file, maxFileSizeMB) => {
   const maxFileSizeBytes = maxFileSizeMB * 1024 * 1024;

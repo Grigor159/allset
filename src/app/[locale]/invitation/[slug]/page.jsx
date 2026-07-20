@@ -27,25 +27,3 @@ export default async function Invitation({ params }) {
 
   return <InvitationClient data={data} />;
 }
-
-// import { getInvitationData, pickLang } from "@/lib/invitation";
-// export async function generateMetadata({ params }) {
-//   const { slug } = await params;
-
-//   const t = await getTranslations();
-//   const locale = await getLocale();
-//   const data = await getInvitationData(slug);
-
-//   return meta({
-//     title: pickLang(data?.title, locale) || "Henry & Mariam",
-//     description: pickLang(data?.description, locale) || t("classic_title"),
-//     locale,
-//   });
-// }
-
-// export default async function Invitation({ params }) {
-//   const { slug } = await params;
-//   const data = await getInvitationData(slug);
-
-//   return <InvitationClient data={data} />;
-// }

@@ -20,7 +20,6 @@ export const Calendar = ({ value }) => {
     <Box bg="white" padding="55px">
       <DayPicker
         mode="single"
-        // navLayout="none"
         selected={selectedDate}
         month={selectedDate}
         locale={DATE_LOCALES[language]}

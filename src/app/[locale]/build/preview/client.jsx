@@ -25,7 +25,6 @@ export const PreviewClient = () => {
   return (
     <Animate>
       <VStack
-        // pt={{ base: "32px", md: "48px" }}
         w="100%"
         bg="white"
         borderRadius={"8px"}

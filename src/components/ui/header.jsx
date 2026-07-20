@@ -50,8 +50,6 @@ export const Header = () => {
       right="0"
       zIndex="100"
       bg={bg}
-      // bg="#f6f6f7"
-      // boxShadow="sm"
       py="16px"
       px="0"
       transition="background 0.3s ease"

@@ -110,11 +110,3 @@ export const Language = ({ bg, noMenu }) => {
     </Menu.Root>
   );
 };
-
-// const currentPath = window.location.pathname;
-
-// const pathParts = currentPath.split("/");
-// pathParts[1] = code;
-
-// const newPath = pathParts.join("/");
-// navigate(newPath, { replace: true });

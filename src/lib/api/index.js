@@ -18,12 +18,6 @@ instance.interceptors.response.use(
         if ((status === 401 || status === 403 || status === 404) && exitMessage) {
             error(exitMessage)
             queryClient.clear();
-            // sessionStorage.removeItem("");
-            // localStorage.removeItem("");
-
-            // setTimeout(() => {
-            //     window.location.href = "/login";
-            // }, 1000)
         }
 
         return Promise.reject(err);

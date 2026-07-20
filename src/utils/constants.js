@@ -12,26 +12,6 @@ export const languages = [
   { code: "en", flag: enFlag },
   { code: "ru", flag: ruFlag },
 ];
-// export const languages = [
-//   {
-//     code: "hy",
-//     flag: "am",
-//   },
-//   {
-//     code: "en",
-//     flag: "gb",
-//   },
-//   {
-//     code: "ru",
-//     flag: "ru",
-//   },
-// ]
-
-// export const localesMap = {
-//   hy: "am",
-//   en: "gb",
-//   ru: "ru",
-// }
 
 export const days = (difference) => Math.floor(difference / (1000 * 60 * 60 * 24));
 export const hours = (difference) => Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -58,7 +38,6 @@ export const DATE_LOCALES = {
 };
 
 export const mainPages = [
-  // "digital_invitations", "about-us"
   {
     name: "digital_invitations",
     path: "build/templates"
@@ -271,23 +250,7 @@ export const social = [
   {
     href: "https://www.instagram.com/allset_event/",
     icon: insta
-  },
-  // {
-  //   href: "https://",
-  //   icon: twitter
-  // },
-  // {
-  //   href: "https://",
-  //   icon: youtube
-  // },
-  // {
-  //   href: "https://",
-  //   icon: tiktok
-  // },
-  // {
-  //   href: "https://",
-  //   icon: pinterest
-  // },
+  }
 ]
 
 import { create, manage, check } from '../assets/svgs';
@@ -394,23 +357,6 @@ export const guestsTableHeader = [
 ];
 
 export const guestEditOptions = ["GROOM", "BRIDE"];
-
-
-// export const translitMap = {
-//   // Armenian letters
-//   ա: "a", բ: "b", գ: "g", դ: "d", ե: "e", զ: "z", է: "e", ը: "y",
-//   թ: "t", ժ: "zh", ի: "i", լ: "l", խ: "kh", ծ: "ts", կ: "k", հ: "h",
-//   ձ: "dz", ղ: "gh", ճ: "ch", մ: "m", յ: "y", ն: "n", շ: "sh", ո: "vo",
-//   չ: "ch", պ: "p", ջ: "j", ռ: "r", ս: "s", վ: "v", տ: "t", ր: "r",
-//   ց: "ts", ւ: "u", փ: "p", ք: "q", օ: "o", ֆ: "f",
-
-//   // Russian letters
-//   а: "a", б: "b", в: "v", г: "g", д: "d", е: "e", ё: "yo", ж: "zh",
-//   з: "z", и: "i", й: "y", к: "k", л: "l", м: "m", н: "n", о: "o",
-//   п: "p", р: "r", с: "s", т: "t", у: "u", ф: "f", х: "kh", ц: "ts",
-//   ч: "ch", ш: "sh", щ: "shch", ъ: "", ы: "y", ь: "", э: "e", ю: "yu", я: "ya",
-// };
-
 
 // view
 export const FALLBACK = ["#0D3B3A", "#7FA39B", "#C7D6CE", "#F1F4EF"];

@@ -35,25 +35,11 @@ export const TitleDemo = ({ urlExtension }) => {
         <Field.Label gap="16px">
           <Label text="invitation_url" />
         </Field.Label>
-
-        {/* <Stack w="100%" gap="12px" pl="40px"> */}
-        {/* <Input
-            type="text"
-            name="name"
-            value={BASE_URL + "es_du"}
-            variant="subtle"
-            h="62px"
-            border={"1px solid"}
-            borderColor={"#D1D5DB"}
-            borderRadius="8px"
-            disabled={true}
-          /> */}
         <Text gap="8px" fontSize={"12px"} color={"#6B7280"}>
           {t("not_active")}
         </Text>
 
         <Tooltip
-          // ids={{ trigger: id }}
           positioning={{ placement: "top" }}
           content={isCopied ? t("copied") : t("copy")}
         >
@@ -82,8 +68,6 @@ export const TitleDemo = ({ urlExtension }) => {
             {isCopied && <Icon>{copied.icon}</Icon>}
           </Flex>
         </Tooltip>
-
-        {/* </Stack> */}
       </Field.Root>
     </Stack>
   );

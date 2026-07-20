@@ -52,8 +52,6 @@ export const ConfirmClient = () => {
           EDP_DESCRIPTION: edpDescription,
           EDP_AMOUNT: edpAmount,
           EDP_BILL_NO: edpBillNo,
-          // EDP_SUCCESS_URL: successUrl,
-          // EDP_FAIL_URL: failUrl,
         };
 
         Object.entries(fields).forEach(([name, value]) => {

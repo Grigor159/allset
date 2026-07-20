@@ -108,7 +108,6 @@ export const Dresscode = ({
                     }}
                     tabIndex={0}
                     w={{ base: "100%", md: "222px" }}
-                    // onClick={() => setSelected(item.id)}
                     onClick={() => handlePaletteSelect(item)}
                   >
                     <HStack gap={"8px"} pb="12px">
@@ -155,7 +154,6 @@ export const Dresscode = ({
               value={value?.description}
               onChange={handleInputChange}
               placeholder={t("dresscode_placeholder")}
-              // disabled={!checked}
             />
           </>
         )}
@@ -163,64 +161,3 @@ export const Dresscode = ({
     </Stack>
   );
 };
-
-/* <Flex w="100%" gap="24px" justify={"space-between"}>
-  <Selector
-    name="style"
-    value={value?.style}
-    onChange={handleNestedChange}
-    collection={createListCollection({ items: styles })}
-    disabled={!checked}
-  />
-  <Selector
-    name="color_palette_id"
-    value={value?.colorPaletteId}
-    onChange={handleNestedChange}
-    collection={createListCollection({ items: schemes })}
-    disabled={!checked}
-  />
-</Flex> */
-
-// const handleNestedChange = (e) => {
-//   const { name, value: inputValue } = e.target;
-//   onChange({
-//     target: {
-//       name: "dressCode",
-//       value: {
-//         ...value,
-//         [name]: inputValue,
-//       },
-//     },
-//   });
-// };
-
-// const handleNestedChange = (e, lang) => {
-//   if (e?.target) {
-//     const { name, value: inputValue } = e.target;
-
-//     if (name === "description") {
-//       onChange({
-//         target: {
-//           name: "dressCode",
-//           value: {
-//             ...value,
-//             description: {
-//               ...value?.description,
-//               [lang]: inputValue,
-//             },
-//           },
-//         },
-//       });
-//     } else {
-//       onChange({
-//         target: {
-//           name: "dressCode",
-//           value: {
-//             ...value,
-//             [name]: inputValue,
-//           },
-//         },
-//       });
-//     }
-//   }
-// };

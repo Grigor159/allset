@@ -3,8 +3,6 @@
 import {
     PutObjectCommand,
     DeleteObjectCommand,
-    // DeleteObjectsCommand,
-    // ListObjectsV2Command,
 } from "@aws-sdk/client-s3";
 import { s3Client, region, bucket } from "@/lib/aws";
 
@@ -21,11 +19,16 @@ export const InvitationStorageService = {
                 ContentType: file.type,
             });
 
-            try {
-                const result = await s3Client.send(command);
-            } catch (err) {
-                throw err;
-            }
+            // V1 - working but with unused variables and handler
+            // try {
+            //     const result = await s3Client.send(command);
+            // } catch (err) {
+            //     throw err;
+            // }
+
+            // V2
+            await s3Client.send(command);
+
             return {
                 key,
                 url: `https://${bucket}.s3.${region}.amazonaws.com/${key}`,
@@ -37,11 +40,6 @@ export const InvitationStorageService = {
     },
 
     async uploadMany(files, invitationId) {
-        console.log("[AWS] uploadMany", {
-            invitationId,
-            count: files?.length,
-        });
-
         if (!files?.length || !invitationId) return [];
 
         const uploaded = await Promise.all(

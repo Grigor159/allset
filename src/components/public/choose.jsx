@@ -54,7 +54,6 @@ export const Choose = () => {
 
             {isLaptop && (
               <Stack
-                // w={{ base: "100%", md: "fit-content" }}
                 mx={"auto"}
                 maxW={"264px"}
                 maxH={"440px"}
@@ -114,7 +113,6 @@ export const Choose = () => {
 
           {!isLaptop && (
             <Stack
-              // w={{ base: "100%", md: "fit-content" }}
               mx={"auto"}
               maxW={"710px"}
               maxH={"688px"}

@@ -1,7 +1,6 @@
 "use client"
 
 import { createSystem, defaultConfig, ChakraProvider } from "@chakra-ui/react";
-// import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
 import { Toaster } from "../components/ui/toaster";
 
 const system = createSystem(defaultConfig, {
@@ -18,7 +17,6 @@ const system = createSystem(defaultConfig, {
 export function ChakraUIProvider({ children }) {
   return (
     <ChakraProvider value={system}>
-    {/* <ChakraProvider value={defaultSystem}> */}
       {children}
       <Toaster />
     </ChakraProvider>

@@ -20,9 +20,7 @@ export const scrollToTopWithDuration = (duration) => {
 }
 
 import { languages } from "./constants";
-// export const getFlagCode = (lang) => {
-//   return localesMap[lang];
-// };
+
 export const getFlagCode = (lang) => {
   const found = languages.find((l) => l.code === lang);
   return found?.flag || null;
@@ -69,12 +67,6 @@ export const getNextRoute = (pathname) => {
   };
 };
 
-// export const hasMultipleWords = (text) => {
-//   if (!text || typeof text !== "string") return false;
-//   const words = text.trim().split(/\s+/);
-//   return words.length > 1;
-// };
-
 import { localesRegex } from "./regex";
 export const navigateWithLocal = (pathname) =>
   pathname.replace(localesRegex, "")
@@ -101,7 +93,6 @@ export function getTimeUntil(fullDate) {
   }
 
   const now = new Date();
-  // const target = new Date(fullDate); // "YYYY-mm-dd"
   const [day, month, year] = fullDate.split("-").map(Number);
 
   const target = new Date(year, month - 1, day);
@@ -220,9 +211,7 @@ export const filterInvitations = (data = [], name = "") => {
   });
 };
 
-// view
 export const pickLang = (obj, lang = "en") =>
   obj?.[lang] || obj?.en || obj?.hy || obj?.ru || "";
 
-//
 export const remainingImgsCount = (count, value) => Math.max(0, count - (value?.length || 0));

@@ -18,7 +18,6 @@ import {
 import { Tooltip } from "../ui/tooltip";
 import { add } from "@/assets/svgs";
 import { getFlagCode } from "@/utils/helpers";
-// import { error } from "../ui/alerts";
 import { slugify } from "transliteration";
 
 export const AddAgenda = ({ setData, languages }) => {

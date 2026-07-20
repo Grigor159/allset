@@ -53,7 +53,6 @@ export default async function RootLayout({ children }) {
         <meta property="fb:app_id" content="118506514674722" />
       </head>
       <body
-        // className={fonts.variable}
         className={`${montserrat.variable} ${sosbanff.variable} ${shk.variable} ${allegrou.variable}`}
         data-locale={locale}
         style={{ backgroundColor: "#f9fafb" }}

@@ -61,7 +61,6 @@ export const Info = ({ isLoading, data }) => {
         <Input
           value={val("name")}
           onChange={handleChange("name")}
-          //
           variant="subtle"
           borderRadius={"4px"}
           bg="#F9FAFB"
@@ -77,7 +76,6 @@ export const Info = ({ isLoading, data }) => {
         <Input
           value={val("phoneNumber")}
           onChange={handleChange("phoneNumber")}
-          //
           variant="subtle"
           borderRadius={"4px"}
           bg="#F9FAFB"
@@ -93,7 +91,6 @@ export const Info = ({ isLoading, data }) => {
         <Input
           defaultValue={data?.email}
           disabled
-          //
           variant="subtle"
           borderRadius={"4px"}
           bg="#F9FAFB"
@@ -108,7 +105,6 @@ export const Info = ({ isLoading, data }) => {
         <Input
           value={val("dateOfBirth")}
           onChange={handleChange("dateOfBirth")}
-          //
           variant="subtle"
           borderRadius={"4px"}
           bg="#F9FAFB"

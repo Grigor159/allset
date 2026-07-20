@@ -30,7 +30,6 @@ export const TextArea = ({
         onChange={(e) => onChange(e, lng)}
         placeholder={placeholder}
         required
-        // disabled={!lng}
         disabled={disabled}
         variant="subtle"
         borderRadius={"4px"}

@@ -19,7 +19,5 @@ export const Description = ({ text, width, textAlign }) => {
         __html: t(text).replace(/\n/g, "<br />"),
       }}
     />
-    //   {/* {t(text)}
-    // </Text> */}
   );
 };

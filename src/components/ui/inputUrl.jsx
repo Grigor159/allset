@@ -1,4 +1,3 @@
-// work in venue but agenda (timeline) not work
 "use client";
 
 import React from "react";
@@ -19,7 +18,6 @@ export const InputUrl = ({
         name={`${name}`}
         value={value ?? ""}
         onChange={onChange}
-        // onChange={handleChange}
         placeholder={placeholder}
         disabled={disabled}
         variant="subtle"

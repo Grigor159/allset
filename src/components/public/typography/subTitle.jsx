@@ -10,7 +10,6 @@ export const SubTitle = ({ text, color, textAlign }) => {
   return (
     <Heading
       as="h4"
-      // fontSize={"23px"}
       fontSize={{ base: "16px", md: "23px" }}
       lineHeight={{base:"26px",md:"44px"}}
       fontStyle={"italic"}

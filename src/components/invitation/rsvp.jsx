@@ -58,7 +58,6 @@ export const Rsvp = ({
               h="52px"
               bg="white"
               variant="outline"
-              //
               name="mainGuest"
               value={form.mainGuest}
               onChange={handleChange}
@@ -72,17 +71,6 @@ export const Rsvp = ({
               variant="outline"
               value={guests}
               color={color}
-              //
-              // onValueChange={({ value }) => {
-              //   const count = Number(value[0]) || 0;
-              //   setForm((prev) => ({
-              //     ...prev,
-              //     secondaryGuests: Array.from(
-              //       { length: count },
-              //       (_, i) => prev.secondaryGuests[i] ?? "",
-              //     ),
-              //   }));
-              // }}
               onValueChange={handleGuestCountChange}
             >
               <Select.HiddenSelect />
@@ -156,7 +144,6 @@ export const Rsvp = ({
               }
             />
             <Flex
-              // minW={isMobile ? "100%" : "442px"}
               w="100%"
               gap="12px"
               justify={"space-between"}

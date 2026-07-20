@@ -16,7 +16,6 @@ export const useGetTanstack = (name, enabled = true) => {
         const token = await getAccessTokenSilently();
         headers.Authorization = `Bearer ${token}`;
       }
-      //   const { data } = await apiClient.get(`${name}`);
       const { data } = await apiClient.get(name, {
         headers,
       });
@@ -40,10 +39,6 @@ export const useGetAuthTanstack = (
     queryFn: async () => {
       if (!isAuthenticated) throw new Error("User not authenticated");
 
-      // const token = await getAccessTokenSilently({
-      //     audience: process.env.NEXT_PUBLIC_API_AUDIENCE,
-      //     // scope: "profile email openid"
-      // });
       const token = await getAccessTokenSilently();
 
       const { data } = await apiClient.get(name, {
@@ -57,16 +52,6 @@ export const useGetAuthTanstack = (
     staleTime: staleTime,
   });
 };
-
-// export const usePostTanstack = (name, options) => {
-//     return useMutation({
-//         mutationFn: async (body) => {
-//             const { data } = await apiClient.post(`${name}`, body);
-//             return data;
-//         },
-//         ...options,
-//     });
-// };
 
 // TODO get token by getAccessTokenSilently,store in cookies and remove from here
 export const useMutateAuthTanstack = (name, method, options) => {

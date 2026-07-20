@@ -14,7 +14,6 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
-// import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { GrFormPreviousLink, GrFormNextLink } from "react-icons/gr";
 import { star, starEmpty } from "@/assets/svgs";
@@ -75,11 +74,6 @@ export const FeedbackSlide = ({ feedbacks }) => {
         spaceBetween={16}
         speed={500}
         loop={false}
-        // autoplay={{
-        //   delay: 5000,
-        //   disableOnInteraction: false,
-        // }}
-        // modules={[Autoplay]}
       >
         {feedbacks?.map(({ name, image, count, rating, text }, index) => (
           <SwiperSlide key={index}>

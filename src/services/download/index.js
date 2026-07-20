@@ -103,11 +103,9 @@ export const downloadGuestList = (data, t) => {
     const statusStyle =
       item.status === "CONFIRMED"
         ? {
-            // fill: { fgColor: { rgb: "26a036" } },
             font: { color: { rgb: "2E8D3B" } },
           }
         : {
-            // fill: { fgColor: { rgb: "ff552e" } },
             font: { color: { rgb: "CF2B2B" } },
           };
 
@@ -150,94 +148,3 @@ export const downloadGuestList = (data, t) => {
   XLSX.utils.book_append_sheet(workbook, worksheet, "Guests");
   XLSX.writeFile(workbook, "AllSet_Guest_List.xlsx");
 };
-
-// import { format } from "date-fns";
-// import * as XLSX from "xlsx";
-
-// export const downloadGuestList = (data, t) => {
-//   if (!data || !data.length) return;
-
-//   const headers = [
-//     t("guest_name"),
-//     t("accompanying_name"),
-//     t("accompanying_names"),
-//     t("note"),
-//     t("group_count"),
-//     t("guest_group"),
-//     t("table_number"),
-//     t("status"),
-//   ];
-
-//   const rows = data.map((item) => [
-//     item.mainGuest,
-//     item.secondaryGuests?.length || 0,
-//     item.secondaryGuests?.join(", ") || "-",
-//     item.notes || "-",
-//     (item.secondaryGuests?.length || 0) + 1,
-//     item.guestSide ? t(item.guestSide.toLowerCase()) : "-",
-//     item.tableNumber || "-",
-//     item.status === "CONFIRMED"
-//       ? t(item.status.toLowerCase()) +
-//         format(new Date(item.createdAt), " (dd.MM.yy)")
-//       : t(item.status.toLowerCase()),
-//   ]);
-
-//   // Combine headers + rows
-//   const worksheetData = [headers, ...rows];
-
-//   // Create worksheet
-//   const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
-
-//   // Create workbook
-//   const workbook = XLSX.utils.book_new();
-//   XLSX.utils.book_append_sheet(workbook, worksheet, "Guests");
-
-//   // Download file
-//   XLSX.writeFile(workbook, "AllSet_Guest_List.xlsx");
-// };
-
-// export const downloadGuestList = (data, t) => {
-//   if (!data || !data.length) return;
-
-//   const headers = [
-//     t("guest_name"),
-//     t("accompanying_name"),
-//     t("accompanying_names"),
-//     t("status"),
-//     t("note"),
-//     t("group_count"),
-//     t("guest_group"),
-//     t("table_number"),
-//   ];
-
-//   const rows = data.map((item) => [
-//     item.mainGuest,
-//     item.secondaryGuests?.length || 0,
-//     item.secondaryGuests?.join(", ") || "-",
-//     item.status === "CONFIRMED"
-//       ? t(item.status.toLowerCase()) +
-//         format(new Date(item.createdAt), " (dd.MM.yy)")
-//       : t(item.status.toLowerCase()),
-//     item.notes || "-",
-//     (item.secondaryGuests?.length || 0) + 1,
-//     item.guestSide ? t(item.guestSide.toLowerCase()) : "-",
-//     item.tableNumber || "-",
-//   ]);
-
-//   const csvContent = [headers, ...rows]
-//     .map((row) => row.map((v) => `"${v}"`).join(","))
-//     .join("\n");
-
-//   const blob = new Blob(["\uFEFF" + csvContent], {
-//     type: "text/csv;charset=utf-8;",
-//   });
-
-//   const url = URL.createObjectURL(blob);
-//   const link = document.createElement("a");
-//   link.href = url;
-//   link.setAttribute("download", "guest-list.csv");
-//   document.body.appendChild(link);
-//   link.click();
-//   document.body.removeChild(link);
-//   URL.revokeObjectURL(url);
-// };

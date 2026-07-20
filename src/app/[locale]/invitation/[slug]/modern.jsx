@@ -197,11 +197,9 @@ export default function Modern({
     <Box
       data-viewport={viewport}
       style={vars}
-      // w={`${width}px`}
       bg="#F3F3F3"
       color="#111"
       overflow="hidden"
-      // position={"relative"}
     >
       {locales && <Language locales={locales} />}
 
@@ -210,7 +208,6 @@ export default function Modern({
         position="relative"
         w="100%"
         h={r("565px", "650px")}
-        // bgImage={`linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.45) 100%), url(${heroImage})`}
         bgImage={`linear-gradient(180deg, rgba(0,0,0,0.05) 50%, #F3F3F3 99.43%), url(${heroImage})`}
         bgSize="cover"
         bgPos="center"
@@ -221,12 +218,10 @@ export default function Modern({
           left="0"
           right="0"
           gap={r("8px", "114px")}
-          // color="white"
           textAlign="center"
         >
           <Text
             fontFamily="var(--font-allegrou)"
-            // fontFamily={sosBanff.style.fontFamily}
             fontSize={r("54px", "123px")}
             lineHeight="40px"
             fontWeight="400"
@@ -303,21 +298,15 @@ export default function Modern({
             maskImage: `url(${sliderBg.src})`,
             maskRepeat: "no-repeat",
             maskPosition: "center",
-            // WebkitMaskSize: "contain",
-            // maskSize: "contain",
             WebkitMaskSize: "100% 100%",
             maskSize: "100% 100%",
-            // WebkitMaskSize: !isMobile && "100% 100%",
-            // maskSize: !isMobile && "100% 100%",
           }}
         />
         <VStack
-          // position={"relative"}
           align={"center"}
           justify={"center"}
           minH={r("1017px", "1931px")}
           h="100%"
-          // pt={r("100px", "0")}
           pt={{ base: "100px", sm: "0" }}
         >
           <Stack
@@ -359,9 +348,7 @@ export default function Modern({
               {t("dear_guest")}
             </Text>
             <Text
-              // maxW="942px"
               textAlign="center"
-              // fontSize={isMobile ? "15px" : "20px"}
               fontSize={r("14px", "20px")}
               lineHeight="28px"
               fontWeight="400"
@@ -380,7 +367,6 @@ export default function Modern({
               {t("classic_journey")}
             </Text>
             {/* ————— COUNTDOWN ————— */}
-            {/* <VStack gap={isMobile ? "24px" : "100px"}> */}
             {data?.countDown !== false && (
               <CountdownTimer
                 template={data?.templateId || template}
@@ -407,7 +393,6 @@ export default function Modern({
               slidesPerView={"auto"}
               centeredSlides={true}
               grabCursor={true}
-              // watchOverflow={false}
               speed={500}
               spaceBetween={0}
               pagination={true}
@@ -461,7 +446,6 @@ export default function Modern({
               color="var(--c-accent)"
               position="absolute"
               left="5%"
-              // top="50%"
               top={r("80%", "50%")}
               transform="translateY(-30%)"
               w={r("55px", "243px")}
@@ -536,7 +520,6 @@ export default function Modern({
               color="var(--c-accent)"
               position="absolute"
               right="5%"
-              // top="10%"
               top={r("40%", "10%")}
               transform="translateY(-10%)"
               w={r("55px", "243px")}
@@ -556,7 +539,6 @@ export default function Modern({
                 position="absolute"
                 left="10%"
                 bottom="10%"
-                // transform="translateY(-10%)"
               >
                 {rsvpRight.icon}
               </Icon>
@@ -580,7 +562,6 @@ export default function Modern({
               position="absolute"
               right="15%"
               top="20%"
-              // transform="translateY(-10%)"
             >
               {rsvpLeft.icon}
             </Icon>
@@ -599,7 +580,6 @@ export default function Modern({
               color="var(--c-accent)"
               position="absolute"
               left="15%"
-              // top="20%"
               top={r("-20%", "20%")}
             >
               {rsvpLeft.icon}
@@ -680,7 +660,6 @@ export default function Modern({
                 position="absolute"
                 right="10%"
                 bottom="10%"
-                // transform="translateY(-10%)"
               >
                 {rsvpRight.icon}
               </Icon>
@@ -758,7 +737,6 @@ export default function Modern({
 
         {/* ————— OUR LOVE STORY ————— */}
         {(!isLive || data?.ourStory) && (
-          // <Center >
           <Flex
             w="90%"
             justify={"space-between"}
@@ -779,8 +757,6 @@ export default function Modern({
                 {t("classic_story")}
               </Text>
               <Text
-                // maxW="877px"
-                // w="50%" //
                 textAlign="center"
                 fontSize={isMobile ? "15px" : "18px"}
                 lineHeight="28px"
@@ -793,7 +769,6 @@ export default function Modern({
             </VStack>
             {storyImgOne && (
               <Image
-                // order={{ base: 2, md: 1 }}
                 order={r(2, 1)}
                 src={storyImgOne}
                 alt="story 1"
@@ -836,15 +811,11 @@ export default function Modern({
               />
             )}
           </Flex>
-          // </Center>
         )}
 
         {/* ————— CONTACT ————— */}
         {(!isLive || data?.connectWithUs) && (
           <Stack
-            // bg="var(--c-primary)"
-            // color="white"
-            // py={isMobile ? "28px" : "40px"}
             pt="78px"
             pb="78px"
             align={"center"}

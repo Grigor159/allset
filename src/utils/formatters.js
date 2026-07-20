@@ -55,10 +55,6 @@ export const formatDDMMYYYY = (date) => {
   return `${day}.${month}.${year}`;
 }
 
-// V1
-// export const joinFilters = (filters) => filters?.join(",");
-
-// V2
 export const joinFilters = (filters) => {
   if (!filters) return "";
 
@@ -66,7 +62,7 @@ export const joinFilters = (filters) => {
     return filters.join(",");
   }
 
-  return filters; // already a string from query
+  return filters;
 };
 
 import { escapeRegex } from "./regex";
@@ -187,17 +183,7 @@ export const formatRusticTitle = (title, lang) => {
 
 import { format } from "date-fns";
 import { DATE_LOCALES } from "./constants";
-// export function formatDateByLang(dateString, locale) {
-//   const date = new Date(dateString);
-//   const loc = DATE_LOCALES[locale] || enUS;
 
-//   return {
-//     year: date.getFullYear(),
-//     day: date.getDate(),
-//     monthName: format(date, "LLLL", { locale: loc }).toUpperCase(),
-//     dayName: format(date, "EEEE", { locale: loc }).toUpperCase(),
-//   };
-// }
 export function formatDateByLang(dateValue, locale) {
   let date = dateValue ? new Date(dateValue) : new Date();
 
@@ -221,9 +207,9 @@ export function formatDateByLang(dateValue, locale) {
 
 export const formatTitle = (value) =>
   value
-    .replace(/[^\p{L},]/gu, "") // only letters and commas
-    .replace(/,+/g, ",")        // collapse commas
-    .replace(/^,|,$/g, "")      // trim commas
+    .replace(/[^\p{L},]/gu, "") 
+    .replace(/,+/g, ",")        
+    .replace(/^,|,$/g, "")      
     .split(",")
     .filter(Boolean)
     .map(capitalize)

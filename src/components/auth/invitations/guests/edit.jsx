@@ -117,7 +117,6 @@ export const Edit = ({ id, guestId }) => {
           variant="plain"
           outline="none"
           _hover={{ bg: "#80A0A133" }}
-          // loading={isLoading}
           disabled={isLoading}
           onClick={handleOpen}
         >

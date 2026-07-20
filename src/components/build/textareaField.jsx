@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Field, Flex, HStack, Stack, Text } from "@chakra-ui/react";
 import { Label } from "@/components/build/typography/label";
-// import { xls } from "../../assets/svgs";
 import { Switcher } from "@/components/build/switcher";
 import { TextArea } from "../ui/textarea";
 

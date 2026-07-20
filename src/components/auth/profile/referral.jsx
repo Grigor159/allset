@@ -39,7 +39,6 @@ export const Referral = ({ code }) => {
         fontSize={"14px"}
         color={"white"}
         w={{ base: "90%", md: "70%" }}
-        // lineClamp={{ base: 3, xl: 2 }}
       >
         {t("referral_text")}
       </Text>

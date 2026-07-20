@@ -18,7 +18,6 @@ export const Preview = ({ palette }) => {
       minW="0"
       w="100%"
       h="fit-content"
-      // minH="100%"
       bg="white"
       borderRadius={"8px"}
       p={{ base: "0", md: "24px" }}

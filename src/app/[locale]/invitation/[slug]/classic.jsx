@@ -188,11 +188,9 @@ export default function Classic({
     <Box
       data-viewport={viewport}
       style={vars}
-      // w={`${width}px`}
       bg="#F6F5F4"
       color="#111"
       overflow="hidden"
-      // position={"relative"}
     >
       {locales && <Language locales={locales} />}
 
@@ -217,7 +215,6 @@ export default function Classic({
         >
           <Text
             fontFamily="var(--font-sosbanff)"
-            // fontFamily={sosBanff.style.fontFamily}
             fontSize={r("54px", "103px")}
             lineHeight="40px"
             fontWeight="400"
@@ -551,7 +548,6 @@ export default function Classic({
           bgSize="cover"
           bgRepeat={"no-repeat"}
           bgPos="center"
-          // h="451px"
         >
           <VStack gap={r("16px", "40px")} textAlign="center">
             <Text
@@ -623,9 +619,6 @@ export default function Classic({
       {/* ————— CONTACT ————— */}
       {(!isLive || data?.connectWithUs) && (
         <Flex
-          // bg="var(--c-primary)"
-          // color="white"
-          // py={isMobile ? "28px" : "40px"}
           pb={r("56px", "100px")}
           align={"center"}
           justify={"center"}
@@ -678,24 +671,3 @@ export default function Classic({
     </Box>
   );
 }
-
-// const handleConfirm = (e) => {
-//   e.preventDefault();
-
-//   if (!form.mainGuest) return error(t("add_guest"));
-//   if (!form.guestSide) return error(t("invitor"));
-
-//   const hasEmptyGuest = form.secondaryGuests.some((guest) => !guest.trim());
-//   if (hasEmptyGuest) return error(t("accompanying_name"));
-
-//   mutate({ ...form, status: "CONFIRMED" });
-// };
-
-// const handleDecline = (e) => {
-//   e.preventDefault();
-
-//   if (!form.mainGuest) return error(t("add_guest"));
-//   if (!form.guestSide) return error(t("invitor"));
-
-//   mutate({ ...form, status: "DECLINED" });
-// };

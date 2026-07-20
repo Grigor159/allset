@@ -18,20 +18,6 @@ export const Contact = ({ name, value, onChange, hide, enabled, required }) => {
 
   const handleSwitchChange = (e) => {
     setChecked(e.checked);
-
-    // if (e.checked && (!value || typeof value !== "object")) {
-    //   onChange({
-    //     target: {
-    //       name,
-    //       value: {
-    //         name: "",
-    //         phone: "",
-    //         email: "",
-    //       },
-    //     },
-    //   });
-    // }
-
     hide(name, !e.checked);
   };
 
@@ -84,7 +70,6 @@ export const Contact = ({ name, value, onChange, hide, enabled, required }) => {
               onChange={handleNestedChange}
               placeholder={t("name")}
               required={true}
-              // disabled={!checked}
             />
             <InputSimple
               name="phone"
@@ -94,7 +79,6 @@ export const Contact = ({ name, value, onChange, hide, enabled, required }) => {
                 t("phone") + " " + (value?.email ? t("not_required") : "")
               }
               required={!value?.email}
-              // disabled={!checked}
             />
             <InputSimple
               name="email"
@@ -104,7 +88,6 @@ export const Contact = ({ name, value, onChange, hide, enabled, required }) => {
                 t("email") + " " + (value?.phone ? t("not_required") : "")
               }
               required={!value?.phone}
-              // disabled={!checked}
             />
           </Flex>
         )}

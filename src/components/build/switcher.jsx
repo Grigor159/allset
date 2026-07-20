@@ -25,7 +25,6 @@ export const Switcher = ({ checked, onChange }) => {
         checked={checked}
         onCheckedChange={handleChange}
         size="lg"
-        //   colorPalette="pink"
       >
         <Switch.HiddenInput />
         <Switch.Control

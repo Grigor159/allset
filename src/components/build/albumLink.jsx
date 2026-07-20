@@ -49,7 +49,6 @@ export const AlbumLink = ({
             value={value ?? ""}
             onChange={onChange}
             placeholder={t("photo_video_placeholder")}
-            // disabled={!checked}
           />
         )}
       </Field.Root>

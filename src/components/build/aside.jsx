@@ -29,13 +29,7 @@ export const Aside = ({ data, language }) => {
       bg={{ base: "transparent", md: "white" }}
       borderRadius={"8px"}
       p={{ base: "0", md: "24px" }}
-      // gap={{ base: "0", md: "32px" }}
-      // boxShadow="0px 4px 10px 0px #0041431A"
       overflowY={"scroll"}
-      // css={{
-      //   scrollbarWidth: "thin",
-      //   scrollbarColor: "#004143 transparent",
-      // }}
       scrollbarWidth="thin"
       scrollbarColor="#004143 transparent"
     >

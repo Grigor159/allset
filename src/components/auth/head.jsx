@@ -16,13 +16,6 @@ export const Head = ({ text }) => {
         fontWeight="500"
         color={"#4B5563"}
         w="100%"
-        // borderBottom={shouldShowBorder ? "1px solid" : "none"}
-        // borderImageSource={
-        //   shouldShowBorder
-        //     ? "linear-gradient(90deg, #E7E7E7 0%, #F9FAFB 72.18%)"
-        //     : "none"
-        // }
-        // borderImageSlice={shouldShowBorder ? 1 : 0}
       >
         {t(text)}
       </Heading>

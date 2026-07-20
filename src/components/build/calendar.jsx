@@ -1,5 +1,5 @@
 "use client";
-// TODO: 1916 issue
+
 import { useMemo, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Dialog, Icon, Input, InputGroup, CloseButton } from "@chakra-ui/react";
@@ -52,7 +52,6 @@ export const Calendar = ({ name, value, onChange, required, disabled }) => {
       open={open}
       onOpenChange={setOpen}
       placement="center"
-      // disabled={disabled}
     >
       <Dialog.Trigger asChild>
         <InputGroup
@@ -100,11 +99,8 @@ export const Calendar = ({ name, value, onChange, required, disabled }) => {
             <DayPicker
               locale={DATE_LOCALES[language]}
               mode="single"
-              // captionLayout="dropdown"
               navLayout="around"
               selected={selected}
-              // fromYear={currentYear}
-              // toYear={currentYear + 5}
               defaultMonth={selected || today}
               startMonth={new Date(currentYear, 0)}
               endMonth={new Date(currentYear + 1, 11)}
@@ -131,19 +127,3 @@ export const Calendar = ({ name, value, onChange, required, disabled }) => {
     </Dialog.Root>
   );
 };
-
-// V1 - with default 1916 issue
-// const selected = value
-//   ? (() => {
-//       const [year, month, day] = value.split("-").map(Number);
-//       return new Date(year, month - 1, day);
-//     })()
-//   : null;
-
-// V2 - default fixed,but new slected is broken
-// const selected = value
-//   ? (() => {
-//       const parts = value.split("-").map(Number);
-//       return new Date(parts[2], parts[1] - 1, parts[0]);
-//     })()
-//   : undefined;
