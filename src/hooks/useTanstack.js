@@ -8,7 +8,7 @@ export const useGetTanstack = (name, enabled = true) => {
   const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
 
   return useQuery({
-    queryKey: [name],
+    queryKey: [name, isAuthenticated],
     queryFn: async () => {
       let headers = {};
 

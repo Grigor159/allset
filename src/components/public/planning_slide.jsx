@@ -105,14 +105,7 @@ import React, { useRef } from "react";
 import { useGetTanstack } from "@/hooks/useTanstack";
 import { useQueryState } from "nuqs";
 import { useRouter } from "@/i18n/routing";
-import {
-  Flex,
-  For,
-  Image,
-  Skeleton,
-  Stack,
-  useMediaQuery,
-} from "@chakra-ui/react";
+import { Flex, For, Image, Skeleton, Stack } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow } from "swiper/modules";
 import { Pagination } from "swiper/modules";
@@ -126,7 +119,6 @@ export const PlanningSlide = () => {
 
   const { isLoading, data } = useGetTanstack("templates");
   const [_, setTemplate] = useQueryState("template");
-  const [isLaptop] = useMediaQuery("(max-width: 992px)");
 
   const handleSelect = (id) => {
     setTemplate(id);
