@@ -45,14 +45,6 @@ export function formatPrice(price, t) {
   return `${formatted} ${t("currency")}`;
 }
 
-export const generateAgendaKey = (text) => {
-  return text
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, "_")
-    .replace(/^_+|_+$/g, "");
-};
-
 export const formatDDMMYYYY = (date) => {
   const d = new Date(date);
 

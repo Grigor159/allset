@@ -18,8 +18,8 @@ import {
 import { Tooltip } from "../ui/tooltip";
 import { add } from "@/assets/svgs";
 import { getFlagCode } from "@/utils/helpers";
-import { generateAgendaKey } from "@/utils/formatters";
-import { error } from "../ui/alerts";
+// import { error } from "../ui/alerts";
+import { slugify } from "transliteration";
 
 export const AddAgenda = ({ setData, languages }) => {
   const t = useTranslations();
@@ -33,12 +33,13 @@ export const AddAgenda = ({ setData, languages }) => {
   };
 
   const handleAdd = () => {
-    const enValue = values.en?.trim();
-    // if (!enValue) {
-    //   return error("You need to add English");
-    // }
+    const source = values.en?.trim() || values.ru?.trim() || values.hy?.trim();
 
-    const key = generateAgendaKey(enValue);
+    const key = slugify(source, {
+      lowercase: true,
+      separator: "_",
+    });
+
     const newAgenda = {
       [key]: languages.reduce(
         (acc, lang) => ({
