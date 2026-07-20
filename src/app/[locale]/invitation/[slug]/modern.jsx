@@ -239,7 +239,7 @@ export default function Modern({
 
       {/* ————— DATE ————— */}
       <Flex
-        gap={r("8px","12px")}
+        gap={r("8px", "12px")}
         align="baseline"
         justify="center"
         py={r("50px", "100px")}
@@ -305,8 +305,10 @@ export default function Modern({
             maskPosition: "center",
             // WebkitMaskSize: "contain",
             // maskSize: "contain",
-            WebkitMaskSize: !isMobile && "100% 100%",
-            maskSize: !isMobile && "100% 100%",
+            WebkitMaskSize: "100% 100%",
+            maskSize: "100% 100%",
+            // WebkitMaskSize: !isMobile && "100% 100%",
+            // maskSize: !isMobile && "100% 100%",
           }}
         />
         <VStack
@@ -315,7 +317,8 @@ export default function Modern({
           justify={"center"}
           minH={r("1017px", "1931px")}
           h="100%"
-          pt={r("0", "100px")}
+          // pt={r("100px", "0")}
+          pt={{ base: "100px", sm: "0" }}
         >
           <Stack
             position={"relative"}
@@ -328,7 +331,7 @@ export default function Modern({
             <Icon
               color="var(--c-accent)"
               position="absolute"
-              left={r("3%", "8%")}
+              left={r("11%", "8%")}
               top="20%"
               w={r("34px", "108px")}
               h={r("77px", "252px")}
@@ -338,7 +341,7 @@ export default function Modern({
             <Icon
               color="var(--c-accent)"
               position="absolute"
-              right={r("3%", "8%")}
+              right={r("11%", "8%")}
               top="20%"
               w={r("34px", "108px")}
               h={r("77px", "252px")}
@@ -363,7 +366,7 @@ export default function Modern({
               lineHeight="28px"
               fontWeight="400"
               color="#F3F3F3"
-              w={r("100%", "60%")}
+              w={r("70%", "60%")}
             >
               {description}
             </Text>
