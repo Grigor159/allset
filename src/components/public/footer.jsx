@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import logo from "@/assets/imgs/allset.png";
 import idram from "@/assets/imgs/idram.png";
-import arca from "@/assets/imgs/arca.png";
+import arca from "@/assets/imgs/arca.svg";
 import { useTranslations } from "next-intl";
 
 const PaymentChip = ({ children, label }) => (
@@ -253,7 +253,7 @@ export const Footer = () => {
           </Text>
           <Flex gap="8px" align="center">
             <PaymentChip label="ArCa">
-              <Image src={arca.src} h="14px" alt="ArCa" />
+              <Image src={arca.src} h="16px" alt="ArCa" />
             </PaymentChip>
             <PaymentChip label="Visa">
               <VisaIcon />
