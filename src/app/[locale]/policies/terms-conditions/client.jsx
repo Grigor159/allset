@@ -236,8 +236,16 @@ export const TermsClient = () => {
             <Separator />
 
             {/* Section 14 */}
-            <Stack gap="8px">
+            <Stack gap="12px">
               <Heading size="2xl">{t("terms_section14_title")}</Heading>
+
+              <Text>{t("terms_section14_intro")}</Text>
+            </Stack>
+            <Separator />
+
+            {/* Section 15 */}
+            <Stack gap="8px">
+              <Heading size="2xl">{t("terms_section15_title")}</Heading>
 
               <Text>{t("terms_for_email")}</Text>
               <Text fontWeight={600}>{t("privacyPolicy_email")}</Text>
