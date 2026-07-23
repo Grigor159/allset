@@ -106,11 +106,12 @@ export default function Modern({
   const [form, setForm] = useState(getInvitationForm(id));
   const [guests, setGuests] = useState([`${t("classic_count")}`]);
 
-  const initialSlide = Math.floor((data?.mainImages?.length || 0) / 2);
   const heroImage = data?.mainImages?.[0] || mainBg.src;
   const storyImgOne = data?.ourStory?.photoUrls?.[0] || (!isLive && story1.src);
   const storyImgTwo = data?.ourStory?.photoUrls?.[1] || (!isLive && story2.src);
   const slideImages = data?.mainImages || (!isLive && MODERN_FALLBACKS);
+  const initialSlide =
+    slideImages?.length > 2 ? Math.floor(slideImages.length / 2) : 0;
 
   const title =
     pickLang(data?.title, language) || (!isLive && "Henry & Mariam");
