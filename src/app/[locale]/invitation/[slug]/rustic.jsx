@@ -480,7 +480,7 @@ export default function Rustic({
       </VStack>
 
       {/* ————— TIMING ————— */}
-      {(!isLive || data?.timeline?.length > 0) && (
+      {timeline?.length > 0 && (
         <Center>
           <Stack
             bgImage={`url(${timingBg.src})`}

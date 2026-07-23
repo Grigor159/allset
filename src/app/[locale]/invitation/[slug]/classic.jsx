@@ -271,7 +271,7 @@ export default function Classic({
       </VStack>
 
       {/* ————— TIMING ————— */}
-      {(!isLive || data?.timeline?.length > 0) && (
+      {timeline?.length > 0 && (
         <Flex
           bg="var(--c-secondary)"
           color="white"

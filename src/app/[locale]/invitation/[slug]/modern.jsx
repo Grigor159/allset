@@ -441,7 +441,7 @@ export default function Modern({
         bgRepeat="no-repeat"
       >
         {/* ————— TIMING ————— */}
-        {(!isLive || data?.timeline?.length > 0) && (
+        {timeline?.length > 0 && (
           <Center pt="90px" position="relative">
             <Icon
               color="var(--c-accent)"
