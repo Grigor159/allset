@@ -307,7 +307,8 @@ export default function Modern({
           justify={"center"}
           minH={r("1017px", "1931px")}
           h="100%"
-          pt={{ base: "100px", sm: "0" }}
+          pt={r("150px", "0")}
+          pb={r("120px", "0")}
         >
           <Stack
             position={"relative"}
@@ -340,8 +341,8 @@ export default function Modern({
             <Text
               fontFamily="var(--font-allegrou)"
               fontWeight="400"
-              fontSize={r("64px", "123px")}
-              lineHeight="1.1"
+              fontSize={r("46px", "123px")}
+              lineHeight={r("1.3", "1.1")}
               color="#F3F3F3"
               textAlign={"center"}
             >
@@ -400,7 +401,7 @@ export default function Modern({
               modules={[EffectCoverflow, Pagination]}
               coverflowEffect={{
                 rotate: 18,
-                stretch: 60,
+                stretch: r(0, 60),
                 depth: 120,
                 modifier: 1,
                 slideShadows: false,
