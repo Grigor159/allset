@@ -37,7 +37,8 @@ export const Rsvp = ({
       <VStack
         py={r("64px", "100px")}
         gap="37px"
-        px={{ base: "30px", md: "unset" }}
+        // px={{ base: "30px", md: "unset" }}
+        px={"24px"}
         zIndex={2}
       >
         <Text

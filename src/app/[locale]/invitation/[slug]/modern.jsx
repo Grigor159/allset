@@ -307,7 +307,7 @@ export default function Modern({
           justify={"center"}
           minH={r("1017px", "1931px")}
           h="100%"
-          pt={{ base: "100px", sm: "0" }}
+          pt={{ base: "0", sm: "100px" }}
         >
           <Stack
             position={"relative"}
@@ -465,6 +465,7 @@ export default function Modern({
                 lineHeight="24px"
                 textTransform="uppercase"
                 color="#323232"
+                textAlign="center"
               >
                 {t("classic_timing")}
               </Text>
