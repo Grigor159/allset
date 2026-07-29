@@ -200,7 +200,7 @@ export default function Classic({
         w="100%"
         h={r("640px", "750px")}
         bgImage={`linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.45) 100%), url(${heroImage})`}
-        bgSize="contain"
+        bgSize="cover"
         bgRepeat={"no-repeat"}
         bgPos="center"
       >
