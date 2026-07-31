@@ -467,6 +467,7 @@ export default function Modern({
                 lineHeight="24px"
                 textTransform="uppercase"
                 color="#323232"
+                textAlign="center"
               >
                 {t("classic_timing")}
               </Text>

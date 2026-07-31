@@ -83,7 +83,8 @@ export function CountdownTimer({ template, eventDate, r }) {
   }
 
   return (
-    <HStack gap={{ base: "10px", xl: "40px" }}>
+    // <HStack gap={{ base: "10px", xl: "40px" }}>
+    <HStack gap="10px">
       <Countdown
         template={template}
         value={countdown.days}

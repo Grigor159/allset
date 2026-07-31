@@ -195,8 +195,6 @@ export default function Rustic({
     });
   };
 
-  console.log(data);
-
   return (
     <Box
       data-viewport={viewport}
@@ -551,36 +549,37 @@ export default function Rustic({
 
       {/* ————— RSVP ————— */}
       {(!isLive || data?.confirmationEnabled) && (
-        <Container maxW="1440px" px={{ base: "0", md: "80px" }}>
-          <Flex align={"center"} justify="center" gap="60px">
-            <Icon
-              position={r("absolute", "unset")}
-              top="0"
-              left="0"
-              zIndex={1}
-              color="var(--c-accent)"
-            >
-              {heartsLeft.icon}
-            </Icon>
-            <Rsvp
-              r={r}
-              color="var(--c-primary)"
-              data={data?.rsvp}
-              note={data?.template?.hasConfirmationNote}
-              guestCount={guestCount}
-              form={form}
-              setForm={setForm}
-              guests={guests}
-              handleChange={handleChange}
-              handleGuestCountChange={handleGuestCountChange}
-              handleSecondaryGuestChange={handleSecondaryGuestChange}
-              handleSubmit={handleSubmit}
-            />
-            <Icon display={r("none", "block")} color="var(--c-accent)">
-              {heartsRight.icon}
-            </Icon>
-          </Flex>
-        </Container>
+        // <Container maxW="1440px" px={{ base: "0", md: "80px" }}>
+        <Flex align={"center"} justify="center" gap="60px">
+          <Icon
+            position={r("absolute", "unset")}
+            top="0"
+            left="0"
+            display={r("none", "block")}
+            zIndex={1}
+            color="var(--c-accent)"
+          >
+            {heartsLeft.icon}
+          </Icon>
+          <Rsvp
+            r={r}
+            color="var(--c-primary)"
+            data={data?.rsvp}
+            note={data?.template?.hasConfirmationNote}
+            guestCount={guestCount}
+            form={form}
+            setForm={setForm}
+            guests={guests}
+            handleChange={handleChange}
+            handleGuestCountChange={handleGuestCountChange}
+            handleSecondaryGuestChange={handleSecondaryGuestChange}
+            handleSubmit={handleSubmit}
+          />
+          <Icon display={r("none", "block")} color="var(--c-accent)">
+            {heartsRight.icon}
+          </Icon>
+        </Flex>
+        // </Container>
       )}
 
       {/* ————— DRESS CODE ————— */}
