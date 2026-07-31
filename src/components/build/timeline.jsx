@@ -40,6 +40,16 @@ export const Timeline = ({
   const getItem = (venueKey) =>
     timeline.find((item) => item.venueKey === venueKey);
 
+  const toMinutes = (time) => {
+    if (!time) return Infinity; // unchecked / no time → bottom
+    const [h, m] = String(time).split(":");
+    return (parseInt(h, 10) || 0) * 60 + (parseInt(m, 10) || 0);
+  };
+
+  const sortedEntries = Object.entries(data || {}).sort(
+    ([a], [b]) => toMinutes(getItem(a)?.time) - toMinutes(getItem(b)?.time),
+  );
+
   const handleCheckboxChange = (venueKey, isChecked, venueName) => {
     let newTimeline = [...value];
 
@@ -87,7 +97,7 @@ export const Timeline = ({
 
       {disabled && (
         <>
-          {Object.entries(data || {}).map(([venueKey, venueName]) => {
+          {sortedEntries.map(([venueKey, venueName]) => {
             const item = getItem(venueKey);
             const isChecked = !!item;
 

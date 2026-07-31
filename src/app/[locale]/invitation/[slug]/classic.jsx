@@ -4,7 +4,7 @@ import { useState, useRef, useMemo } from "react";
 import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutateAuthTanstack } from "@/hooks/useTanstack";
-import { formatEventDate, paletteToVars } from "@/utils/formatters";
+import { formatEventDate, paletteToVars, formatTime, sortByTime } from "@/utils/formatters";
 import { Language } from "@/components/invitation/language";
 import { getInvitationForm, pickLang } from "@/utils/helpers";
 import {
@@ -297,7 +297,7 @@ export default function Classic({
             </Text>
 
             <Stack gap={r("32px", "40px")} minW={"361px"}>
-              {timeline?.map((item, i) => (
+              {sortByTime(timeline)?.map((item, i) => (
                 <Flex
                   key={i}
                   justify={"space-between"}
@@ -315,7 +315,7 @@ export default function Classic({
                       fontWeight="800"
                       lineHeight={"24px"}
                     >
-                      {item.time}
+                      {formatTime(item.time)}
                     </Text>
                     <Text
                       fontSize={r("20px", "22px")}

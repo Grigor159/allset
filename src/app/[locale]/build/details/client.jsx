@@ -17,6 +17,7 @@ import { Box, Stack } from "@chakra-ui/react";
 import { Animate } from "@/components/ui/animate";
 import { LngSelector } from "@/components/build/lngSelector";
 import { TitleCreator } from "@/components/build/titleCreator";
+import { TitleDemo } from "@/components/build/titleDemo";
 import { EventDate } from "@/components/build/eventDate";
 import { Timeline } from "@/components/build/timeline";
 import { Contact } from "@/components/build/contact";
@@ -126,7 +127,18 @@ export const DetailsClient = () => {
     const titles =
       data?.defaults?.agendaTitles ??
       invitationData?.template?.defaults?.agendaTitles;
-    if (titles) setAgenda(titles);
+
+    // Merge venues already saved in the timeline (incl. custom-added ones) so
+    // they render as rows when returning to an existing draft.
+    const savedVenues = Object.fromEntries(
+      (invitationData?.timeline ?? [])
+        .filter((it) => it?.venueKey)
+        .map((it) => [it.venueKey, it.venueName]),
+    );
+
+    if (titles || Object.keys(savedVenues).length) {
+      setAgenda({ ...(titles || {}), ...savedVenues });
+    }
   }, [data, invitationData]);
 
   useEffect(() => {
@@ -502,6 +514,12 @@ export const DetailsClient = () => {
               status={status}
             />
           </Animate>
+
+          {status !== "active" && urlExtension && (
+            <Animate>
+              <TitleDemo urlExtension={urlExtension} />
+            </Animate>
+          )}
 
           <Animate>
             <EventDate

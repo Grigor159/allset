@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutateAuthTanstack } from "@/hooks/useTanstack";
-import { formatDateByLang, paletteToVars } from "@/utils/formatters";
+import { formatDateByLang, paletteToVars, formatTime, sortByTime } from "@/utils/formatters";
 import { Language } from "@/components/invitation/language";
 import { getInvitationForm, pickLang } from "@/utils/helpers";
 import {
@@ -476,7 +476,7 @@ export default function Modern({
                 align={"center"}
                 justify={"center"}
               >
-                {timeline?.map((item, i) => (
+                {sortByTime(timeline)?.map((item, i) => (
                   <Flex
                     key={i}
                     justify={"space-between"}
@@ -490,7 +490,7 @@ export default function Modern({
                         lineHeight={"24px"}
                         color="#323232"
                       >
-                        {item.time}
+                        {formatTime(item.time)}
                       </Text>
                       <Text
                         fontSize={isMobile ? "15px" : "24px"}

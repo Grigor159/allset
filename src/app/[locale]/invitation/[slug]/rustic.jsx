@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutateAuthTanstack } from "@/hooks/useTanstack";
-import { formatRusticTitle, paletteToVars } from "@/utils/formatters";
+import { formatRusticTitle, paletteToVars, formatTime, sortByTime } from "@/utils/formatters";
 import { Language } from "@/components/invitation/language";
 import { getInvitationForm, pickLang } from "@/utils/helpers";
 import {
@@ -503,7 +503,7 @@ export default function Rustic({
             </Text>
 
             <Stack gap={r("20px", "40px")} align={"center"}>
-              {timeline?.map((item, i) => (
+              {sortByTime(timeline)?.map((item, i) => (
                 <VStack
                   key={i}
                   align="center"
@@ -515,7 +515,7 @@ export default function Rustic({
                     fontWeight="800"
                     lineHeight={"24px"}
                   >
-                    {item.time || "00:00"}
+                    {formatTime(item.time) || "00:00"}
                   </Text>
 
                   <Text

@@ -214,3 +214,18 @@ export const formatTitle = (value) =>
     .filter(Boolean)
     .map(capitalize)
     .join(",");
+export const formatTime = (time) => {
+  if (!time) return "";
+  const [h = "", m = ""] = String(time).split(":");
+  if (h === "" && m === "") return "";
+  return `${h.padStart(2, "0")}:${(m || "0").padStart(2, "0")}`;
+};
+
+export const sortByTime = (timeline = []) => {
+  const toMinutes = (t) => {
+    if (!t) return Infinity;
+    const [h, m] = String(t).split(":");
+    return (parseInt(h, 10) || 0) * 60 + (parseInt(m, 10) || 0);
+  };
+  return [...(timeline || [])].sort((a, b) => toMinutes(a?.time) - toMinutes(b?.time));
+};
