@@ -411,10 +411,10 @@ export const GUEST_COUNT = [
 ]
 
 export const TIMELINE = [
-  { time: "12:00", venueName: "BRIDE'S HOME" },
-  { time: "13:30", venueName: "DEPARTURE TO GROOM'S HOME" },
-  { time: "16:00", venueName: "GROOM'S HOME" },
-  { time: "17:30", venueName: "ARRIVAL AT RECEPTION VENUE" },
+  { time: "12:00", venueName: "BRIDE'S HOME", venueLocation: "https://maps.google.com" },
+  { time: "13:30", venueName: "DEPARTURE TO GROOM'S HOME", venueLocation: "https://maps.google.com" },
+  { time: "16:00", venueName: "GROOM'S HOME", venueLocation: "https://maps.google.com" },
+  { time: "17:30", venueName: "ARRIVAL AT RECEPTION VENUE", venueLocation: "https://maps.google.com" },
 ]
 
 // used in formatEventDate & diffParts formatters
