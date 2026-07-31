@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import {
   Stack,
   Container,
@@ -16,6 +17,7 @@ import img from "@/assets/imgs/story_bg.png";
 import imgMobile from "@/assets/imgs/story_bg_mobile.png";
 
 export const Story = () => {
+  const t = useTranslations();
   const [isMobile] = useMediaQuery("(max-width: 767px)");
 
   return (
@@ -42,7 +44,7 @@ export const Story = () => {
                       fontWeight={700}
                       color={"#161E24"}
                     >
-                      30+ երջանիկ զույգեր
+                      {t("story_stat_one_title")}
                     </Text>
                   </li>
                   <li>
@@ -51,8 +53,7 @@ export const Story = () => {
                       fontWeight={400}
                       color={"#4B5563"}
                     >
-                      Ստեղծում ենք գեղեցիկ հրավերներ, որոնք զույգերը կսիրեն և
-                      կհիշեն հավերժ
+                      {t("story_stat_one_desc")}
                     </Span>
                   </li>
                 </Stack>
@@ -64,7 +65,7 @@ export const Story = () => {
                       fontWeight={700}
                       color={"#161E24"}
                     >
-                      4000+ հյուրեր
+                      {t("story_stat_two_title")}
                     </Text>
                   </li>
                   <li>
@@ -73,7 +74,7 @@ export const Story = () => {
                       fontWeight={400}
                       color={"#4B5563"}
                     >
-                      Lorem ipsum est quam aliquam quam nulla morbi in nulla.
+                      {t("story_stat_two_desc")}
                     </Span>
                   </li>
                 </Stack>
@@ -90,7 +91,7 @@ export const Story = () => {
                       fontWeight={700}
                       color={"#161E24"}
                     >
-                      100% գոհունակություն
+                      {t("story_stat_three_title")}
                     </Text>
                   </li>
                   <li>
@@ -99,8 +100,7 @@ export const Story = () => {
                       fontWeight={400}
                       color={"#4B5563"}
                     >
-                      Ավելի քան 10 յուրահատուկ հրավերների ոճ՝ ստեղծված
-                      յուրաքանչյուր առիթի համար
+                      {t("story_stat_three_desc")}
                     </Span>
                   </li>
                 </Stack>
@@ -112,7 +112,7 @@ export const Story = () => {
                       fontWeight={700}
                       color={"#161E24"}
                     >
-                      3 լեզուներ
+                      {t("story_stat_four_title")}
                     </Text>
                   </li>
                   <li>
@@ -121,7 +121,7 @@ export const Story = () => {
                       fontWeight={400}
                       color={"#4B5563"}
                     >
-                      Երեք լեզվով հասանելի՝ հայերեն, անգլերեն, ռուսերեն
+                      {t("story_stat_four_desc")}
                     </Span>
                   </li>
                 </Stack>

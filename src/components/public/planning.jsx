@@ -73,7 +73,7 @@ export const Planning = () => {
                 transition="all 0.3s ease"
                 onClick={() => router.push(`/build/templates`)}
               >
-                {t("start")}
+                {t("create_invitation")}
               </Button>
             </Stack>
           </Flex>
