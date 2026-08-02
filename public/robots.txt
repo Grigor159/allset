@@ -15,4 +15,3 @@ Disallow: /logs/
 Disallow: /*.env
 
 Sitemap: https://allset.am/sitemap.xml
-Sitemap: https://allset.am/images_sitemap.xml
