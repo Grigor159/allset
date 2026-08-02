@@ -17,9 +17,11 @@ export const queryClient = new QueryClient({
     },
 })
 
-const persister = createAsyncStoragePersister({ storage: window.localStorage })
+if (typeof window !== "undefined") {
+    const persister = createAsyncStoragePersister({ storage: window.localStorage })
 
-persistQueryClient({ queryClient, persister })
+    persistQueryClient({ queryClient, persister })
+}
 
 export function QueryProvider({ children }) {
     return (
