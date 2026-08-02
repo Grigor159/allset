@@ -1,8 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useLocale } from "next-intl";
-import { useQueryState } from "nuqs";
 import { Accordion as Acc, For, Span, Image } from "@chakra-ui/react";
 import plus from "@/assets/imgs/plus.png";
 import minus from "@/assets/imgs/minus.png";
@@ -10,26 +9,17 @@ import minus from "@/assets/imgs/minus.png";
 export const Accordion = ({ faqs }) => {
   const language = useLocale();
 
-  const [question, setQuestion] = useQueryState("question");
-
-  const handleChange = (e) => {
-    const next = e.value?.[0];
-    if (!next) {
-      setQuestion(null);
-    } else {
-      setQuestion(next);
-    }
-  };
+  const [open, setOpen] = useState([]);
 
   return (
     <Acc.Root
       collapsible
-      value={[question]}
-      onValueChange={(e) => handleChange(e)}
+      value={open}
+      onValueChange={(e) => setOpen(e.value)}
     >
       <For each={faqs}>
         {(faq, index) => {
-          const isOpen = question === index.toString();
+          const isOpen = open.includes(index.toString());
 
           return (
             <Acc.Item
