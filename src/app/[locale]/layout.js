@@ -8,6 +8,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { Header } from "@/components/ui/header";
 import { ScrollToTop } from "@/components/ui/scrollToTop";
 import { Footer } from "@/components/public/footer";
+import { JsonLd } from "@/components/seo/jsonLd";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import "../index.css";
 
@@ -51,6 +52,9 @@ export default async function RootLayout({ children }) {
         {/* Twitter */}
         <meta name="twitter:creator" content="allset.am" />
         <meta property="fb:app_id" content="118506514674722" />
+
+        {/* Structured data (Organization + WebSite) */}
+        <JsonLd />
       </head>
       <body
         className={`${montserrat.variable} ${sosbanff.variable} ${shk.variable} ${allegrou.variable}`}
