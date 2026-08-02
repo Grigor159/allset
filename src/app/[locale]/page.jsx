@@ -5,9 +5,10 @@ import { HomeClient } from "./client";
 export async function generateMetadata() {
   const t = await getTranslations();
   const locale = await getLocale();
-  const description = t("plan_desc");
+  const title = t("seo_home_title");
+  const description = t("seo_home_desc");
 
-  return meta({ description, locale });
+  return meta({ title, description, locale });
 }
 
 export default async function Home() {
