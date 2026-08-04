@@ -15,22 +15,26 @@ const ROUTES = [
     { path: "/policies/terms-conditions", priority: 0.3, changeFrequency: "yearly" },
 ];
 
+const LOCALES = ["hy", "en", "ru"];
+
 export default function sitemap() {
     const lastModified = new Date();
 
-    return ROUTES.map(({ path, priority, changeFrequency }) => ({
-        // canonical entry points to the default locale (hy)
-        url: `${BASE}/hy${path}`,
-        lastModified,
-        changeFrequency,
-        priority,
-        alternates: {
-            languages: {
-                hy: `${BASE}/hy${path}`,
-                en: `${BASE}/en${path}`,
-                ru: `${BASE}/ru${path}`,
-                "x-default": `${BASE}/hy${path}`,
-            },
-        },
-    }));
+    // List every locale URL as its own primary <loc> (not just an hreflang
+    // alternate) so Google discovers /hy, /en and /ru each as a first-class URL.
+    return ROUTES.flatMap(({ path, priority, changeFrequency }) => {
+        const languages = {
+            hy: `${BASE}/hy${path}`,
+            en: `${BASE}/en${path}`,
+            ru: `${BASE}/ru${path}`,
+            "x-default": `${BASE}/hy${path}`,
+        };
+        return LOCALES.map((loc) => ({
+            url: `${BASE}/${loc}${path}`,
+            lastModified,
+            changeFrequency,
+            priority,
+            alternates: { languages },
+        }));
+    });
 }
