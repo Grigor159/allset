@@ -69,6 +69,7 @@ export const Continue = () => {
       fontWeight="400"
       lineHeight="24px"
       bg="#004143"
+      flex={{ base: 1, md: "none" }}
       w={{ base: "100%", md: "137px" }}
       h="52px"
       border="1px solid"
@@ -96,6 +97,7 @@ export const Continue = () => {
       fontWeight="400"
       lineHeight="24px"
       bg="#004143"
+      flex={{ base: 1, md: "none" }}
       w={{ base: "100%", md: "137px" }}
       h="52px"
       border="1px solid"

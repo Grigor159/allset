@@ -44,8 +44,8 @@ export const CustomisationsClient = () => {
         pt={{ base: "32px", md: "48px" }}
         pb="22px"
         gap={"24px"}
-        flexDirection={{ base: "column-reverse", md: "row" }}
-        h="90dvh"
+        flexDirection={{ base: "column", md: "row" }}
+        h={{ base: "auto", md: "90dvh" }}
       >
         <Aside data={selectedTemplate?.palettes} language={language} />
         <Preview palette={selectedPalette} /> 

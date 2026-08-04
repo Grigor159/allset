@@ -40,6 +40,10 @@ export const Header = () => {
 
   if (pathname?.includes("/invitation/")) return;
 
+  // Hide the top bar on mobile once a template is chosen (build steps after templates).
+  const hideOnMobile =
+    pathname?.includes("/build/") && !pathname?.includes("/build/templates");
+
   return (
     <Box
       as="header"
@@ -53,6 +57,7 @@ export const Header = () => {
       py="16px"
       px="0"
       transition="background 0.3s ease"
+      display={{ base: hideOnMobile ? "none" : "block", md: "block" }}
     >
       <Container maxW="1440px" px={{ base: "24px", md: "40px" }}>
         <Flex align="center" justify="space-between">

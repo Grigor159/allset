@@ -26,7 +26,7 @@ export const BottomPart = () => {
           <Steps />
           <Flex
             gap={{ base: "16px", md: "8px" }}
-            flexDirection={{ base: "column-reverse", md: "row" }}
+            flexDirection="row"
           >
             <GoBack />
             <Continue />

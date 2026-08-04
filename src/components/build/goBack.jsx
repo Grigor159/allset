@@ -23,6 +23,7 @@ export const GoBack = () => {
       color="#4B5563"
       border={"1px solid"}
       borderColor={"#4B5563"}
+      flex={{ base: 1, md: "none" }}
       w={{ base: "100%", md: "137px" }}
       h="52px"
     >

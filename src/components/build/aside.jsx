@@ -25,11 +25,11 @@ export const Aside = ({ data, language }) => {
     <Box
       as="aside"
       maxW={{ base: "100%", md: "320px" }}
-      h="100%"
+      h={{ base: "auto", md: "100%" }}
       bg={{ base: "transparent", md: "white" }}
       borderRadius={"8px"}
       p={{ base: "0", md: "24px" }}
-      overflowY={"scroll"}
+      overflowY={{ base: "visible", md: "scroll" }}
       scrollbarWidth="thin"
       scrollbarColor="#004143 transparent"
     >
