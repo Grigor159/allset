@@ -52,11 +52,15 @@ export const Card = ({ el }) => {
 
   return (
     <Stack
-      bg="white"
+      bg={isSelected ? "#004143" : "white"}
       gap="16px"
       w={"100%"}
       minH={{ base: "500px", md: "602px" }}
-      boxShadow={isSelected && "0px 4px 10px 0px rgba(0, 65, 67, 0.1)"}
+      boxShadow={
+        isSelected
+          ? "0px 12px 32px 0px rgba(0, 65, 67, 0.35)"
+          : "none"
+      }
       borderRadius={"8px"}
       _hover={{
         cursor: "pointer",
@@ -78,8 +82,8 @@ export const Card = ({ el }) => {
         overflow={"hidden"}
         borderRadius="8px"
         border={{ base: "0px",  md: isSelected ? "20px solid" : "24px solid", }}
-        borderColor={{ base: "transparent", md: "#F1F1F1" }}
-        background={"#F1F1F1"}
+        borderColor={{ base: "transparent", md: isSelected ? "#FFFFFF" : "#F1F1F1" }}
+        background={isSelected ? "#FFFFFF" : "#F1F1F1"}
         transition="all 0.3s ease"
       >
         <Image
@@ -99,7 +103,7 @@ export const Card = ({ el }) => {
             fontWeight={400}
             lineHeight={"28px"}
             letterSpacing={0}
-            color={isSelected ? "#0C4A4C" : "#004143"}
+            color={isSelected ? "#FFFFFF" : "#004143"}
             transition="all 0.3s ease"
             w={{ base: "fit-content", md: "180px" }}
           >
@@ -111,7 +115,7 @@ export const Card = ({ el }) => {
             <Text
               textDecoration="line-through"
               fontSize={"12px"}
-              color={"#6B7280"}
+              color={isSelected ? "rgba(255,255,255,0.6)" : "#6B7280"}
             >
               {formatPrice(pricing?.basePrice, t)}
             </Text>
@@ -119,7 +123,8 @@ export const Card = ({ el }) => {
         </Stack>
         <Text
           border="1px solid"
-          borderColor="#EFEFEF"
+          borderColor={isSelected ? "#FFFFFF" : "#EFEFEF"}
+          bg={isSelected ? "#FFFFFF" : "transparent"}
           borderRadius="8px"
           fontSize={"14px"}
           color={"#004143"}
@@ -136,7 +141,7 @@ export const Card = ({ el }) => {
       </Flex>
       <SubText
         fs="14px"
-        color={isSelected ? "#004143" : "#4B5563"}
+        color={isSelected ? "#FFFFFF" : "#4B5563"}
         text={description[language]}
         lineClamp={4}
         height={"72px"}
@@ -145,13 +150,17 @@ export const Card = ({ el }) => {
       <Flex gap="46px">
         <Flex flexDirection={"column"} gap="16px">
           <HStack>
-            <Icon>{palleteName.icon}</Icon>
-            <Text fontSize={"14px"} color={isSelected ? "#004143" : "#6B7280"}>
+            <Icon css={isSelected ? { "& path": { stroke: "#FFFFFF" } } : undefined}>
+              {palleteName.icon}
+            </Icon>
+            <Text fontSize={"14px"} color={isSelected ? "#FFFFFF" : "#6B7280"}>
               {createdByKeyword[language]}
             </Text>
           </HStack>
           <HStack>
-            <Icon>{palletDesc.icon}</Icon>
+            <Icon css={isSelected ? { "& path": { stroke: "#FFFFFF" } } : undefined}>
+              {palletDesc.icon}
+            </Icon>
             {paletteKeyword?.colors?.map((color, index) => (
               <Box
                 key={color}
@@ -170,14 +179,18 @@ export const Card = ({ el }) => {
 
         <Flex flexDirection={"column"} gap="16px">
           <HStack>
-            <Icon>{palletHex.icon}</Icon>
-            <Text fontSize={"14px"} color={isSelected ? "#004143" : "#6B7280"}>
+            <Icon css={isSelected ? { "& path": { stroke: "#FFFFFF" } } : undefined}>
+              {palletHex.icon}
+            </Icon>
+            <Text fontSize={"14px"} color={isSelected ? "#FFFFFF" : "#6B7280"}>
               {lovedByKeyword[language]}
             </Text>
           </HStack>
           <HStack>
-            <Icon>{palletLast.icon}</Icon>
-            <Text fontSize={"14px"} color={isSelected ? "#004143" : "#6B7280"}>
+            <Icon css={isSelected ? { "& path": { stroke: "#FFFFFF" } } : undefined}>
+              {palletLast.icon}
+            </Icon>
+            <Text fontSize={"14px"} color={isSelected ? "#FFFFFF" : "#6B7280"}>
               {styleKeyword[language]}
             </Text>
           </HStack>
